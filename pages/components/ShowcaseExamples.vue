@@ -10,10 +10,10 @@
         </p>
       </div>
 
-      <div class="mt-6 text-center text-gray-400 text-sm">
+      <!-- <div class="mt-6 text-center text-gray-400 text-sm">
         <p>Person generation options: don't allow, allow adults only (default), or allow all*</p>
         <p class="mt-1 text-xs">*Allow all option not available in EU, UK, Switzerland, and MENA regions</p>
-      </div>
+      </div> -->
 
       <div class="mt-6 sm:mt-8 lg:mt-12 relative">
         <!-- 轮播容器 -->
