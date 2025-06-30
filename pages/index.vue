@@ -6,12 +6,20 @@
         id="hero"
         class="min-h-[700px] relative pt-[64px]"
       >
-        <keep-alive>
+        <!-- <keep-alive>
           <ImageUploader />
+        </keep-alive> -->
+        <keep-alive>
+          <ShowcaseExamples />
         </keep-alive>
       </section>
 
-    
+      <!-- 图片生成 -->
+      <section id="prompt-image-generator">
+        <keep-alive>
+          <PromptImageGenerator />
+        </keep-alive>
+      </section>
       
       <!-- 操作步骤 -->
       <section id="how-it-works">
@@ -61,6 +69,8 @@ const FaqSection = defineAsyncComponent(() => import('~/pages/components/FaqSect
 const HowItWorks = defineAsyncComponent(() => import('~/pages/components/HowItWorks.vue'));
 const FeatureShowcase = defineAsyncComponent(() => import('~/pages/components/FeatureShowcase.vue'));
 const Reviews = defineAsyncComponent(() => import('~/pages/components/Reviews.vue'));
+const ShowcaseExamples = defineAsyncComponent(() => import('~/pages/components/ShowcaseExamples.vue'));
+const PromptImageGenerator = defineAsyncComponent(() => import('~/components/PromptImageGenerator.vue'));
 
 import { useNuxtApp } from 'nuxt/app'
 const { $toast } = useNuxtApp() as any
