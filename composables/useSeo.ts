@@ -8,10 +8,10 @@ interface SeoOptions {
 }
 
 export const useSeo = (options: SeoOptions = {}) => {
-  const defaultTitle = 'Veo3-AI Video Generation with Realistic Sound'
-  const defaultDescription = 'Veo3 - AI Video Generator with perfect audio synchronization. Create stunning videos with automated sound effects, dialogue, and ambient noise generation.'
-  const defaultImage = '/img/veo3-og-image.jpg'
-  const baseUrl = 'https://veo3.com'
+  const defaultTitle = 'Imagen 4 Ultra - Advanced AI Image Generation'
+  const defaultDescription = 'Imagen 4 Ultra - Create stunning images with advanced AI technology. Features multi-language support, digital watermarking, and customizable safety settings.'
+  const defaultImage = '/img/imagen4-ultra-og-image.jpg'
+  const baseUrl = 'https://imagen4ultra.com'
 
   const title = options.title || defaultTitle
   const description = options.description || defaultDescription
@@ -66,7 +66,7 @@ export const useSeo = (options: SeoOptions = {}) => {
       // Keywords
       {
         name: 'keywords',
-        content: 'Veo3, AI video generation, video creator, realistic sound, audio sync, sound effects'
+        content: 'Imagen 4 Ultra, AI image generation, digital watermarking, multi-language support, safety settings, prompt rewriting'
       }
     ],
     link: [

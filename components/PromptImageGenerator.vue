@@ -1,14 +1,14 @@
 <template>
   <div class="relative w-full flex flex-col items-center justify-start overflow-x-hidden">
     <!-- 标题区 -->
-    <!-- <div class="mt-[64px] mb-10 flex flex-col items-center relative z-10">
-      <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-center bg-gradient-to-r from-[#f49d25] via-[#ffb347] to-[#ff8c42] bg-clip-text text-transparent drop-shadow-2xl tracking-tight animate-gradient-x">
+    <div class="mt-[64px] mb-10 flex flex-col items-center relative z-10">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-center bg-gradient-to-r from-[#f49d25] via-[#ffb347] to-[#ff8c42] bg-clip-text text-transparent drop-shadow-2xl tracking-tight animate-gradient-x">
         AI Image Generation
-      </h1>
+      </h2>
       <p class="mt-4 text-base text-gray-200 text-center max-w-4xl font-medium">
         Create stunning images with our advanced AI image generation technology
       </p>
-    </div> -->
+    </div>
 
     <!-- 主体区 -->
     <div class="w-full max-w-[1360px] flex flex-col lg:flex-row gap-3 lg:gap-4 justify-center items-stretch px-2 sm:px-3 lg:px-4 pb-12 lg:pb-20">

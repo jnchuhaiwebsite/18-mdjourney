@@ -3,10 +3,10 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
         <h2 class="text-4xl font-extrabold text-[#f49d25] sm:text-5xl">
-          Veo3 AI Core Features
+          Imagen 4 Ultra Features
         </h2>
         <p class="mt-4 text-xl text-gray-300">
-          Revolutionary video generation capabilities powered by Veo3 technology
+          Professional AI Image Generation with Advanced Controls
         </p>
       </div>
 
@@ -110,43 +110,43 @@ defineOptions({
 // Main feature data with video demonstrations - keeping only 3 features
 const mainFeatures = [
   {
-    title: "Advanced Veo3 AI Technology",
-    description: "Veo3 AI leverages cutting-edge Veo3 technology to transform text descriptions and images into dynamic videos. Our AI understands context and creates natural, fluid animations with professional quality.",
+    title: "English-Only Prompt System",
+    description: "Imagen 4 Ultra currently supports English prompts only, ensuring optimal output quality and accuracy in image generation. One image is generated per request.",
     icon: BoltIcon,
-    video: "https://img.xbgremove.com/veo3/veo3-Core-Features-video-01.mp4",
-    poster: "https://img.xbgremove.com/veo3/veo3-Core-Features-video-01.jpg",
     points: [
-      "Veo3-powered video generation",
-      "Natural motion and transitions",
-      "Context-aware processing",
-      "Professional output quality"
-    ]
+      "English language prompts only",
+      "Single image generation per request",
+      "Advanced prompt processing",
+      "High-quality output generation"
+    ],
+    video: "/video/imagen-demo.mp4",
+    poster: "/img/demo/Imagen-4-Ultra-image1.webp"
   },
   {
-    title: "Dual Generation Modes",
-    description: "Choose between text-to-video or image-to-video generation.Upload one image (JPG/JPEG or PNG format, max 10MB), or create videos from text descriptions with unlimited creativity.",
+    title: "Multiple Aspect Ratio Support",
+    description: "Choose from five professional aspect ratios for your generated images, with 1:1 square format as the default setting.",
     icon: CommandLineIcon,
-    video: "https://img.xbgremove.com/veo3/veo3-Core-Features-video-02.mp4",
-    poster: "https://img.xbgremove.com/veo3/veo3-Core-Features-video-03.jpg",
     points: [
-      "Text-to-video generation",
-      "Image-to-video conversion",
-      // "Batch image processing",
-      "Multiple format support"
-    ]
+      "Square format (1:1) - Default",
+      "Portrait options (3:4, 9:16)",
+      "Landscape options (4:3, 16:9)",
+      "Maintains quality across all ratios"
+    ],
+    video: "/video/aspect-ratio-demo.mp4",
+    poster: "/img/demo/Imagen-4-Ultra-image2.webp"
   },
   {
-    title: "High-Quality Video Output",
-    description: "Generate professional videos with different quality settings using Veo3 AI's advanced technology. The AI maintains image details while creating smooth motion, delivering results suitable for commercial use.",
+    title: "Person Generation Controls",
+    description: "Comprehensive person generation settings with three distinct modes to meet various content requirements and regional regulations.",
     icon: VideoCameraIcon,
-    video: "https://img.xbgremove.com/veo3/veo3-Core-Features-video-03.mp4",
-    poster: "https://img.xbgremove.com/veo3/veo3-Core-Features-video-02.jpg",
     points: [
-      "HD video output",
-      "Detail preservation",
-      "Commercial quality",
-      "Instant download"
-    ]
+      "No person generation mode (dont_allow)",
+      "Adult-only mode - Default (allow_adult)",
+      "All-inclusive mode (allow_all)*",
+      "*Regional restrictions apply in EU, UK, Switzerland, ME & NA"
+    ],
+    video: "/video/content-settings-demo.mp4",
+    poster: "/img/demo/Imagen-4-Ultra-image3.webp"
   }
 ];
 

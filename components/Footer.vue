@@ -51,16 +51,16 @@
       <!-- Logo 和描述 -->
       <div class="py-6 border-t border-gray-700">
         <div class="flex flex-col items-center text-center">
-          <img src="/logo.png" alt="veo3 AI - AI Image Animator Platform" loading="lazy" class="h-16 md:h-24 mb-4">
+          <img src="/logo.png" alt="Imagen 4 Ultra - Advanced AI Image Generation" loading="lazy" class="h-16 md:h-24 mb-4">
           <p class="text-sm text-gray-400 max-w-xl mb-4">
-            veo3 revolutionizes your photos into captivating motion videos through cutting-edge AI animation technology, delivering Hollywood-grade visual effects in minutes.
+            Imagen 4 Ultra delivers stunning AI-generated images with advanced technology. Supporting English prompts with customizable aspect ratios (1:1, 3:4, 4:3, 9:16, 16:9) and advanced person generation controls for professional results.
           </p>
           <div class="flex flex-col items-center gap-2 text-sm text-gray-500">
-            <p>© 2025 veo3 AI. All rights reserved.</p>
+            <p>© 2025 Imagen 4 Ultra. All rights reserved.</p>
             <div class="text-center">
               <p class="text-gray-400 text-sm">
                 Need help? Contact us at 
-                <a href="mailto:support@vidveo3.com" class=" transition-colors">support@vidveo3.com</a>
+                <a href="mailto:support@imagen4ultra.com" class=" transition-colors">support@imagen4ultra.com</a>
               </p>
             </div>
           </div>
