@@ -71,24 +71,24 @@ defineOptions({
 // FAQ数据
 const faqs = [
   {
-    question: "What languages does Imagen currently support?",
-    answer: "Currently, Imagen only supports English prompts. This means all text descriptions for image generation must be provided in English for optimal results."
+    question: "What are the key parameters for Imagen 4 Ultra?",
+    answer: "Imagen 4 Ultra has two main parameters: aspectRatio and personGeneration. The system can only generate one image at a time by default."
   },
   {
-    question: "What aspect ratios are available for image generation?",
-    answer: "Imagen supports five different aspect ratios: 1:1 (square), 3:4 (portrait), 4:3 (landscape), 9:16 (vertical), and 16:9 (horizontal). The default aspect ratio is 1:1 if not specified."
+    question: "What aspect ratios are supported?",
+    answer: "Imagen supports five aspect ratios: 1:1 (square, default), 3:4 (portrait), 4:3 (landscape), 9:16 (vertical), and 16:9 (horizontal). You can specify your preferred ratio using the aspectRatio parameter."
   },
   {
-    question: "How does person generation work in Imagen?",
-    answer: "Imagen offers three person generation settings: 'dont_allow' (no person generation), 'allow_adult' (default setting, generates only adult images), and 'allow_all' (generates both adult and child images). Note that 'allow_all' is restricted in EU, UK, Switzerland, and MENA regions."
+    question: "How does the person generation feature work?",
+    answer: "The personGeneration parameter has three options: 'dont_allow' (no person generation), 'allow_adult' (default, adults only), and 'allow_all' (adults and children). Note: 'allow_all' is restricted in EU, UK, Switzerland, and MENA regions."
   },
   {
-    question: "What are the image generation limits?",
-    answer: "Imagen 4 Ultra is limited to generating one image per request. This is a fixed limitation and cannot be modified."
+    question: "What language support is available?",
+    answer: "Currently, Imagen 4 Ultra only supports English prompts. All text descriptions for image generation must be provided in English for optimal results."
   },
   {
-    question: "How do I specify these parameters in my requests?",
-    answer: "Parameter naming conventions may vary by programming language, but the key parameters are: aspectRatio (for image proportions) and personGeneration (for person generation settings). These can be configured according to your specific needs within the allowed values."
+    question: "Are there any regional restrictions?",
+    answer: "Yes, the 'allow_all' setting for person generation is not available in the European Union, United Kingdom, Switzerland, and the Middle East and North Africa (MENA) regions."
   }
 ];
 

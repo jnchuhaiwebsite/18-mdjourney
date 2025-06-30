@@ -11,46 +11,15 @@
       </div>
 
       <div class="mt-20 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-        <!-- Testimonial 1 -->
-        <div class="bg-gray-800 rounded-lg p-8 shadow-xl">
+        <div v-for="review in reviews" :key="review.author" class="bg-gray-800 rounded-lg p-8 shadow-xl">
           <div class="mb-6">
-            <h3 class="text-lg font-bold text-white">Emily Anderson - Digital Artist</h3>
-            <p class="text-gray-400">California</p>
+            <h3 class="text-lg font-bold text-white">{{ review.author }} - {{ review.title }}</h3>
+            <p class="text-gray-400">{{ review.location }}</p>
             <div class="flex items-center mt-2">
               <span class="text-yellow-400">★★★★★</span>
             </div>
           </div>
-          <p class="text-gray-300">
-            "The aspect ratio options in Imagen 4 Ultra are fantastic! Being able to switch between 1:1 for social media and 16:9 for web banners has streamlined my workflow significantly. The image quality is consistently impressive."
-          </p>
-        </div>
-
-        <!-- Testimonial 2 -->
-        <div class="bg-gray-800 rounded-lg p-8 shadow-xl">
-          <div class="mb-6">
-            <h4 class="text-lg font-bold text-white">James Miller - Professional Photographer</h4>
-            <p class="text-gray-400">New York</p>
-            <div class="flex items-center mt-2">
-              <span class="text-yellow-400">★★★★★</span>
-            </div>
-          </div>
-          <p class="text-gray-300">
-            "The person generation controls in Imagen 4 Ultra are exactly what I needed. The 'allow_adult' setting ensures I get appropriate content for my commercial projects, and the English prompts are intuitive and precise."
-          </p>
-        </div>
-
-        <!-- Testimonial 3 -->
-        <div class="bg-gray-800 rounded-lg p-8 shadow-xl">
-          <div class="mb-6">
-            <h4 class="text-lg font-bold text-white">Sophie Chen - Marketing Director</h4>
-            <p class="text-gray-400">Seattle</p>
-            <div class="flex items-center mt-2">
-              <span class="text-yellow-400">★★★★★</span>
-            </div>
-          </div>
-          <p class="text-gray-300">
-            "Imagen 4 Ultra's English prompt system is remarkably accurate. I can generate exactly what I envision, and the customizable aspect ratios make it perfect for our multi-platform marketing campaigns."
-          </p>
+          <p class="text-gray-300">{{ review.content }}</p>
         </div>
       </div>
 
@@ -81,27 +50,24 @@ const scrollToHero = () => {
 
 const reviews = [
   {
-    content: "Veo3 AI transformed my static product photos into engaging videos for our e-commerce site. The Veo3 technology delivers amazing quality in just minutes!",
-    author: "Sarah Chen",
-    title: "E-commerce Manager",
-    rating: 5
-  },
-  {
-    content: "As a digital artist, I love how Veo3 AI brings my illustrations to life. The text-to-video feature is incredible for creating unique content for social media.",
-    author: "Michael Rodriguez",
+    author: "Emily Anderson",
     title: "Digital Artist",
+    location: "California",
+    content: "The aspect ratio options in Imagen 4 Ultra are fantastic! Being able to switch between 1:1 for social media and 16:9 for web banners has streamlined my workflow significantly. The image quality is consistently impressive.",
     rating: 5
   },
   {
-    content: "The dual generation modes are fantastic - I can create videos from text or images. The batch processing with up to 3 images saves me so much time. Highly recommended!",
-    author: "Emma Thompson",
+    author: "James Miller",
+    title: "Professional Photographer",
+    location: "New York",
+    content: "The person generation controls in Imagen 4 Ultra are exactly what I needed. The 'allow_adult' setting ensures I get appropriate content for my commercial projects, and the English prompts are intuitive and precise.",
+    rating: 5
+  },
+  {
+    author: "Sophie Chen",
     title: "Marketing Director",
-    rating: 5
-  },
-  {
-    content: "We use Veo3 AI for our educational content. It's amazing how the Veo3 technology can turn simple descriptions into dynamic animations that help students understand concepts better.",
-    author: "Dr. James Wilson",
-    title: "Educational Content Creator",
+    location: "Seattle",
+    content: "Imagen 4 Ultra's English prompt system is remarkably accurate. I can generate exactly what I envision, and the customizable aspect ratios make it perfect for our multi-platform marketing campaigns.",
     rating: 5
   }
 ];

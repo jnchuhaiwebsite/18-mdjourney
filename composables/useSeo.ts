@@ -8,8 +8,8 @@ interface SeoOptions {
 }
 
 export const useSeo = (options: SeoOptions = {}) => {
-  const defaultTitle = 'Imagen 4 Ultra - Advanced AI Image Generation'
-  const defaultDescription = 'Imagen 4 Ultra - Create stunning images with advanced AI technology. Features multi-language support, digital watermarking, and customizable safety settings.'
+  const defaultTitle = 'Imagen 4 Ultra - Professional AI Image Generation Platform'
+  const defaultDescription = 'Create stunning images with Imagen 4 Ultra AI technology. Features customizable aspect ratios, person generation controls, and professional-grade output. Supports English prompts with advanced safety filters.'
   const defaultImage = '/img/imagen4-ultra-og-image.jpg'
   const baseUrl = 'https://imagen4ultra.com'
 
@@ -66,7 +66,7 @@ export const useSeo = (options: SeoOptions = {}) => {
       // Keywords
       {
         name: 'keywords',
-        content: 'Imagen 4 Ultra, AI image generation, digital watermarking, multi-language support, safety settings, prompt rewriting'
+        content: 'Imagen 4 Ultra, AI image generation, aspect ratio customization, person generation controls, English prompts, professional image quality, safety filters, digital watermarking'
       }
     ],
     link: [
