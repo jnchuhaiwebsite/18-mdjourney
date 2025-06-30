@@ -3,10 +3,10 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
         <h2 class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#f49d25] to-[#ff8c42] sm:text-5xl animate-fade-in">
-          How Veo3 AI Works
+          Master Imagen 4 Ultra
         </h2>
         <p class="mt-4 text-xl text-gray-300 animate-slide-up">
-          Simple 4-step process to create stunning videos with Veo3 technology
+          Generate Professional AI Images with Advanced Configuration Options
         </p>
       </div>
 
@@ -46,29 +46,26 @@ import {
   ArrowDownTrayIcon,
   ArrowUpTrayIcon,
   PencilIcon,
-  CpuChipIcon
+  CpuChipIcon,
+  LanguageIcon,
+  CloudArrowDownIcon
 } from '@heroicons/vue/24/outline'
 
 const steps = [
   {
-    title: "Choose Your Mode",
-    description: "Select between text-to-video or image-to-video generation. Upload one image (JPG/JPEG or PNG format, max 10MB), or describe your vision with text prompts.",
-    icon: CommandLineIcon
-  },
-  {
-    title: "Describe Your Vision",
-    description: "Add detailed descriptions of how you want your content to be animated. Be specific about motion, style, effects, and the overall video concept you want to achieve.",
+    title: "Craft Your English Prompt",
+    description: "Create your image description in English - the only supported language for Imagen prompts. Be specific and detailed for best results.",
     icon: PencilIcon
   },
   {
-    title: "Veo3 AI Processing",
-    description: "Our advanced Veo3 AI technology analyzes your input and creates smooth, natural animations. The AI understands context and generates high-quality video content based on your specifications.",
-    icon: CpuChipIcon
+    title: "Configure Image Settings",
+    description: "Choose your preferred aspect ratio (1:1, 3:4, 4:3, 9:16, or 16:9) and set person generation preferences according to your region's guidelines.",
+    icon: AdjustmentsHorizontalIcon
   },
   {
-    title: "Download Your Video",
-    description: "Your professional video will be swiftly processed and ready to download in high-quality MP4 format. Perfect for social media, marketing, presentations, or creative projects.",
-    icon: ArrowDownTrayIcon
+    title: "Generate & Download",
+    description: "Click generate to create your AI masterpiece with Imagen 4 Ultra's advanced technology, complete with secure verification.",
+    icon: CloudArrowDownIcon
   }
 ];
 </script>

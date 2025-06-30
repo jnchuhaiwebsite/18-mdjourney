@@ -101,9 +101,9 @@ onMounted(() => {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    name: "Veo3 AI",
-    description: "Advanced video generation platform powered by Veo3 technology. Create stunning videos from text descriptions or transform images into dynamic video content. Support for multiple image formats and batch processing.",
-    applicationCategory: "VideoGenerationApplication",
+    name: "Imagen 4 Ultra",
+    description: "Advanced AI image generation platform powered by Imagen 4 Ultra technology. Create high-quality images with customizable parameters including aspect ratio and person generation controls. Supports English prompts with professional-grade output.",
+    applicationCategory: "ImageGenerationApplication",
     operatingSystem: "All",
     offers: {
       "@type": "Offer",
@@ -111,21 +111,43 @@ onMounted(() => {
       priceCurrency: "USD",
     },
     featureList: [
-      "Veo3-powered video generation",
-      "Text-to-video conversion",
-      "Image-to-video conversion",
-      "Batch image processing",
-      "Multiple image format support",
-      "HD video output (768P/1080P)",
-      "Fast processing (20-60 seconds)",
-      "Professional video quality",
+      "Advanced Imagen 4 Ultra technology",
+      "English prompt support",
+      "Multiple aspect ratios (1:1, 3:4, 4:3, 9:16, 16:9)",
+      "Customizable person generation settings",
+      "Professional image quality",
+      "Fast generation (20-60 seconds)",
       "Commercial usage rights",
-      "Instant video download"
+      "Digital watermarking",
+      "Safety filters and content moderation",
+      "Instant image download"
+    ],
+    additionalProperty: [
+      {
+        "@type": "PropertyValue",
+        "name": "supportedAspectRatios",
+        "value": ["1:1", "3:4", "4:3", "9:16", "16:9"]
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "personGenerationOptions",
+        "value": ["dont_allow", "allow_adult", "allow_all"]
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "defaultSettings",
+        "value": {
+          "batchSize": 1,
+          "aspectRatio": "1:1",
+          "personGeneration": "allow_adult"
+        }
+      }
     ],
     screenshot: "/logo.png",
-    applicationSubCategory: "AI Video Generation",
+    applicationSubCategory: "AI Image Generation",
     browserRequirements: "Requires JavaScript. Requires HTML5.",
-    softwareVersion: "1.0.0"
+    softwareVersion: "1.0.0",
+    inLanguage: "en-US"
   };
   // 添加结构化数据到页面头部
   const script = document.createElement("script");

@@ -1,7 +1,7 @@
 <template>
   <section id="faq" class="py-20 bg-blue-pale">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 id="faq-heading" class="text-3xl font-bold text-center mb-12 text-[#f49d25]">Frequently Asked Questions</h2>
+      <h2 id="faq-heading" class="text-3xl font-bold text-center mb-12 text-[#f49d25]">Understanding Imagen Configuration</h2>
       
       <div class="space-y-4">
         <div 
@@ -71,41 +71,25 @@ defineOptions({
 // FAQ数据
 const faqs = [
   {
-    question: "What is Veo3 AI and how does it work?",
-    answer: "Veo3 AI is an advanced video generation platform powered by Veo3 technology. It offers two main modes: text-to-video generation where you describe your vision, and image-to-video conversion where you upload images to create dynamic videos."
+    question: "What are the key parameters for Imagen 4 Ultra?",
+    answer: "Imagen 4 Ultra has two main parameters: aspectRatio and personGeneration. The system can only generate one image at a time by default."
   },
   {
-    question: "What image formats are supported for image-to-video?",
-    answer: "Veo3 AI supports all major image formats including JPEG(JPG) and PNG. You can upload up to one images at once, each under 10MB, to create batch video content."
+    question: "What aspect ratios are supported?",
+    answer: "Imagen supports five aspect ratios: 1:1 (square, default), 3:4 (portrait), 4:3 (landscape), 9:16 (vertical), and 16:9 (horizontal). You can specify your preferred ratio using the aspectRatio parameter."
   },
   {
-    question: "How long does it take to generate a video?",
-    answer: "The generation process typically takes 20-60 seconds, depending on the complexity of your input and the desired video effect. Veo3 technology ensures fast and efficient processing."
+    question: "How does the person generation feature work?",
+    answer: "The personGeneration parameter has three options: 'dont_allow' (no person generation), 'allow_adult' (default, adults only), and 'allow_all' (adults and children). Note: 'allow_all' is restricted in EU, UK, Switzerland, and MENA regions."
   },
   {
-    question: "What type of content works best for text-to-video?",
-    answer: "Clear, detailed descriptions work best for text-to-video generation. Be specific about the scene, motion, style, and effects you want. The more detailed your prompt, the better the results."
+    question: "What language support is available?",
+    answer: "Currently, Imagen 4 Ultra only supports English prompts. All text descriptions for image generation must be provided in English for optimal results."
   },
   {
-    question: "Can I customize the video style and effects?",
-    answer: "Yes, you can guide the video style through your prompt description. Specify the type of movement, speed, visual effects, and overall aesthetic you want to achieve. Veo3 AI understands context and creates accordingly."
-  },
-  // {
-  //   question: "What video formats and quality are available?",
-  //   answer: "Videos are generated in MP4 format with HD quality options (768P and 1080P). We maintain high visual fidelity while ensuring file sizes remain manageable for easy sharing and downloading."
-  // },
-  {
-    question: "Are there any content restrictions?",
-    answer: "Yes, we do not allow the upload of explicit, violent, or inappropriate content. All uploads must comply with our terms of service and content guidelines. We maintain a safe and professional platform."
-  },
-  {
-    question: "Can I use the generated videos commercially?",
-    answer: "Yes, you retain the rights to your generated videos, provided you had the necessary rights to the original content. Please review our terms of service for detailed usage rights and commercial licensing."
-  },
-  // {
-  //   question: "How does the batch image processing work?",
-  //   answer: "You can upload up to 3 images simultaneously for image-to-video generation. Each image will be processed individually, and you can download each generated video separately. This feature is perfect for creating multiple video variations."
-  // }
+    question: "Are there any regional restrictions?",
+    answer: "Yes, the 'allow_all' setting for person generation is not available in the European Union, United Kingdom, Switzerland, and the Middle East and North Africa (MENA) regions."
+  }
 ];
 
 // 初始显示的FAQ数量

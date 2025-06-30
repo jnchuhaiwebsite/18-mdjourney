@@ -50,22 +50,23 @@
         <section>
           <h2 class="text-xl font-semibold mb-4">5. Service Limitations</h2>
           <ul class="list-disc pl-6 mt-2">
-            <li>Fast model is limited to text-to-video generation only</li>
-            <li>One image processing at a time</li>
-            <li>Maximum image size of 10MB</li>
-            <li>Supported formats: JPG/JPEG/PNG only</li>
-            <li>Fixed output: 1080p resolution, 8-second duration</li>
+            <li>API requests limited to 20 per minute per project</li>
+            <li>One image generation per request</li>
+            <li>Text prompts limited to 480 tokens</li>
+            <li>Supported aspect ratios: 1:1 (1024x1024), 3:4 (896x1280), 4:3 (1280x896), 9:16 (768x1408), 16:9 (1408x768)</li>
+            <li>Supported languages: English, Chinese (Simplified & Traditional), Hindi, Japanese, Korean, Portuguese, Spanish</li>
           </ul>
         </section>
 
         <section>
           <h2 class="text-xl font-semibold mb-4">6. Prohibited Content</h2>
-          <p>Users may not upload or generate:</p>
+          <p>Users may not generate:</p>
           <ul class="list-disc pl-6 mt-2">
             <li>Illegal or harmful content</li>
             <li>Copyright-infringing materials</li>
             <li>Adult or explicit content</li>
             <li>Content that violates third-party rights</li>
+            <li>Content that bypasses safety settings</li>
           </ul>
         </section>
 
@@ -76,7 +77,7 @@
 
         <section>
           <h2 class="text-xl font-semibold mb-4">8. Contact Information</h2>
-          <p>For any questions regarding these terms, please contact us at: support@vidveo3.com</p>
+          <p>For any questions regarding these terms, please contact us at: support@imagen4ultra.com</p>
         </section>
 
         <section class="mt-8">
