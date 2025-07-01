@@ -2,7 +2,7 @@
   <div class="min-h-screen bg-blue-pale pb-10">
     <!-- Page title -->
     <div class="pt-32 pb-12 text-center">
-      <h1 class="text-3xl md:text-4xl font-bold mb-2 text-[#990066]">veo3 Blog</h1>
+      <h1 class="text-3xl md:text-4xl font-bold mb-2 text-[#990066]">Imagen 4 Ultra Blog</h1>
       <p class="text-gray-400">Tips, tutorials, and inspiration for creating professional-quality videos with AI image animator technology</p>
     </div>
     
