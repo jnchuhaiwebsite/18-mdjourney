@@ -238,30 +238,17 @@
           <div class="relative aspect-square rounded-lg overflow-hidden group shadow-lg hover:shadow-xl transition-shadow">
             <template v-if="currentTab === 1">
               <div class="relative w-full h-full">
-                <video 
-                  :src="work.generate_image" 
+                <img 
+                  :src="work.quality_image" 
                   class="w-full h-full object-cover cursor-pointer"
                   loading="lazy"
-                  muted
-                  playsinline
-                  ref="videoRefs"
-                  @mouseenter="handleVideoPlay($event)"
-                  @mouseleave="handleVideoPause($event)"
-                  @click="openLightbox(work.generate_image)"
-                  @loadstart="handleVideoLoadStart(work.task_id)"
-                  @canplay="handleVideoCanPlay(work.task_id)"
+                  alt="Generated image"
+                  @click="openLightbox(work.quality_image)"
                 />
-                <!-- 视频加载状态指示器 -->
-                <div v-if="videoLoadingStates.get(work.task_id)" class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                  <div class="text-center">
-                    <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-gray-300 border-t-white mb-2"></div>
-                    <p class="text-white text-sm">Loading...</p>
-                  </div>
-                </div>
               </div>
               <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity flex gap-2">
                 <button 
-                  @click="openLightbox(work.generate_image)"
+                  @click="openLightbox(work.quality_image)"
                   class="bg-gray-800 bg-opacity-80 p-2 rounded-full hover:bg-opacity-100 transition-all shadow-lg hover:shadow-xl"
                   title="View full size"
                 >
@@ -270,10 +257,10 @@
                   </svg>
                 </button>
                 <button 
-                  @click="handleDownload(work.generate_image)"
+                  @click="handleDownload(work.quality_image)"
                   class="bg-gray-800 bg-opacity-80 p-2 rounded-full hover:bg-opacity-100 transition-all shadow-lg hover:shadow-xl"
                   :disabled="isDownloading"
-                  title="Download video"
+                  title="Download image"
                 >
                   <svg v-if="!isDownloading" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -406,15 +393,14 @@
       </div>
     </div>
 
-    <!-- 视频预览模态框 -->
+    <!-- 图片预览模态框 -->
     <div v-if="showPreview" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/95" @click="closePreview">
       <div class="relative w-full h-full flex items-center justify-center p-4">
         <div class="relative w-full h-full flex items-center justify-center">
-          <video 
-            :src="previewVideo" 
-            class="max-w-full max-h-full w-auto h-auto object-contain cursor-pointer"
-            controls
-            autoplay
+          <img 
+            :src="previewImage" 
+            class="max-w-full max-h-full w-auto h-auto object-contain cursor-zoom-out"
+            alt="Preview image"
             @click.stop
           />
           <button 
@@ -509,12 +495,9 @@ const page = ref(1)
 const pageSize = ref(8)
 const totalWorksPages = ref(1)
 
-// 视频加载状态
-const videoLoadingStates = ref(new Map<string, boolean>())
-
-// 视频预览相关状态
+// 图片预览相关状态
 const showPreview = ref(false)
-const previewVideo = ref('')
+const previewImage = ref('')
 const isDownloading = ref(false)
 
 // 标签选项卡配置
@@ -531,20 +514,6 @@ const creditLoading = ref(false)
 const creditPage = ref(1)
 const creditPageSize = ref(10)
 const totalPages = ref(1)
-
-// 视频播放控制
-const handleVideoPlay = (event: Event) => {
-  const video = event.target as HTMLVideoElement
-  video.play().catch(() => {
-    // 忽略自动播放策略导致的错误
-  })
-}
-
-const handleVideoPause = (event: Event) => {
-  const video = event.target as HTMLVideoElement
-  video.pause()
-  video.currentTime = 0
-}
 
 // 格式化日期
 const formatDate = (timestamp: number) => {
@@ -626,24 +595,24 @@ const fetchWorks = async () => {
   }
 }
 
-// 打开视频预览
-const openLightbox = (video: string) => {
-  previewVideo.value = video
+// 打开图片预览
+const openLightbox = (image: string) => {
+  previewImage.value = image
   showPreview.value = true
 }
 
-// 关闭视频预览
+// 关闭图片预览
 const closePreview = () => {
   showPreview.value = false
-  previewVideo.value = ''
+  previewImage.value = ''
 }
 
-// 下载视频
-const handleDownload = async (videoUrl: string) => {
-  if (!videoUrl || isDownloading.value) return
+// 下载图片
+const handleDownload = async (imageUrl: string) => {
+  if (!imageUrl || isDownloading.value) return
   isDownloading.value = true
   try {
-    const response = await fetch(videoUrl)
+    const response = await fetch(imageUrl)
     if (!response.ok) {
       throw new Error('Download failed')
     }
@@ -652,7 +621,7 @@ const handleDownload = async (videoUrl: string) => {
     const url = window.URL.createObjectURL(blob)
     const link = document.createElement('a')
     link.href = url
-    link.download = `${Date.now()}.mp4`
+    link.download = `${Date.now()}.jpg`
     
     document.body.appendChild(link)
     link.click()
@@ -665,16 +634,6 @@ const handleDownload = async (videoUrl: string) => {
   } finally {
     isDownloading.value = false
   }
-}
-
-// 视频加载事件处理
-const handleVideoCanPlay = (taskId: string) => {
-  videoLoadingStates.value.set(taskId, false)
-}
-
-// 视频加载开始事件处理
-const handleVideoLoadStart = (taskId: string) => {
-  videoLoadingStates.value.set(taskId, true)
 }
 
 // 复制提示词

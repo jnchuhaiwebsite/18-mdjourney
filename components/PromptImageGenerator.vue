@@ -21,7 +21,18 @@
               Prompt
             </label>
           </div>
+          <SignInButton v-if="!isSignedIn" mode="modal">
+            <textarea
+              v-model="prompt"
+              :maxlength="480"
+              rows="6"
+              :class="{'border-red-500 focus:ring-red-500': promptError}"
+              class="w-full rounded-lg bg-[#111111] border border-gray-700 text-gray-200 px-3 py-2 focus:ring-2 focus:ring-[#ec2657] focus:border-transparent transition placeholder-gray-500 text-sm lg:text-base resize-none"
+              placeholder="Describe the image you want to generate..."
+            ></textarea>
+          </SignInButton>
           <textarea
+            v-else
             v-model="prompt"
             :maxlength="480"
             rows="6"
@@ -123,7 +134,20 @@
         </div>
 
         <!-- 生成按钮 -->
+        <SignInButton v-if="!isSignedIn" mode="modal">
+          <button
+            type="submit"
+            class="w-full flex items-center justify-center gap-1.5 px-3 mt-3 lg:px-4 py-2 sm:py-2.5 bg-gradient-to-r from-[#ec2657] to-[#333333] hover:from-[#ec2657]/90 hover:to-[#333333]/80 text-white rounded-lg font-extrabold text-base sm:text-lg lg:text-xl shadow-xl transition relative"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
+            </svg>
+            <span>Generate Image</span>
+            <span class="absolute -top-1.5 -right-1.5 bg-[#00b8ff] text-white text-xs font-bold px-1.5 py-0.5 rounded-full shadow border-2 border-white/50 shadow-[0_0_15px_rgba(0,184,255,0.3)]">{{ currentModelScore }} points</span>
+          </button>
+        </SignInButton>
         <button
+          v-else
           type="submit"
           @click="generateImage"
           class="w-full flex items-center justify-center gap-1.5 px-3 mt-3 lg:px-4 py-2 sm:py-2.5 bg-gradient-to-r from-[#ec2657] to-[#333333] hover:from-[#ec2657]/90 hover:to-[#333333]/80 text-white rounded-lg font-extrabold text-base sm:text-lg lg:text-xl shadow-xl transition relative"
@@ -143,6 +167,15 @@
           <div class="relative w-full h-[480px] flex items-center justify-center">
             <div v-if="generatedImage" class="w-full h-full">
               <img :src="generatedImage" alt="Generated Image" class="w-full h-full object-contain rounded-lg">
+              <button
+                @click="downloadImage"
+                class="absolute top-2 right-2 bg-gradient-to-r from-[#ec2657] to-[#333333] hover:from-[#ec2657]/90 hover:to-[#333333]/80 text-white px-4 py-2 rounded-lg font-semibold text-sm flex items-center gap-2 shadow-xl transition"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+                Download
+              </button>
               <div class="absolute bottom-2 left-2 right-2 bg-black/60 p-2 rounded-lg text-xs text-gray-300">
                 <p class="mb-1"><span class="font-semibold text-[#ec2657]">Prompt:</span> {{ displayedPrompt }}</p>
                 <p class="mb-1"><span class="font-semibold text-[#ec2657]">Model:</span> {{ getModelDisplayName(selectedModel) }}</p>
@@ -169,7 +202,10 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
+import { useClerkAuth } from '~/utils/auth'
+import { useUserStore } from '~/stores/user';
 import { createTasksText, getScore } from '~/api'
+import { useNavigation } from '~/utils/navigation'
 
 const prompt = ref('')
 const selectedRatio = ref('1:1')
@@ -180,6 +216,62 @@ const displayedPrompt = ref('')
 const promptError = ref(false)
 const taskId = ref('')
 const modelScores = ref<Record<string, number>>({})
+
+// 引入auth认证
+const { isSignedIn } = useClerkAuth();
+const userStore = useUserStore();
+const { handleNavClick } = useNavigation();
+
+// 计算用户剩余积分
+const remainingCredits = computed(() => {
+  if (!userStore.userInfo) return 0;
+  return userStore.userInfo.free_limit + userStore.userInfo.remaining_limit || 0;
+});
+
+// 获取积分信息
+const fetchScores = async () => {
+  try {
+    const response = await getScore() as ScoreResponse
+    if (response && response.code === 200 && Array.isArray(response.data)) {
+      // 将积分数据转换为以模型名称为键的对象
+      const scores: Record<string, number> = {}
+      response.data.forEach((item: ScoreItem) => {
+        scores[item.model] = item.score
+      })
+      modelScores.value = scores
+    } else {
+      console.error('获取积分信息失败:', response)
+    }
+  } catch (error) {
+    console.error('获取积分信息失败:', error)
+  }
+}
+
+// 组件挂载时获取积分信息
+onMounted(() => {
+  fetchScores()
+})
+
+// 检查登录状态
+const checkLoginStatus = () => {
+  return isSignedIn.value;
+}
+
+// 检查积分是否足够
+const checkCredits = () => {
+  // 从modelScores中获取所需积分
+  const requiredCredits = modelScores.value[selectedModel.value] || 0;
+  
+  console.log('remainingCredits', remainingCredits.value)
+  console.log('requiredCredits', requiredCredits)
+  
+  if (remainingCredits.value < requiredCredits) {
+    // 滚动到订阅模块
+    handleNavClick('pricing');
+    return false;
+  }
+  return true;
+}
 
 // 模型映射关系
 const modelMap = {
@@ -233,32 +325,18 @@ interface ScoreResponse {
   success: boolean;
 }
 
-// 获取积分信息
-const fetchScores = async () => {
-  try {
-    const response = await getScore() as ScoreResponse
-    if (response && response.code === 200 && Array.isArray(response.data)) {
-      // 将积分数据转换为以模型名称为键的对象
-      const scores: Record<string, number> = {}
-      response.data.forEach((item: ScoreItem) => {
-        scores[item.model] = item.score
-      })
-      modelScores.value = scores
-    } else {
-      console.error('获取积分信息失败:', response)
-    }
-  } catch (error) {
-    console.error('获取积分信息失败:', error)
-  }
-}
-
-// 组件挂载时获取积分信息
-onMounted(() => {
-  fetchScores()
-})
-
 // 使用API生成图片
 const generateImage = async () => {
+  // 检查登录状态
+  if (!checkLoginStatus()) {
+    return;
+  }
+  
+  // 检查积分是否足够
+  if (!checkCredits()) {
+    return;
+  }
+  
   // 验证提示词是否填写
   if (!prompt.value.trim()) {
     promptError.value = true
@@ -299,6 +377,9 @@ const generateImage = async () => {
         taskId: taskId.value,
         imageUrl: response.data.image_url
       })
+
+      // 更新用户信息以刷新积分显示
+      await userStore.fetchUserInfo()
     } else {
       console.error('图片生成失败:', response)
       throw new Error(response?.msg || '图片生成失败')
@@ -326,6 +407,33 @@ const getRatioLabel = (ratio: string): string => {
 // 获取模型显示名称
 const getModelDisplayName = (model: string): string => {
   return modelDisplayName[model] || model;
+}
+
+const downloadImage = async () => {
+  try {
+    // 获取图片数据
+    const response = await fetch(generatedImage.value)
+    const blob = await response.blob()
+    
+    // 创建下载链接
+    const url = window.URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    
+    // 生成文件名：使用当前时间戳和taskId
+    const timestamp = new Date().getTime()
+    link.download = `imagen-${timestamp}-${taskId.value}.png`
+    
+    // 触发下载
+    document.body.appendChild(link)
+    link.click()
+    
+    // 清理
+    document.body.removeChild(link)
+    window.URL.revokeObjectURL(url)
+  } catch (error) {
+    console.error('Download image failed:', error)
+  }
 }
 </script>
 

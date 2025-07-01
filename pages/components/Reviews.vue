@@ -42,7 +42,7 @@
 <script setup lang="ts">
 // 跳转到首页
 const scrollToHero = () => {
-  const heroSection = document.getElementById('hero');
+  const heroSection = document.getElementById('prompt-image-generator');
   if (heroSection) {
     heroSection.scrollIntoView({ behavior: 'smooth' });
   }
