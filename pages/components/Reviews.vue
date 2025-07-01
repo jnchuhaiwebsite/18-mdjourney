@@ -6,7 +6,7 @@
           Imagen 4 Ultra Configuration
         </h2>
         <p class="mt-4 text-lg text-gray-300">
-          Experience the power of Imagen 4 Ultra with English prompts, customizable aspect ratios (1:1, 3:4, 4:3, 9:16, 16:9), and flexible person generation settings. Create stunning AI-generated images with precise control.
+          Experience the power of Imagen 4 Ultra with English prompts, versatile image format customization, and flexible person generation settings. Create stunning AI-generated images with precise control.
         </p>
       </div>
 
