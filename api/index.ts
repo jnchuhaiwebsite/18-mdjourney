@@ -19,7 +19,7 @@ export const urlList = {
   createTasksTextVideo: baseUrl + '/api/task/imagen4/make_video',     // 创建任务-文生视频
   getSubPlans: baseUrl + '/api/website/priceList',     // 获取套餐信息
   getSubplansTest: baseUrl + '/api/website/odl',     // 获取测试套餐信息
-  payOrder: baseUrl + '/api/pay/paypal',  // 支付
+  payOrder: baseUrl + '/api/pay/creem',  // 支付
   opusList: baseUrl + '/api/user/opus_list', // 获取用户作品列表
   checkTask: baseUrl + '/api/task/imagen4/check_task_status', // 检查任务
   friendLinkList: baseUrl + '/api/cms/friendLinkList', // 获取友情链接列表
