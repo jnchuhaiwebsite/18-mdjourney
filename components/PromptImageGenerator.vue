@@ -24,7 +24,6 @@
           <SignInButton v-if="!isSignedIn" mode="modal">
             <textarea
               v-model="prompt"
-              :maxlength="480"
               rows="6"
               :class="{'border-red-500 focus:ring-red-500': promptError}"
               class="w-full rounded-lg bg-[#111111] border border-gray-700 text-gray-200 px-3 py-2 focus:ring-2 focus:ring-[#ec2657] focus:border-transparent transition placeholder-gray-500 text-sm lg:text-base resize-none"
@@ -34,7 +33,6 @@
           <textarea
             v-else
             v-model="prompt"
-            :maxlength="480"
             rows="6"
             :class="{'border-red-500 focus:ring-red-500': promptError}"
             class="w-full rounded-lg bg-[#111111] border border-gray-700 text-gray-200 px-3 py-2 focus:ring-2 focus:ring-[#ec2657] focus:border-transparent transition placeholder-gray-500 text-sm lg:text-base resize-none"
@@ -49,7 +47,6 @@
                 Please enter a prompt to generate an image
               </p>
             </div>
-            <span class="text-xs text-gray-400">{{ prompt.length }}/480</span>
           </div>
         </div>
 
@@ -166,7 +163,7 @@
         <div class="flex flex-col justify-center items-center w-full h-full bg-gradient-to-br from-[#1a1a1a]/10 via-[#990066]/8 to-[#333333]/10 rounded-[16px]">
           <div class="relative w-full h-[480px] flex items-center justify-center">
             <div v-if="generatedImage" class="w-full h-full">
-              <img :src="generatedImage" alt="Generated Image" class="w-full h-full object-contain rounded-lg">
+              <img :src="generatedImage" alt="Generated Image" class="w-full h-full object-contain rounded-lg" crossorigin="anonymous">
               <button
                 @click="downloadImage"
                 class="absolute top-2 right-2 bg-gradient-to-r from-[#ec2657] to-[#333333] hover:from-[#ec2657]/90 hover:to-[#333333]/80 text-white px-4 py-2 rounded-lg font-semibold text-sm flex items-center gap-2 shadow-xl transition"
@@ -176,11 +173,6 @@
                 </svg>
                 Download
               </button>
-              <div class="absolute bottom-2 left-2 right-2 bg-black/60 p-2 rounded-lg text-xs text-gray-300">
-                <p class="mb-1"><span class="font-semibold text-[#ec2657]">Prompt:</span> {{ displayedPrompt }}</p>
-                <p class="mb-1"><span class="font-semibold text-[#ec2657]">Model:</span> {{ getModelDisplayName(selectedModel) }}</p>
-                <p><span class="font-semibold text-[#ec2657]">Aspect Ratio:</span> {{ selectedRatio }}</p>
-              </div>
             </div>
             <div v-else-if="isGenerating" class="text-center">
               <div class="w-16 h-16 border-4 border-[#ec2657] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
@@ -227,6 +219,7 @@ const remainingCredits = computed(() => {
   if (!userStore.userInfo) return 0;
   return userStore.userInfo.free_limit + userStore.userInfo.remaining_limit || 0;
 });
+
 
 // 获取积分信息
 const fetchScores = async () => {
@@ -409,48 +402,33 @@ const getModelDisplayName = (model: string): string => {
   return modelDisplayName[model] || model;
 }
 
-const downloadImage = () => {
+const downloadImage = async () => {
   try {
-    // 获取图片元素
-    const imgElement = document.querySelector('img[alt="Generated Image"]') as HTMLImageElement;
-    if (!imgElement) {
-      console.error('找不到图片元素');
-      return;
-    }
-
-    // 创建canvas
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
+    // 创建一个新的a标签用于下载
+    const link = document.createElement('a');
     
-    // 设置canvas尺寸与图片一致
-    canvas.width = imgElement.naturalWidth;
-    canvas.height = imgElement.naturalHeight;
+    // 使用fetch获取图片blob数据
+    const response = await fetch(generatedImage.value, {
+      mode: 'cors',
+      credentials: 'same-origin'
+    });
+    const blob = await response.blob();
     
-    // 将图片绘制到canvas
-    if (ctx) {
-      ctx.drawImage(imgElement, 0, 0);
-      
-      // 从canvas获取图片数据并下载
-      canvas.toBlob((blob) => {
-        if (blob) {
-          const url = window.URL.createObjectURL(blob);
-          const link = document.createElement('a');
-          link.href = url;
-          
-          // 生成文件名：使用当前时间戳和taskId
-          const timestamp = new Date().getTime();
-          link.download = `imagen-${timestamp}-${taskId.value}.png`;
-          
-          // 触发下载
-          document.body.appendChild(link);
-          link.click();
-          
-          // 清理
-          document.body.removeChild(link);
-          window.URL.revokeObjectURL(url);
-        }
-      }, 'image/png');
-    }
+    // 创建blob URL
+    const url = window.URL.createObjectURL(blob);
+    link.href = url;
+    
+    // 设置文件名
+    const timestamp = new Date().getTime();
+    link.download = `imagen-${timestamp}-${taskId.value}.png`;
+    
+    // 触发下载
+    document.body.appendChild(link);
+    link.click();
+    
+    // 清理
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(url);
   } catch (error) {
     console.error('下载图片失败:', error);
   }
