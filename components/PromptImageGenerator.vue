@@ -49,7 +49,7 @@
             <div v-for="(size, ratio) in aspectRatios" :key="ratio" class="relative flex-shrink-0" style="width: calc(20% - 10px);">
               <button
                 type="button"
-                @click="selectedRatio = ratio"
+                @click="selectedRatio = ratio.toString()"
                 class="w-full h-24 flex flex-col items-center justify-center rounded-xl transition-colors"
                 :class="selectedRatio === ratio ? 'bg-[#ec2657]/20 border-2 border-[#ec2657]' : 'bg-[#2a2a2a] border border-[#3a3a3a] hover:border-gray-600'"
               >
@@ -90,7 +90,7 @@
                   </div>
                 </div>
                 <span class="text-sm text-center" :class="selectedRatio === ratio ? 'text-[#ec2657]' : 'text-gray-300'">
-                  {{ getRatioLabel(ratio) }}
+                  {{ getRatioLabel(ratio.toString()) }}
                 </span>
               </button>
             </div>
@@ -103,19 +103,21 @@
           <div class="flex flex-wrap gap-2">
             <button
               type="button"
-              @click="selectedModel = 'ultra'"
+              @click="selectedModel = 'imagen-4-ultra'"
               class="h-8 px-3 text-sm border rounded-md transition-colors flex items-center gap-1"
-              :class="selectedModel === 'ultra' ? 'border-[#ec2657] bg-[#ec2657]/10 text-[#ec2657]' : 'border-gray-700 text-gray-300 hover:border-gray-600'"
+              :class="selectedModel === 'imagen-4-ultra' ? 'border-[#ec2657] bg-[#ec2657]/10 text-[#ec2657]' : 'border-gray-700 text-gray-300 hover:border-gray-600'"
             >
               Ultra
+              <!-- <span v-if="modelScores['imagen-4-ultra']" class="ml-1 text-xs opacity-80">({{ modelScores['imagen-4-ultra'] }} points)</span> -->
             </button>
             <button
               type="button"
-              @click="selectedModel = 'normal'"
+              @click="selectedModel = 'imagen-4'"
               class="h-8 px-3 text-sm border rounded-md transition-colors flex items-center gap-1"
-              :class="selectedModel === 'normal' ? 'border-[#ec2657] bg-[#ec2657]/10 text-[#ec2657]' : 'border-gray-700 text-gray-300 hover:border-gray-600'"
+              :class="selectedModel === 'imagen-4' ? 'border-[#ec2657] bg-[#ec2657]/10 text-[#ec2657]' : 'border-gray-700 text-gray-300 hover:border-gray-600'"
             >
               Normal
+              <!-- <span v-if="modelScores['imagen-4']" class="ml-1 text-xs opacity-80">({{ modelScores['imagen-4'] }} points)</span> -->
             </button>
           </div>
         </div>
@@ -124,13 +126,14 @@
         <button
           type="submit"
           @click="generateImage"
-          class="w-full flex items-center justify-center gap-1.5 px-3 mt-3 lg:px-4 py-2 sm:py-2.5 bg-gradient-to-r from-[#ec2657] to-[#333333] hover:from-[#ec2657]/90 hover:to-[#333333]/80 text-white rounded-lg font-extrabold text-base sm:text-lg lg:text-xl shadow-xl transition"
+          class="w-full flex items-center justify-center gap-1.5 px-3 mt-3 lg:px-4 py-2 sm:py-2.5 bg-gradient-to-r from-[#ec2657] to-[#333333] hover:from-[#ec2657]/90 hover:to-[#333333]/80 text-white rounded-lg font-extrabold text-base sm:text-lg lg:text-xl shadow-xl transition relative"
           :disabled="isGenerating"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
           </svg>
           <span>{{ isGenerating ? 'Generating...' : 'Generate Image' }}</span>
+          <span class="absolute -top-1.5 -right-1.5 bg-[#00b8ff] text-white text-xs font-bold px-1.5 py-0.5 rounded-full shadow border-2 border-white/50 shadow-[0_0_15px_rgba(0,184,255,0.3)]">{{ currentModelScore }} points</span>
         </button>
       </div>
 
@@ -142,7 +145,7 @@
               <img :src="generatedImage" alt="Generated Image" class="w-full h-full object-contain rounded-lg">
               <div class="absolute bottom-2 left-2 right-2 bg-black/60 p-2 rounded-lg text-xs text-gray-300">
                 <p class="mb-1"><span class="font-semibold text-[#ec2657]">Prompt:</span> {{ displayedPrompt }}</p>
-                <p class="mb-1"><span class="font-semibold text-[#ec2657]">Model:</span> {{ selectedModel }}</p>
+                <p class="mb-1"><span class="font-semibold text-[#ec2657]">Model:</span> {{ getModelDisplayName(selectedModel) }}</p>
                 <p><span class="font-semibold text-[#ec2657]">Aspect Ratio:</span> {{ selectedRatio }}</p>
               </div>
             </div>
@@ -165,15 +168,35 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import { createTasksText, getScore } from '~/api'
 
 const prompt = ref('')
 const selectedRatio = ref('1:1')
-const selectedModel = ref('ultra')
+const selectedModel = ref('imagen-4-ultra')
 const isGenerating = ref(false)
 const generatedImage = ref('')
 const displayedPrompt = ref('')
 const promptError = ref(false)
+const taskId = ref('')
+const modelScores = ref<Record<string, number>>({})
+
+// 模型映射关系
+const modelMap = {
+  'normal': 'imagen-4',
+  'ultra': 'imagen-4-ultra'
+}
+
+// 显示名称映射
+const modelDisplayName: Record<string, string> = {
+  'imagen-4': 'Normal',
+  'imagen-4-ultra': 'Ultra'
+}
+
+// 计算当前选择模型的积分
+const currentModelScore = computed(() => {
+  return modelScores.value[selectedModel.value] || 0
+})
 
 interface AspectRatios {
   [key: string]: string;
@@ -187,7 +210,54 @@ const aspectRatios: AspectRatios = {
   '16:9': '1408 x 768'
 }
 
-// 模拟图片生成过程
+interface ApiResponse {
+  code: number;
+  msg: string;
+  data?: {
+    task_id: string;
+    image_url: string;
+  };
+  success: boolean;
+}
+
+interface ScoreItem {
+  id: number;
+  model: string;
+  score: number;
+}
+
+interface ScoreResponse {
+  code: number;
+  msg: string;
+  data: ScoreItem[];
+  success: boolean;
+}
+
+// 获取积分信息
+const fetchScores = async () => {
+  try {
+    const response = await getScore() as ScoreResponse
+    if (response && response.code === 200 && Array.isArray(response.data)) {
+      // 将积分数据转换为以模型名称为键的对象
+      const scores: Record<string, number> = {}
+      response.data.forEach((item: ScoreItem) => {
+        scores[item.model] = item.score
+      })
+      modelScores.value = scores
+    } else {
+      console.error('获取积分信息失败:', response)
+    }
+  } catch (error) {
+    console.error('获取积分信息失败:', error)
+  }
+}
+
+// 组件挂载时获取积分信息
+onMounted(() => {
+  fetchScores()
+})
+
+// 使用API生成图片
 const generateImage = async () => {
   // 验证提示词是否填写
   if (!prompt.value.trim()) {
@@ -204,29 +274,35 @@ const generateImage = async () => {
   displayedPrompt.value = prompt.value
   
   try {
-    // 模拟API调用延迟
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    
-    // 根据选择的比例和模型获取示例图片
-    const demoImages = [
-      '/img/demo/Imagen-4-Ultra-image1.webp',
-      '/img/demo/Imagen-4-Ultra-image2.webp',
-      '/img/demo/Imagen-4-Ultra-image3.webp',
-      '/img/demo/Imagen-4-Ultra-image4.webp',
-      '/img/demo/Imagen-4-Ultra-image5.webp'
-    ]
-    
-    // 随机选择一张示例图片
-    const randomIndex = Math.floor(Math.random() * demoImages.length)
-    generatedImage.value = demoImages[randomIndex]
-    
-    // 记录生成的参数
-    console.log('Image generated with:', {
+    // 调用API生成图片
+    const response = await createTasksText({
       prompt: prompt.value,
-      aspectRatio: selectedRatio.value,
       model: selectedModel.value,
-      size: aspectRatios[selectedRatio.value as keyof typeof aspectRatios]
-    })
+      ratio: selectedRatio.value
+    }) as ApiResponse
+    
+    if (response && (response.code === 0 || response.code === 200) && response.data) {
+      // 保存任务ID
+      taskId.value = response.data.task_id
+      
+      // 使用API返回的图片URL
+      if (response.data.image_url) {
+        generatedImage.value = response.data.image_url
+      }
+      
+      // 记录生成的参数
+      console.log('Image generated with:', {
+        prompt: prompt.value,
+        aspectRatio: selectedRatio.value,
+        model: selectedModel.value,
+        size: aspectRatios[selectedRatio.value],
+        taskId: taskId.value,
+        imageUrl: response.data.image_url
+      })
+    } else {
+      console.error('图片生成失败:', response)
+      throw new Error(response?.msg || '图片生成失败')
+    }
   } catch (error) {
     console.error('图片生成失败:', error)
   } finally {
@@ -236,14 +312,20 @@ const generateImage = async () => {
 
 // 获取比例标签名称
 const getRatioLabel = (ratio: string): string => {
-  switch(ratio) {
+  const ratioStr = String(ratio);
+  switch(ratioStr) {
     case '1:1': return 'Square (1:1)';
     case '3:4': return 'Portrait (3:4)';
     case '4:3': return 'Standard (4:3)';
     case '9:16': return 'Mobile (9:16)';
     case '16:9': return 'Landscape (16:9)';
-    default: return ratio;
+    default: return ratioStr;
   }
+}
+
+// 获取模型显示名称
+const getModelDisplayName = (model: string): string => {
+  return modelDisplayName[model] || model;
 }
 </script>
 
