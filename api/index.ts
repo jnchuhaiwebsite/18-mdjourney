@@ -15,17 +15,17 @@ const baseUrl = process.env.NODE_ENV === 'development'
 export const urlList = {
   setUserInfo: baseUrl + '/api/user/auth',        // 设置用户信息
   getCurrentUser: baseUrl + '/api/user/info',   // 获取当前用户信息
-  createTasksImgVideo: baseUrl + '/api/task/veo3/make_video',     // 创建任务-图生视频
-  createTasksTextVideo: baseUrl + '/api/task/veo3/make_video',     // 创建任务-文生视频
+  createTasksImgVideo: baseUrl + '/api/task/imagen4/make_video',     // 创建任务-图生视频
+  createTasksTextVideo: baseUrl + '/api/task/imagen4/make_video',     // 创建任务-文生视频
   getSubPlans: baseUrl + '/api/website/priceList',     // 获取套餐信息
   getSubplansTest: baseUrl + '/api/website/odl',     // 获取测试套餐信息
   payOrder: baseUrl + '/api/pay/paypal',  // 支付
   opusList: baseUrl + '/api/user/opus_list', // 获取用户作品列表
-  checkTask: baseUrl + '/api/task/veo3/check_task_status', // 检查任务
+  checkTask: baseUrl + '/api/task/imagen4/check_task_status', // 检查任务
   friendLinkList: baseUrl + '/api/cms/friendLinkList', // 获取友情链接列表
-  getScore: baseUrl + '/api/veo3/score', // 获取积分
-  getUserOpus: baseUrl + '/api/veo3/show', // 查询用户作品展示列表
-  getShareInfo: baseUrl + '/api/veo3/get_share_info', // 获取用户作品展示详情
+  getScore: baseUrl + '/api/imagen4/score', // 获取积分
+  getUserOpus: baseUrl + '/api/imagen4/show', // 查询用户作品展示列表
+  getShareInfo: baseUrl + '/api/imagen4/get_share_info', // 获取用户作品展示详情
   upload: baseUrl + '/api/common/upload', // 上传图片获取url
   getTimesLog: baseUrl + '/api/user/times_log', // 获取使用次数日志、消费记录
 
