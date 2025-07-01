@@ -23,11 +23,11 @@ onMounted(() => {
 /* 主题色 */
 :root {
   /* 主题色 - 紫色 */
-  --theme-primary: #f49d25;
+  --theme-primary: #ec2657;
   --theme-primary-hover: #f3a943;
   
   /* 文字颜色 */
-  --text-primary: #f49d25;
+  --text-primary: #ec2657;
   --text-secondary: #f3a943;
   
   /* 背景和边框 */

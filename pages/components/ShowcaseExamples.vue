@@ -2,18 +2,13 @@
   <div class="py-8 sm:py-12 lg:py-16 bg-[#1a1a1a]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center">
-        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#f49d25] bg-gradient-to-r from-[#f49d25] via-[#ffb347] to-[#ff8c42] bg-clip-text text-transparent">
-          Imagen Configuration
+        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#ec2657] bg-gradient-to-r from-[#ec2657] via-[#990066] to-[#333333] bg-clip-text text-transparent">
+          Imagen 4 Ultra - Professional AI Image Generator
         </h1>
         <p class="mt-2 sm:mt-4 text-base sm:text-lg lg:text-xl text-gray-300">
-          Imagen 4 Ultra generates one high-quality image per request. Customize your image with aspect ratios (1:1, 3:4, 4:3, 9:16, 16:9) and control person generation settings. Note: English prompts only.
+          Experience the power of Imagen 4 Ultra - 10x faster rendering with stunning 2K quality output. Create both photorealistic and abstract masterpieces with unprecedented detail.
         </p>
       </div>
-
-      <!-- <div class="mt-6 text-center text-gray-400 text-sm">
-        <p>Person generation options: don't allow, allow adults only (default), or allow all*</p>
-        <p class="mt-1 text-xs">*Allow all option not available in EU, UK, Switzerland, and MENA regions</p>
-      </div> -->
 
       <div class="mt-6 sm:mt-8 lg:mt-12 relative">
         <!-- 轮播容器 -->
@@ -32,9 +27,9 @@
               >
               <button 
                 @click="copyPrompt(slides[slides.length - 1].prompt)"
-                class="absolute top-2 sm:top-4 right-2 sm:right-4 bg-[#f49d25] hover:bg-[#ffb347] px-3 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-lg flex items-center space-x-2 transition-colors duration-200"
+                class="absolute top-2 sm:top-4 right-2 sm:right-4 bg-[#ec2657] hover:bg-[#990066] px-3 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-lg flex items-center space-x-2 transition-colors duration-200"
               >
-                <span class="text-xs sm:text-sm font-medium text-black">Copy Prompt</span>
+                <span class="text-xs sm:text-sm font-medium text-white">Copy Prompt</span>
               </button>
             </div>
 
@@ -47,9 +42,9 @@
               >
               <button 
                 @click="copyPrompt(slide.prompt)"
-                class="absolute top-2 sm:top-4 right-2 sm:right-4 bg-[#f49d25] hover:bg-[#ffb347] px-3 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-lg flex items-center space-x-2 transition-colors duration-200"
+                class="absolute top-2 sm:top-4 right-2 sm:right-4 bg-[#ec2657] hover:bg-[#990066] px-3 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-lg flex items-center space-x-2 transition-colors duration-200"
               >
-                <span class="text-xs sm:text-sm font-medium text-black">Copy Prompt</span>
+                <span class="text-xs sm:text-sm font-medium text-white">Copy Prompt</span>
               </button>
             </div>
 
@@ -62,9 +57,9 @@
               >
               <button 
                 @click="copyPrompt(slides[0].prompt)"
-                class="absolute top-2 sm:top-4 right-2 sm:right-4 bg-[#f49d25] hover:bg-[#ffb347] px-3 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-lg flex items-center space-x-2 transition-colors duration-200"
+                class="absolute top-2 sm:top-4 right-2 sm:right-4 bg-[#ec2657] hover:bg-[#990066] px-3 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-lg flex items-center space-x-2 transition-colors duration-200"
               >
-                <span class="text-xs sm:text-sm font-medium text-black">Copy Prompt</span>
+                <span class="text-xs sm:text-sm font-medium text-white">Copy Prompt</span>
               </button>
             </div>
           </div>
@@ -72,17 +67,17 @@
           <!-- 轮播控制按钮 -->
           <button 
             @click="prevSlide" 
-            class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-[#f49d25] hover:bg-[#ffb347] p-1.5 sm:p-2 rounded-full shadow-lg"
+            class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-[#ec2657] hover:bg-[#990066] p-1.5 sm:p-2 rounded-full shadow-lg"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-6 sm:w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-6 sm:w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
             </svg>
           </button>
           <button 
             @click="nextSlide" 
-            class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-[#f49d25] hover:bg-[#ffb347] p-1.5 sm:p-2 rounded-full shadow-lg"
+            class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-[#ec2657] hover:bg-[#990066] p-1.5 sm:p-2 rounded-full shadow-lg"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-6 sm:w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-6 sm:w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
             </svg>
           </button>
@@ -94,7 +89,7 @@
               :key="index"
               @click="goToSlide(index + 1)"
               class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-colors duration-200"
-              :class="(currentIndex === index + 1 || (currentIndex === slides.length + 1 && index === 0) || (currentIndex === 0 && index === slides.length - 1)) ? 'bg-[#f49d25]' : 'bg-[#f49d25]/50'"
+              :class="(currentIndex === index + 1 || (currentIndex === slides.length + 1 && index === 0) || (currentIndex === 0 && index === slides.length - 1)) ? 'bg-[#ec2657]' : 'bg-[#ec2657]/50'"
             ></button>
           </div>
         </div>
@@ -104,7 +99,7 @@
       <div class="flex justify-center mt-6 sm:mt-8">
         <button 
           @click="scrollToGenerator"
-          class="bg-[#f49d25] hover:bg-[#ffb347] text-black px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold flex items-center gap-1.5 sm:gap-2 transition-colors duration-200 shadow-lg text-sm sm:text-base"
+          class="bg-[#ec2657] hover:bg-[#990066] text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold flex items-center gap-1.5 sm:gap-2 transition-colors duration-200 shadow-lg text-sm sm:text-base"
         >
           <span>Start Creating</span>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 20 20" fill="currentColor">

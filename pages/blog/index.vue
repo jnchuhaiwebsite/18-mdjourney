@@ -2,7 +2,7 @@
   <div class="min-h-screen bg-blue-pale pb-10">
     <!-- Page title -->
     <div class="pt-32 pb-12 text-center">
-      <h1 class="text-3xl md:text-4xl font-bold mb-2 text-[#ffb347]">veo3 Blog</h1>
+      <h1 class="text-3xl md:text-4xl font-bold mb-2 text-[#990066]">veo3 Blog</h1>
       <p class="text-gray-400">Tips, tutorials, and inspiration for creating professional-quality videos with AI image animator technology</p>
     </div>
     
@@ -12,7 +12,7 @@
         <div class="flex flex-row md:flex-col space-x-2 md:space-x-0 md:space-y-2 overflow-x-auto md:overflow-x-visible pb-2 md:pb-0">
           <div 
             class="px-3 md:px-4 py-2 rounded-lg transition-colors cursor-pointer whitespace-nowrap text-sm md:text-base"
-            :class="currentCategory === 'all' ? 'bg-[#ffb347] text-white' : 'bg-gray-800 text-gray-300 hover:bg-gray-700'"
+            :class="currentCategory === 'all' ? 'bg-[#990066] text-white' : 'bg-gray-800 text-gray-300 hover:bg-gray-700'"
             @click="handleCategoryChange('all')"
           >
             All
@@ -21,7 +21,7 @@
             v-for="category in allCategories" 
             :key="category.id"
             class="px-3 md:px-4 py-2 rounded-lg transition-colors whitespace-nowrap cursor-pointer text-sm md:text-base"
-            :class="currentCategory === category.id.toString() ? 'bg-[#ffb347] text-white' : 'bg-gray-800 text-gray-300 hover:bg-gray-700'"
+            :class="currentCategory === category.id.toString() ? 'bg-[#990066] text-white' : 'bg-gray-800 text-gray-300 hover:bg-gray-700'"
             @click="handleCategoryChange(category.id.toString())"
           >
             {{ category.name }}
@@ -33,7 +33,7 @@
       <div class="flex-1">
         <!-- Loading state -->
         <div v-if="loading" class="flex justify-center items-center py-20">
-          <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#ffb347]"></div>
+          <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#990066]"></div>
         </div>
 
         <!-- Blog posts and empty state - only show when data is loaded -->
@@ -42,7 +42,7 @@
             <div 
               v-for="post in blogData?.blogList || []" 
               :key="post.id"
-              class="block bg-gray-800 rounded-xl p-4 md:p-6 shadow-sm hover:shadow-md transition-all border border-gray-700 hover:border-[#ffb347] hover:translate-y-[-2px] cursor-pointer"
+              class="block bg-gray-800 rounded-xl p-4 md:p-6 shadow-sm hover:shadow-md transition-all border border-gray-700 hover:border-[#990066] hover:translate-y-[-2px] cursor-pointer"
               @click="navigateToBlog(post)"
             >
               <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-2 md:gap-4 mb-3 md:mb-4">
@@ -50,7 +50,7 @@
                   <h2 class="text-lg md:text-xl font-bold mb-1 md:mb-2 text-gray-200 truncate">{{ post.title }}</h2>
                   <p class="text-sm md:text-base text-gray-400 line-clamp-2">{{ post.abstract }}</p>
                 </div>
-                <span class="px-2 md:px-3 py-1 bg-[#ffb347] text-white text-xs md:text-sm rounded-full whitespace-nowrap inline-block w-fit">
+                <span class="px-2 md:px-3 py-1 bg-[#990066] text-white text-xs md:text-sm rounded-full whitespace-nowrap inline-block w-fit">
                   {{ getCategoryLabel(post.class_id) }}
                 </span>
               </div>
@@ -88,7 +88,7 @@
                     v-if="page !== '...'"
                     @click="goToPage(page)"
                     class="px-3 py-2 rounded-lg transition-colors text-sm"
-                    :class="page === currentPage ? 'bg-[#ffb347] text-white' : 'bg-gray-800 text-gray-300 hover:bg-gray-700'"
+                    :class="page === currentPage ? 'bg-[#990066] text-white' : 'bg-gray-800 text-gray-300 hover:bg-gray-700'"
                   >
                     {{ page }}
                   </button>

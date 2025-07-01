@@ -1,7 +1,7 @@
 <template>
   <button
     @click="scrollToTop"
-    class="fixed bottom-20 right-8 w-12 h-12 rounded-full bg-theme text-black shadow-lg flex items-center justify-center transition-all duration-300 transform hover:scale-110 z-50"
+    class="fixed bottom-20 right-8 w-12 h-12 rounded-full bg-theme text-white shadow-lg flex items-center justify-center transition-all duration-300 transform hover:scale-110 z-50"
     :class="{ 'opacity-0 translate-y-10 pointer-events-none': !isVisible, 'opacity-100 translate-y-0': isVisible }"
     aria-label="Back to top"
   >

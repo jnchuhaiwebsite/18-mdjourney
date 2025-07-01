@@ -3,15 +3,15 @@
     <div class="pt-32 py-10 mx-auto w-11/12 max-w-4xl">
       <button
         @click="handleBack"
-        class="inline-flex items-center text-gray-300 hover:text-[#ffb347] transition-colors mb-8 group font-medium"
+        class="inline-flex items-center text-gray-300 hover:text-[#990066] transition-colors mb-8 group font-medium"
       >
-        <div class="w-3 h-3 border-l-2 border-b-2 border-gray-300 group-hover:border-[#ffb347] transform rotate-45 mr-2 transition-colors"></div>
+        <div class="w-3 h-3 border-l-2 border-b-2 border-gray-300 group-hover:border-[#990066] transform rotate-45 mr-2 transition-colors"></div>
         Back to Blog
       </button>
 
       <!-- Loading state -->
       <div v-if="loading" class="flex justify-center items-center py-20">
-        <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#ffb347]"></div>
+        <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#990066]"></div>
       </div>
 
       <!-- Error state -->
@@ -20,7 +20,7 @@
         <p class="text-gray-400 mb-8">{{ error }}</p>
         <button 
           @click="loadBlogData"
-          class="inline-flex items-center px-8 py-4 bg-[#ffb347] hover:bg-[#ffb347] text-white rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-200"
+          class="inline-flex items-center px-8 py-4 bg-[#990066] hover:bg-[#990066] text-white rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-200"
         >
           Retry
         </button>
@@ -28,17 +28,17 @@
 
       <!-- Blog content -->
       <article v-else-if="post" class="prose prose-invert max-w-none bg-gray-800 p-6 md:p-8 rounded-xl shadow-sm">
-        <h1 class="text-3xl md:text-4xl font-bold mb-6 text-[#ffb347] border-l-4 border-[#ffb347] pl-4">{{ post.title }}</h1>
+        <h1 class="text-3xl md:text-4xl font-bold mb-6 text-[#990066] border-l-4 border-[#990066] pl-4">{{ post.title }}</h1>
         
         <div class="flex items-center gap-4 mb-8">
-          <span class="px-2 md:px-3 py-1 bg-[#ffb347] text-white text-xs rounded-full">
+          <span class="px-2 md:px-3 py-1 bg-[#990066] text-white text-xs rounded-full">
             {{ getCategoryLabel(post.class_id) }}
           </span>
           <span class="text-gray-400 text-sm">{{ formatDate(post.created_time) }}</span>
         </div>
 
         <!-- Rich text content -->
-        <div class="text-gray-300 space-y-6 [&>h1]:text-2xl [&>h1]:font-bold [&>h1]:text-gray-100 [&>h2]:text-xl [&>h2]:font-bold [&>h2]:text-gray-100 [&>h3]:text-lg [&>h3]:font-bold [&>h3]:text-gray-100 [&>p]:text-gray-300 [&>p]:leading-relaxed [&>a]:text-[#ffb347] [&>a]:hover:text-[#ffb347] [&>strong]:text-gray-100 [&>code]:text-gray-100 [&>code]:bg-gray-700 [&>code]:px-1 [&>code]:py-0.5 [&>code]:rounded [&>blockquote]:border-l-4 [&>blockquote]:border-[#ffb347] [&>blockquote]:pl-4 [&>blockquote]:text-gray-300 [&>hr]:border-gray-600 [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:marker:text-gray-400 [&>ol]:list-decimal [&>ol]:pl-6 [&>ol]:marker:text-gray-400" v-html="processedContent"></div>
+        <div class="text-gray-300 space-y-6 [&>h1]:text-2xl [&>h1]:font-bold [&>h1]:text-gray-100 [&>h2]:text-xl [&>h2]:font-bold [&>h2]:text-gray-100 [&>h3]:text-lg [&>h3]:font-bold [&>h3]:text-gray-100 [&>p]:text-gray-300 [&>p]:leading-relaxed [&>a]:text-[#990066] [&>a]:hover:text-[#990066] [&>strong]:text-gray-100 [&>code]:text-gray-100 [&>code]:bg-gray-700 [&>code]:px-1 [&>code]:py-0.5 [&>code]:rounded [&>blockquote]:border-l-4 [&>blockquote]:border-[#990066] [&>blockquote]:pl-4 [&>blockquote]:text-gray-300 [&>hr]:border-gray-600 [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:marker:text-gray-400 [&>ol]:list-decimal [&>ol]:pl-6 [&>ol]:marker:text-gray-400" v-html="processedContent"></div>
 
         <!-- Related articles section -->
         <div class="mt-12 pt-8 border-t border-gray-700" v-if="relatedPosts.length > 0">
@@ -60,7 +60,7 @@
         <div class="text-center mt-12">
           <button
             @click="handleBackHome"
-            class="inline-flex items-center px-8 py-4 bg-[#ffb347] hover:bg-[#ffb347] text-white rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-200"
+            class="inline-flex items-center px-8 py-4 bg-[#990066] hover:bg-[#990066] text-white rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-200"
           >
             <span class="mr-2">🏠</span>
             Back to home
@@ -74,7 +74,7 @@
         <p class="text-gray-400 mb-8">The blog post you are looking for does not exist or has been deleted.</p>
         <NuxtLink 
           to="/blog" 
-          class="inline-flex items-center px-8 py-4 bg-[#ffb347] hover:bg-[#ffb347] text-white rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-200"
+          class="inline-flex items-center px-8 py-4 bg-[#990066] hover:bg-[#990066] text-white rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-200"
         >
           Back to Blog List
           <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

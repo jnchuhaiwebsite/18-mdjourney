@@ -2,7 +2,7 @@
     <div class="relative w-full flex flex-col items-center justify-start overflow-x-hidden">
       <!-- 标题区 -->
       <div class="mt-[64px] mb-10 flex flex-col items-center relative z-10">
-        <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-center bg-gradient-to-r from-[#f49d25] via-[#ffb347] to-[#ff8c42] bg-clip-text text-transparent drop-shadow-2xl tracking-tight animate-gradient-x">
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-center bg-gradient-to-r from-[#ec2657] via-[#990066] to-[#333333] bg-clip-text text-transparent drop-shadow-2xl tracking-tight animate-gradient-x">
           Veo3-AI Video Generation with Realistic Sound
         </h1>
         <p class="mt-4 text-base text-gray-200 text-center max-w-4xl font-medium">
@@ -32,7 +32,7 @@
             <textarea 
               v-model="prompt"
               maxlength="2000"
-              class="w-full rounded-lg bg-[#111111] border border-gray-700 text-gray-200 px-2 py-1.5 focus:ring-2 focus:ring-[#f49d25] focus:border-transparent transition placeholder-gray-500 text-sm lg:text-base h-32 resize-none" 
+              class="w-full rounded-lg bg-[#111111] border border-gray-700 text-gray-200 px-2 py-1.5 focus:ring-2 focus:ring-[#ec2657] focus:border-transparent transition placeholder-gray-500 text-sm lg:text-base h-32 resize-none" 
               placeholder="Describe the video you want to generate..."
               @click="handleAction('prompt')"
             ></textarea>
@@ -41,7 +41,7 @@
                 <p class="text-xs text-gray-400">Be detailed and specific about what you want to see in the veo3 video.</p>
                 <button 
                   @click="getRandomPrompt"
-                  class="flex items-center gap-1 px-2 py-1 text-xs bg-[#f49d25]/10 hover:bg-[#f49d25]/20 text-[#f49d25] rounded-md transition-colors"
+                  class="flex items-center gap-1 px-2 py-1 text-xs bg-[#ec2657]/10 hover:bg-[#ec2657]/20 text-[#ec2657] rounded-md transition-colors"
                 >
                   <SparklesIcon class="h-3.5 w-3.5" />
                   <span>Inspiration</span>
@@ -58,7 +58,7 @@
                 <label class="text-xs text-gray-400 mr-2">Fast Generation</label>
                 <div class="group relative">
                   <InformationCircleIcon class="h-4 w-4 text-gray-400 cursor-help" />
-                  <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 px-2 py-1.5 bg-[#f49d25] text-black text-xs rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 whitespace-nowrap z-10">
+                  <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 px-2 py-1.5 bg-[#ec2657] text-black text-xs rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 whitespace-nowrap z-10">
                     Fast generation mode only supports text-to-video generation.
                   </div>
                 </div>
@@ -66,7 +66,7 @@
               <!-- 开关按钮 -->
               <label class="inline-flex items-center cursor-pointer">
                 <input type="checkbox" v-model="isFastMode" class="sr-only peer">
-                <div class="relative w-9 h-5 bg-gray-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-[#f49d25] rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#f49d25]"></div>
+                <div class="relative w-9 h-5 bg-gray-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-[#ec2657] rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#ec2657]"></div>
               </label>
             </div>
           </div>
@@ -76,7 +76,7 @@
             <label class="block text-sm lg:text-base font-semibold text-gray-300 mb-2">
               Upload Image (Optional)
             </label>
-            <div class="w-full border-2 border-dashed border-gray-700 rounded-lg p-3 hover:border-[#f49d25] transition-colors cursor-pointer mb-3 relative bg-[#111111]">
+            <div class="w-full border-2 border-dashed border-gray-700 rounded-lg p-3 hover:border-[#ec2657] transition-colors cursor-pointer mb-3 relative bg-[#111111]">
               
               <input 
                 type="file" 
@@ -121,13 +121,13 @@
                 type="checkbox" 
                 id="showInGallery" 
                 v-model="isShow"
-                class="w-3 h-3 rounded border-gray-600 bg-gray-700 text-[#f49d25] focus:ring-[#f49d25] focus:ring-offset-gray-800"
+                class="w-3 h-3 rounded border-gray-600 bg-gray-700 text-[#ec2657] focus:ring-[#ec2657] focus:ring-offset-gray-800"
               />
               <label for="showInGallery" class="text-sm text-gray-300">Share to Gallery</label>
             </div>
             <div class="group relative">
               <InformationCircleIcon class="h-4 w-4 text-gray-400 cursor-help" />
-              <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 px-2 py-1.5 bg-[#f49d25] text-black text-xs rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 whitespace-nowrap z-10">
+              <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 px-2 py-1.5 bg-[#ec2657] text-black text-xs rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 whitespace-nowrap z-10">
                 Your work will be displayed in the gallery when checked
               </div>
             </div>
@@ -135,7 +135,7 @@
 
           <!-- 生成按钮 -->
           <button 
-            class="w-full flex items-center justify-center gap-1.5 px-3 mt-3 lg:px-4 py-2 sm:py-2.5 bg-gradient-to-r from-[#f49d25] to-[#ff8c42] hover:from-[#f49d25]/90 hover:to-[#ff8c42]/80 text-black rounded-lg font-extrabold text-base sm:text-lg lg:text-xl shadow-xl transition relative" 
+            class="w-full flex items-center justify-center gap-1.5 px-3 mt-3 lg:px-4 py-2 sm:py-2.5 bg-gradient-to-r from-[#ec2657] to-[#333333] hover:from-[#ec2657]/90 hover:to-[#333333]/80 text-white rounded-lg font-extrabold text-base sm:text-lg lg:text-xl shadow-xl transition relative" 
             @click="handleAction('generate')"
             :disabled="isGenerating"
           >
@@ -151,7 +151,7 @@
           containerHeight.sm.replace('sm:min-', 'sm:'),
           containerHeight.lg.replace('lg:min-', 'lg:')
         ]">
-          <div class="flex flex-col justify-center items-center w-full h-full bg-gradient-to-br from-[#1a1a1a]/10 via-[#ffb347]/8 to-[#ff8c42]/10 rounded-[16px]">
+          <div class="flex flex-col justify-center items-center w-full h-full bg-gradient-to-br from-[#1a1a1a]/10 via-[#990066]/8 to-[#333333]/10 rounded-[16px]">
             <div class="relative w-full h-[480px] flex items-center justify-center">
               <!-- 进度条 -->
               <div v-if="isGenerating" class="absolute inset-0 flex items-center justify-center">
@@ -167,7 +167,7 @@
                       cy="50"
                     />
                     <circle
-                      class="text-[#f49d25]"
+                      class="text-[#ec2657]"
                       stroke-width="8"
                       stroke-dasharray="251.2"
                       stroke-dashoffset="251.2"
@@ -182,20 +182,20 @@
                       }"
                     />
                   </svg>
-                  <div class="absolute inset-0 flex items-center justify-center text-[#f49d25] font-bold text-lg">
+                  <div class="absolute inset-0 flex items-center justify-center text-[#ec2657] font-bold text-lg">
                     {{ progress.toFixed(0) }}%
                   </div>
-                  <span class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 whitespace-nowrap text-[#f49d25] text-base font-medium">Generating your video<span class="loading-dots">...</span></span>
+                  <span class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 whitespace-nowrap text-[#ec2657] text-base font-medium">Generating your video<span class="loading-dots">...</span></span>
                 </div>
                 <div v-else class="flex flex-col items-center justify-center">
-                  <div class="animate-spin rounded-full h-10 w-10 border-4 border-[#f49d25] border-t-transparent"></div>
-                  <span class="mt-3 text-[#f49d25] text-base font-medium whitespace-nowrap">Generating your video<span class="loading-dots">...</span></span>
+                  <div class="animate-spin rounded-full h-10 w-10 border-4 border-[#ec2657] border-t-transparent"></div>
+                  <span class="mt-3 text-[#ec2657] text-base font-medium whitespace-nowrap">Generating your video<span class="loading-dots">...</span></span>
                 </div>
                 
                 <!-- 继续制作按钮 -->
                 <button 
                   @click="handleContinueCreating"
-                  class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-[#f49d25] hover:bg-[#f49d25]/80 text-black px-4 py-2 rounded-lg font-medium transition-colors shadow-lg flex items-center gap-2"
+                  class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-[#ec2657] hover:bg-[#ec2657]/80 text-white px-4 py-2 rounded-lg font-medium transition-colors shadow-lg flex items-center gap-2"
                 >
                   <ArrowUpTrayIcon class="h-4 w-4" />
                   <span>Keep making</span>
@@ -228,7 +228,7 @@
                     </svg>
                   </button>
                 </div>
-                <div class="absolute top-3 sm:top-4 left-1/2 transform -translate-x-1/2 text-[#f49d25] px-3 sm:px-4 py-1 sm:py-1.5 rounded-lg text-sm sm:text-base font-semibold shadow-lg pointer-events-none select-none whitespace-nowrap z-10">
+                <div class="absolute top-3 sm:top-4 left-1/2 transform -translate-x-1/2 text-[#ec2657] px-3 sm:px-4 py-1 sm:py-1.5 rounded-lg text-sm sm:text-base font-semibold shadow-lg pointer-events-none select-none whitespace-nowrap z-10">
                   AI Video Generation Demo
                 </div>
               </div>
@@ -246,7 +246,7 @@
                 ></video>
                 <button 
                   @click="handleDownload"
-                  class="absolute top-0 right-0 bg-black/60 text-[#f49d25] px-3 py-1.5 rounded-lg text-xs font-medium shadow-lg flex items-center gap-1.5 transition-all duration-300 hover:bg-black/70 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-sm hover:shadow-[#f49d25]"
+                  class="absolute top-0 right-0 bg-black/60 text-[#ec2657] px-3 py-1.5 rounded-lg text-xs font-medium shadow-lg flex items-center gap-1.5 transition-all duration-300 hover:bg-black/70 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-sm hover:shadow-[#ec2657]"
                   :disabled="isDownloading"
                 >
                   <ArrowDownTrayIcon v-if="!isDownloading" class="w-4 h-4" />
@@ -254,7 +254,7 @@
                   {{ isDownloading ? 'Downloading...' : 'Download' }}
                 </button>
                 <!-- 添加提示文本 -->
-                <div class="absolute top-0 left-0 bg-[#f49d25] text-black px-3 py-1.5 rounded-lg text-xs font-medium shadow-lg flex items-center justify-center gap-1.5 whitespace-nowrap">
+                <div class="absolute top-0 left-0 bg-[#ec2657] text-white px-3 py-1.5 rounded-lg text-xs font-medium shadow-lg flex items-center justify-center gap-1.5 whitespace-nowrap">
                   <span>Video has been generated, visit</span>
                   <NuxtLink to="/profile" class="text-black hover:text-gray-800 transition-colors font-semibold">
                     profile-My Works
@@ -264,7 +264,7 @@
               </div>
               <!-- 视频加载中 -->
               <div v-else class="absolute inset-0 flex items-center justify-center">
-                <div class="animate-spin rounded-full h-10 w-10 border-4 border-[#f49d25] border-t-transparent"></div>
+                <div class="animate-spin rounded-full h-10 w-10 border-4 border-[#ec2657] border-t-transparent"></div>
               </div>
             </div>
           </div>
@@ -481,8 +481,8 @@
   })
   
   // 预览视频URL
-  const previewVideoUrl = 'https://resource.vidveo3.com/veo3/veo3demo.mp4'
-  const previewVideoPoster = 'https://resource.vidveo3.com/veo3/veo3-video-generated-image-demonstration.jpg'
+  const previewVideoUrl = 'https://resource.aimagen43.com/veo3/veo3demo.mp4'
+  const previewVideoPoster = 'https://resource.aimagen43.com/veo3/veo3-video-generated-image-demonstration.jpg'
   
   // 处理视频加载事件
   const handleVideoLoadStart = (target: EventTarget | null) => {

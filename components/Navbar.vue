@@ -18,7 +18,7 @@
             <template v-for="(section, index) in sections" :key="index">
               <div
                 @click="handleNavClick(section.href || section.id)"
-                class="text-gray-300 hover:text-[#f49d25] transition-colors cursor-pointer"
+                class="text-gray-300 hover:text-[#ec2657] transition-colors cursor-pointer"
               >
                 {{ section.name }}
               </div>
@@ -27,14 +27,14 @@
             <template v-if="isSignedIn">
               <NuxtLink
                 to="/profile"
-                class="text-gray-300 hover:text-[#f49d25] transition-colors"
+                class="text-gray-300 hover:text-[#ec2657] transition-colors"
               >
                 Personal Center
               </NuxtLink>
               <div class="text-gray-300 flex items-center gap-2">
-                <span class="text-[#f49d25]">Credits:</span>
-                <span class="text-[#f49d25] font-medium">{{ credits }}</span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-[#f49d25]">
+                <span class="text-[#ec2657]">Credits:</span>
+                <span class="text-[#ec2657] font-medium">{{ credits }}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-[#ec2657]">
                   <path d="M10.464 8.746c.227-.18.497-.311.786-.394v2.795a2.252 2.252 0 01-.786-.393c-.394-.313-.546-.681-.546-1.004 0-.323.152-.691.546-1.004zM12.75 15.662v-2.824c.347.085.664.228.921.421.427.32.579.686.579.991 0 .305-.152.671-.579.991a2.534 2.534 0 01-.921.42z" />
                   <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v.816a3.836 3.836 0 00-1.72.756c-.712.566-1.112 1.35-1.112 2.178 0 .829.4 1.612 1.113 2.178.502.4 1.102.647 1.719.756v2.978a2.536 2.536 0 01-.921-.421l-.879-.66a.75.75 0 00-.9 1.2l.879.66c.533.4 1.169.645 1.821.75V18a.75.75 0 001.5 0v-.81a4.124 4.124 0 001.821-.749c.745-.559 1.179-1.344 1.179-2.191 0-.847-.434-1.632-1.179-2.191a4.122 4.122 0 00-1.821-.75V8.354c.29.082.559.213.786.393l.415.33a.75.75 0 00.933-1.175l-.415-.33a3.836 3.836 0 00-1.719-.755V6z" clip-rule="evenodd" />
                 </svg>
@@ -48,7 +48,7 @@
           <!-- 移动端菜单按钮 -->
           <button
             @click="isOpen = !isOpen"
-            class="lg:hidden text-[#f49d25] p-2 rounded-md hover:bg-[#f49d25]/20 transition-colors"
+            class="lg:hidden text-[#ec2657] p-2 rounded-md hover:bg-[#ec2657]/20 transition-colors"
           >
             <svg
               v-if="!isOpen"
@@ -91,7 +91,7 @@
           <!-- 关闭按钮 -->
           <button
             @click="isOpen = false"
-            class="fixed top-4 right-4 text-[#f49d25] p-2 rounded-full hover:bg-[#f49d25]/20 transition-colors z-[101]"
+            class="fixed top-4 right-4 text-[#ec2657] p-2 rounded-full hover:bg-[#ec2657]/20 transition-colors z-[101]"
           >
             <svg
               class="w-6 h-6"
@@ -115,7 +115,7 @@
               <template v-for="(section, index) in sections" :key="index">
                 <div
                   @click="() => { handleNavClick(section.href || section.id); isOpen = false; }"
-                  class="block text-gray-300 hover:text-[#f49d25] text-base py-2 transition-colors cursor-pointer"
+                  class="block text-gray-300 hover:text-[#ec2657] text-base py-2 transition-colors cursor-pointer"
                 >
                   {{ section.name }}
                 </div>
@@ -123,7 +123,7 @@
               <NuxtLink
                 v-if="isSignedIn"
                 to="/profile"
-                class="block text-gray-300 hover:text-[#f49d25] text-base py-2 transition-colors"
+                class="block text-gray-300 hover:text-[#ec2657] text-base py-2 transition-colors"
                 @click="() => { isOpen = false; }"
               >
                 Personal Center

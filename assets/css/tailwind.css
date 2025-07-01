@@ -6,12 +6,12 @@
 @layer base {
   :root {
     --background: 250 10% 10%; /* #19171C */
-    --foreground: 262 83% 58%; /* #f49d25 */
+    --foreground: 262 83% 58%; /* #ec2657 */
     --card: 250 10% 12%;
     --card-foreground: 262 83% 58%;
     --popover: 250 10% 12%;
     --popover-foreground: 262 83% 58%;
-    --primary: #f49d25; /* #f49d25 */
+    --primary: #ec2657; /* #ec2657 */
     --primary-foreground: 0 0% 100%; /* 白色 */
     --secondary: 250 10% 15%;
     --secondary-foreground: 262 83% 58%;
@@ -33,12 +33,12 @@
   }
   .dark {
     --background: 250 10% 10%; /* #19171C */
-    --foreground: 262 83% 58%; /* #f49d25 */
+    --foreground: 262 83% 58%; /* #ec2657 */
     --card: 250 10% 12%;
     --card-foreground: 262 83% 58%;
     --popover: 250 10% 12%;
     --popover-foreground: 262 83% 58%;
-    --primary: 262 83% 58%; /* #f49d25 */
+    --primary: 262 83% 58%; /* #ec2657 */
     --primary-foreground: 0 0% 100%; /* 白色 */
     --secondary: 250 10% 15%;
     --secondary-foreground: 262 83% 58%;

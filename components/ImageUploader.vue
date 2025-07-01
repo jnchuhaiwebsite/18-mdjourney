@@ -9,7 +9,7 @@
     <!-- Tab section -->
     <div class="flex w-fit ml-6 mt-6">
       <h2
-        class="w-30 p-3 text-center font-medium text-[#f49d25] cursor-pointer transition-all relative text-base border-transparent hover:text-[#8B5CF6]"
+        class="w-30 p-3 text-center font-medium text-[#ec2657] cursor-pointer transition-all relative text-base border-transparent hover:text-[#8B5CF6]"
       >
         Pencil Drawing Converter
       </h2>
@@ -49,7 +49,7 @@
           <div v-else class="w-full h-full flex flex-col items-center justify-center">
             <button
               @click="triggerFileInput"
-              class="px-4 py-2 bg-[#f49d25] text-white rounded-lg hover:bg-[#8B5CF6] transition-all flex items-center gap-2"
+              class="px-4 py-2 bg-[#ec2657] text-white rounded-lg hover:bg-[#8B5CF6] transition-all flex items-center gap-2"
             >
               <ArrowUpTrayIcon class="w-5 h-5" />
               Upload Photos
@@ -61,7 +61,7 @@
         <!-- Style list area -->
         <div class="w-full border border-gray-700 rounded-lg bg-[#1E1C21]" style="height: 280px; overflow-y: auto;">
           <div class="p-3">
-            <h3 class="text-[#f49d25] font-medium mb-2">Select Pencil Drawing Style</h3>
+            <h3 class="text-[#ec2657] font-medium mb-2">Select Pencil Drawing Style</h3>
             <div v-if="styleList.length === 0" class="flex items-center justify-center h-40">
               <div class="text-gray-400">loading...</div>
             </div>
@@ -70,7 +70,7 @@
                 v-for="(style, index) in styleList"
                 :key="index"
                 :class="['aspect-[2/3] rounded-lg overflow-hidden cursor-pointer border-2 relative', 
-                  selectedStyleIndex === index ? 'border-[#f49d25]' : 'border-transparent']"
+                  selectedStyleIndex === index ? 'border-[#ec2657]' : 'border-transparent']"
                 @click="selectStyle(index)"
               >
                 <div class="relative w-full h-full">
@@ -82,7 +82,7 @@
                     @load="handleImageLoad(index)"
                   />
                   <div v-if="!style.imageLoaded" class="absolute inset-0 flex items-center justify-center bg-[#1E1C21]">
-                    <div class="animate-spin rounded-full h-6 w-6 border-2 border-[#f49d25] border-t-transparent"></div>
+                    <div class="animate-spin rounded-full h-6 w-6 border-2 border-[#ec2657] border-t-transparent"></div>
                   </div>
                 </div>
                 <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-xs py-1 px-2 text-center">
@@ -101,7 +101,7 @@
           
           <!-- Generate progress overlay -->
           <div v-if="isGenerating" class="absolute inset-0 bg-black bg-opacity-40 z-20 flex flex-col items-center justify-center backdrop-blur-md px-8">
-            <div class="animate-spin rounded-full h-12 w-12 border-4 border-[#f49d25] border-t-transparent mb-4"></div>
+            <div class="animate-spin rounded-full h-12 w-12 border-4 border-[#ec2657] border-t-transparent mb-4"></div>
             <div class="text-white text-xl font-medium">Generating your AI pencil drawing...</div>
             <div class="text-white text-2xl font-bold mt-2">{{ Math.round(progress) }}%</div>
             <div class="text-white text-sm mt-6 max-w-xs text-center">
@@ -111,7 +111,7 @@
           
           <!-- Regular loading state (not for generation) -->
           <div v-else-if="isImageLoading" class="absolute inset-0 flex items-center justify-center">
-            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-[#f49d25]"></div>
+            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-[#ec2657]"></div>
           </div>
 
           <!-- Display images -->
@@ -145,7 +145,7 @@
       <!-- AI generation button -->
       <button
         @click="generateAIImage"
-        class="py-2.5 px-6 rounded-xl bg-[#f49d25] text-white hover:bg-[#8B5CF6] transition-colors text-base flex items-center justify-center gap-2"
+        class="py-2.5 px-6 rounded-xl bg-[#ec2657] text-white hover:bg-[#8B5CF6] transition-colors text-base flex items-center justify-center gap-2"
         :disabled="isGenerating || isLoading"
         :class="{'opacity-50 cursor-not-allowed': isGenerating || isLoading}"
       >

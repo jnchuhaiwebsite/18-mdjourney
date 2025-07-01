@@ -40,7 +40,7 @@
         >
           <div
             v-if="plan.is_popular"
-            class="absolute -top-3 right-6 px-3 py-1 bg-theme text-black text-sm rounded-full"
+            class="absolute -top-3 right-6 px-3 py-1 bg-theme text-white text-sm rounded-full"
           >
             Trial Offer
           </div>

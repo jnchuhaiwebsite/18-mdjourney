@@ -36,14 +36,14 @@
           :class="[
             'bg-gray-800 rounded-xl p-8 flex flex-col',
             plan.is_popular
-              ? 'border-2 border-[#f49d25] shadow-lg relative'
+              ? 'border-2 border-[#ec2657] shadow-lg relative'
               : 'border border-gray-700 shadow-sm hover:shadow-md transition-shadow',
             plan.price === 0 ? 'hidden md:flex' : 'flex'
           ]"
         >
           <div
             v-if="plan.is_popular"
-            class="absolute -top-3 right-6 px-3 py-1 bg-theme text-black text-sm rounded-full"
+            class="absolute -top-3 right-6 px-3 py-1 bg-theme text-white text-sm rounded-full"
           >
             Most Popular
           </div>

@@ -72,7 +72,7 @@
 
         <section>
           <h2 class="text-xl font-semibold mb-4">7. Contact Us</h2>
-          <p>If you have any questions about this Privacy Policy, please contact us at: support@vidveo3.com</p>
+          <p>If you have any questions about this Privacy Policy, please contact us at: support@aimagen43.com</p>
         </section>
 
         <section class="mt-8">

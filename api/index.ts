@@ -5,9 +5,9 @@ import { useRuntimeConfig } from 'nuxt/app'
 
 const baseUrl = process.env.NODE_ENV === 'development'
   ? 'http://192.168.0.55:8686'
-  : 'https://art.vidveo3.com';
+  : 'https://art.aimagen43.com';
 
-// const baseUrl = 'https://art.vidveo3.com';
+// const baseUrl = 'https://art.aimagen43.com';
 // const baseUrl = 'http://192.168.0.55:8686';
 
 // console.log('当前baseUrl:', baseUrl);

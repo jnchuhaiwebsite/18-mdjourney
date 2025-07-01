@@ -6,13 +6,13 @@
       <div class="flex flex-col md:flex-row gap-8 md:gap-12 mb-8 md:mb-12">
         <!-- 友情链接区域 -->
         <div class="md:w-1/3">
-          <h3 class="text-[#f49d25] font-medium mb-4 text-left text-sm md:text-lg">Partner Sites</h3>
+          <h3 class="text-[#ec2657] font-medium mb-4 text-left text-sm md:text-lg">Partner Sites</h3>
           <div class="flex flex-wrap gap-3">
             <a v-for="(item,index) in partnerSites" :key="index" 
                :href="item.url" 
                target="_blank" 
                rel="noopener noreferrer" 
-               class="text-gray-400 hover:text-[#f49d25] transition-colors text-sm">
+               class="text-gray-400 hover:text-[#ec2657] transition-colors text-sm">
               {{ item.name }}
             </a>
           </div>
@@ -22,15 +22,15 @@
         <div class="md:w-2/3 grid grid-cols-2 sm:grid-cols-2 gap-6 md:gap-8">
           <!-- 导航链接 -->
           <div>
-            <h3 class="text-[#f49d25] font-medium mb-4 text-sm md:text-lg">Navigation</h3>
+            <h3 class="text-[#ec2657] font-medium mb-4 text-sm md:text-lg">Navigation</h3>
             <div class="flex flex-col gap-2">
               <template v-for="(section, index) in sections" :key="index">
                 <NuxtLink v-if="section.href" :to="section.href" 
-                  class="text-gray-400 hover:text-[#f49d25] transition-colors">
+                  class="text-gray-400 hover:text-[#ec2657] transition-colors">
                   {{ section.name }}
                 </NuxtLink>
                 <div v-else @click.prevent="handleNavClick(section.id)" 
-                  class="text-gray-400 hover:text-[#f49d25] transition-colors cursor-pointer">
+                  class="text-gray-400 hover:text-[#ec2657] transition-colors cursor-pointer">
                   {{ section.name }}
                 </div>
               </template>
@@ -39,10 +39,10 @@
 
           <!-- 法律条款 -->
           <div>
-            <h3 class="text-[#f49d25] font-medium mb-4 text-sm md:text-lg">Legal</h3>
+            <h3 class="text-[#ec2657] font-medium mb-4 text-sm md:text-lg">Legal</h3>
             <div class="flex flex-col gap-2">
-              <NuxtLink to="/subsidiary/privacy-policy" class="text-gray-400 hover:text-[#f49d25] transition-colors">Privacy Policy</NuxtLink>
-              <NuxtLink to="/subsidiary/terms-of-service" class="text-gray-400 hover:text-[#f49d25] transition-colors">Terms of Service</NuxtLink>
+              <NuxtLink to="/subsidiary/privacy-policy" class="text-gray-400 hover:text-[#ec2657] transition-colors">Privacy Policy</NuxtLink>
+              <NuxtLink to="/subsidiary/terms-of-service" class="text-gray-400 hover:text-[#ec2657] transition-colors">Terms of Service</NuxtLink>
             </div>
           </div>
         </div>
@@ -60,7 +60,7 @@
             <div class="text-center">
               <p class="text-gray-400 text-sm">
                 Need help? Contact us at 
-                <a href="mailto:support@imagen4ultra.com" class=" transition-colors">support@imagen4ultra.com</a>
+                <a href="mailto:support@aimagen4.com" class=" transition-colors">support@aimagen4.com</a>
               </p>
             </div>
           </div>
@@ -107,7 +107,7 @@ a::after {
   left: 0;
   width: 0;
   height: 1px;
-  background-color: #f49d25;  /* theme color */
+  background-color: #ec2657;  /* theme color */
   transition: width 0.3s ease;
 }
 
