@@ -1,7 +1,7 @@
 <template>
   <section id="faq" class="py-20 bg-blue-pale">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 id="faq-heading" class="text-3xl font-bold text-center mb-12 text-[#ec2657]">Understanding Imagen Configuration</h2>
+      <h2 id="faq-heading" class="text-3xl font-bold text-center mb-12 text-[#ec2657]">Frequently Asked Questions - Imagen 4 Ultra</h2>
       
       <div class="space-y-4">
         <div 
@@ -71,24 +71,24 @@ defineOptions({
 // FAQ数据
 const faqs = [
   {
-    question: "What are the key parameters for Imagen 4 Ultra?",
-    answer: "Imagen 4 Ultra has two main parameters: aspectRatio and personGeneration. The system can only generate one image at a time by default."
-  },
-  {
     question: "What aspect ratios are supported?",
     answer: "Imagen supports five aspect ratios: 1:1 (square, default), 3:4 (portrait), 4:3 (landscape), 9:16 (vertical), and 16:9 (horizontal). You can specify your preferred ratio using the aspectRatio parameter."
-  },
-  {
-    question: "How does the person generation feature work?",
-    answer: "The personGeneration parameter has three options: 'dont_allow' (no person generation), 'allow_adult' (default, adults only), and 'allow_all' (adults and children). Note: 'allow_all' is restricted in EU, UK, Switzerland, and MENA regions."
   },
   {
     question: "What language support is available?",
     answer: "Currently, Imagen 4 Ultra only supports English prompts. All text descriptions for image generation must be provided in English for optimal results."
   },
   {
-    question: "Are there any regional restrictions?",
-    answer: "Yes, the 'allow_all' setting for person generation is not available in the European Union, United Kingdom, Switzerland, and the Middle East and North Africa (MENA) regions."
+    question: "How do I write effective prompts for the main subject?",
+    answer: "When writing prompts, start by clearly describing your main subject - whether it's an object, person, animal, or scene. Be specific and use meaningful descriptive words. For example, instead of just saying 'a cat', try 'a fluffy orange tabby cat sitting alertly'."
+  },
+  {
+    question: "How should I describe the background and setting?",
+    answer: "The background is crucial for context. Specify the environment clearly - whether it's a studio setting with a white background, an outdoor scene with natural lighting, or an indoor environment. For instance: 'in a sun-drenched meadow with wildflowers', or 'in a minimalist studio with soft diffused lighting'."
+  },
+  {
+    question: "What's the best way to specify the artistic style?",
+    answer: "Layer your desired artistic style onto your prompt. You can use general terms like 'digital art', 'photograph', or 'sketch', or be more specific like 'pastel drawing', 'charcoal illustration', or 'isometric 3D rendering'. You can also combine styles, such as 'watercolor and ink illustration with digital enhancement'."
   }
 ];
 

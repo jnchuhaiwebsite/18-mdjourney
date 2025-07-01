@@ -31,46 +31,18 @@
             </ul>
           </div>
 
-          <!-- Video showcase -->
+          <!-- Image showcase -->
           <div class="w-full md:w-1/2">
-            <div class="relative bg-blue-pale/80 shadow-xl w-full max-w-md mx-auto rounded-xl overflow-hidden aspect-video">
-              <div v-if="!showVideo[index]" class="absolute inset-0 w-full h-full flex items-center justify-center bg-blue-pale" :style="`background-image: url('${feature.poster}'); background-size: cover; background-position: center;`">
-                <button 
-                  class="w-16 h-16 bg-white bg-opacity-80 rounded-full flex items-center justify-center shadow-lg hover:bg-gray-100 transition-colors focus:outline-none"
-                  @click="playVideo(index)"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-black" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M8 5v14l11-7z"/>
-                  </svg>
-                </button>
-              </div>
-              <video
-                v-if="showVideo[index]"
-                :src="feature.video" 
-                class="w-full h-full object-cover rounded-xl"
-                :poster="feature.poster"
-                autoplay
-                preload="auto"
-                @click="pauseAndShowCover(index, $event)"
-                @playing="onVideoPlaying(index)"
-                @ended="onVideoEnded(index)"
-                playsinline
-                webkit-playsinline
-                x5-playsinline
-                x5-video-player-type="h5"
-                x5-video-player-fullscreen="false"
-              ></video>
-              <div v-if="videoLoading[index]" class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 z-10">
-                <svg class="animate-spin h-12 w-12 text-[#ec2657]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
-                </svg>
-              </div>
+            <div class="relative bg-blue-pale/80 shadow-xl w-full max-w-md mx-auto rounded-xl overflow-hidden">
+              <img 
+                :src="feature.image" 
+                :alt="feature.title"
+                class="w-full h-full object-cover rounded-xl hover:scale-105 transition-transform duration-300"
+              />
             </div>
           </div>
         </div>
       </div>
-
 
       <!-- CTA Section -->
       <div class="text-center mt-16">
@@ -89,7 +61,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import {
   SparklesIcon,
   VideoCameraIcon,
@@ -107,7 +78,7 @@ defineOptions({
   name: 'FeatureShowcase'
 })
 
-// Main feature data with video demonstrations - keeping only 3 features
+// Main feature data with image demonstrations
 const mainFeatures = [
   {
     title: "English-Only Prompt System",
@@ -119,8 +90,7 @@ const mainFeatures = [
       "Advanced prompt processing",
       "High-quality output generation"
     ],
-    video: "/video/imagen-demo.mp4",
-    poster: "/img/demo/Imagen-4-Ultra-image1.webp"
+    image: "/img/demo/Imagen-4-Ultra-image6.webp"
   },
   {
     title: "Multiple Aspect Ratio Support",
@@ -132,70 +102,9 @@ const mainFeatures = [
       "Landscape options (4:3, 16:9)",
       "Maintains quality across all ratios"
     ],
-    video: "/video/aspect-ratio-demo.mp4",
-    poster: "/img/demo/Imagen-4-Ultra-image2.webp"
-  },
-  {
-    title: "Person Generation Controls",
-    description: "Comprehensive person generation settings with three distinct modes to meet various content requirements and regional regulations.",
-    icon: VideoCameraIcon,
-    points: [
-      "No person generation mode (dont_allow)",
-      "Adult-only mode - Default (allow_adult)",
-      "All-inclusive mode (allow_all)*",
-      "*Regional restrictions apply in EU, UK, Switzerland, ME & NA"
-    ],
-    video: "/video/content-settings-demo.mp4",
-    poster: "/img/demo/Imagen-4-Ultra-image3.webp"
+    image: "/img/demo/Imagen-4-Ultra-image7.webp"
   }
 ];
-
-// Technical features grid - removed aspect ratio feature
-const techFeatures = [
-  {
-    title: "High Resolution Output",
-    description: "Generate stunning 768P and 1080P videos with cinematic quality and rich details",
-    icon: ArrowsPointingOutIcon,
-    specs: "768P, 1080P resolution"
-  },
-  {
-    title: "Dual Generation Modes",
-    description: "Create videos from text prompts or transform images into dynamic video content",
-    icon: ClockIcon,
-    specs: "Text-to-video & Image-to-video"
-  },
-  {
-    title: "Fast Processing",
-    description: "Advanced Veo3 AI processing with 20-60 seconds generation time and high instruction response rate",
-    icon: ArrowPathIcon,
-    specs: "20-60 seconds processing time"
-  }
-];
-
-// 控制每个视频是否显示
-const showVideo = ref(mainFeatures.map(() => false));
-const videoLoading = ref(mainFeatures.map(() => false));
-
-function playVideo(idx: number) {
-  showVideo.value = showVideo.value.map((_, i) => i === idx);
-  videoLoading.value = videoLoading.value.map((_, i) => i === idx);
-}
-
-function pauseAndShowCover(idx: number, event: Event) {
-  const video = event.target as HTMLVideoElement;
-  video.pause();
-  showVideo.value[idx] = false;
-  videoLoading.value[idx] = false;
-}
-
-function onVideoPlaying(idx: number) {
-  videoLoading.value[idx] = false;
-}
-
-function onVideoEnded(idx: number) {
-  showVideo.value[idx] = false;
-  videoLoading.value[idx] = false;
-}
 
 // 跳转到首页
 const scrollToHero = () => {
