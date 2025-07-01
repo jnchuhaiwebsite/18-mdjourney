@@ -4,8 +4,8 @@ import { useRuntimeConfig } from 'nuxt/app'
 // console.log('当前环境:', process.env.NODE_ENV);
 
 const baseUrl = process.env.NODE_ENV === 'development'
-  ? 'http://192.168.0.55:8686'
-  : 'https://art.aimagen43.com';
+  ? 'https://art.aimagen4.com'
+  : 'https://art.aimagen4.com';
 
 // const baseUrl = 'https://art.aimagen43.com';
 // const baseUrl = 'http://192.168.0.55:8686';
@@ -32,6 +32,7 @@ export const urlList = {
   loginAuth: baseUrl + '/api/user/login_auth', // 登录认证
   blogCategoryList: baseUrl + '/api/cms/blogCategoryList', // 获取博客分类列表
   blogList: baseUrl + '/api/cms/blogList', // 获取博客列表
+  createTasksText: baseUrl + '/api/task/imagen4/create',  // 创建任务-文生图
 }
 
 /**
@@ -102,6 +103,22 @@ export const getCurrentUser = async () => {
 export const createTaskImgVideo = async (data: any) => {
   try {
     return await apiRequest(urlList.createTasksImgVideo, 'POST', data, true);
+  } catch (error) {
+    console.error('创建任务失败:', error);
+    throw error;
+  }
+}
+
+/**
+ * 创建任务-文生图
+ * @param prompt - 描述-必填
+ * @param model - 模型-必填
+ * @param aspect_ratio - 比例-必填
+ * @returns {Object} - 返回任务结果
+ */
+export const createTasksText = async (data: any) => {
+  try {
+    return await apiRequest(urlList.createTasksText, 'POST', data, true);
   } catch (error) {
     console.error('创建任务失败:', error);
     throw error;
