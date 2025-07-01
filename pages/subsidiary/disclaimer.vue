@@ -77,7 +77,7 @@
 
         <section>
           <h2 class="text-xl font-semibold mb-4">7. Contact Information</h2>
-          <p>For questions about this disclaimer, please contact us at: support@imagen4ultra.com</p>
+          <p>For questions about this disclaimer, please contact us at: support@aimagen4.com</p>
         </section>
 
         <section class="mt-8">

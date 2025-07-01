@@ -27,7 +27,7 @@
       <div class="text-center mt-16">
         <button
           @click="scrollToHero"
-          class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#f49d25] to-[#ff8c42] hover:from-[#f49d25]/90 hover:to-[#ff8c42]/80 text-white rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-200"
+          class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#ec2657] to-[#333333] hover:from-[#ec2657]/90 hover:to-[#333333]/80 text-white rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-200"
         >
           Start Creating Now
           <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -3,14 +3,14 @@
       <div class="pt-32 py-10 mx-auto w-11/12 max-w-4xl">
         <NuxtLink
           to="/portfolio"
-          class="inline-flex items-center text-gray-300 hover:text-[#f49d25] transition-colors mb-8 group font-medium"
+          class="inline-flex items-center text-gray-300 hover:text-[#ec2657] transition-colors mb-8 group font-medium"
         >
-          <div class="w-3 h-3 border-l-2 border-b-2 border-gray-300 group-hover:border-[#f49d25] transform rotate-45 mr-2 transition-colors"></div>
+          <div class="w-3 h-3 border-l-2 border-b-2 border-gray-300 group-hover:border-[#ec2657] transform rotate-45 mr-2 transition-colors"></div>
           Back to Portfolio
         </NuxtLink>
   
         <div v-if="pending" class="flex justify-center items-center py-20">
-          <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#f49d25]"></div>
+          <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#ec2657]"></div>
         </div>
   
         <div v-else-if="portfolioItem" class="bg-gray-800 rounded-xl shadow-lg overflow-hidden">
@@ -33,7 +33,7 @@
               </div>
               <button
                 @click="goToCreate"
-                class="bg-[#f49d25] hover:bg-[#8B5CF6] text-white px-4 py-2 rounded-lg font-medium transition-colors"
+                class="bg-[#ec2657] hover:bg-[#8B5CF6] text-white px-4 py-2 rounded-lg font-medium transition-colors"
               >
                 Create Similar
               </button>
@@ -46,7 +46,7 @@
                 <p class="text-gray-200">{{ portfolioItem.prompt }}</p>
                 <button
                   @click="copyPrompt"
-                  class="mt-3 text-[#f49d25] hover:text-[#8B5CF6] text-sm flex items-center"
+                  class="mt-3 text-[#ec2657] hover:text-[#8B5CF6] text-sm flex items-center"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>

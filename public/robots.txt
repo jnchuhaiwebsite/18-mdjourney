@@ -19,7 +19,7 @@ Disallow: /mypay/
 Disallow: /components/
 
 # 声明网站地图
-Sitemap: https://www.vidveo3.com/sitemap.xml
+Sitemap: https://www.aimagen4.com/sitemap.xml
 
 
 

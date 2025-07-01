@@ -2,7 +2,7 @@
   <section class="py-20 bg-blue-pale">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
-        <h2 class="text-4xl font-extrabold text-[#f49d25] sm:text-5xl">
+        <h2 class="text-4xl font-extrabold text-[#ec2657] sm:text-5xl">
           Imagen 4 Ultra Features
         </h2>
         <p class="mt-4 text-xl text-gray-300">
@@ -17,15 +17,15 @@
              :class="{ 'md:flex-row-reverse': index % 2 !== 0 }">
           <!-- Text content -->
           <div class="w-full md:w-1/2 space-y-6">
-            <div class="inline-block p-3 bg-gradient-to-r from-[#f49d25] to-[#ff8c42] rounded-lg">
+            <div class="inline-block p-3 bg-gradient-to-r from-[#ec2657] to-[#333333] rounded-lg">
               <component :is="feature.icon" class="w-6 h-6 text-white" />
             </div>
-            <h3 class="text-2xl font-bold text-[#f49d25]">{{ feature.title }}</h3>
+            <h3 class="text-2xl font-bold text-[#ec2657]">{{ feature.title }}</h3>
             <p class="text-gray-300 text-lg">{{ feature.description }}</p>
             <ul class="space-y-3">
               <li v-for="(point, pIndex) in feature.points" :key="pIndex" 
                   class="flex items-center text-gray-300">
-                <span class="mr-2 text-[#f49d25]">✓</span>
+                <span class="mr-2 text-[#ec2657]">✓</span>
                 {{ point }}
               </li>
             </ul>
@@ -61,7 +61,7 @@
                 x5-video-player-fullscreen="false"
               ></video>
               <div v-if="videoLoading[index]" class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 z-10">
-                <svg class="animate-spin h-12 w-12 text-[#f49d25]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <svg class="animate-spin h-12 w-12 text-[#ec2657]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                   <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                   <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
                 </svg>
@@ -76,7 +76,7 @@
       <div class="text-center mt-16">
         <button
           @click="scrollToHero"
-          class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#f49d25] to-[#ff8c42] hover:from-[#f49d25]/90 hover:to-[#ff8c42]/80 text-white rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-200"
+          class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#ec2657] to-[#333333] hover:from-[#ec2657]/90 hover:to-[#333333]/80 text-white rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-200"
         >
           Start Creating Now
           <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

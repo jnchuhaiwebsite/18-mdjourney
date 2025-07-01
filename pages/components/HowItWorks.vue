@@ -2,7 +2,7 @@
   <section class="py-20 bg-blue-pale">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
-        <h2 class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#f49d25] to-[#ff8c42] sm:text-5xl animate-fade-in">
+        <h2 class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#ec2657] to-[#333333] sm:text-5xl animate-fade-in">
           Master Imagen 4 Ultra
         </h2>
         <p class="mt-4 text-xl text-gray-300 animate-slide-up">
@@ -14,14 +14,14 @@
         <div 
           v-for="(step, index) in steps" 
           :key="index"
-          class="relative bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 sm:p-8 shadow-xl border border-gray-700/50 hover:border-[#f49d25]/50 transition-all duration-300 hover:transform hover:scale-105 group flex-1 min-w-[250px] max-w-[300px]">
-          <div class="absolute -top-4 -left-4 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-[#f49d25] to-[#ff8c42] rounded-full flex items-center justify-center text-white text-lg sm:text-xl font-bold shadow-lg group-hover:shadow-[#f49d25]/25 transition-all duration-300">
+          class="relative bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 sm:p-8 shadow-xl border border-gray-700/50 hover:border-[#ec2657]/50 transition-all duration-300 hover:transform hover:scale-105 group flex-1 min-w-[250px] max-w-[300px]">
+          <div class="absolute -top-4 -left-4 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-[#ec2657] to-[#333333] rounded-full flex items-center justify-center text-white text-lg sm:text-xl font-bold shadow-lg group-hover:shadow-[#ec2657]/25 transition-all duration-300">
             {{ index + 1 }}
           </div>
           
           <div class="text-center">
             <div class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-gray-700/50 rounded-full mb-6 group-hover:bg-gray-700/70 transition-colors duration-300">
-              <component :is="step.icon" class="w-5 h-5 sm:w-6 sm:h-6 text-[#f49d25]" />
+              <component :is="step.icon" class="w-5 h-5 sm:w-6 sm:h-6 text-[#ec2657]" />
             </div>
             
             <h3 class="text-xl sm:text-2xl font-bold text-white mb-4">{{ step.title }}</h3>
@@ -29,7 +29,7 @@
           </div>
           
           <!-- Animated underline -->
-          <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-[#f49d25] to-[#ff8c42] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+          <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-[#ec2657] to-[#333333] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
         </div>
       </div>
     </div>

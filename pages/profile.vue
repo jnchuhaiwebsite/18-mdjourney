@@ -172,7 +172,7 @@
                   class="w-8 h-8 rounded-lg text-sm transition-colors"
                   :class="[
                     page === creditPage 
-                      ? 'bg-[#f49d25] text-white' 
+                      ? 'bg-[#ec2657] text-white' 
                       : 'bg-gray-700 text-gray-200 hover:bg-gray-600'
                   ]"
                 >
@@ -224,7 +224,7 @@
           class="px-6 py-2 rounded-full transition-all"
           :class="[
             currentTab === tab.value 
-              ? 'bg-[#f49d25] text-gray-300 shadow-lg font-medium' 
+              ? 'bg-[#ec2657] text-gray-300 shadow-lg font-medium' 
               : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
           ]"
         >

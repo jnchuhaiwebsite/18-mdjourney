@@ -10,7 +10,7 @@
           </p>
         </div>
         <div v-if="pending" class="flex justify-center items-center py-20">
-          <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#f49d25]"></div>
+          <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#ec2657]"></div>
         </div>
         <div v-else-if="!portfolioItems || portfolioItems.length === 0" class="flex flex-col items-center justify-center py-20">
           <div class="text-center">
@@ -23,7 +23,7 @@
             <p class="text-gray-400 mb-6">There are no works that have not been uploaded by users. Be the first to share your AI animation work</p>
             <button 
               @click="goToHome" 
-              class="bg-[#f49d25] hover:bg-[#f49d25] text-white px-6 py-3 rounded-lg transition-colors focus:outline-none"
+              class="bg-[#ec2657] hover:bg-[#ec2657] text-white px-6 py-3 rounded-lg transition-colors focus:outline-none"
             >
               Start Creating
             </button>
@@ -81,7 +81,7 @@
             <div class="px-4 pb-4 flex justify-end items-center gap-2">
               <button
                 @click="goToCreate(idx)"
-                class="bg-[#f49d25] hover:bg-[#8B5CF6] text-white text-sm px-3 py-1 mt-3 rounded transition-colors focus:outline-none"
+                class="bg-[#ec2657] hover:bg-[#8B5CF6] text-white text-sm px-3 py-1 mt-3 rounded transition-colors focus:outline-none"
               >
                 Create Similar
               </button>
