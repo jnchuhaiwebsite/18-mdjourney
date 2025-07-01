@@ -227,9 +227,19 @@ const processedContent = computed(() => {
   content = content.replace(/^- \[([^\]]*)\] (.*$)/gim, '<li><input type="checkbox" $1> $2</li>');
   content = content.replace(/^- (.*$)/gim, '<li>$1</li>');
   
-  // 处理段落
-  content = content.replace(/\n\n/g, '</p><p>');
+  // 改进的换行符处理
+  // 1. 先处理连续的换行符为临时标记
+  content = content.replace(/\n\n+/g, '###PARAGRAPH###');
+  // 2. 处理单个换行符为 <br>
+  content = content.replace(/\n/g, '<br>');
+  // 3. 将临时标记转换为段落分隔
+  content = content.replace(/###PARAGRAPH###/g, '</p><p>');
+  
+  // 包装整个内容到段落标签中
   content = '<p>' + content + '</p>';
+  
+  // 清理可能产生的空段落
+  content = content.replace(/<p>\s*<\/p>/g, '');
   
   return content;
 });
@@ -321,7 +331,7 @@ const loadBlogData = async () => {
 
 onMounted(() => {
   if (error.value) {
-    error.value = error.value.message || 'Loading failed';
+    error.value = error.value || 'Loading failed';
   }
 });
 
