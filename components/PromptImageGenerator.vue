@@ -409,30 +409,50 @@ const getModelDisplayName = (model: string): string => {
   return modelDisplayName[model] || model;
 }
 
-const downloadImage = async () => {
+const downloadImage = () => {
   try {
-    // 获取图片数据
-    const response = await fetch(generatedImage.value)
-    const blob = await response.blob()
+    // 获取图片元素
+    const imgElement = document.querySelector('img[alt="Generated Image"]') as HTMLImageElement;
+    if (!imgElement) {
+      console.error('找不到图片元素');
+      return;
+    }
+
+    // 创建canvas
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
     
-    // 创建下载链接
-    const url = window.URL.createObjectURL(blob)
-    const link = document.createElement('a')
-    link.href = url
+    // 设置canvas尺寸与图片一致
+    canvas.width = imgElement.naturalWidth;
+    canvas.height = imgElement.naturalHeight;
     
-    // 生成文件名：使用当前时间戳和taskId
-    const timestamp = new Date().getTime()
-    link.download = `imagen-${timestamp}-${taskId.value}.png`
-    
-    // 触发下载
-    document.body.appendChild(link)
-    link.click()
-    
-    // 清理
-    document.body.removeChild(link)
-    window.URL.revokeObjectURL(url)
+    // 将图片绘制到canvas
+    if (ctx) {
+      ctx.drawImage(imgElement, 0, 0);
+      
+      // 从canvas获取图片数据并下载
+      canvas.toBlob((blob) => {
+        if (blob) {
+          const url = window.URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
+          
+          // 生成文件名：使用当前时间戳和taskId
+          const timestamp = new Date().getTime();
+          link.download = `imagen-${timestamp}-${taskId.value}.png`;
+          
+          // 触发下载
+          document.body.appendChild(link);
+          link.click();
+          
+          // 清理
+          document.body.removeChild(link);
+          window.URL.revokeObjectURL(url);
+        }
+      }, 'image/png');
+    }
   } catch (error) {
-    console.error('Download image failed:', error)
+    console.error('下载图片失败:', error);
   }
 }
 </script>
