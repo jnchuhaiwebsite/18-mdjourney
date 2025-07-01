@@ -56,7 +56,7 @@ export default defineNuxtConfig({
       ], // 外部脚本
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-        { rel: 'canonical', href: 'https://imagen4ultra.com' }
+        { rel: 'canonical', href: 'https://aimagen4.com' }
       ]
     }
   },

@@ -9,9 +9,9 @@ interface SeoOptions {
 
 export const useSeo = (options: SeoOptions = {}) => {
   const defaultTitle = 'Imagen 4 Ultra - Professional AI Image Generation Platform'
-  const defaultDescription = 'Create stunning images with Imagen 4 Ultra AI technology. Features customizable aspect ratios, person generation controls, and professional-grade output. Supports English prompts with advanced safety filters.'
+  const defaultDescription = 'Unlock the power of Imagen 4 Ultra to generate high-quality, photorealistic images from text descriptions. Experience advanced AI image generation today.'
   const defaultImage = '/img/imagen4-ultra-og-image.jpg'
-  const baseUrl = 'https://imagen4ultra.com'
+  const baseUrl = 'https://aimagen4.com'
 
   const title = options.title || defaultTitle
   const description = options.description || defaultDescription
