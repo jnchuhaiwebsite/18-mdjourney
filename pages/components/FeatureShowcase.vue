@@ -81,18 +81,6 @@ defineOptions({
 // Main feature data with image demonstrations
 const mainFeatures = [
   {
-    title: "English-Only Prompt System",
-    description: "Imagen 4 Ultra currently supports English prompts only, ensuring optimal output quality and accuracy in image generation. One image is generated per request.",
-    icon: BoltIcon,
-    points: [
-      "English language prompts only",
-      "Single image generation per request",
-      "Advanced prompt processing",
-      "High-quality output generation"
-    ],
-    image: "/img/demo/Imagen-4-Ultra-image6.webp"
-  },
-  {
     title: "Multiple Aspect Ratio Support",
     description: "Choose from five professional aspect ratios for your generated images, with 1:1 square format as the default setting.",
     icon: CommandLineIcon,
@@ -102,7 +90,31 @@ const mainFeatures = [
       "Landscape options (4:3, 16:9)",
       "Maintains quality across all ratios"
     ],
-    image: "/img/demo/Imagen-4-Ultra-image7.webp"
+    image: "/img/demo/Imagen-4-Ultra-ratio.webp"
+  },
+  {
+    title: "Historical Art Reference",
+    description: "Create images inspired by famous art movements and historical styles with simple prompts. Just include 'in the style of [art period or movement]' in your request.",
+    icon: PhotoIcon,
+    points: [
+      "Access to diverse historical art styles",
+      "Perfect for educational and creative projects",
+      "Generate images with iconic aesthetic qualities",
+      "Example: 'generate an image in the style of impressionism: a wind farm'"
+    ],
+    image: "/img/demo/Imagen-4-Ultra-style.webp"
+  },
+  {
+    title: "Text Integration Feature",
+    description: "Easily add text to your generated images, providing additional expressiveness for creative projects and marketing materials.",
+    icon: SparklesIcon,
+    points: [
+      "Generate posters, logos, and ads with integrated text",
+      "Control text length (recommended under 25 characters) for optimal results",
+      "Specify font styles and sizes to enhance visual impact",
+      "Use parameterized prompts for precise control over text appearance and placement"
+    ],
+    image: "/img/demo/Imagen-4-Ultra-imageText.webp"
   }
 ];
 
