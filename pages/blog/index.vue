@@ -3,7 +3,7 @@
     <!-- Page title -->
     <div class="pt-32 pb-12 text-center">
       <h1 class="text-3xl md:text-4xl font-bold mb-2 text-[#990066]">Imagen 4 Ultra Blog</h1>
-      <p class="text-gray-400">Tips, tutorials, and inspiration for creating professional-quality videos with AI image animator technology</p>
+      <p class="text-gray-400">Tips, tutorials, and inspiration for creating professional-quality visuals with Imagen 4 Ultra AI image generation technology</p>
     </div>
     
     <div class="flex flex-col md:flex-row gap-4 md:gap-8 mb-16 mx-auto w-11/12 max-w-7xl">
@@ -137,12 +137,10 @@ declare const useAsyncData: <T>(key: string, handler: () => Promise<T>) => Promi
 const router = useRouter()
 
 useSeo({
-  title: "veo3 Blog: AI Image Animator Tips & Updates",
-  description: "Discover the latest updates on veo3, a top - tier AI image animator. Leverage advanced AI tech for stunning animations and get expert tips for better results.",
-  ogTitle: "veo3 Blog: AI Image Animator Tips & Updates",
-  ogDescription: "Stay updated on veo3, the leading AI - powered image animator. Uncover new features, tips, and how it revolutionizes video generation with advanced technology.",
-  twitterTitle: "veo3 Blog: AI Image Animator Tips & Updates",
-  twitterDescription: "Get the latest on veo3, an advanced AI image animator. Explore new features, expert tips, and stay ahead in AI - driven video creation."
+  title: "Imagen 4 Ultra Blog: AI Image Generation & Animation Guide",
+  description: "Discover Imagen 4 Ultra's AI technology for creating professional images and animations. Get tips and updates to enhance your visual content.",
+  image: "/logo.png",
+  url: "/blog"
 });
 
 // 使用 useAsyncData 获取数据
@@ -171,16 +169,6 @@ const { data: initialData, refresh } = await useAsyncData(
         total: 0
       };
     }
-  },
-  {
-    server: true,
-    lazy: false,
-    // 设置缓存时间为1小时
-    default: () => ({
-      categoryList: [],
-      blogList: [],
-      total: 0
-    }),
   }
 );
 
@@ -198,25 +186,26 @@ const fetchBlogData = async () => {
   error.value = ''
   
   try {
-    // 构建API参数，支持分类筛选
+    // Build API parameters, supporting category filtering
     const apiParams: any = {
       page: currentPage.value,
       page_size: pageSize.value
     }
     
-    // 如果选择了特定分类，添加分类参数
+    // If a specific category is selected, add the category parameter
     if (currentCategory.value !== 'all') {
       apiParams.class_id = currentCategory.value
     }
     
-    // 获取博客列表
+    // Get blog list
     const getList = await getBlogList(apiParams) as any;
     if (getList.code === 200) {
-      blogData.value = {
-        ...blogData.value,
+      const newBlogData = {
+        categoryList: blogData.value?.categoryList || [],
         blogList: getList.data.list || [],
         total: getList.data.total || 0
       }
+      blogData.value = newBlogData
     }
   } catch (err: any) {
     error.value = err.message || 'Failed to load blog data'
@@ -327,19 +316,19 @@ const navigateToBlog = (post: any) => {
   router.push(`/blog/${url[url.length - 1]}`)
 }
 
-// Set canonical URL when mounted
+  // Set canonical URL when mounted
 onMounted(() => {
   
   // Add structured data
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Blog",
-    name: "veo3 Blog",
-    description: "Expert tutorials and insights on AI image animator technology",
-    url: "https://www.veo3.com/blog",
+    name: "Imagen 4 Ultra Blog",
+    description: "Professional AI image generation and animation technology tutorials and insights",
+    url: "https://aimagen4.com/blog",
     publisher: {
       "@type": "Organization",
-      name: "veo3",
+      name: "Imagen 4 Ultra",
       logo: {
         "@type": "ImageObject",
         url: "/logo.png"
