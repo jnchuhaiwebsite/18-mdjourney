@@ -121,27 +121,27 @@ const { $toast } = useNuxtApp()
 const slides = [
   {
     name: 'Imagen-4-Ultra-image5',
-    image: '/img/demo/Imagen-4-Ultra-image5.webp',
+    image: 'https://resource.aimagen4.com/aimagen4/demo/Imagen-4-Ultra-image5.webp',
     prompt: 'Theme: 4-panel comic. Panel 1: An anime-style girl with short pink hair and a ribbon is running down a suburban Japanese road with a piece of toast in her mouth. The speech bubble reads "Late, late!" Panel 2: The girl collides with something. A loud sound effect suggests the collision. Sound effect: "Crash!" Panel 3: The girl has fallen and is sitting on the ground. She looks a little hurt. The speech bubble reads "Ouch, ouch, ouch..." Panel 4: A short distance away, a young man in a blazer uniform is sitting. The two have just bumped into each other around a corner and are looking at each other.'
   },
   {
     name: 'Imagen-4-Ultra-image4',
-    image: '/img/demo/Imagen-4-Ultra-image4.webp',
+    image: 'https://resource.aimagen4.com/aimagen4/demo/Imagen-4-Ultra-image4.webp',
     prompt: "A digital anime style illustration with a soft, hand-drawn, sketch-like aesthetic, watercolor and pastel textures, and a muted, desaturated, cool color palette of soft blues and grays. A light-skinned anime girl with long black hair and red eyes is sitting in a resting area of an abandoned village's unmanned train station. She is wearing a white summer dress that reaches to her knees and sandals. On her head, she wears a straw hat with a wide brim, adorned with a blue ribbon tied into a bow around the base of the crown. The train tracks, a clear blue sky, and clouds occupy more than half of the foreground, stretching out before her. Soft, diffused lighting creates a serene and somewhat melancholic mood."
   },
   {
     name: 'Imagen-4-Ultra-image3',
-    image: '/img/demo/Imagen-4-Ultra-image3.webp',
+    image: 'https://resource.aimagen4.com/aimagen4/demo/Imagen-4-Ultra-image3.webp',
     prompt: 'Avant-garde fashion editorial shot: a model in a voluminous, architectural gown standing on a shimmering, alien landscape under a binary sunset, surreal colors, high-concept, cinematic.'
   },
   {
     name: 'Imagen-4-Ultra-image1',
-    image: '/img/demo/Imagen-4-Ultra-image1.webp',
+    image: 'https://resource.aimagen4.com/aimagen4/demo/Imagen-4-Ultra-image1.webp',
     prompt: 'Front of a vintage travel postcard for Kyoto: iconic pagoda under cherry blossoms, snow-capped mountains in distance, clear blue sky, vibrant colors.'
   },
   {
     name: 'Imagen-4-Ultra-image2',
-    image: '/img/demo/Imagen-4-Ultra-image2.webp',
+    image: 'https://resource.aimagen4.com/aimagen4/demo/Imagen-4-Ultra-image2.webp',
     prompt: 'Photograph of an adventurous couple hiking on a mountain peak at sunrise, arms raised in triumph, epic panoramic view of valleys below, dramatic light.'
   }
 ]
