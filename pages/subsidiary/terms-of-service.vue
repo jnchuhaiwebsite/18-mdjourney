@@ -11,21 +11,20 @@
       </div>
 
       <h1 class="text-3xl font-bold mb-8 text-white">Terms of Service</h1>
-      <p class="text-gray-300 mb-8">Effective Date: June 27, 2025</p>
+      <p class="text-gray-300 mb-8">Effective Date: {{ new Date().toLocaleDateString() }}</p>
       
       <div class="space-y-6 text-white">
         <section>
           <h2 class="text-xl font-semibold mb-4">1. Acceptance of Terms</h2>
-          <p>By accessing or using Imagen 4 Ultra's video generation services, you agree to be bound by these Terms of Service. If you disagree with any part of these terms, you may not access our service.</p>
+          <p>By accessing or using Imagen 4 Ultra's image generation services, you agree to be bound by these Terms of Service. If you disagree with any part of these terms, you may not access our service.</p>
         </section>
 
         <section>
           <h2 class="text-xl font-semibold mb-4">2. Service Description</h2>
-          <p>Imagen 4 Ultra provides AI-powered video generation services, including:</p>
+          <p>Imagen 4 Ultra provides AI-powered image generation services, including:</p>
           <ul class="list-disc pl-6 mt-2">
-            <li>Text-to-video generation (available in both Standard and Fast models)</li>
-            <li>Image-to-video generation (available in Standard model only)</li>
-            <li>Generation of 1080p resolution, 8-second videos</li>
+            <li>Text-to-image generation (available in both Normal and Ultra models)</li>
+            <li>Generation of 1K resolution images</li>
             <li>Support for image uploads in JPG/JPEG/PNG formats (max 10MB)</li>
           </ul>
         </section>
@@ -37,24 +36,22 @@
             <li>Upload only appropriate and legal content</li>
             <li>Maintain the security of their account</li>
             <li>Comply with file format and size restrictions</li>
-            <li>Process one image at a time for video generation</li>
+            <li>Process one image at a time for generation</li>
             <li>Not attempt to circumvent system limitations</li>
           </ul>
         </section>
 
         <section>
           <h2 class="text-xl font-semibold mb-4">4. Intellectual Property Rights</h2>
-          <p>Users retain rights to their uploaded content. However, you grant Imagen 4 Ultra a license to use, process, and store your content for service provision. Generated videos are subject to our fair use policy.</p>
+          <p>Users retain rights to their uploaded content. However, you grant Imagen 4 Ultra a license to use, process, and store your content for service provision. Generated images are subject to our fair use policy.</p>
         </section>
 
         <section>
           <h2 class="text-xl font-semibold mb-4">5. Service Limitations</h2>
           <ul class="list-disc pl-6 mt-2">
-            <li>API requests limited to 20 per minute per project</li>
             <li>One image generation per request</li>
-            <li>Text prompts limited to 480 tokens</li>
             <li>Supported aspect ratios: 1:1 (1024x1024), 3:4 (896x1280), 4:3 (1280x896), 9:16 (768x1408), 16:9 (1408x768)</li>
-            <li>Supported languages: English, Chinese (Simplified & Traditional), Hindi, Japanese, Korean, Portuguese, Spanish</li>
+            <li>Supported language: English</li>
           </ul>
         </section>
 
@@ -99,7 +96,7 @@ definePageMeta({
 
 useSeo({
   title: 'Imagen 4 Ultra AI | Terms of Service',
-  description: 'Read our terms of service for using Imagen 4 Ultra AI - the leading AI image animator platform powered by advanced AI technology.'
+  description: 'Read our terms of service for using Imagen 4 Ultra AI - the leading AI image generation platform powered by advanced AI technology.'
 })
 </script>
 

@@ -11,68 +11,84 @@
       </div>
       
       <h1 class="text-3xl font-bold mb-8 text-white">Privacy Policy</h1>
-      <p class="text-gray-300 mb-8">Effective Date: June 27, 2025</p>
+      <p class="text-gray-300 mb-8">Effective Date: {{ new Date().toLocaleDateString() }}</p>
       
       <div class="space-y-6 text-white">
         <section>
           <h2 class="text-xl font-semibold mb-4">1. Introduction</h2>
-          <p>Welcome to Imagen 4 Ultra ("we," "our," or "us"). This Privacy Policy outlines how we collect, use, protect, and handle your information when you use our cutting-edge AI-powered image and video generation platform.</p>
+          <p>Welcome to Imagen 4 Ultra. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our AI-powered image generation service.</p>
         </section>
 
         <section>
           <h2 class="text-xl font-semibold mb-4">2. Information We Collect</h2>
-          <p>Imagen 4 Ultra collects the following information that you provide directly to us:</p>
+          <p>We collect the following types of information:</p>
           <ul class="list-disc pl-6 mt-2">
-            <li>Images you upload (supported formats: JPG/JPEG/PNG, maximum size: 10MB)</li>
-            <li>Text prompts and instructions for AI-powered generation</li>
-            <li>Account information, credentials, and user preferences</li>
-            <li>AI model selection preferences (Ultra, Standard, or Fast models)</li>
-            <li>Platform usage statistics and interaction data</li>
+            <li><strong>Account Information:</strong> Email, password, and profile details when you register.</li>
+            <li><strong>User Content:</strong> Text prompts and uploaded images you provide for image generation.</li>
+            <li><strong>Usage Data:</strong> Information about how you interact with our service, including generation parameters, device information, and IP address.</li>
+            <li><strong>Payment Information:</strong> Credit card details and billing information if you subscribe to premium features.</li>
           </ul>
         </section>
 
         <section>
           <h2 class="text-xl font-semibold mb-4">3. How We Use Your Information</h2>
-          <p>At Imagen 4 Ultra, we use the information collected to:</p>
+          <p>We use your information to:</p>
           <ul class="list-disc pl-6 mt-2">
-            <li>Generate high-quality 1080p, 8-second AI videos from your inputs</li>
-            <li>Train and enhance our proprietary AI models and algorithms</li>
-            <li>Optimize platform performance and user experience</li>
-            <li>Provide customer support and communicate service updates</li>
-            <li>Maintain compliance with our terms of service and applicable regulations</li>
+            <li>Provide and improve our image generation services</li>
+            <li>Process your requests and transactions</li>
+            <li>Train and improve our AI models</li>
+            <li>Send service notifications and updates</li>
+            <li>Respond to your inquiries and support requests</li>
+            <li>Enforce our terms of service and prevent prohibited use</li>
           </ul>
         </section>
 
         <section>
-          <h2 class="text-xl font-semibold mb-4">4. Data Storage and Security</h2>
-          <p>Imagen 4 Ultra implements industry-leading security measures to protect your uploaded content and personal information. All user data, including source images and generated videos, are encrypted and processed according to the highest security standards in the industry.</p>
+          <h2 class="text-xl font-semibold mb-4">4. Data Retention</h2>
+          <p>We retain your account information as long as your account is active. Generated images are stored for 30 days unless you choose to save them to your personal gallery. Text prompts may be retained for service improvement purposes but will be anonymized after 90 days.</p>
         </section>
 
         <section>
-          <h2 class="text-xl font-semibold mb-4">5. Data Sharing and Disclosure</h2>
-          <p>Imagen 4 Ultra does not sell your personal information. Your data may only be shared under these specific circumstances:</p>
+          <h2 class="text-xl font-semibold mb-4">5. Information Sharing</h2>
+          <p>We do not sell your personal information. We may share information with:</p>
           <ul class="list-disc pl-6 mt-2">
-            <li>With your explicit consent and authorization</li>
-            <li>To comply with legal obligations and regulatory requirements</li>
-            <li>To protect our intellectual property and prevent service abuse</li>
-            <li>With trusted third-party service providers who assist our operations</li>
+            <li>Service providers who help us operate our platform</li>
+            <li>Legal authorities when required by law</li>
+            <li>Third parties in connection with a merger, acquisition, or sale of assets</li>
           </ul>
         </section>
 
         <section>
           <h2 class="text-xl font-semibold mb-4">6. Your Rights</h2>
-          <p>As an Imagen 4 Ultra user, you have the right to:</p>
+          <p>Depending on your location, you may have rights to:</p>
           <ul class="list-disc pl-6 mt-2">
-            <li>Access and download your personal information</li>
-            <li>Request complete deletion of your account and associated data</li>
-            <li>Opt-out of promotional communications and marketing</li>
-            <li>Update or correct your profile information and preferences</li>
+            <li>Access personal information we hold about you</li>
+            <li>Correct inaccurate information</li>
+            <li>Delete your personal information</li>
+            <li>Export your data in a portable format</li>
+            <li>Opt out of certain processing activities</li>
           </ul>
+          <p class="mt-2">To exercise these rights, please contact us at privacy@aimagen4.com.</p>
         </section>
 
         <section>
-          <h2 class="text-xl font-semibold mb-4">7. Contact Us</h2>
-          <p>If you have any questions about this Privacy Policy or Imagen 4 Ultra's data practices, please contact our dedicated support team at: support@imagen4ultra.com</p>
+          <h2 class="text-xl font-semibold mb-4">7. Security</h2>
+          <p>We implement appropriate technical and organizational measures to protect your information. However, no method of transmission over the internet or electronic storage is 100% secure.</p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold mb-4">8. Children's Privacy</h2>
+          <p>Our service is not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13.</p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold mb-4">9. Changes to This Privacy Policy</h2>
+          <p>We may update this Privacy Policy periodically. We will notify you of significant changes through our website or email.</p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold mb-4">10. Contact Us</h2>
+          <p>If you have any questions about this Privacy Policy, please contact us at: privacy@aimagen4.com</p>
         </section>
 
         <section class="mt-8">
@@ -94,7 +110,7 @@ definePageMeta({
 
 useSeo({
   title: 'Imagen 4 Ultra AI | Privacy Policy',
-  description: 'Learn how Imagen 4 Ultra AI protects your data and privacy while using our advanced AI image and video generation platform.'
+  description: 'Read our privacy policy for using Imagen 4 Ultra AI - the leading AI image generation platform powered by advanced AI technology.'
 })
 </script>
 
