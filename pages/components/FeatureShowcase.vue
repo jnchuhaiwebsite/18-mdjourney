@@ -90,7 +90,7 @@ const mainFeatures = [
       "Landscape options (4:3, 16:9)",
       "Maintains quality across all ratios"
     ],
-    image: "/img/demo/Imagen-4-Ultra-ratio.webp"
+    image: "https://resource.aimagen4.com/aimagen4/demo/Imagen-4-Ultra-ratio.webp"
   },
   {
     title: "Historical Art Reference",
@@ -102,7 +102,7 @@ const mainFeatures = [
       "Generate images with iconic aesthetic qualities",
       "Example: 'generate an image in the style of impressionism: a wind farm'"
     ],
-    image: "/img/demo/Imagen-4-Ultra-style.webp"
+    image: "https://resource.aimagen4.com/aimagen4/demo/Imagen-4-Ultra-style.webp"
   },
   {
     title: "Text Integration Feature",
@@ -114,7 +114,7 @@ const mainFeatures = [
       "Specify font styles and sizes to enhance visual impact",
       "Use parameterized prompts for precise control over text appearance and placement"
     ],
-    image: "/img/demo/Imagen-4-Ultra-imageText.webp"
+    image: "https://resource.aimagen4.com/aimagen4/demo/Imagen-4-Ultra-imageText.webp"
   }
 ];
 
