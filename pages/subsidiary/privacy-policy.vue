@@ -68,7 +68,7 @@
             <li>Export your data in a portable format</li>
             <li>Opt out of certain processing activities</li>
           </ul>
-          <p class="mt-2">To exercise these rights, please contact us at privacy@aimagen4.com.</p>
+          <p class="mt-2">To exercise these rights, please contact us at support@aimagen4.com.</p>
         </section>
 
         <section>
@@ -88,7 +88,7 @@
 
         <section>
           <h2 class="text-xl font-semibold mb-4">10. Contact Us</h2>
-          <p>If you have any questions about this Privacy Policy, please contact us at: privacy@aimagen4.com</p>
+          <p>If you have any questions about this Privacy Policy, please contact us at: support@aimagen4.com</p>
         </section>
 
         <section class="mt-8">
