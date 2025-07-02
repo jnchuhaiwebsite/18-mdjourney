@@ -41,7 +41,7 @@
       
       <!-- CTA Buttons -->
       <div class="text-center mt-12 space-x-4"> 
-        <!-- 在这里添加显示更多/更少按钮 -->
+        <!-- Add show more/less buttons here -->
         <button
           v-if="hasMoreItems && faqs.length > initialVisibleCount"
           @click="showMore"
@@ -68,14 +68,14 @@ defineOptions({
   name: 'FaqSection'
 })
 
-// FAQ数据
+// FAQ data
 const faqs = [
   {
     question: "What aspect ratios are supported?",
     answer: "Imagen supports five aspect ratios: 1:1 (square, default), 3:4 (portrait), 4:3 (landscape), 9:16 (vertical), and 16:9 (horizontal). You can specify your preferred ratio using the aspectRatio parameter."
   },
   {
-    question: "What language support is available?",
+    question: "What languages are supported?",
     answer: "Currently, Imagen 4 Ultra only supports English prompts. All text descriptions for image generation must be provided in English for optimal results."
   },
   {
@@ -89,64 +89,76 @@ const faqs = [
   {
     question: "What's the best way to specify the artistic style?",
     answer: "Layer your desired artistic style onto your prompt. You can use general terms like 'digital art', 'photograph', or 'sketch', or be more specific like 'pastel drawing', 'charcoal illustration', or 'isometric 3D rendering'. You can also combine styles, such as 'watercolor and ink illustration with digital enhancement'."
+  },
+  {
+    question: "How long does image generation take?",
+    answer: "With Imagen 4 Ultra, standard images typically complete in 10-15 seconds. High-quality and complex images may take 20-30 seconds. Generation time also depends on current system load and your selected image resolution."
+  },
+  {
+    question: "Who owns the copyright to generated images?",
+    answer: "Images generated using Imagen 4 Ultra are owned by you, the user, and can be used for both personal and commercial purposes. However, please note that if your prompts include copyrighted characters or brands, the use of the resulting images may be restricted."
+  },
+  {
+    question: "What should I do if generation fails or results are not ideal?",
+    answer: "If generation fails, try simplifying your prompt or breaking down complex requirements. For less-than-ideal results, try using more specific descriptions, adjusting style parameters, or using negative prompts to specify unwanted elements. You can also use our feedback tools to help the system learn your preferences."
   }
 ];
 
-// 初始显示的FAQ数量
+// Initial number of FAQs to display
 const initialVisibleCount = 5;
 const visibleCount = ref(initialVisibleCount);
 
-// 跟踪每个FAQ项的展开状态
+// Track expanded state of each FAQ item
 const openFaqs = ref(Array(faqs.length).fill(false));
 
-// 当前显示的FAQ项目
+// Currently displayed FAQ items
 const faqItems = computed(() => {
   return faqs.slice(0, visibleCount.value);
 });
 
-// 是否还有更多FAQ可显示
+// Whether there are more FAQs to display
 const hasMoreItems = computed(() => {
   return visibleCount.value < faqs.length;
 });
 
-// 切换FAQ项的展开/折叠状态
+// Toggle the expanded/collapsed state of FAQ item
 const toggleFaq = (index: number) => {
   openFaqs.value[index] = !openFaqs.value[index];
 };
 
-// 显示更多FAQ
+// Show more FAQs
 const showMore = () => {
   visibleCount.value = faqs.length;
 };
 
-// 显示较少FAQ
+// Show fewer FAQs
 const showLess = () => {
   visibleCount.value = initialVisibleCount;
-  // 直接跳转到 FAQ 模块
+  // Scroll directly to the FAQ section
   const faqSection = document.getElementById('faq');
   if (faqSection) {
     faqSection.scrollIntoView();
   }
 };
 
-// 滚动到顶部
+// Scroll to top
 const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
-// 滚动到底部
+// Scroll to bottom
 const scrollToContact = () => {
   window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
 };
 </script>
 
 <style scoped>
-/* 旋转动画 */
+/* Rotation animation */
 .rotate-180 {
   transform: rotate(180deg);
 }
 
-/* 滑动过渡效果 */
+/* Slide transition effects */
 .transition-all {
   transition-property: all;
 }
@@ -159,12 +171,12 @@ const scrollToContact = () => {
   transition-duration: 300ms;
 }
 
-/* 按钮悬浮效果 */
+/* Button hover effects */
 .hover\:shadow-lg:hover {
   box-shadow: 0 10px 15px -3px rgba(244, 157, 37, 0.3), 0 4px 6px -2px rgba(244, 157, 37, 0.2);
 }
 
-/* 添加发光效果 */
+/* Add glow effects */
 .bg-\[\#ec2657\] {
   box-shadow: 0 0 15px rgba(244, 157, 37, 0.3);
 }
