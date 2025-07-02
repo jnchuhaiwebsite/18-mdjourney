@@ -325,7 +325,7 @@ onMounted(() => {
     "@type": "Blog",
     name: "Imagen 4 Ultra Blog",
     description: "Professional AI image generation and animation technology tutorials and insights",
-    url: "https://aimagen4.com/blog",
+    url: "https://www.aimagen4.com/blog",
     publisher: {
       "@type": "Organization",
       name: "Imagen 4 Ultra",
