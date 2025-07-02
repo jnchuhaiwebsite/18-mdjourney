@@ -289,6 +289,7 @@ onMounted(async () => {
         from_login,
         avatar,
         nickname,
+        from_type: 0,
         token
       }).then(async () => {
         getUserInfo();

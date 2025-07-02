@@ -79,7 +79,7 @@
 
         <section>
           <h2 class="text-xl font-semibold mb-4">9. Contact Information</h2>
-          <p>For questions regarding this disclaimer, please contact us at: legal@aimagen4.com</p>
+          <p>For questions regarding this disclaimer, please contact us at: support@aimagen4.com</p>
         </section>
 
         <section class="mt-8">
