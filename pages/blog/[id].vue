@@ -294,12 +294,12 @@ const title = computed(() => {
 
 // Set page metadata
 useSeo({
-  title: `${title.value} - veo3 AI Blog`,
+  title: `${title.value}`,
   description: metaDescription.value,
   type: 'article',
-  ogTitle: `${title.value} - veo3 AI Blog`,
+  ogTitle: `${title.value} - aimagen4 Blog`,
   ogDescription: metaDescription.value,
-  twitterTitle: `${title.value} - veo3 AI Blog`,
+  twitterTitle: `${title.value} - aimagen4 Blog`,
   twitterDescription: metaDescription.value,
   other: [
     { property: 'article:published_time', content: post.value?.created_time ? new Date(post.value.created_time * 1000).toISOString() : '' },
