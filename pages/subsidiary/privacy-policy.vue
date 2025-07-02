@@ -16,63 +16,63 @@
       <div class="space-y-6 text-white">
         <section>
           <h2 class="text-xl font-semibold mb-4">1. Introduction</h2>
-          <p>Welcome to Veo3 ("we," "our," or "us"). This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our AI-powered video generation service.</p>
+          <p>Welcome to Imagen 4 Ultra ("we," "our," or "us"). This Privacy Policy outlines how we collect, use, protect, and handle your information when you use our cutting-edge AI-powered image and video generation platform.</p>
         </section>
 
         <section>
           <h2 class="text-xl font-semibold mb-4">2. Information We Collect</h2>
-          <p>We collect information that you provide directly to us, including:</p>
+          <p>Imagen 4 Ultra collects the following information that you provide directly to us:</p>
           <ul class="list-disc pl-6 mt-2">
-            <li>Images you upload (JPG/JPEG/PNG format, under 10MB)</li>
-            <li>Text prompts for video generation</li>
-            <li>Account information and preferences</li>
-            <li>Model selection choices (Standard or Fast model)</li>
-            <li>Usage data and interaction with our platform</li>
+            <li>Images you upload (supported formats: JPG/JPEG/PNG, maximum size: 10MB)</li>
+            <li>Text prompts and instructions for AI-powered generation</li>
+            <li>Account information, credentials, and user preferences</li>
+            <li>AI model selection preferences (Ultra, Standard, or Fast models)</li>
+            <li>Platform usage statistics and interaction data</li>
           </ul>
         </section>
 
         <section>
           <h2 class="text-xl font-semibold mb-4">3. How We Use Your Information</h2>
-          <p>We use the collected information to:</p>
+          <p>At Imagen 4 Ultra, we use the information collected to:</p>
           <ul class="list-disc pl-6 mt-2">
-            <li>Generate 1080p, 8-second videos from your inputs</li>
-            <li>Improve our AI models and service quality</li>
-            <li>Maintain and optimize our platform</li>
-            <li>Communicate with you about our services</li>
-            <li>Ensure compliance with our terms and policies</li>
+            <li>Generate high-quality 1080p, 8-second AI videos from your inputs</li>
+            <li>Train and enhance our proprietary AI models and algorithms</li>
+            <li>Optimize platform performance and user experience</li>
+            <li>Provide customer support and communicate service updates</li>
+            <li>Maintain compliance with our terms of service and applicable regulations</li>
           </ul>
         </section>
 
         <section>
           <h2 class="text-xl font-semibold mb-4">4. Data Storage and Security</h2>
-          <p>We implement appropriate security measures to protect your uploaded content and personal information. Your images and generated videos are stored securely and processed in accordance with industry standards.</p>
+          <p>Imagen 4 Ultra implements industry-leading security measures to protect your uploaded content and personal information. All user data, including source images and generated videos, are encrypted and processed according to the highest security standards in the industry.</p>
         </section>
 
         <section>
           <h2 class="text-xl font-semibold mb-4">5. Data Sharing and Disclosure</h2>
-          <p>We do not sell your personal information. We may share your information only in the following circumstances:</p>
+          <p>Imagen 4 Ultra does not sell your personal information. Your data may only be shared under these specific circumstances:</p>
           <ul class="list-disc pl-6 mt-2">
-            <li>With your explicit consent</li>
-            <li>To comply with legal obligations</li>
-            <li>To protect our rights and prevent abuse</li>
-            <li>With service providers who assist in our operations</li>
+            <li>With your explicit consent and authorization</li>
+            <li>To comply with legal obligations and regulatory requirements</li>
+            <li>To protect our intellectual property and prevent service abuse</li>
+            <li>With trusted third-party service providers who assist our operations</li>
           </ul>
         </section>
 
         <section>
           <h2 class="text-xl font-semibold mb-4">6. Your Rights</h2>
-          <p>You have the right to:</p>
+          <p>As an Imagen 4 Ultra user, you have the right to:</p>
           <ul class="list-disc pl-6 mt-2">
-            <li>Access your personal information</li>
-            <li>Request deletion of your data</li>
-            <li>Opt-out of marketing communications</li>
-            <li>Update or correct your information</li>
+            <li>Access and download your personal information</li>
+            <li>Request complete deletion of your account and associated data</li>
+            <li>Opt-out of promotional communications and marketing</li>
+            <li>Update or correct your profile information and preferences</li>
           </ul>
         </section>
 
         <section>
           <h2 class="text-xl font-semibold mb-4">7. Contact Us</h2>
-          <p>If you have any questions about this Privacy Policy, please contact us at: support@aimagen43.com</p>
+          <p>If you have any questions about this Privacy Policy or Imagen 4 Ultra's data practices, please contact our dedicated support team at: support@imagen4ultra.com</p>
         </section>
 
         <section class="mt-8">
@@ -93,8 +93,8 @@ definePageMeta({
 })
 
 useSeo({
-  title: 'veo3 AI | Privacy Policy',
-  description: 'Learn how veo3 AI protects your data and privacy while using our AI image animator platform powered by advanced AI technology.'
+  title: 'Imagen 4 Ultra AI | Privacy Policy',
+  description: 'Learn how Imagen 4 Ultra AI protects your data and privacy while using our advanced AI image and video generation platform.'
 })
 </script>
 

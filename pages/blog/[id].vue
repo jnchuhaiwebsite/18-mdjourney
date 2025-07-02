@@ -305,8 +305,8 @@ useSeo({
     { property: 'article:published_time', content: post.value?.created_time ? new Date(post.value.created_time * 1000).toISOString() : '' },
     { property: 'article:section', content: getCategoryLabel(post.value?.class_id || 0) },
     { property: 'article:tag', content: post.value?.keywords || 'AI video generation, text to video, image to video, video creation' },
-    { property: 'article:author', content: 'veo3 AI Team' },
-    { property: 'article:publisher', content: 'veo3 AI' }
+    { property: 'article:author', content: 'Imagen 4 Ultra AI Team' },
+    { property: 'article:publisher', content: 'Imagen 4 Ultra AI' }
   ]
 } as SeoOptions);
 

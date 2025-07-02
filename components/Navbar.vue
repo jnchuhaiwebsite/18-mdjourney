@@ -9,7 +9,7 @@
           <!-- Logo -->
           <div class="flex items-center gap-2">
             <NuxtLink to="/">
-              <img src="/logo.png" alt="veo3 AI - AI Image Animator Platform" class="h-12 lg:h-16" loading="lazy" />
+              <img src="/logo.png" alt="Imagen 4 Ultra AI - AI Image Animator Platform" class="h-12 lg:h-16" loading="lazy" />
             </NuxtLink>
           </div>
 

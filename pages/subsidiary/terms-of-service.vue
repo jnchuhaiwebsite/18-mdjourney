@@ -16,12 +16,12 @@
       <div class="space-y-6 text-white">
         <section>
           <h2 class="text-xl font-semibold mb-4">1. Acceptance of Terms</h2>
-          <p>By accessing or using Veo3's video generation services, you agree to be bound by these Terms of Service. If you disagree with any part of these terms, you may not access our service.</p>
+          <p>By accessing or using Imagen 4 Ultra's video generation services, you agree to be bound by these Terms of Service. If you disagree with any part of these terms, you may not access our service.</p>
         </section>
 
         <section>
           <h2 class="text-xl font-semibold mb-4">2. Service Description</h2>
-          <p>Veo3 provides AI-powered video generation services, including:</p>
+          <p>Imagen 4 Ultra provides AI-powered video generation services, including:</p>
           <ul class="list-disc pl-6 mt-2">
             <li>Text-to-video generation (available in both Standard and Fast models)</li>
             <li>Image-to-video generation (available in Standard model only)</li>
@@ -44,7 +44,7 @@
 
         <section>
           <h2 class="text-xl font-semibold mb-4">4. Intellectual Property Rights</h2>
-          <p>Users retain rights to their uploaded content. However, you grant Veo3 a license to use, process, and store your content for service provision. Generated videos are subject to our fair use policy.</p>
+          <p>Users retain rights to their uploaded content. However, you grant Imagen 4 Ultra a license to use, process, and store your content for service provision. Generated videos are subject to our fair use policy.</p>
         </section>
 
         <section>
@@ -98,8 +98,8 @@ definePageMeta({
 })
 
 useSeo({
-  title: 'veo3 AI | Terms of Service',
-  description: 'Read our terms of service for using veo3 AI - the leading AI image animator platform powered by advanced AI technology.'
+  title: 'Imagen 4 Ultra AI | Terms of Service',
+  description: 'Read our terms of service for using Imagen 4 Ultra AI - the leading AI image animator platform powered by advanced AI technology.'
 })
 </script>
 
