@@ -106,7 +106,10 @@ const toggleFaq = (index: number) => {
 };
 
 const scrollToHero = () => {
-  navigateTo('/components/generation')
+  const heroElement = document.getElementById('hero');
+  if (heroElement) {
+    heroElement.scrollIntoView({ behavior: 'smooth' });
+  }
 };
 </script>
 

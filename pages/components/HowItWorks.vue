@@ -2,9 +2,9 @@
   <section class="py-20 bg-blue-pale">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
-        <h1 class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#ec2657] to-[#333333] sm:text-5xl animate-fade-in">
+        <h2 class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#ec2657] to-[#333333] sm:text-5xl animate-fade-in">
           How to Create AI Images with Imagen 4 Ultra
-        </h1>
+        </h2>
         <p class="mt-4 text-xl text-gray-300 animate-slide-up">
           Transform Your Ideas into Professional AI-Generated Images in Three Simple Steps
         </p>

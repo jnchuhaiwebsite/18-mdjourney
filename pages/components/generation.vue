@@ -1,8 +1,8 @@
 <template>
-  <div class="relative w-full flex flex-col items-center justify-start overflow-x-hidden bg-blue-pale min-h-screen">
+  <div class="relative w-full flex flex-col items-center justify-start overflow-x-hidden bg-blue-pale ">
     <!-- 标题区 -->
     <div class="mt-[120px] mb-10 flex flex-col items-center relative z-10">
-      <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-center bg-gradient-to-r from-[#ec2657] via-[#990066] to-[#333333] bg-clip-text text-transparent drop-shadow-2xl tracking-tight animate-gradient-x">
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#ec2657] bg-gradient-to-r from-[#ec2657] via-[#990066] to-[#333333] bg-clip-text text-transparent">
         Imagen 4 Ultra - Professional AI Art Generation Platform
       </h1>
       <p class="mt-4 text-base text-gray-200 text-center max-w-4xl font-medium">
@@ -233,7 +233,7 @@ useSeo({
   twitterTitle: title,
   twitterDescription: description,
   twitterImage: '/img/og-image.jpg',
-  canonicalUrl: 'https://www.imagen4ultra.com/components/generation', // Replace with your actual domain
+  canonicalUrl: 'https://www.imagen4ultra.com/', // Replace with your actual domain
 })
 
 // 获取积分信息

@@ -1,16 +1,19 @@
 <template>
-  <div class="container mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold text-center mb-8 bg-gradient-to-r from-[#ec2657] via-[#990066] to-[#333333] bg-clip-text text-transparent">imagen 4 ultra how to use: How to Use Imagen 4 Ultra AI</h1>
+  <div class="container mx-auto px-4 py-8 pt-20 sm:pt-24">
+    <h1 class="text-4xl font-bold text-center sm:text-5xl bg-gradient-to-r from-[#ec2657] via-[#990066] to-[#333333] bg-clip-text text-transparent">How to Use Imagen 4 Ultra AI</h1>
+    <p class="max-w-3xl mx-auto mt-4 text-lg text-center text-gray-400">
+      Unlock the full potential of AI-powered creativity. This guide provides a step-by-step walkthrough on how to use Imagen 4 Ultra, from mastering prompts to advanced style control and text integration.
+    </p>
 
-    <div class="max-w-4xl mx-auto">
+    <div class="max-w-4xl mx-auto mt-16">
       <!-- Step-by-step Guide -->
-      <div class="space-y-12">
-        <div v-for="(step, index) in steps" :key="index" class="flex items-start">
-          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-[#ec2657] flex items-center justify-center text-white text-xl font-bold">
+      <div class="space-y-8">
+        <div v-for="(step, index) in steps" :key="index" class="flex items-start p-6 rounded-xl bg-[#1F2937]/30 ring-1 ring-inset ring-white/10">
+          <div class="flex items-center justify-center flex-shrink-0 w-16 h-16 text-2xl font-bold text-white rounded-full bg-[#ec2657]">
             {{ index + 1 }}
           </div>
-          <div class="ml-6">
-            <h2 class="text-xl font-semibold mb-2 text-[#F3F4F6]">{{ step.title }}</h2>
+          <div class="ml-8">
+            <h2 class="text-xl font-semibold text-[#F3F4F6] mb-2">{{ step.title }}</h2>
             <p class="text-[#8a8c90] mb-4">{{ step.description }}</p>
             <div v-if="step.tips" class="bg-[#19171C]/50 p-4 rounded-lg border border-[#ec2657]/20">
               <h3 class="font-semibold text-[#ec2657] mb-2">Pro Tips:</h3>
@@ -25,8 +28,8 @@
       </div>
 
       <!-- Call to Action -->
-      <div class="mt-12 text-center">
-        <NuxtLink to="/components/generation" 
+      <div class="mt-16 text-center">
+        <NuxtLink to="/" 
                   class="bg-[#ec2657] text-white px-8 py-3 rounded-full hover:bg-[#990066] transition-colors">
           Start Creating Now
         </NuxtLink>
@@ -90,7 +93,7 @@ const steps = [
 
 // SEO Configuration
 useHead({
-  title: 'How to Use Imagen 4 Ultra AI | Complete Guide 2025',
+  title: ' Imagen 4 Ultra How to Use | Complete Guide 2025',
   meta: [
     {
       name: 'description',
@@ -137,7 +140,8 @@ useHead({
 <style scoped>
 /* Enhanced accessibility and SEO-friendly styling */
 h1, h2, h3 {
-  scroll-margin-top: 2rem;
+  margin-top: 2rem; /* 根据需要调整 */
+  scroll-margin-top: 4rem; /* 根据需要调整 */
 }
 
 .prose {

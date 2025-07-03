@@ -14,7 +14,7 @@ export interface RouteItem {
 // 主路由配置
 export const mainRoutes: RouteItem[] = [
   { id: "hero", name: "Home", icon: "home" },
-  { id: "generation", name: "Generation",href: "/components/generation", icon: "tag", badge: "imagen 4 ultra", badgePosition: 'right' },
+  // { id: "generation", name: "Generation",href: "/", icon: "tag", badge: "imagen 4 ultra", badgePosition: 'right' },
   { id: "how to use", name: "How to Use",href: "/how-to-use", icon: "tag", badge: "New", badgePosition: 'right' },
   { id: "normal vs ultra", name: "Normal vs Ultra", href: "/normal-vs-ultra", icon: "tag" },
   { id: "pricing", name: "Pricing", href: "/pricing", icon: "tag" },

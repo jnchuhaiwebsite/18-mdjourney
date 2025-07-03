@@ -96,7 +96,15 @@
 
         </div>
       </article>
+                  <!-- Call to Action -->
+      <div class="mt-12 text-center">
+        <NuxtLink to="/" 
+                  class="bg-[#ec2657] text-white px-8 py-3 rounded-full hover:bg-[#990066] transition-colors">
+          Start Creating Now
+        </NuxtLink>
+      </div>
     </div>
+
   </div>
 </template>
 

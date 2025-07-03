@@ -84,7 +84,7 @@
         
         <!-- Back to Home Button -->
         <NuxtLink 
-          to="/components/generation" 
+          to="/" 
           class="inline-block bg-theme text-white font-medium px-5 py-2 md:px-8 md:py-3 rounded-lg hover:bg-theme-hover transition-colors text-sm md:text-lg">
           Back to Home
         </NuxtLink>

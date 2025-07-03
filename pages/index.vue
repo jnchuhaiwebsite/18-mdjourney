@@ -10,16 +10,26 @@
           <ImageUploader />
         </keep-alive> -->
         <keep-alive>
+          <Generation />
+        </keep-alive>
+      </section>
+
+      <!-- 展示案例 -->
+      <section id="ShowcaseExamples">
+        <keep-alive>
           <ShowcaseExamples />
         </keep-alive>
       </section>
-        <!-- 操作步骤 -->
-        <section id="how-it-works">
-          <keep-alive>
-            <HowItWorks />
-          </keep-alive>
-        </section>
-  
+
+      <!-- 操作步骤 -->
+      <section id="how-it-works">
+        <keep-alive>
+          <HowItWorks />
+        </keep-alive>
+      </section>
+
+
+
       <!-- 特性展示 -->
       <section id="features-showcase">
         <keep-alive>
@@ -63,6 +73,7 @@ const FeatureShowcase = defineAsyncComponent(() => import('~/pages/components/Fe
 const Reviews = defineAsyncComponent(() => import('~/pages/components/Reviews.vue'));
 const ShowcaseExamples = defineAsyncComponent(() => import('~/pages/components/ShowcaseExamples.vue'));
 const PromptImageGenerator = defineAsyncComponent(() => import('~/components/PromptImageGenerator.vue'));
+const Generation = defineAsyncComponent(() => import('~/pages/components/Generation.vue'));
 
 import { useNuxtApp } from 'nuxt/app'
 const { $toast } = useNuxtApp() as any
