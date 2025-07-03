@@ -113,7 +113,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-import { useNuxtApp } from 'nuxt/app'
+import { useNuxtApp, navigateTo } from 'nuxt/app'
 
 const { $toast } = useNuxtApp()
 
@@ -214,10 +214,7 @@ onUnmounted(() => {
 
 // 滚动到图片生成器组件
 const scrollToGenerator = () => {
-  const generatorElement = document.getElementById('prompt-image-generator')
-  if (generatorElement) {
-    generatorElement.scrollIntoView({ behavior: 'smooth' })
-  }
+  navigateTo('/components/generation')
 }
 </script>
 

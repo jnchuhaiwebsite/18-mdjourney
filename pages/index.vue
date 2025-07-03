@@ -13,21 +13,13 @@
           <ShowcaseExamples />
         </keep-alive>
       </section>
-
-      <!-- 图片生成 -->
-      <section id="prompt-image-generator">
-        <keep-alive>
-          <PromptImageGenerator />
-        </keep-alive>
-      </section>
-      
-      <!-- 操作步骤 -->
-      <section id="how-it-works">
-        <keep-alive>
-          <HowItWorks />
-        </keep-alive>
-      </section>
-
+        <!-- 操作步骤 -->
+        <section id="how-it-works">
+          <keep-alive>
+            <HowItWorks />
+          </keep-alive>
+        </section>
+  
       <!-- 特性展示 -->
       <section id="features-showcase">
         <keep-alive>
@@ -43,11 +35,11 @@
       </section>
 
       <!-- 定价模块 -->
-      <section id="pricing">
+      <!-- <section id="pricing">
         <keep-alive>
           <PricingPlans />
         </keep-alive>
-      </section>
+      </section> -->
 
       <!-- 常见问题模块 -->
       <section id="faq">

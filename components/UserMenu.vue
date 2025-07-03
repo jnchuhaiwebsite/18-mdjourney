@@ -5,13 +5,13 @@
       <div class="relative user-menu-container">
         <button
           @click="toggleUserMenu"
-          class="relative focus:outline-none"
+          class="relative focus:outline-none px-1.5 py-1.5 rounded-lg hover:bg-[#ec2657]/10 hover:shadow-lg hover:shadow-[#ec2657]/20 transition-all"
         >
           <img
             :src="userDisplay?.imageUrl || '/default-avatar.png'"
             :alt="userDisplay?.username ? `${userDisplay.username}'s Profile Picture - SeedancePro` : 'Default User Avatar - SeedancePro'"
             loading="lazy"
-            class="w-10 h-10 rounded-full object-cover hover:opacity-80 transition-opacity"
+            class="w-9 h-9 rounded-full object-cover hover:opacity-80 transition-opacity"
           />
         </button>
 
