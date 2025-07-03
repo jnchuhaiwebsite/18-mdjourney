@@ -214,7 +214,10 @@ onUnmounted(() => {
 
 // 滚动到图片生成器组件
 const scrollToGenerator = () => {
-  navigateTo('/')
+  const heroElement = document.getElementById('hero');
+  if (heroElement) {
+    heroElement.scrollIntoView({ behavior: 'smooth' });
+  }
 }
 </script>
 
