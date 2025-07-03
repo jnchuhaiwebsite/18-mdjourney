@@ -2,11 +2,11 @@
   <div class="bg-[#101010] text-gray-200">
     <div class="container mx-auto px-4 py-12 md:py-20">
       <div class="text-center max-w-3xl mx-auto mt-8">
-        <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-[#ec2657] via-[#990066] to-[#333333] bg-clip-text text-transparent">
-          imagen 4 ultra free | Claim Your Free AI Image Generation Credits
+        <h1 class="text-2xl md:text-4xl font-bold  text-center sm:text-5xl bg-gradient-to-r from-[#ec2657] via-[#990066] to-[#333333] bg-clip-text text-transparent mb-4">
+          Imagen 4 Ultra Free | Explore AI Image Generation with 20 Free Credits
         </h1>
         <p class="text-lg md:text-xl text-gray-400 mb-8">
-          Sign up for Imagen 4 Ultra Free today and receive <strong>20 free credits</strong> to experience the cutting-edge of AI image creation. No credit card required. Discover the power of imagen 4 ultra free and transform your creative process.
+          Join Imagen 4 Ultra Free today and receive <strong>20 complimentary credits</strong> to explore the forefront of AI image creation. No credit card required. Experience the transformative power of Imagen 4 Ultra Free and elevate your creative process.
         </p>
       </div>
 
@@ -14,11 +14,11 @@
         <div class="bg-[#19171C] rounded-lg shadow-xl p-8 border border-[#ec2657]/20">
           <h2 class="text-2xl font-semibold mb-4 text-white">What You Get with 20 Credits</h2>
           <p class="text-gray-400 mb-4">
-            Your free credits give you the perfect opportunity to test our powerful generation models with imagen 4 ultra free:
+            Your free credits give you the perfect opportunity to test our powerful generation models with Imagen 4 Ultra Free:
           </p>
           <ul class="space-y-3 text-gray-300">
-            <li>✨ <strong>Generate 1 Ultra-Quality Image:</strong> Experience our most advanced model, delivering incredible detail, realism, and prompt accuracy with imagen 4 ultra free.</li>
-            <li>✨ <strong>Generate 2 Normal-Quality Images:</strong> Quickly create high-quality images perfect for concepts, drafts, and rapid ideation using imagen 4 ultra free.</li>
+            <li>✨ <strong>Generate 1 Ultra-Quality Image:</strong> Experience our most advanced model, delivering exceptional detail, realism, and prompt accuracy.</li>
+            <li>✨ <strong>Generate 2 Normal-Quality Images:</strong> Quickly create high-quality images perfect for concepts, drafts, and rapid ideation.</li>
           </ul>
           <p class="mt-4 text-gray-400">
             Curious about the difference? <NuxtLink to="/normal-vs-ultra" class="text-[#ec2657] hover:underline">Compare Normal vs. Ultra quality here</NuxtLink>.
@@ -27,9 +27,9 @@
         <div class="bg-[#19171C] rounded-lg shadow-xl p-8 border border-gray-800">
           <h2 class="text-2xl font-semibold mb-4 text-white">How to Get Started</h2>
           <ol class="space-y-3 text-gray-300 list-decimal list-inside">
-            <li><strong>Create a Free Account:</strong> Quick and simple sign-up to access imagen 4 ultra free.</li>
-            <li><strong>Receive 20 Free Credits:</strong> Credits are added to your account instantly, allowing you to explore imagen 4 ultra free.</li>
-            <li><strong>Start Creating:</strong> Use our intuitive prompt editor to bring your ideas to life with imagen 4 ultra free.</li>
+            <li><strong>Create a Free Account:</strong> Quick and simple sign-up to access Imagen 4 Ultra Free.</li>
+            <li><strong>Receive 20 Free Credits:</strong> Credits are added to your account instantly, allowing you to explore Imagen 4 Ultra Free.</li>
+            <li><strong>Start Creating:</strong> Use our intuitive prompt editor to bring your ideas to life.</li>
           </ol>
         </div>
       </div>
@@ -37,7 +37,7 @@
       <div class="mt-16 text-center bg-[#19171C] rounded-lg p-8 border border-gray-800 shadow-xl">
         <h2 class="text-2xl font-semibold mb-3 text-white">Coming Soon: Earn More Credits!</h2>
         <p class="text-gray-400 max-w-2xl mx-auto">
-          We're launching a referral program! Soon, you'll be able to share a unique link from your user dashboard. When a friend signs up and subscribes, you'll receive a generous amount of credits based on their first plan. It's our way of saying thank you for spreading the word about imagen 4 ultra free.
+          We're launching a referral program! Soon, you'll be able to share a unique link from your user dashboard. When a friend signs up and subscribes, you'll receive a generous amount of credits based on their first plan. It's our way of saying thank you for spreading the word about Imagen 4 Ultra Free.
         </p>
       </div>
 
@@ -80,8 +80,8 @@ const scrollToGenerator = () => {
 }
 
 useSeo({
-  title: 'Free AI Image Credits | Imagen 4 Ultra',
-  description: 'Sign up for Imagen 4 Ultra Free and get 20 credits for AI images. No card needed. Discover more credits!',
+  title: 'Imagen 4 Ultra Free | Get 20 Free AI Image Credits',
+  description: 'Sign up for Imagen 4 Ultra Free and receive 20 free credits to explore AI image generation. No credit card required. Start creating today!',
   url: '/free'
 });
 </script> 

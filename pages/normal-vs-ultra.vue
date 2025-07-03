@@ -3,8 +3,8 @@
     <div class="container mx-auto px-4 pt-28 pb-16">
       <article class="max-w-3xl mx-auto">
         <header class="text-center mb-12">
-          <h1 class="text-4xl md:text-5xl font-bold text-[#ec2657] mb-4">imagen 4.0 vs ultra: Normal vs. Ultra — Which One Should You Choose?</h1>
-          <p class="text-lg text-gray-400">A deep dive into Google's latest image generation models to help you make the best choice.</p>
+          <h1 class="text-3xl md:text-4xl font-bold  text-center sm:text-5xl bg-gradient-to-r from-[#ec2657] via-[#990066] to-[#333333] bg-clip-text text-transparent mb-4">Imagen 4.0 vs Ultra | Choosing the Right Image Generation Model</h1>
+          <p class="text-lg text-gray-400">A comprehensive guide to Google's latest image generation models, helping you make an informed decision.</p>
         </header>
 
         <div class="prose prose-invert prose-lg max-w-none mx-auto">
@@ -35,7 +35,7 @@
           <ul>
             <li><strong>Core Strength</strong>: Cost-effective and capable of handling a wide range of image generation needs.</li>
             <li><strong>Image Quality</strong>: Delivers standard, reliable high-quality images suitable for social media, blog posts, and more.</li>
-            <li><strong>Pricing</strong>: <span class="text-[#f3a943] font-semibold">$0.04 / image</span>, a competitive price that unleashes creativity without constraints.</li>
+            <li><strong>Pricing</strong>: <span class="text-[#f3a943] font-semibold">8 credits / image</span>, a competitive price that unleashes creativity without constraints.</li>
           </ul>
           <p>If you need a dependable, efficient, and affordable image generation tool for regular tasks, Imagen 4 Normal is the smart choice.</p>
 
@@ -72,7 +72,7 @@
           <ul>
             <li><strong>Core Strength</strong>: Unparalleled ability to follow text prompts, accurately rendering complex scenes and subtle details.</li>
             <li><strong>Image Quality</strong>: Produces top-tier images in terms of detail, style, and artistic flair, suitable for commercial projects and high-quality art.</li>
-            <li><strong>Pricing</strong>: <span class="text-[#f3a943] font-semibold">$0.06 / image</span>, providing powerful support for your professional needs.</li>
+            <li><strong>Pricing</strong>: <span class="text-[#f3a943] font-semibold">12 credits / image</span>, providing powerful support for your professional needs.</li>
           </ul>
 
           <div class="not-prose my-12 flex justify-center items-stretch gap-0">
@@ -109,11 +109,11 @@
 </template>
 
 <script setup lang="ts">
-// 'useHead' is auto-imported in Nuxt 3
+import { useHead } from '#imports';
 useHead({
-  title: 'imagen 4.0 vs ultra: Normal vs. Ultra - Which to Choose?',
+  title: 'Imagen 4.0 vs Ultra | Best Image Model Choice',
   meta: [
-    { name: 'description', content: 'Explore the key differences between Google\'s Imagen 4 and Imagen 4 Ultra. Compare performance, pricing, and use cases to decide which AI model is right for you.' }
+    { name: 'description', content: 'Discover the differences between Google\'s Imagen 4 and Imagen 4 Ultra. Compare performance, pricing, and use cases to choose the best AI model for your needs.' }
   ]
 })
 </script>

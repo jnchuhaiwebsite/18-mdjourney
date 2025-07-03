@@ -1,6 +1,6 @@
 <template>
   <div class="container mx-auto px-4 py-8 pt-20 sm:pt-24">
-    <h1 class="text-4xl font-bold text-center sm:text-5xl bg-gradient-to-r from-[#ec2657] via-[#990066] to-[#333333] bg-clip-text text-transparent">How to Use Imagen 4 Ultra AI</h1>
+    <h1 class="text-3xl md:text-4xl font-bold  text-center sm:text-5xl bg-gradient-to-r from-[#ec2657] via-[#990066] to-[#333333] bg-clip-text text-transparent mb-4">How to Use Imagen 4 Ultra | Step-by-Step Guide</h1>
     <p class="max-w-3xl mx-auto mt-4 text-lg text-center text-gray-400">
       Unlock the full potential of AI-powered creativity. This guide provides a step-by-step walkthrough on how to use Imagen 4 Ultra, from mastering prompts to advanced style control and text integration.
     </p>
@@ -93,11 +93,11 @@ const steps = [
 
 // SEO Configuration
 useHead({
-  title: ' Imagen 4 Ultra How to Use | Complete Guide 2025',
+  title: 'How to Use Imagen 4 Ultra | Unlock AI-Powered Creativity',
   meta: [
     {
       name: 'description',
-      content: 'Master Imagen 4 Ultra AI with expert tips on prompts, styles, and text integration. Create stunning AI art with our step-by-step guide.'
+      content: 'Learn to create stunning AI images with Imagen 4 Ultra. Master prompts, style control, and text integration in easy steps.'
     },
     {
       name: 'keywords',
