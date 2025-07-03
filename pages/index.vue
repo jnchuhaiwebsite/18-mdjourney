@@ -73,7 +73,7 @@ const FeatureShowcase = defineAsyncComponent(() => import('~/pages/components/Fe
 const Reviews = defineAsyncComponent(() => import('~/pages/components/Reviews.vue'));
 const ShowcaseExamples = defineAsyncComponent(() => import('~/pages/components/ShowcaseExamples.vue'));
 const PromptImageGenerator = defineAsyncComponent(() => import('~/components/PromptImageGenerator.vue'));
-const Generation = defineAsyncComponent(() => import('~/pages/components/Generation.vue'));
+const Generation = defineAsyncComponent(() => import('~/pages/components/generation.vue'));
 
 import { useNuxtApp } from 'nuxt/app'
 const { $toast } = useNuxtApp() as any
