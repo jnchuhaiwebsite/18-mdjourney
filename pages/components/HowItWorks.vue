@@ -2,11 +2,11 @@
   <section class="py-20 bg-blue-pale">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
-        <h2 class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#ec2657] to-[#333333] sm:text-5xl animate-fade-in">
-          Master Imagen 4 Ultra
-        </h2>
+        <h1 class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#ec2657] to-[#333333] sm:text-5xl animate-fade-in">
+          How to Create AI Images with Imagen 4 Ultra
+        </h1>
         <p class="mt-4 text-xl text-gray-300 animate-slide-up">
-          Generate Professional AI Images with Advanced Configuration Options
+          Transform Your Ideas into Professional AI-Generated Images in Three Simple Steps
         </p>
       </div>
 
@@ -24,7 +24,7 @@
               <component :is="step.icon" class="w-5 h-5 sm:w-6 sm:h-6 text-[#ec2657]" />
             </div>
             
-            <h3 class="text-xl sm:text-2xl font-bold text-white mb-4">{{ step.title }}</h3>
+            <h2 class="text-xl sm:text-2xl font-bold text-white mb-4">{{ step.title }}</h2>
             <p class="text-gray-300 mb-4">{{ step.description }}</p>
           </div>
           
@@ -53,18 +53,18 @@ import {
 
 const steps = [
   {
-    title: "Craft Your English Prompt",
-    description: "Create your image description in English - the only supported language for Imagen prompts. Be specific and detailed for best results.",
+    title: "Write Your Prompt in English",
+    description: "Create a detailed description of your desired image in English. The more specific your prompt, the better your results will be. Include style, mood, and key elements.",
     icon: PencilIcon
   },
   {
-    title: "Configure Image Settings",
-    description: "Choose your preferred aspect ratio (1:1, 3:4, 4:3, 9:16, or 16:9) and set person generation preferences according to your region's guidelines.",
+    title: "Customize Your Image Settings",
+    description: "Select your ideal image dimensions from multiple aspect ratios (1:1, 3:4, 4:3, 9:16, or 16:9). Adjust person generation settings to match your regional requirements.",
     icon: AdjustmentsHorizontalIcon
   },
   {
-    title: "Generate & Download",
-    description: "Click generate to create your AI masterpiece with Imagen 4 Ultra's advanced technology, complete with secure verification.",
+    title: "Generate and Save Your Creation",
+    description: "Click the generate button to create your AI masterpiece using our advanced Imagen 4 Ultra technology. Once verified, download your high-quality image instantly.",
     icon: CloudArrowDownIcon
   }
 ];

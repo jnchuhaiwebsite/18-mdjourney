@@ -1,46 +1,64 @@
 <template>
-  <div class="py-24 bg-blue-pale">
+  <section class="py-24 bg-blue-pale" aria-labelledby="testimonials-title">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center">
-        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
-          Imagen 4 Ultra Configuration
+        <h2 id="testimonials-title" class="text-3xl font-extrabold text-white sm:text-4xl">
+          What Our Users Say About Imagen 4 Ultra
         </h2>
         <p class="mt-4 text-lg text-gray-300">
-          Experience the power of Imagen 4 Ultra with English prompts, versatile image format customization, and flexible person generation settings. Create stunning AI-generated images with precise control.
+          Discover how professionals are leveraging Imagen 4 Ultra's advanced AI capabilities to create stunning visuals with precision and ease.
         </p>
       </div>
 
       <div class="mt-20 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-        <div v-for="review in reviews" :key="review.author" class="bg-gray-800 rounded-lg p-8 shadow-xl">
+        <div 
+          v-for="review in reviews" 
+          :key="review.author" 
+          class="bg-gray-800 rounded-lg p-8 shadow-xl"
+          itemscope 
+          itemtype="https://schema.org/Review"
+        >
           <div class="mb-6">
-            <h3 class="text-lg font-bold text-white">{{ review.author }} - {{ review.title }}</h3>
-            <p class="text-gray-400">{{ review.location }}</p>
-            <div class="flex items-center mt-2">
-              <span class="text-yellow-400">★★★★★</span>
+            <h3 class="text-lg font-bold text-white">
+              <span itemprop="author">{{ review.author }}</span> - 
+              <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+                <span itemprop="jobTitle">{{ review.title }}</span>
+              </span>
+            </h3>
+            <p class="text-gray-400" itemprop="locationCreated">{{ review.location }}</p>
+            <div class="flex items-center mt-2" itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
+              <meta itemprop="ratingValue" :content="review.rating" />
+              <meta itemprop="bestRating" content="5" />
+              <span class="text-yellow-400" aria-label="5 out of 5 stars">★★★★★</span>
             </div>
           </div>
-          <p class="text-gray-300">{{ review.content }}</p>
+          <p class="text-gray-300" itemprop="reviewBody">{{ review.content }}</p>
         </div>
       </div>
 
-      <!-- 添加开始创建按钮 -->
       <div class="text-center mt-16">
         <button
           @click="scrollToHero"
           class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#ec2657] to-[#333333] hover:from-[#ec2657]/90 hover:to-[#333333]/80 text-white rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-200"
+          aria-label="Start creating with Imagen 4 Ultra"
         >
-          Start Creating Now
-          <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          Start Creating Today
+          <svg 
+            class="ml-2 w-5 h-5" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
           </svg>
         </button>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script setup lang="ts">
-// 跳转到首页
 const scrollToHero = () => {
   const heroSection = document.getElementById('prompt-image-generator');
   if (heroSection) {
@@ -52,22 +70,22 @@ const reviews = [
   {
     author: "Emily Anderson",
     title: "Digital Artist",
-    location: "California",
-    content: "The aspect ratio options in Imagen 4 Ultra are fantastic! Being able to switch between 1:1 for social media and 16:9 for web banners has streamlined my workflow significantly. The image quality is consistently impressive.",
+    location: "San Francisco, CA",
+    content: "Imagen 4 Ultra's aspect ratio flexibility is a game-changer! I can seamlessly create content for any platform - from Instagram squares to YouTube thumbnails. The AI consistently delivers professional-quality results that exceed my expectations.",
     rating: 5
   },
   {
     author: "James Miller",
-    title: "Professional Photographer",
-    location: "New York",
-    content: "The person generation controls in Imagen 4 Ultra are exactly what I needed. The 'allow_adult' setting ensures I get appropriate content for my commercial projects, and the English prompts are intuitive and precise.",
+    title: "Creative Director",
+    location: "New York City, NY",
+    content: "The advanced person generation controls are incredibly sophisticated. I can create exactly the right imagery for our brand campaigns while maintaining full control over content appropriateness. The English prompt system is remarkably intuitive.",
     rating: 5
   },
   {
-    author: "Sophie Chen",
-    title: "Marketing Director",
-    location: "Seattle",
-    content: "Imagen 4 Ultra's English prompt system is remarkably accurate. I can generate exactly what I envision, and the customizable aspect ratios make it perfect for our multi-platform marketing campaigns.",
+    author: "Sarah Thompson",
+    title: "Marketing Strategist",
+    location: "Austin, TX",
+    content: "What sets Imagen 4 Ultra apart is its precision. The English prompts translate perfectly into visuals, and the customizable formats make it our go-to tool for cross-platform campaigns. It's revolutionized our content creation process.",
     rating: 5
   }
 ];
