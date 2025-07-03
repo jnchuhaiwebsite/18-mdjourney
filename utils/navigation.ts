@@ -7,17 +7,18 @@ export interface RouteItem {
   name: string
   icon?: string
   href?: string
+  badge?: string
+  badgePosition?: 'center' | 'left' | 'right' // badge位置：center=上方居中, left=左上角, right=右上角
 }
 
 // 主路由配置
 export const mainRoutes: RouteItem[] = [
   { id: "hero", name: "Home", icon: "home" },
-  { id: "how-it-works", name: "How It Works", icon: "steps" },
-  { id: "features-showcase", name: "Features", icon: "star" },
-  { id: "reviews", name: "Reviews", icon: "star" },
-  { id: "pricing", name: "Pricing", icon: "tag" },
-  { id: "faq", name: "FAQ", icon: "help" },
-  // { id: "portfolio", name: "Portfolio", href: "/portfolio", icon: "image" },
+  // { id: "generation", name: "Generation",href: "/", icon: "tag", badge: "imagen 4 ultra", badgePosition: 'right' },
+  { id: "how to use", name: "How to Use",href: "/how-to-use", icon: "tag", badge: "New", badgePosition: 'right' },
+  { id: "normal vs ultra", name: "Normal vs Ultra", href: "/normal-vs-ultra", icon: "tag" },
+  { id: "pricing", name: "Pricing", href: "/pricing", icon: "tag" },
+  { id: "free", name: "Free", href: "/free", icon: "tag", badge: "Hot", badgePosition: 'right' },
   { id: "blog", name: "Blog", href: "/blog", icon: "book" }
 ]
 

@@ -2,11 +2,11 @@
   <div class="py-8 sm:py-12 lg:py-16 bg-[#1a1a1a]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center">
-        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#ec2657] bg-gradient-to-r from-[#ec2657] via-[#990066] to-[#333333] bg-clip-text text-transparent">
-          Imagen 4 Ultra - Professional AI Image Generator
-        </h1>
+        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#ec2657] bg-gradient-to-r from-[#ec2657] via-[#990066] to-[#333333] bg-clip-text text-transparent">
+          Case Showcase - Explore Our Creative Works
+        </h2>
         <p class="mt-2 sm:mt-4 text-base sm:text-lg lg:text-xl text-gray-300">
-          Experience the power of Imagen 4 Ultra - 10x faster rendering with stunning 2K quality output. Create both photorealistic and abstract masterpieces with unprecedented detail.
+          Browse the amazing works created with Imagen 4 Ultra and experience the limitless possibilities of AI image generation.
         </p>
       </div>
 
@@ -113,7 +113,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-import { useNuxtApp } from 'nuxt/app'
+import { useNuxtApp, navigateTo } from 'nuxt/app'
 
 const { $toast } = useNuxtApp()
 
@@ -214,10 +214,7 @@ onUnmounted(() => {
 
 // 滚动到图片生成器组件
 const scrollToGenerator = () => {
-  const generatorElement = document.getElementById('prompt-image-generator')
-  if (generatorElement) {
-    generatorElement.scrollIntoView({ behavior: 'smooth' })
-  }
+  navigateTo('/')
 }
 </script>
 

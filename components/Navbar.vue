@@ -5,45 +5,65 @@
       style="background: rgba(25, 23, 28, 0.8)"
     >
       <div class="max-w-7xl mx-auto px-4">
-        <div class="flex items-center justify-between h-16">
+        <div class="flex items-center justify-between h-20">
           <!-- Logo -->
-          <div class="flex items-center gap-2">
+          <div class="flex-shrink-0">
             <NuxtLink to="/">
-              <img src="/logo.png" alt="Imagen 4 Ultra AI - AI Image Animator Platform" class="h-12 lg:h-16" loading="lazy" />
+              <img src="/logo.png" alt="Imagen 4 Ultra AI - AI Image Animator Platform" class="h-12 lg:h-14" loading="lazy" />
             </NuxtLink>
           </div>
 
           <!-- PC端导航 -->
-          <div class="hidden lg:flex items-center space-x-8">
+          <div class="hidden lg:flex items-center flex-grow justify-center space-x-6 mx-4">
             <template v-for="(section, index) in sections" :key="index">
               <div
                 @click="handleNavClick(section.href || section.id)"
-                class="text-gray-300 hover:text-[#ec2657] transition-colors cursor-pointer"
+                class="relative text-gray-300 hover:text-[#ec2657] transition-all cursor-pointer px-4 py-2.5 rounded-lg hover:bg-[#ec2657]/10 hover:shadow-lg hover:shadow-[#ec2657]/20 whitespace-nowrap mt-3"
               >
+                <span
+                  v-if="section.badge"
+                  :class="[
+                    'absolute text-[10px] leading-none bg-[#ec2657] text-white rounded-full px-2 py-1 min-w-fit inline-flex items-center justify-center whitespace-nowrap',
+                    {
+                      '-top-2.5 left-1/2 -translate-x-1/2': section.badgePosition === 'center',
+                      '-top-2.5 -left-1': section.badgePosition === 'left',
+                      '-top-2.5 -right-1': section.badgePosition === 'right',
+                    }
+                  ]"
+                >
+                  {{ section.badge }}
+                </span>
                 {{ section.name }}
-              </div>
-            </template>
-            <!-- 添加Personal Center和Credits -->
-            <template v-if="isSignedIn">
-              <NuxtLink
-                to="/profile"
-                class="text-gray-300 hover:text-[#ec2657] transition-colors"
-              >
-                Personal Center
-              </NuxtLink>
-              <div class="text-gray-300 flex items-center gap-2">
-                <span class="text-[#ec2657]">Credits:</span>
-                <span class="text-[#ec2657] font-medium">{{ credits }}</span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-[#ec2657]">
-                  <path d="M10.464 8.746c.227-.18.497-.311.786-.394v2.795a2.252 2.252 0 01-.786-.393c-.394-.313-.546-.681-.546-1.004 0-.323.152-.691.546-1.004zM12.75 15.662v-2.824c.347.085.664.228.921.421.427.32.579.686.579.991 0 .305-.152.671-.579.991a2.534 2.534 0 01-.921.42z" />
-                  <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v.816a3.836 3.836 0 00-1.72.756c-.712.566-1.112 1.35-1.112 2.178 0 .829.4 1.612 1.113 2.178.502.4 1.102.647 1.719.756v2.978a2.536 2.536 0 01-.921-.421l-.879-.66a.75.75 0 00-.9 1.2l.879.66c.533.4 1.169.645 1.821.75V18a.75.75 0 001.5 0v-.81a4.124 4.124 0 001.821-.749c.745-.559 1.179-1.344 1.179-2.191 0-.847-.434-1.632-1.179-2.191a4.122 4.122 0 00-1.821-.75V8.354c.29.082.559.213.786.393l.415.33a.75.75 0 00.933-1.175l-.415-.33a3.836 3.836 0 00-1.719-.755V6z" clip-rule="evenodd" />
-                </svg>
               </div>
             </template>
           </div>
 
           <!-- 用户信息区域 - PC端 -->
-          <UserMenu />
+          <div class="hidden lg:flex items-center space-x-4 flex-shrink-0">
+            <!-- 添加Personal Center和Credits -->
+            <!-- <template v-if="isSignedIn">
+              <NuxtLink
+                to="/profile"
+                class="relative text-gray-300 hover:text-[#ec2657] transition-all cursor-pointer px-4 py-2.5 rounded-lg hover:bg-[#ec2657]/10 hover:shadow-lg hover:shadow-[#ec2657]/20 whitespace-nowrap mt-3"
+              >
+                Personal Center
+              </NuxtLink>
+              <div class="relative text-gray-300 transition-all px-4 py-2.5 rounded-lg hover:bg-[#ec2657]/10 hover:shadow-lg hover:shadow-[#ec2657]/20 whitespace-nowrap mt-3 cursor-pointer">
+                <div class="flex items-center gap-2">
+                  <span class="text-[#ec2657]">Credits:</span>
+                  <span class="text-[#ec2657] font-medium">{{ credits }}</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-[#ec2657]">
+                    <path d="M10.464 8.746c.227-.18.497-.311.786-.394v2.795a2.252 2.252 0 01-.786-.393c-.394-.313-.546-.681-.546-1.004 0-.323.152-.691.546-1.004zM12.75 15.662v-2.824c.347.085.664.228.921.421.427.32.579.686.579.991 0 .305-.152.671-.579.991a2.534 2.534 0 01-.921.42z" />
+                    <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v.816a3.836 3.836 0 00-1.72.756c-.712.566-1.112 1.35-1.112 2.178 0 .829.4 1.612 1.113 2.178.502.4 1.102.647 1.719.756v2.978a2.536 2.536 0 01-.921-.421l-.879-.66a.75.75 0 00-.9 1.2l.879.66c.533.4 1.169.645 1.821.75V18a.75.75 0 001.5 0v-.81a4.124 4.124 0 001.821-.749c.745-.559 1.179-1.344 1.179-2.191 0-.847-.434-1.632-1.179-2.191a4.122 4.122 0 00-1.821-.75V8.354c.29.082.559.213.786.393l.415.33a.75.75 0 00.933-1.175l-.415-.33a3.836 3.836 0 00-1.719-.755V6z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+              </div>
+            </template> -->
+            <!-- 用户头像区域 -->
+            <div class="mt-3">
+              <UserMenu />
+            </div>
+          </div>
 
           <!-- 移动端菜单按钮 -->
           <button
@@ -115,8 +135,21 @@
               <template v-for="(section, index) in sections" :key="index">
                 <div
                   @click="() => { handleNavClick(section.href || section.id); isOpen = false; }"
-                  class="block text-gray-300 hover:text-[#ec2657] text-base py-2 transition-colors cursor-pointer"
+                  class="relative block text-gray-300 hover:text-[#ec2657] text-base transition-all cursor-pointer px-4 py-2.5 rounded-lg hover:bg-[#ec2657]/10 hover:shadow-lg hover:shadow-[#ec2657]/20 whitespace-nowrap mt-3"
                 >
+                  <span
+                    v-if="section.badge"
+                    :class="[
+                      'absolute text-[10px] leading-none bg-[#ec2657] text-white rounded-full px-2 py-1 min-w-fit inline-flex items-center justify-center whitespace-nowrap',
+                      {
+                        '-top-2.5 left-1/2 -translate-x-1/2': section.badgePosition === 'center',
+                        '-top-2.5 -left-1': section.badgePosition === 'left',
+                        '-top-2.5 -right-1': section.badgePosition === 'right',
+                      }
+                    ]"
+                  >
+                    {{ section.badge }}
+                  </span>
                   {{ section.name }}
                 </div>
               </template>

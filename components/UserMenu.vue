@@ -5,13 +5,13 @@
       <div class="relative user-menu-container">
         <button
           @click="toggleUserMenu"
-          class="relative focus:outline-none"
+          class="relative focus:outline-none px-1.5 py-1.5 rounded-lg hover:bg-[#ec2657]/10 hover:shadow-lg hover:shadow-[#ec2657]/20 transition-all"
         >
           <img
             :src="userDisplay?.imageUrl || '/default-avatar.png'"
             :alt="userDisplay?.username ? `${userDisplay.username}'s Profile Picture - SeedancePro` : 'Default User Avatar - SeedancePro'"
             loading="lazy"
-            class="w-10 h-10 rounded-full object-cover hover:opacity-80 transition-opacity"
+            class="w-9 h-9 rounded-full object-cover hover:opacity-80 transition-opacity"
           />
         </button>
 
@@ -48,6 +48,34 @@
                   {{ vipLastTime }}
                 </p>
               </div>
+            </div>
+          </div>
+
+          <!-- 菜单选项 -->
+          <div class="py-1 border-b border-baby-pink/20">
+            <!-- 个人中心 -->
+            <NuxtLink
+              to="/profile"
+              class="block px-4 py-2 text-sm text-gray-700 hover:bg-baby-pink/10 flex items-center transition-all duration-200 hover:translate-x-1"
+              @click="showUserMenu = false"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              Personal Center
+            </NuxtLink>
+
+            <!-- 我的积分 -->
+            <div
+              class="block px-4 py-2 text-sm text-gray-700 hover:bg-baby-pink/10 flex items-center justify-between transition-all duration-200 hover:translate-x-1 cursor-pointer"
+            >
+              <div class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.171-.879-1.171-2.303 0-3.182C10.536 7.719 11.768 7.5 12 7.5c.725 0 1.45.22 2.003.659" />
+                </svg>
+                Credits:
+              </div>
+              <span class="text-gray-500">{{ points }}</span>
             </div>
           </div>
 
@@ -124,6 +152,31 @@
         </div>
       </div>
 
+      <!-- 移动端菜单选项 -->
+      <div class="mt-4 space-y-2">
+        <!-- 个人中心 -->
+        <NuxtLink
+          to="/profile"
+          class="block w-full py-2 px-4 rounded-lg bg-baby-pink/10 hover:bg-baby-pink/20 transition-all duration-200 text-sm font-medium text-gray-700 flex items-center gap-2"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          Personal Center
+        </NuxtLink>
+
+        <!-- 我的积分 -->
+        <div class="w-full py-2 px-4 rounded-lg bg-baby-pink/10 hover:bg-baby-pink/20 transition-all duration-200 text-sm font-medium text-gray-700 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.171-.879-1.171-2.303 0-3.182C10.536 7.719 11.768 7.5 12 7.5c.725 0 1.45.22 2.003.659" />
+            </svg>
+            Credits:
+          </div>
+          <span class="text-gray-500">{{ points }}</span>
+        </div>
+      </div>
+
       <!-- 退出按钮 -->
       <SignOutButton>
         <button
@@ -164,7 +217,7 @@
 import { ref, computed, onMounted } from "vue";
 import { useClerkAuth } from '~/utils/auth'
 import { useUserStore } from '~/stores/user';
-import { setUserInfo,loginAuth } from '~/api/index'
+import { setUserInfo, loginAuth } from '~/api/index'
 
 const props = defineProps({
   isMobile: {
@@ -181,6 +234,16 @@ console.log('userStore初始化:', userStore);
 const vipLastTime = ref("");
 const showUserMenu = ref(false);
 const isAuthLoading = ref(true);
+
+// 计算总积分
+const points = computed(() => {
+  const userInfo = userStore.userInfo;
+  if (!userInfo) return 0;
+  
+  const freeLimit = userInfo.free_limit || 0;
+  const remainingLimit = userInfo.remaining_limit || 0;
+  return freeLimit + remainingLimit;
+});
 
 // 引入auth认证
 const { 
@@ -292,7 +355,7 @@ onMounted(async () => {
         from_type: 0,
         token
       }).then(async () => {
-        getUserInfo();
+        await getUserInfo();
       }).catch((error) => {
         console.error('登录认证失败:', error);
         isAuthLoading.value = false;

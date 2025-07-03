@@ -45,7 +45,7 @@
       </div>
 
       <!-- CTA Section -->
-      <div class="text-center mt-16">
+      <!-- <div class="text-center mt-16">
         <button
           @click="scrollToHero"
           class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#ec2657] to-[#333333] hover:from-[#ec2657]/90 hover:to-[#333333]/80 text-white rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-200"
@@ -55,7 +55,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
           </svg>
         </button>
-      </div>
+      </div> -->
     </div>
   </section>
 </template>
