@@ -3,7 +3,7 @@ import { useRuntimeConfig } from 'nuxt/app'
 // API基础URL
 // console.log('当前环境:', process.env.NODE_ENV);
 
-const baseUrl = process.env.NODE_ENV !== 'development'
+const baseUrl = process.env.NODE_ENV === 'development'
   ? 'http://192.168.0.55:8686'
   : 'https://art.aimagen4.com';
 

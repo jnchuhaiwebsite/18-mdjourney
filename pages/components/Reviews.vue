@@ -35,7 +35,7 @@
           <p class="text-gray-300" itemprop="reviewBody">{{ review.content }}</p>
         </div>
       </div>
-
+<!-- 
       <div class="text-center mt-16">
         <button
           @click="scrollToHero"
@@ -53,7 +53,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
           </svg>
         </button>
-      </div>
+      </div> -->
     </div>
   </section>
 </template>

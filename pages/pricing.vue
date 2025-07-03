@@ -7,11 +7,11 @@
       <!-- <div class="text-gray-300 text-center text-lg mb-2 font-medium">
         Choose Your Plan
       </div> -->
-      <h2
-        class="text-theme text-center text-4xl font-bold mb-4 font-medium"
+      <h1
+        class="text-theme text-center text-4xl font-bold mb-4 font-medium mt-12"
       >
-      imagen 4 ultra pricing
-      </h2>
+        Imagen 4 Ultra Pricing
+      </h1>
       <p class="text-gray-400 text-center max-w-2xl mx-auto mb-12">
         Purchase credits to use our services. No subscription required - pay once, use anytime.
       </p>

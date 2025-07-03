@@ -5,7 +5,7 @@
       
       <div class="space-y-4">
         <div 
-          v-for="(faq, index) in faqItems" 
+          v-for="(faq, index) in faqs" 
           :key="index"
           class="border-b border-[#ec2657]/20 py-6 hover:bg-[#ec2657]/5 transition-colors duration-200 rounded-lg px-4"
         >
@@ -38,31 +38,32 @@
           </div>
         </div>
       </div>
-      
-      <!-- CTA Buttons -->
-      <div class="text-center mt-12 space-x-4"> 
-        <!-- Add show more/less buttons here -->
+    </div>
+
+    <div class="text-center mt-16">
         <button
-          v-if="hasMoreItems && faqs.length > initialVisibleCount"
-          @click="showMore"
-          class="bg-[#ec2657]/80 hover:bg-[#ec2657] text-white font-medium py-2 px-6 rounded-full transition-all duration-300 shadow-md hover:shadow-lg cursor-pointer inline-block"
+          @click="scrollToHero"
+          class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#ec2657] to-[#333333] hover:from-[#ec2657]/90 hover:to-[#333333]/80 text-white rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-200"
+          aria-label="Start creating with Imagen 4 Ultra"
         >
-          Show More
-        </button>
-        <button
-          v-if="!hasMoreItems && faqs.length > initialVisibleCount"
-          @click="showLess"
-          class="bg-[#ec2657]/80 hover:bg-[#ec2657] text-white font-medium py-2 px-6 rounded-full transition-all duration-300 shadow-md hover:shadow-lg cursor-pointer inline-block"
-        >
-          Show Less
+          Start Creating Today
+          <svg 
+            class="ml-2 w-5 h-5" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+          </svg>
         </button>
       </div>
-    </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
+import { navigateTo } from 'nuxt/app';
 
 defineOptions({
   name: 'FaqSection'
@@ -70,14 +71,6 @@ defineOptions({
 
 // FAQ data
 const faqs = [
-  {
-    question: "What aspect ratios are supported?",
-    answer: "Imagen supports five aspect ratios: 1:1 (square, default), 3:4 (portrait), 4:3 (landscape), 9:16 (vertical), and 16:9 (horizontal). You can specify your preferred ratio using the aspectRatio parameter."
-  },
-  {
-    question: "What languages are supported?",
-    answer: "Currently, Imagen 4 Ultra only supports English prompts. All text descriptions for image generation must be provided in English for optimal results."
-  },
   {
     question: "How do I write effective prompts for the main subject?",
     answer: "When writing prompts, start by clearly describing your main subject - whether it's an object, person, animal, or scene. Be specific and use meaningful descriptive words. For example, instead of just saying 'a cat', try 'a fluffy orange tabby cat sitting alertly'."
@@ -104,51 +97,16 @@ const faqs = [
   }
 ];
 
-// Initial number of FAQs to display
-const initialVisibleCount = 5;
-const visibleCount = ref(initialVisibleCount);
-
 // Track expanded state of each FAQ item
 const openFaqs = ref(Array(faqs.length).fill(false));
-
-// Currently displayed FAQ items
-const faqItems = computed(() => {
-  return faqs.slice(0, visibleCount.value);
-});
-
-// Whether there are more FAQs to display
-const hasMoreItems = computed(() => {
-  return visibleCount.value < faqs.length;
-});
 
 // Toggle the expanded/collapsed state of FAQ item
 const toggleFaq = (index: number) => {
   openFaqs.value[index] = !openFaqs.value[index];
 };
 
-// Show more FAQs
-const showMore = () => {
-  visibleCount.value = faqs.length;
-};
-
-// Show fewer FAQs
-const showLess = () => {
-  visibleCount.value = initialVisibleCount;
-  // Scroll directly to the FAQ section
-  const faqSection = document.getElementById('faq');
-  if (faqSection) {
-    faqSection.scrollIntoView();
-  }
-};
-
-// Scroll to top
-const scrollToTop = () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-};
-
-// Scroll to bottom
-const scrollToContact = () => {
-  window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+const scrollToHero = () => {
+  navigateTo('/components/generation')
 };
 </script>
 

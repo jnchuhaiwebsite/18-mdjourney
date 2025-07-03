@@ -41,7 +41,7 @@
           <!-- 用户信息区域 - PC端 -->
           <div class="hidden lg:flex items-center space-x-4 flex-shrink-0">
             <!-- 添加Personal Center和Credits -->
-            <template v-if="isSignedIn">
+            <!-- <template v-if="isSignedIn">
               <NuxtLink
                 to="/profile"
                 class="relative text-gray-300 hover:text-[#ec2657] transition-all cursor-pointer px-4 py-2.5 rounded-lg hover:bg-[#ec2657]/10 hover:shadow-lg hover:shadow-[#ec2657]/20 whitespace-nowrap mt-3"
@@ -58,7 +58,7 @@
                   </svg>
                 </div>
               </div>
-            </template>
+            </template> -->
             <!-- 用户头像区域 -->
             <div class="mt-3">
               <UserMenu />
