@@ -71,7 +71,7 @@ defineOptions({
   name: 'FaqSection'
 })
 
-// FAQ data
+// FAQ dataasas
 const faqs = [
   {
     question: "How can I use my free registration credits to generate images?",
