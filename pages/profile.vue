@@ -18,7 +18,7 @@
             <span v-if="userInfo.vip_last_time > 0" class="px-2 py-1 bg-yellow-900 text-yellow-100 text-sm rounded-full">VIP Member</span>
           </div>
           <p class="text-gray-300 mt-1">{{ userInfo.email }}</p>
-          <p class="text-gray-400 text-sm mt-1">Registered: {{ formatDate(userInfo.created_at) }}</p>
+          <!-- <p class="text-gray-400 text-sm mt-1">Registered: {{ formatDate(userInfo.created_at) }}</p> -->
           <p class="text-gray-400 text-sm">Login Method: {{ userInfo.from_login === 'google' ? 'Google' : 'Other' }}</p>
         </div>
       </div>
