@@ -9,25 +9,25 @@
           <!-- Logo -->
           <div class="flex-shrink-0">
             <NuxtLink to="/">
-              <img src="/logo.png" alt="Imagen 4 Ultra AI - AI Image Animator Platform" class="h-12 lg:h-14" loading="lazy" />
+              <img src="/logo.png" alt="Imagen 4 Ultra AI - AI Image Animator Platform" class="h-14 lg:h-16" loading="lazy" />
             </NuxtLink>
           </div>
 
           <!-- PC端导航 -->
-          <div class="hidden lg:flex items-center flex-grow justify-center space-x-6 mx-4">
+          <div class="hidden lg:flex items-center flex-grow space-x-4 ml-6">
             <template v-for="(section, index) in sections" :key="index">
               <div
                 @click="handleNavClick(section.href || section.id)"
-                class="relative text-gray-300 hover:text-[#ec2657] transition-all cursor-pointer px-4 py-2.5 rounded-lg hover:bg-[#ec2657]/10 hover:shadow-lg hover:shadow-[#ec2657]/20 whitespace-nowrap mt-3"
+                class="relative text-gray-300 hover:text-[#ec2657] transition-all cursor-pointer px-4 py-2.5 rounded-lg hover:bg-[#ec2657]/10 hover:shadow-lg hover:shadow-[#ec2657]/20 whitespace-nowrap"
               >
                 <span
                   v-if="section.badge"
                   :class="[
                     'absolute text-[10px] leading-none bg-[#ec2657] text-white rounded-full px-2 py-1 min-w-fit inline-flex items-center justify-center whitespace-nowrap',
                     {
-                      '-top-2.5 left-1/2 -translate-x-1/2': section.badgePosition === 'center',
-                      '-top-2.5 -left-1': section.badgePosition === 'left',
-                      '-top-2.5 -right-1': section.badgePosition === 'right',
+                      '-top-2 left-1/2 -translate-x-1/2': section.badgePosition === 'center',
+                      '-top-2 -left-1': section.badgePosition === 'left',
+                      '-top-2 -right-1': section.badgePosition === 'right',
                     }
                   ]"
                 >
@@ -44,11 +44,11 @@
             <!-- <template v-if="isSignedIn">
               <NuxtLink
                 to="/profile"
-                class="relative text-gray-300 hover:text-[#ec2657] transition-all cursor-pointer px-4 py-2.5 rounded-lg hover:bg-[#ec2657]/10 hover:shadow-lg hover:shadow-[#ec2657]/20 whitespace-nowrap mt-3"
+                class="relative text-gray-300 hover:text-[#ec2657] transition-all cursor-pointer px-4 py-2.5 rounded-lg hover:bg-[#ec2657]/10 hover:shadow-lg hover:shadow-[#ec2657]/20 whitespace-nowrap"
               >
                 Personal Center
               </NuxtLink>
-              <div class="relative text-gray-300 transition-all px-4 py-2.5 rounded-lg hover:bg-[#ec2657]/10 hover:shadow-lg hover:shadow-[#ec2657]/20 whitespace-nowrap mt-3 cursor-pointer">
+              <div class="relative text-gray-300 transition-all px-4 py-2.5 rounded-lg hover:bg-[#ec2657]/10 hover:shadow-lg hover:shadow-[#ec2657]/20 whitespace-nowrap cursor-pointer">
                 <div class="flex items-center gap-2">
                   <span class="text-[#ec2657]">Credits:</span>
                   <span class="text-[#ec2657] font-medium">{{ credits }}</span>
@@ -60,7 +60,7 @@
               </div>
             </template> -->
             <!-- 用户头像区域 -->
-            <div class="mt-3">
+            <div>
               <UserMenu />
             </div>
           </div>
@@ -142,9 +142,9 @@
                     :class="[
                       'absolute text-[10px] leading-none bg-[#ec2657] text-white rounded-full px-2 py-1 min-w-fit inline-flex items-center justify-center whitespace-nowrap',
                       {
-                        '-top-2.5 left-1/2 -translate-x-1/2': section.badgePosition === 'center',
-                        '-top-2.5 -left-1': section.badgePosition === 'left',
-                        '-top-2.5 -right-1': section.badgePosition === 'right',
+                        '-top-2 left-1/2 -translate-x-1/2': section.badgePosition === 'center',
+                        '-top-2 -left-1': section.badgePosition === 'left',
+                        '-top-2 -right-1': section.badgePosition === 'right',
                       }
                     ]"
                   >

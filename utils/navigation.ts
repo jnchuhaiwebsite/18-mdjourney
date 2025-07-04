@@ -15,7 +15,7 @@ export interface RouteItem {
 export const mainRoutes: RouteItem[] = [
   { id: "hero", name: "Home", icon: "home" },
   // { id: "generation", name: "Generation",href: "/", icon: "tag", badge: "imagen 4 ultra", badgePosition: 'right' },
-  { id: "how to use", name: "How to Use",href: "/how-to-use", icon: "tag", badge: "New", badgePosition: 'right' },
+  { id: "how to use", name: "How to Use",href: "/how-to-use", icon: "tag" },
   { id: "normal vs ultra", name: "Normal vs Ultra", href: "/normal-vs-ultra", icon: "tag" },
   { id: "pricing", name: "Pricing", href: "/pricing", icon: "tag" },
   { id: "free", name: "Free", href: "/free", icon: "tag", badge: "Hot", badgePosition: 'right' },
