@@ -1,17 +1,10 @@
 <template>
     <div class="relative w-full flex flex-col items-center justify-start overflow-x-hidden">
       <!-- 标题区 -->
-      <div class="mt-[64px] mb-10 flex flex-col items-center relative z-10">
-        <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-center bg-gradient-to-r from-[#ec2657] via-[#990066] to-[#ec2657] bg-clip-text text-transparent drop-shadow-2xl tracking-tight animate-gradient-x">
-          Veo3-AI Video Generation with Realistic Sound
-        </h1>
-        <p class="mt-4 text-base text-gray-200 text-center max-w-4xl font-medium">
-          Professional AI-powered video creation tool for high-quality content generation and editing
-        </p>
-        <p class="mt-2 text-base text-gray-200 text-center max-w-4xl font-medium">
-          Create stunning videos with perfect audio sync
-        </p>
-      </div>
+      <PageHero 
+        title="Veo3-AI Video Generation with Realistic Sound"
+        subtitle="Professional AI-powered video creation tool for high-quality content generation and editing. Create stunning videos with perfect audio sync"
+      />
 
       <!-- 主体区 -->
       <div class="w-full max-w-[1360px] flex flex-col lg:flex-row gap-3 lg:gap-4 justify-center items-stretch px-2 sm:px-3 lg:px-4 pb-12 lg:pb-20">
@@ -276,12 +269,14 @@
   
   <script setup lang="ts">
   import { ArrowUpTrayIcon, ArrowUpOnSquareIcon, XMarkIcon, InformationCircleIcon, ArrowDownTrayIcon, ArrowPathIcon, SparklesIcon } from '@heroicons/vue/24/outline'
-  import { ref, computed, watch, onUnmounted, onMounted } from 'vue'
+  import { ref, computed, watch, onUnmounted, onMounted, defineAsyncComponent } from 'vue'
   import { useUserStore } from '~/stores/user'
   import { useRoute } from 'vue-router'
   import { useNuxtApp } from 'nuxt/app'
   import { useVideoTaskStore } from '~/stores/videoTask'
   import { useNotificationStore } from '~/stores/notification'
+
+  const PageHero = defineAsyncComponent(() => import('~/components/PageHero.vue'))
   
   // 图片方向纠正
   import { correctImageOrientation } from '~/utils/imageOrientation'

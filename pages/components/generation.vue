@@ -1,14 +1,10 @@
 <template>
   <div class="relative w-full flex flex-col items-center justify-start overflow-x-hidden bg-blue-pale ">
     <!-- 标题区 -->
-    <div class="mt-[40px] mb-10 flex flex-col items-center relative z-10">
-      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#ec2657] bg-gradient-to-r from-[#ec2657] via-[#990066] to-[#ec2657] bg-clip-text text-transparent py-4 leading-relaxed text-center max-w-[90%] mx-auto">
-        Imagen 4 Ultra - Professional AI Art Generation Platform
-      </h1>
-      <p class="mt-4 text-base text-gray-200 text-center max-w-4xl font-medium">
-        Create stunning, high-quality images instantly with our cutting-edge AI technology - Professional-grade art generation at your fingertips
-      </p>
-    </div>
+    <PageHero 
+      title="Imagen 4 Ultra - Professional AI Art Generation Platform"
+      subtitle="Create stunning, high-quality images instantly with our cutting-edge AI technology - Professional-grade art generation at your fingertips"
+    />
 
     <!-- 主体区 -->
     <div class="w-full max-w-[1224px] flex flex-col lg:flex-row gap-3 lg:gap-4 justify-center items-stretch px-2 sm:px-3 lg:px-4 pb-12 lg:pb-20">
@@ -195,12 +191,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, defineAsyncComponent } from 'vue'
 import { useClerkAuth } from '~/utils/auth'
 import { useUserStore } from '~/stores/user';
 import { createTasksText, getScore } from '~/api'
 import { useNavigation } from '~/utils/navigation'
 import { useSeo } from '~/composables/useSeo';
+
+const PageHero = defineAsyncComponent(() => import('~/components/PageHero.vue'))
 
 const prompt = ref('')
 const selectedRatio = ref('1:1')

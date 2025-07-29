@@ -1,14 +1,10 @@
 <template>
   <div class="relative w-full flex flex-col items-center justify-start overflow-x-hidden">
     <!-- 标题区 -->
-    <!-- <div class="mt-[64px] mb-10 flex flex-col items-center relative z-10">
-      <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-center bg-gradient-to-r from-[#ec2657] via-[#990066] to-[#ec2657] bg-clip-text text-transparent drop-shadow-2xl tracking-tight animate-gradient-x">
-        AI Image Generation
-      </h2>
-      <p class="mt-4 text-base text-gray-200 text-center max-w-4xl font-medium">
-        Create stunning images with our advanced AI image generation technology
-      </p>
-    </div> -->
+    <PageHero 
+      title="AI Image Generation"
+      subtitle="Create stunning images with our advanced AI image generation technology"
+    />
 
     <!-- 主体区 -->
     <div class="w-full max-w-[1360px] flex flex-col lg:flex-row gap-3 lg:gap-4 justify-center items-stretch px-2 sm:px-3 lg:px-4 pb-12 lg:pb-20">
@@ -193,11 +189,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, defineAsyncComponent } from 'vue'
 import { useClerkAuth } from '~/utils/auth'
 import { useUserStore } from '~/stores/user';
 import { createTasksText, getScore } from '~/api'
 import { useNavigation } from '~/utils/navigation'
+
+const PageHero = defineAsyncComponent(() => import('~/components/PageHero.vue'))
 
 const prompt = ref('')
 const selectedRatio = ref('1:1')

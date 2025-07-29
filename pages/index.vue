@@ -6,18 +6,10 @@
         id="hero"
         class="min-h-[700px] relative pt-[64px]"
       >
-          <div class="mt-[40px] mb-10 flex flex-col items-center relative z-10">
-      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#ec2657] bg-gradient-to-r from-[#ec2657] via-[#990066] to-[#ec2657] bg-clip-text text-transparent py-4 leading-relaxed text-center max-w-[90%] mx-auto">
-        Imagen 4 Ultra - Professional AI Art Generation Platform
-      </h1>
-      <p class="mt-4 text-base text-gray-200 text-center max-w-4xl font-medium">
-        Create stunning, high-quality images instantly with our cutting-edge AI technology - Professional-grade art generation at your fingertips
-      </p>
-    </div>
-        <!-- <keep-alive>
-          <ImageUploader />
-        </keep-alive> -->
-          <Generation />
+        <PageHero 
+          title="Imagen 4 Ultra - Professional AI Art Generation Platform"
+          subtitle="Create stunning, high-quality images instantly with our cutting-edge AI technology - Professional-grade art generation at your fingertips"
+        />
       </section>
 
       <!-- 展示案例 -->
@@ -68,15 +60,14 @@
 import { onBeforeMount, defineAsyncComponent, onMounted } from "vue";
 import { useSeo } from '~/composables/useSeo';
 
-const PricingPlans = defineAsyncComponent(() => import('~/components/PricingPlans.vue'));
-const ImageUploader = defineAsyncComponent(() => import('~/components/ImageUploader.vue'));
+
 const FaqSection = defineAsyncComponent(() => import('~/pages/components/FaqSection.vue'));
 const HowItWorks = defineAsyncComponent(() => import('~/pages/components/HowItWorks.vue'));
 const FeatureShowcase = defineAsyncComponent(() => import('~/pages/components/FeatureShowcase.vue'));
 const Reviews = defineAsyncComponent(() => import('~/pages/components/Reviews.vue'));
 const ShowcaseExamples = defineAsyncComponent(() => import('~/pages/components/ShowcaseExamples.vue'));
 const PromptImageGenerator = defineAsyncComponent(() => import('~/components/PromptImageGenerator.vue'));
-// const Generation = defineAsyncComponent(() => import('~/pages/components/generation.vue'));
+const PageHero = defineAsyncComponent(() => import('~/components/PageHero.vue'));
 
 import { useNuxtApp } from 'nuxt/app'
 const { $toast } = useNuxtApp() as any

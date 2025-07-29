@@ -228,7 +228,7 @@ const props = defineProps({
 
 // 用户存储
 const userStore = useUserStore();
-console.log('userStore初始化:', userStore);
+// console.log('userStore初始化:', userStore);
 
 // 状态管理
 const vipLastTime = ref("");

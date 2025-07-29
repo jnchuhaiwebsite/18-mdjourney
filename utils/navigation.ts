@@ -13,21 +13,23 @@ export interface RouteItem {
 
 // 主路由配置
 export const mainRoutes: RouteItem[] = [
-  { id: "hero", name: "Image Generate ", icon: "Image Generate" },
+  { id: "home", name: "Home", href: "/", icon: "home" },
+  { id: "hero", name: "Image Generate ", href: "/ai-image-generator", icon: "Image Generate" },
   // { id: "generation", name: "Generation",href: "/", icon: "tag", badge: "imagen 4 ultra", badgePosition: 'right' },
-  { id: "how to use", name: "How to Use",href: "/how-to-use", icon: "tag" },
+  // { id: "how to use", name: "How to Use",href: "/how-to-use", icon: "tag" },
   // { id: "normal vs ultra", name: "Normal vs Ultra", href: "/normal-vs-ultra", icon: "tag" },
   { id: "pricing", name: "Pricing", href: "/pricing", icon: "tag" },
   // { id: "free", name: "Free", href: "/free", icon: "tag", badge: "Hot", badgePosition: 'right' },
-  { id: "blog", name: "Blog", href: "/blog", icon: "book" }
+  // { id: "blog", name: "Blog", href: "/blog", icon: "book" }
 ]
 
 
 export const footerRoutes: RouteItem[] = [
-  { id: "how to use", name: "How to Use",href: "/how-to-use", icon: "tag" },
-  { id: "pricing", name: "Pricing", href: "/pricing", icon: "tag" },
-  { id: "normal vs ultra", name: "Normal vs Ultra", href: "/normal-vs-ultra", icon: "tag" },
-  { id: "free", name: "Free", href: "/free", icon: "tag"},
+  // { id: "how to use", name: "How to Use",href: "/how-to-use", icon: "tag" },
+  // { id: "pricing", name: "Pricing", href: "/pricing", icon: "tag" },
+  // { id: "normal vs ultra", name: "Normal vs Ultra", href: "/normal-vs-ultra", icon: "tag" },
+  // { id: "free", name: "Free", href: "/free", icon: "tag"},
+  { id: "faq", name: "Faq", href: "/faq", icon: "faq" },
   { id: "blog", name: "Blog", href: "/blog", icon: "book" }
 ]
 

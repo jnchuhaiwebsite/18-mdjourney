@@ -62,7 +62,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useSeo } from '~/composables/useSeo';
-import { useClerkAuth } from '~/utils/auth';
+import { useClerkAuth } from '~/utils/authHelper';
 import { navigateTo } from 'nuxt/app';
 
 const { isSignedIn, login } = useClerkAuth();

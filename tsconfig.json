@@ -21,6 +21,6 @@
     },
     "types": ["vue", "nuxt", "node"]
   },
-  "include": ["**/*.ts", "**/*.d.ts", "**/*.tsx", "**/*.vue", "utils/auth.js", "utils/auth.js"],
+  "include": ["**/*.ts", "**/*.d.ts", "**/*.tsx", "**/*.vue", "utils/authHelper.js", "utils/authHelper.js"],
   "exclude": ["node_modules"]
 }
