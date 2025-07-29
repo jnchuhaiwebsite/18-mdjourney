@@ -26,7 +26,7 @@
             ]"
             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
           >
-            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd" />
           </svg>
         </button>
           
@@ -44,19 +44,19 @@
     <div class="text-center mt-12">
       <button
         @click="scrollToHero"
-        class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#ec2657] to-[#333333] hover:opacity-90 text-white rounded-lg font-medium text-base transition-colors duration-200"
+        class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#ec2657] to-[#ec2657] hover:opacity-90 text-white rounded-lg font-medium text-base transition-colors duration-200"
         aria-label="Start creating with Imagen 4 Ultra"
       >
         Start Creating Today
-        <svg 
+        <!-- <svg 
           class="ml-2 w-5 h-5" 
           fill="none" 
           stroke="currentColor" 
           viewBox="0 0 24 24"
           aria-hidden="true"
         >
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-        </svg>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 13l5-5m0 0l5 5M7 7l5-5m0 0l5 5"></path>
+        </svg> -->
       </button>
     </div>
     </div>
@@ -90,8 +90,8 @@ const faqs = [
     answer: "All your generated images are saved in your <strong>User Center</strong>. You can:<ul class='list-disc pl-5 mt-2 space-y-1'><li>Browse and review all your previous images</li><li>See the exact prompt used for each</li><li>Download any image to your device anytime</li></ul><br>🔒 We don't auto-delete your history, but we recommend downloading your favorites for safekeeping."
   },
   {
-    question: "What happens when I run out of credits?",
-    answer: "Once your credits are used up, you can <strong>purchase a credit pack</strong> to continue generating images. <br>Visit the <strong>Credits</strong> section in your account to view available packages and pricing.<br>"
+    question: "What can I do when I run out of credits?",
+ answer: "Once your credits are used up, you can <strong>purchase a credit pack</strong> to continue generating images. <br>Visit the <strong>pricing</strong> section in 👉 <a href='/pricing' class='text-[#ec2657] hover:underline'>Imagen 4 Ultra Pricing</a> to view available packages and pricing.<br>"
   },
   {
     question: "Can I use the images commercially? What about copyright?",

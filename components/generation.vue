@@ -1,19 +1,14 @@
 <template>
-  <div class="relative w-full flex flex-col items-center justify-start overflow-x-hidden">
+  <div class="relative w-full flex flex-col items-center justify-start overflow-x-hidden bg-blue-pale ">
     <!-- 标题区 -->
-    <!-- <div class="mt-[64px] mb-10 flex flex-col items-center relative z-10">
-      <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-center bg-gradient-to-r from-[#ec2657] via-[#990066] to-[#ec2657] bg-clip-text text-transparent drop-shadow-2xl tracking-tight animate-gradient-x">
-        AI Image Generation
-      </h2>
-      <p class="mt-4 text-base text-gray-200 text-center max-w-4xl font-medium">
-        Create stunning images with our advanced AI image generation technology
-      </p>
-    </div> -->
+
 
     <!-- 主体区 -->
-    <div class="w-full max-w-[1360px] flex flex-col lg:flex-row gap-3 lg:gap-4 justify-center items-stretch px-2 sm:px-3 lg:px-4 pb-12 lg:pb-20">
+    <div class="w-full max-w-[1224px] flex flex-col lg:flex-row gap-3 lg:gap-4 justify-center items-stretch px-2 sm:px-3 lg:px-4 pb-12 lg:pb-20">
       <!-- 左侧表单 -->
-      <div class="w-full mx-auto lg:mx-0 lg:w-[50%] max-w-[576px] lg:max-w-none bg-[#1a1a1a] backdrop-blur-xl rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] border border-[#8a8c90]/30 p-6 xl:p-8 flex flex-col gap-2 sm:gap-3 lg:gap-4 relative">
+      <div
+        class="w-full mx-auto lg:mx-0 lg:w-[50%] max-w-[576px] lg:max-w-none bg-[#1a1a1a] backdrop-blur-xl rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] border border-[#8a8c90]/30 p-6 xl:p-8 flex flex-col gap-2 sm:gap-3 lg:gap-4 relative"
+      >
         <!-- 提示词输入 -->
         <div>
           <div class="flex items-center justify-between">
@@ -115,7 +110,7 @@
               class="h-8 px-3 text-sm border rounded-md transition-colors flex items-center gap-1"
               :class="selectedModel === 'imagen-4-ultra' ? 'border-[#ec2657] bg-[#ec2657]/10 text-[#ec2657]' : 'border-gray-700 text-gray-300 hover:border-gray-600'"
             >
-              Ultra
+            imagen 4 ultra
               <!-- <span v-if="modelScores['imagen-4-ultra']" class="ml-1 text-xs opacity-80">({{ modelScores['imagen-4-ultra'] }} points)</span> -->
             </button>
             <button
@@ -124,7 +119,7 @@
               class="h-8 px-3 text-sm border rounded-md transition-colors flex items-center gap-1"
               :class="selectedModel === 'imagen-4' ? 'border-[#ec2657] bg-[#ec2657]/10 text-[#ec2657]' : 'border-gray-700 text-gray-300 hover:border-gray-600'"
             >
-              Normal
+            imagen 4
               <!-- <span v-if="modelScores['imagen-4']" class="ml-1 text-xs opacity-80">({{ modelScores['imagen-4'] }} points)</span> -->
             </button>
           </div>
@@ -198,6 +193,7 @@ import { useClerkAuth } from '~/utils/auth'
 import { useUserStore } from '~/stores/user';
 import { createTasksText, getScore } from '~/api'
 import { useNavigation } from '~/utils/navigation'
+import { useSeo } from '~/composables/useSeo';
 
 const prompt = ref('')
 const selectedRatio = ref('1:1')
@@ -220,6 +216,20 @@ const remainingCredits = computed(() => {
   return userStore.userInfo.free_limit + userStore.userInfo.remaining_limit || 0;
 });
 
+const title = 'Imagen 4 Ultra | Free Online AI Image Generator'
+const description = 'Create high-quality images with Imagen 4 Ultra\'s advanced AI. Instantly turn your ideas into stunning visuals with clear text—free image generation included.'
+useSeo({
+  title,
+  description,
+  title_template: title,
+  meta_description: description,
+  og_image: '/img/og-image.jpg', // Make sure to add an appropriate Open Graph image
+  twitter_card: 'summary_large_image',
+  twitterTitle: title,
+  twitterDescription: description,
+  twitterImage: '/img/og-image.jpg',
+  canonicalUrl: 'https://www.imagen4ultra.com/', // Replace with your actual domain
+})
 
 // 获取积分信息
 const fetchScores = async () => {

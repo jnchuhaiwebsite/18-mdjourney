@@ -2,7 +2,7 @@
   <div class="py-8 sm:py-12 lg:py-16 bg-[#1a1a1a]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center">
-        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#ec2657] bg-gradient-to-r from-[#ec2657] via-[#990066] to-[#333333] bg-clip-text text-transparent">
+        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#ec2657] bg-gradient-to-r from-[#ec2657] via-[#990066] to-[#ec2657] bg-clip-text text-transparent">
           Case Showcase - Explore Our Creative Works
         </h2>
         <p class="mt-2 sm:mt-4 text-base sm:text-lg lg:text-xl text-gray-300">
@@ -27,9 +27,9 @@
               >
               <button 
                 @click="copyPrompt(slides[slides.length - 1].prompt)"
-                class="absolute top-2 sm:top-4 right-2 sm:right-4 bg-[#ec2657] hover:bg-[#990066] px-3 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-lg flex items-center space-x-2 transition-colors duration-200"
+                class="absolute top-2 sm:top-4 right-2 sm:right-4 hover:opacity-80 p-2 rounded-full shadow-lg flex items-center space-x-2 transition-opacity duration-200 bg-black/30 backdrop-blur-sm"
               >
-                <span class="text-xs sm:text-sm font-medium text-white">Copy Prompt</span>
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="m4 16c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2h8c1.1 0 2 .9 2 2"></path></svg>
               </button>
             </div>
 
@@ -42,9 +42,9 @@
               >
               <button 
                 @click="copyPrompt(slide.prompt)"
-                class="absolute top-2 sm:top-4 right-2 sm:right-4 bg-[#ec2657] hover:bg-[#990066] px-3 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-lg flex items-center space-x-2 transition-colors duration-200"
+                class="absolute top-2 sm:top-4 right-2 sm:right-4 hover:opacity-80 p-2 rounded-full shadow-lg flex items-center space-x-2 transition-opacity duration-200 bg-black/30 backdrop-blur-sm"
               >
-                <span class="text-xs sm:text-sm font-medium text-white">Copy Prompt</span>
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="m4 16c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2h8c1.1 0 2 .9 2 2"></path></svg>
               </button>
             </div>
 
@@ -57,9 +57,9 @@
               >
               <button 
                 @click="copyPrompt(slides[0].prompt)"
-                class="absolute top-2 sm:top-4 right-2 sm:right-4 bg-[#ec2657] hover:bg-[#990066] px-3 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-lg flex items-center space-x-2 transition-colors duration-200"
+                class="absolute top-2 sm:top-4 right-2 sm:right-4 hover:opacity-80 p-2 rounded-full shadow-lg flex items-center space-x-2 transition-opacity duration-200 bg-black/30 backdrop-blur-sm"
               >
-                <span class="text-xs sm:text-sm font-medium text-white">Copy Prompt</span>
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="m4 16c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2h8c1.1 0 2 .9 2 2"></path></svg>
               </button>
             </div>
           </div>
@@ -103,7 +103,7 @@
         >
           <span>Start Creating</span>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+            <path fill-rule="evenodd" d="M16.707 13.707a1 1 0 01-1.414 0L11 9.414V21a1 1 0 11-2 0V9.414l-4.293 4.293a1 1 0 01-1.414-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 010 1.414z" clip-rule="evenodd" />
           </svg>
         </button>
       </div>
