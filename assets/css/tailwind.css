@@ -93,7 +93,7 @@
     --radius-full: 9999px;
     
     /* 自定义颜色变量 */
-    --primary-color: #4A90E2;
+    --primary-color: #4A90E2; /* #4A90E2 H1标题颜色 */
     --primary-hover-color: #357ABD;
     --primary-light-color: #B3D4F2;
     --primary-dark-color: #2E5A8A;

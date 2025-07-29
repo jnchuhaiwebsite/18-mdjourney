@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss'
+import { h } from 'vue'
 
 export default {
     darkMode: ['class'],
@@ -15,11 +16,26 @@ export default {
   		colors: {
   			theme: '#ec2657',
   			blue: {
-  				dark: '#ec2657',
+  				dark: '#2574E9', // 导航栏使用颜色
   				medium: '#ec2657',
   				light: '#8B5CF6',
-  				pale: '#19171C',
-  				accent: '#ec2657'
+  				pale: '#F5F7FA', //背景使用颜色
+  				accent: '#ec2657',
+				h1: '#357ABD', //H1标题颜色
+				h1p: '#000', //H1下副标题颜色
+				nav:'#BED5DE', //导航背景颜色
+				navtext:'#000000', //导航文字颜色
+				badge:'#ec2657', //导航右上角徽章颜色
+				button:'#2574E9', //按钮颜色
+				buttontext:'#fff', //按钮文字颜色
+				buttonhover:'#1D5FCC', //按钮悬停颜色
+				footer:'#2574E9', //页脚主要使用颜色（导航栏使用颜色）
+				footertext:'#000000', //页脚文字颜色
+				footerhover:'#1D5FCC', //页脚悬停颜色
+				footerbg:'#F5F7FA', //页脚背景颜色
+				footerborder:'#BED5DE', //页脚边框颜色
+				footerborderhover:'#1D5FCC', //页脚边框悬停颜色
+				footerborderbg:'#F5F7FA', //页脚边框背景颜色
   			},
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',

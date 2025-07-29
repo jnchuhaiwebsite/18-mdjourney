@@ -3,7 +3,7 @@
       <div class="pt-32 py-10 mx-auto w-11/12 max-w-4xl">
         <NuxtLink
           to="/portfolio"
-          class="inline-flex items-center text-gray-300 hover:text-[#ec2657] transition-colors mb-8 group font-medium"
+          class="inline-flex items-center text-gray-300 hover:bg-blue-dark  transition-colors mb-8 group font-medium"
         >
           <div class="w-3 h-3 border-l-2 border-b-2 border-gray-300 group-hover:border-[#ec2657] transform rotate-45 mr-2 transition-colors"></div>
           Back to Portfolio

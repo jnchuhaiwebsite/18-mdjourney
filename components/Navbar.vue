@@ -1,8 +1,7 @@
 <template>
   <header>
     <nav
-      class="fixed top-0 left-0 w-full z-50 backdrop-blur-md shadow-md"
-      style="background: rgba(25, 23, 28, 0.8)"
+      class="fixed top-0 left-0 w-full z-50 backdrop-blur-md shadow-md bg-blue-nav"
     >
       <div class="max-w-7xl mx-auto px-4">
         <div class="flex items-center justify-between h-20">
@@ -18,12 +17,12 @@
             <template v-for="(section, index) in sections" :key="index">
               <div
                 @click="handleNavClick(section.href || section.id)"
-                class="relative text-gray-300 hover:text-[#ec2657] transition-all cursor-pointer px-4 py-2.5 rounded-lg hover:bg-[#ec2657]/10 hover:shadow-lg hover:shadow-[#ec2657]/20 whitespace-nowrap"
+                class="relative text-blue-navtext hover:bg-blue-dark  transition-all cursor-pointer px-4 py-2.5 rounded-lg hover:shadow-lg whitespace-nowrap"
               >
                 <span
                   v-if="section.badge"
                   :class="[
-                    'absolute text-[10px] leading-none bg-[#ec2657] text-white rounded-full px-2 py-1 min-w-fit inline-flex items-center justify-center whitespace-nowrap',
+                    'absolute text-[10px] leading-none bg-blue-badge text-white rounded-full px-2 py-1 min-w-fit inline-flex items-center justify-center whitespace-nowrap',
                     {
                       '-top-2 left-1/2 -translate-x-1/2': section.badgePosition === 'center',
                       '-top-2 -left-1': section.badgePosition === 'left',
@@ -44,7 +43,7 @@
             <!-- <template v-if="isSignedIn">
               <NuxtLink
                 to="/profile"
-                class="relative text-gray-300 hover:text-[#ec2657] transition-all cursor-pointer px-4 py-2.5 rounded-lg hover:bg-[#ec2657]/10 hover:shadow-lg hover:shadow-[#ec2657]/20 whitespace-nowrap"
+                class="relative text-gray-300 hover:bg-blue-dark  transition-all cursor-pointer px-4 py-2.5 rounded-lg hover:bg-[#ec2657]/10 hover:shadow-lg hover:shadow-[#ec2657]/20 whitespace-nowrap"
               >
                 Personal Center
               </NuxtLink>
@@ -135,12 +134,12 @@
               <template v-for="(section, index) in sections" :key="index">
                 <div
                   @click="() => { handleNavClick(section.href || section.id); isOpen = false; }"
-                  class="relative block text-gray-300 hover:text-[#ec2657] text-base transition-all cursor-pointer px-4 py-2.5 rounded-lg hover:bg-[#ec2657]/10 hover:shadow-lg hover:shadow-[#ec2657]/20 whitespace-nowrap mt-3"
+                  class="relative block text-gray-300 hover:bg-blue-dark  text-base transition-all cursor-pointer px-4 py-2.5 rounded-lg hover:bg-[#ec2657]/10 hover:shadow-lg hover:shadow-[#ec2657]/20 whitespace-nowrap mt-3"
                 >
                   <span
                     v-if="section.badge"
                     :class="[
-                      'absolute text-[10px] leading-none bg-[#ec2657] text-white rounded-full px-2 py-1 min-w-fit inline-flex items-center justify-center whitespace-nowrap',
+                      'absolute text-[10px] leading-none bg-blue-badgetext-white rounded-full px-2 py-1 min-w-fit inline-flex items-center justify-center whitespace-nowrap',
                       {
                         '-top-2 left-1/2 -translate-x-1/2': section.badgePosition === 'center',
                         '-top-2 -left-1': section.badgePosition === 'left',
@@ -156,7 +155,7 @@
               <NuxtLink
                 v-if="isSignedIn"
                 to="/profile"
-                class="block text-gray-300 hover:text-[#ec2657] text-base py-2 transition-colors"
+                class="block text-gray-300 hover:bg-blue-dark  text-base py-2 transition-colors"
                 @click="() => { isOpen = false; }"
               >
                 Personal Center

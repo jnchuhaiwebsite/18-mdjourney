@@ -4,17 +4,11 @@
     aria-labelledby="pricing-heading"
   >
     <div class="max-w-7xl mx-auto px-4">
-      <!-- <div class="text-gray-300 text-center text-lg mb-2 font-medium">
-        Choose Your Plan
-      </div> -->
-      <h1
-        class="text-theme text-center text-4xl font-bold mb-4 font-medium mt-12"
-      >
-        Imagen 4 Ultra Pricing
-      </h1>
-      <p class="text-gray-400 text-center max-w-2xl mx-auto mb-12">
-        Purchase credits to use our services. No subscription required - pay once, use anytime.
-      </p>
+      <!-- 使用PageHero组件 -->
+      <PageHero 
+        title="Imagen 4 Ultra Pricing"
+        subtitle="Purchase credits to use our services. No subscription required - pay once, use anytime."
+      />
 
       <!-- 加载状态 -->
       <div v-if="pending" class="flex justify-center items-center py-20 w-full">
@@ -90,6 +84,18 @@ import { getSubPlans, payOrder } from "~/api/index";
 import { useClerkAuth } from '~/utils/authHelper';
 import { useSeo } from '~/composables/useSeo';
 import { useAsyncData } from 'nuxt/app';
+import PageHero from '~/components/PageHero.vue';
+
+// 定义套餐数据类型
+interface PricingPlan {
+  name: string;
+  description: string;
+  price: number;
+  code: string;
+  button_text: string;
+  is_popular: boolean;
+  features: string | string[];
+}
 
 // 设置SEO
 useSeo({
@@ -110,7 +116,7 @@ const upgradingPlanId = ref<string | null>(null);
 const { data, pending, error } = await useAsyncData('pricingPlans', async () => {
   try {
     const response = await getSubPlans();
-    return response.data;
+    return response.data as PricingPlan[];
   } catch (err) {
     console.error('Error fetching pricing plans:', err);
     throw err;
@@ -130,7 +136,7 @@ const planData = computed(() => {
 });
 
 // 获取套餐特性列表
-const getPlanFeatures = (plan: any): string[] => {
+const getPlanFeatures = (plan: PricingPlan): string[] => {
   if (!plan.features) return [];
   // 如果特性是字符串，按逗号分割
   if (typeof plan.features === 'string') {
@@ -141,7 +147,7 @@ const getPlanFeatures = (plan: any): string[] => {
 };
 
   // 获取按钮样式
-const getButtonClass = (plan: any): string => {
+const getButtonClass = (plan: PricingPlan): string => {
   if (plan.price === 0) {
     return "bg-gray-100 text-white hover:bg-gray-200";
   } else if (plan.is_popular) {
@@ -152,7 +158,7 @@ const getButtonClass = (plan: any): string => {
 };
 
 // 处理升级计划
-const handleUpgradePlan = async (plan: any) => {
+const handleUpgradePlan = async (plan: PricingPlan) => {
   // 如果没有登录，则提示登录并触发登录
   if (!isSignedIn.value) {
     try {

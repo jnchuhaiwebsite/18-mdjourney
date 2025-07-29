@@ -190,7 +190,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, defineAsyncComponent } from 'vue'
-import { useClerkAuth } from '~/utils/auth'
+import { useClerkAuth } from '~/utils/authHelper'
 import { useUserStore } from '~/stores/user';
 import { createTasksText, getScore } from '~/api'
 import { useNavigation } from '~/utils/navigation'

@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full mx-auto bg-blue-pale">
+  <div class="w-full mx-auto mt-8 p-6 bg-blue-pale rounded-lg">
     <main class="max-w-24xl mx-auto min-h-screen">
       <!-- 首屏区块 -->
       <section
@@ -10,48 +10,13 @@
           title="Imagen 4 Ultra - Professional AI Art Generation Platform"
           subtitle="Create stunning, high-quality images instantly with our cutting-edge AI technology - Professional-grade art generation at your fingertips"
         />
+        <ParameterSettings 
+          v-model="parameters"
+          @generate="handleGenerate"
+        />
       </section>
 
-      <!-- 展示案例 -->
-      <section id="ShowcaseExamples">
-          <ShowcaseExamples />
-      </section>
-
-      <!-- 操作步骤 -->
-      <section id="how-it-works">
-          <HowItWorks />
-      
-      </section>
-
-
-
-      <!-- 特性展示 -->
-      <section id="features-showcase">
-      
-          <FeatureShowcase />
-       
-      </section>
-
-      <!-- 用户评论 -->
-      <section id="reviews">
-      
-          <Reviews />
-        
-      </section>
-
-      <!-- 定价模块 -->
-      <!-- <section id="pricing">
-        <keep-alive>
-          <PricingPlans />
-        </keep-alive>
-      </section> -->
-
-      <!-- 常见问题模块 -->
-      <section id="faq">
-        <keep-alive>
-          <FaqSection />
-        </keep-alive>
-      </section>
+    
     </main>
   </div>
 </template>
@@ -59,19 +24,28 @@
 <script setup lang="ts">
 import { onBeforeMount, defineAsyncComponent, onMounted } from "vue";
 import { useSeo } from '~/composables/useSeo';
+import { ref } from 'vue'
+import ParameterSettings from '~/components/ParameterSettings.vue'
 
 
-const FaqSection = defineAsyncComponent(() => import('~/pages/components/FaqSection.vue'));
-const HowItWorks = defineAsyncComponent(() => import('~/pages/components/HowItWorks.vue'));
-const FeatureShowcase = defineAsyncComponent(() => import('~/pages/components/FeatureShowcase.vue'));
-const Reviews = defineAsyncComponent(() => import('~/pages/components/Reviews.vue'));
-const ShowcaseExamples = defineAsyncComponent(() => import('~/pages/components/ShowcaseExamples.vue'));
-const PromptImageGenerator = defineAsyncComponent(() => import('~/components/PromptImageGenerator.vue'));
 const PageHero = defineAsyncComponent(() => import('~/components/PageHero.vue'));
 
 import { useNuxtApp } from 'nuxt/app'
 const { $toast } = useNuxtApp() as any
-
+// 生成结果
+    // 参数状态
+const parameters = ref({
+      mode: 'text-to-image',
+      aspectRatio: '16:9',
+      speed: 'fast',
+      stylization: 250,
+      weirdness: 0
+    })
+    // 处理生成事件
+    const handleGenerate = (params: any) => {
+      console.log('生成事件触发:', params)
+      $toast.success('开始生成图像...', 3000)
+    }
 // 使用默认的 SEO 配置
 useSeo()
 
