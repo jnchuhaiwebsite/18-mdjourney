@@ -175,7 +175,7 @@
 <script setup lang="ts">
 import { ref, watch, onUnmounted, onMounted } from "vue";
 import { useNavigation } from "~/utils/navigation";
-import { useClerkAuth } from '~/utils/auth';
+import { useClerkAuth } from '~/utils/authHelper';
 import { useRouter, useRoute } from 'vue-router';
 import { useUserStore } from '~/stores/user';
 

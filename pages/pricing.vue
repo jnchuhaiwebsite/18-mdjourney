@@ -87,7 +87,7 @@
 <script setup lang="ts">
 import { ref, watch, computed } from "vue";
 import { getSubPlans, payOrder } from "~/api/index";
-import { useClerkAuth } from '~/utils/auth';
+import { useClerkAuth } from '~/utils/authHelper';
 import { useSeo } from '~/composables/useSeo';
 import { useAsyncData } from '#imports';
 

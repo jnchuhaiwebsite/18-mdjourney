@@ -87,7 +87,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { getSubPlans, payOrder } from "~/api/index";
-import { useClerkAuth } from '~/utils/auth';
+import { useClerkAuth } from '~/utils/authHelper';
 
 import { useAsyncData } from 'nuxt/app';
 // 引入auth认证

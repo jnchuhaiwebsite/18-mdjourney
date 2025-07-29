@@ -1,4 +1,4 @@
-import { useUser, useClerk, useAuth } from '#imports'
+import { useUser, useClerk, useAuth as useClerkAuthImport } from '#imports'
 import { ref, computed, watchEffect } from 'vue'
 import { logoutCookie } from '~/api/index'
 import { useUserStore } from '~/stores/user'
@@ -33,14 +33,14 @@ const authEventBus = {
 export const useAuthEvents = () => authEventBus
 
 /**
- * 扩展的Clerk认证工具函数
+ * Clerk认证工具函数
  * 提供认证状态管理和用户信息访问
  */
-export function useAuthManager() {
+export function useClerkAuth() {
   // 获取Clerk API提供的基础数据
   const { user, isSignedIn, isLoaded } = useUser()
   const clerk = useClerk()  
-  const { userId, sessionId, getToken } = useAuth()
+  const { userId, sessionId, getToken } = useClerkAuthImport()
 
   // 认证状态 - 统一响应式管理
   const authState = ref({
@@ -99,44 +99,37 @@ export function useAuthManager() {
           // 重置退出处理标记
           isHandlingSignOut = false
         } else {
-          if (!isHandlingSignOut) { // 防止重复处理退出
-            authState.value.isLoggedIn = false
-            authState.value.loginStatus = 'Not logged in'
-            authState.value.authStatus = 'Not logged in'
-            handleSignOut()
+          // 用户已退出登录
+          const wasLoggedIn = authState.value.isLoggedIn
+          authState.value.isLoggedIn = false
+          authState.value.loginStatus = 'Logged out'
+          authState.value.authStatus = 'Logged out'
+          
+          // 如果状态从已登录变为未登录，触发登出事件
+          if (wasLoggedIn) {
+            authEventBus.emit('logout')
           }
         }
-        
-        authState.value.isCheckingAuth = false
+      } else {
+        authState.value.isLoaded = false
+        authState.value.isLoading = true
+        authState.value.isInitializing = true
+        authState.value.loginStatus = 'unknown'
+        authState.value.authStatus = 'Checking login status...'
       }
     })
   }
 
   /**
-   * 处理用户退出登录后的操作
+   * 处理用户退出登录
    */
   function handleSignOut() {
-    // 如果已经在处理退出流程，则不重复执行
-    if (isHandlingSignOut) return
-    
-    // 设置标记，避免重复处理
-    isHandlingSignOut = true
-    
-    // 清除本地存储
-    try {
-      logoutCookie();
-      useUserStore().clearUserInfo();
-    } catch (error) {
-      console.error('退出登录失败:', error)
-    }
-    
-    // 重置应用状态
-    authState.value.isLoggedIn = false
-    authState.value.loginStatus = 'Not logged in'
-    authState.value.authStatus = 'Not logged in'
-    authState.value.isCheckingAuth = false
-    
-    // 触发退出事件
+    // 清除本地用户信息
+    const userStore = useUserStore()
+    userStore.clearUser()
+    // 清除后端cookie
+    logoutCookie()
+    // 触发登出事件
     authEventBus.emit('logout')
   }
 
@@ -144,38 +137,14 @@ export function useAuthManager() {
    * 监听Clerk加载状态
    */
   function watchClerkStatus() {
-    // 设置一个检查器，每200ms检查一次Clerk状态
-    const checkInterval = setInterval(() => {
-      if (isLoaded.value) {
-        authState.value.isInitializing = false//Clerk初始化中
-        authState.value.isLoading = false//Clerk正在加载中
-        authState.value.isLoaded = true//Clerk已加载完成
-        authState.value.clerkStatus = 'Loaded successfully'//Clerk状态文本
-        console.log('Clerk 状态: 加载成功')
-        console.log('用户已登录状态:', isSignedIn.value)
-        
-        // 触发Clerk加载完成事件
-        authEventBus.emit('clerkLoaded', isSignedIn.value)
-        
-        // 清除检查器
+    // 这里只是示例，实际可根据需要扩展
+    // 例如监听加载超时、失败等
+    let checkInterval = setInterval(() => {
+      if (authState.value.isLoaded) {
         clearInterval(checkInterval)
-      }
-    }, 200)
-    
-    // 设置超时器
-    setTimeout(() => {
-      if (!isLoaded.value) {
-        authState.value.isInitializing = false//Clerk初始化中
-        authState.value.isLoading = false//Clerk正在加载中
-        authState.value.isLoadTimedOut = true//Clerk加载超时
-        authState.value.clerkStatus = 'Load timed out'//Clerk状态文本
-        authState.value.error = 'Load Clerk timed out'//Clerk错误信息
-        console.log('Clerk 状态: 加载超时')
-        
+      } else if (authState.value.isLoadTimedOut) {
         // 触发加载超时事件
         authEventBus.emit('error', { type: 'timeout', message: 'Clerk加载超时' })
-        
-        // 清除检查器
         clearInterval(checkInterval)
       }
     }, 10000)
@@ -190,11 +159,8 @@ export function useAuthManager() {
       authState.value.clerkStatus = 'Load failed'//Clerk状态文本
       authState.value.error = error//Clerk错误信息
       console.log('Clerk 状态: 加载失败', error)
-      
       // 触发错误事件
       authEventBus.emit('error', { type: 'loadFailed', error })
-      
-      // 清除检查器
       clearInterval(checkInterval)
     }
   }
@@ -214,11 +180,9 @@ export function useAuthManager() {
   async function logout() {
     // 如果已经在处理退出流程，则不重复执行
     if (isHandlingSignOut) return
-    
     try {
       // 设置标记，避免重复处理
       isHandlingSignOut = true
-      
       await clerk.signOut()
       // 用户主动触发的退出
       handleSignOut()
@@ -226,7 +190,6 @@ export function useAuthManager() {
       console.error('退出登录失败:', error)
       authState.value.error = error
       authEventBus.emit('error', { type: 'logoutFailed', error })
-      
       // 退出失败，重置标记
       isHandlingSignOut = false
     }
@@ -270,8 +233,5 @@ export function useAuthManager() {
   }
 }
 
-// 为了向后兼容，导出一个别名
-export const useClerkAuth = useAuthManager
-
-// 导出 useAuth 供其他组件使用
-export { useAuth } 
+// 导出 useLocalAuth 供其他组件使用
+export { useClerkAuth as useLocalAuth } 

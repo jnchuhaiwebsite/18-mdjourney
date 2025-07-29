@@ -215,7 +215,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from "vue";
-import { useClerkAuth } from '~/utils/auth'
+import { useClerkAuth } from '~/utils/authHelper'
 import { useUserStore } from '~/stores/user';
 import { setUserInfo, loginAuth } from '~/api/index'
 

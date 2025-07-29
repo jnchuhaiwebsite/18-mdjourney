@@ -90,7 +90,7 @@
 <script setup lang="ts">
 import { ref,onMounted } from "vue";
 import { getSubplansTest, payOrder } from "~/api/index";
-import { useClerkAuth } from '~/utils/auth';
+import { useClerkAuth } from '~/utils/authHelper';
 import { useNuxtApp } from 'nuxt/app'
 const { $toast } = useNuxtApp() as any
 import { ArrowLeftIcon } from '@heroicons/vue/24/outline'
