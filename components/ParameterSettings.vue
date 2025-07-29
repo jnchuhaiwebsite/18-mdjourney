@@ -52,7 +52,7 @@
       :class="{ hidden: !showAdvancedParams }"
     >
       <!-- Aspect Ratio Selector -->
-      <div class="param-group">
+      <div class="param-group text-blue-parameters">
         <label>Aspect Ratio</label>
         <div class="aspect-ratio-selector">
           <button 
@@ -74,7 +74,7 @@
       </div>
 
       <!-- Speed Selector -->
-      <div class="param-group">
+      <div class="param-group text-blue-parameters">
         <label>Generation Speed</label>
         <div class="speed-selector">
           <button 
@@ -89,7 +89,7 @@
       </div>
 
       <!-- Stylization Slider -->
-      <div class="param-group">
+      <div class="param-group text-blue-parameters">
         <label for="stylization">Stylization</label>
         <div class="slider-group">
           <input 
@@ -113,7 +113,7 @@
       </div>
 
       <!-- Weirdness Slider -->
-      <div class="param-group">
+      <div class="param-group text-blue-parameters">
         <label for="weirdness">Weirdness</label>
         <div class="slider-group">
           <input 
@@ -139,7 +139,7 @@
 
     <!-- Generate Button -->
     <button 
-      class="generate-btn"
+      class="generate-btn "
       @click="handleGenerate"
       :disabled="isGenerating"
     >
@@ -188,7 +188,7 @@ const emit = defineEmits<{
 
 // Reactive data
 const selectedMode = ref('text-to-image')
-const showAdvancedParams = ref(false)
+const showAdvancedParams = ref(true)
 const selectedAspectRatio = ref('16:9')
 const selectedSpeed = ref('fast')
 const stylizationValue = ref(250)

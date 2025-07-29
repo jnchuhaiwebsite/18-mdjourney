@@ -28,32 +28,32 @@
           v-for="(plan, index) in planData"
           :key="index"
           :class="[
-            'bg-gray-800 rounded-xl p-8 flex flex-col',
+            'bg-blue-pricing rounded-xl p-8 flex flex-col',
             plan.is_popular
-              ? 'border-2 border-[#ec2657] shadow-lg relative'
-              : 'border border-gray-700 shadow-sm hover:shadow-md transition-shadow',
+              ? 'border-2 border-blue-pricingPopular shadow-lg relative'
+              : 'border border-blue-pricingborder shadow-sm hover:shadow-md transition-shadow',
             plan.price === 0 ? 'hidden md:flex' : 'flex'
           ]"
         >
           <div
             v-if="plan.is_popular"
-            class="absolute -top-3 right-6 px-3 py-1 bg-theme text-white text-sm rounded-full"
+            class="absolute -top-3 right-6 px-3 py-1 bg-blue-button text-white text-sm rounded-full"
           >
             Most Popular
           </div>
           <h3 class="text-2xl font-bold text-white mb-2 font-medium">
             {{ plan.name }}
           </h3>
-          <p class="text-gray-400 mb-6">{{ plan.description }}</p>
+          <p class="text-blue-pricingtext mb-6">{{ plan.description }}</p>
           <div class="text-3xl font-bold text-white mb-6">
             ${{ plan.price }}
-            <span class="text-gray-400 text-base font-normal"></span>
+            <span class="text-blue-pricingtext text-base font-normal"></span>
           </div>
           <ul class="space-y-3 mb-8" :aria-label="`${plan.name} plan features`">
             <li
               v-for="(feature, fIndex) in getPlanFeatures(plan)"
               :key="fIndex"
-              class="flex items-center text-gray-300"
+              class="flex items-center text-blue-pricingtext"
             >
               <span class="mr-2 text-theme" aria-hidden="true">✓</span>
               {{ feature }}
@@ -64,7 +64,7 @@
               @click="plan.code ? handleUpgradePlan(plan) : null"
               :disabled="upgradingPlanId === plan.code"
               :class="[
-                'w-full py-3 px-4 rounded-lg flex items-center justify-center hover-theme',
+                'w-full py-3 px-4 rounded-lg flex items-center justify-center',
                 getButtonClass(plan),
               ]"
             >
@@ -151,9 +151,9 @@ const getButtonClass = (plan: PricingPlan): string => {
   if (plan.price === 0) {
     return "bg-gray-100 text-white hover:bg-gray-200";
   } else if (plan.is_popular) {
-    return "bg-theme text-white hover:bg-theme-hover";
+    return "bg-blue-button text-white hover:bg-blue-buttonhover";
   } else {
-    return "bg-theme text-white hover:bg-theme-hover";
+    return "bg-blue-button text-white hover:bg-blue-buttonhover";
   }
 };
 

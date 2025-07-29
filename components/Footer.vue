@@ -12,7 +12,7 @@
                :href="item.url" 
                target="_blank" 
                rel="noopener noreferrer" 
-               class="text-blue-footertext hover:bg-blue-footerhover  transition-colors text-sm">
+               class="text-blue-footertext hover:text-blue-footerhover  transition-colors text-sm">
               {{ item.name }}
             </a>
           </div>
@@ -22,7 +22,7 @@
         <div>
           <h3 class="text-blue-footer font-medium mb-4 text-sm md:text-lg">Features</h3>
           <div class="flex flex-col gap-2">
-            <NuxtLink to="/" class="text-blue-footertext hover:bg-blue-dark  transition-colors whitespace-nowrap">Imagen 4 Ultra</NuxtLink>
+            <NuxtLink to="/" class="text-blue-footertext hover:text-blue-footerhover  transition-colors whitespace-nowrap">Imagen 4 Ultra</NuxtLink>
           </div>
         </div>
 
@@ -32,11 +32,11 @@
           <div class="flex flex-col gap-2">
             <template v-for="(section, index) in footerSections" :key="index">
               <NuxtLink v-if="section.href" :to="section.href" 
-                class="text-blue-footertext hover:bg-blue-dark  transition-colors">
+                class="text-blue-footertext hover:text-blue-footerhover  transition-colors">
                 {{ section.name }}
               </NuxtLink>
               <div v-else @click.prevent="handleNavClick(section.id)" 
-                class="text-blue-footertext hover:bg-blue-dark  transition-colors cursor-pointer">
+                class="text-blue-footertext hover:text-blue-footerhover  transition-colors cursor-pointer">
                 {{ section.name }}
               </div>
             </template>
@@ -47,8 +47,8 @@
         <div>
           <h3 class="text-blue-footer font-medium mb-4 text-sm md:text-lg">Legal</h3>
           <div class="flex flex-col gap-2">
-            <NuxtLink to="/subsidiary/privacy-policy" class="text-blue-footertext hover:bg-blue-dark  transition-colors">Privacy Policy</NuxtLink>
-            <NuxtLink to="/subsidiary/terms-of-service" class="text-blue-footertext hover:bg-blue-dark  transition-colors">Terms of Service</NuxtLink>
+            <NuxtLink to="/subsidiary/privacy-policy" class="text-blue-footertext hover:text-blue-footerhover  transition-colors">Privacy Policy</NuxtLink>
+            <NuxtLink to="/subsidiary/terms-of-service" class="text-blue-footertext hover:text-blue-footerhover  transition-colors">Terms of Service</NuxtLink>
           </div>
         </div>
       </div>
@@ -56,7 +56,7 @@
       <!-- Logo 和描述 -->
       <div class="py-6 border-t border-gray-700">
         <div class="flex flex-col items-center text-center">
-          <img src="/logo.png" alt="Imagen 4 Ultra - Advanced AI Image Generation" loading="lazy" class="h-16 md:h-24 mb-4">
+          <h1 class="text-blue-logo text-2xl md:text-3xl font-bold mb-4">MidjourneyAI</h1>
           <p class="text-sm text-blue-footertext max-w-xl mb-4">
             Imagen 4 Ultra delivers stunning AI-generated images with advanced technology. Supporting English prompts with customizable aspect ratios (1:1, 3:4, 4:3, 9:16, 16:9) and advanced person generation controls for professional results.
           </p>
@@ -114,7 +114,7 @@ a::after, .nuxt-link-exact-active::after {
   left: 0;
   width: 0;
   height: 1px;
-  background-color: #ec2657;  /* theme color */
+  background-color: theme('colors.blue.medium');  /* 使用Tailwind配置的颜色 */
   transition: width 0.3s ease;
 }
 

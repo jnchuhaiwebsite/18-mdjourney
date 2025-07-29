@@ -8,7 +8,7 @@
           <!-- Logo -->
           <div class="flex-shrink-0">
             <NuxtLink to="/">
-              <img src="/logo.png" alt="Imagen 4 Ultra AI - AI Image Animator Platform" class="h-14 lg:h-16" loading="lazy" />
+              <span class="text-blue-logo text-2xl lg:text-3xl font-bold">MidjourneyAI</span>
             </NuxtLink>
           </div>
 
@@ -17,7 +17,7 @@
             <template v-for="(section, index) in sections" :key="index">
               <div
                 @click="handleNavClick(section.href || section.id)"
-                class="relative text-blue-navtext hover:bg-blue-dark  transition-all cursor-pointer px-4 py-2.5 rounded-lg hover:shadow-lg whitespace-nowrap"
+                class="relative text-blue-navtext hover:text-blue-dark  transition-all cursor-pointer px-4 py-2.5 rounded-lg hover:shadow-lg whitespace-nowrap"
               >
                 <span
                   v-if="section.badge"
