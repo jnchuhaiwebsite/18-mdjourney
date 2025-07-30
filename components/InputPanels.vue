@@ -4,19 +4,19 @@
       v-if="selectedMode === 'text-to-image'"
       class="input-group"
     >
-      <TextToImageInput />
+      <TextToImageInput @input-change="emit('input-change', $event)" />
     </div>
     <div 
       v-if="selectedMode === 'image-to-image'"
       class="input-group"
     >
-      <ImageToImageInput />
+      <ImageToImageInput @input-change="emit('input-change', $event)" />
     </div>
     <div 
       v-if="selectedMode === 'ai-video'"
       class="input-group"
     >
-      <AiVideoInput />
+      <AiVideoInput @input-change="emit('input-change', $event)" />
     </div>
   </div>
 </template>
@@ -30,6 +30,9 @@ interface Props {
 }
 
 const props = defineProps<Props>()
+
+// Emits
+const emit = defineEmits(['input-change'])
 
 // Dynamically import input components
 const TextToImageInput = defineAsyncComponent(() => import('./inputs/TextToImageInput.vue'))
@@ -49,4 +52,4 @@ const AiVideoInput = defineAsyncComponent(() => import('./inputs/AiVideoInput.vu
 .input-group.hidden {
   display: none;
 }
-</style> 
+</style>

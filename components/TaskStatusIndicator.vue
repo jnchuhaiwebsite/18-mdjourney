@@ -41,4 +41,4 @@ import { storeToRefs } from 'pinia'
 
 const videoTaskStore = useVideoTaskStore()
 const { currentTask, taskQueue, activeTaskCount } = storeToRefs(videoTaskStore)
-</script> 
+</script>

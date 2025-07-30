@@ -4,8 +4,8 @@
       <!-- 页面标题区域 -->
       <header>
         <PageHero 
-          title="Imagen 4 Ultra Pricing"
-          subtitle="Purchase credits to use our services. No subscription required - pay once, use anytime."
+          title="Simple, Transparent Pricing"
+          subtitle="Unlock the full power of Midjourney V7 with a plan that scales with your ambition. No hidden fees, cancel anytime."
         />
       </header>
 
@@ -120,9 +120,8 @@ interface PricingPlan {
 
 // 设置SEO
 useSeo({
-  title: 'Imagen 4 Ultra Pricing | AI Image Generation Plans',
-  description: 'Choose from our flexible pricing plans for Imagen 4 Ultra AI image generation. Pay-as-you-go credits system with no subscription required.',
-  url: '/pricing'
+  title: 'Genesis Engine | Midjourney Pricing & Plans',
+  description: 'Explore simple Midjourney pricing on Genesis Engine. Get unlimited AI art & video with V7. No Discord needed. Find the perfect plan and start for free!',
 });
 
 // 引入auth认证

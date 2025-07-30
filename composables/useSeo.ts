@@ -1,79 +1,71 @@
-import { useHead } from '#app'
+import { useHead, useRequestURL, useRuntimeConfig } from 'nuxt/app'
 
 interface SeoOptions {
-  title?: string
-  description?: string
-  image?: string
-  url?: string
+  title: string
+  description: string
+  ogTitle?: string
+  ogDescription?: string
+  ogImage?: string
+  ogType?: string
+  twitterTitle?: string
+  twitterDescription?: string
+  twitterImage?: string
+  other?: Array<Record<string, string>>
+  twitterCard?: string
 }
 
-export const useSeo = (options: SeoOptions = {}) => {
-  const defaultTitle = 'Imagen 4 Ultra - Professional AI Image Generation Platform'
-  const defaultDescription = 'Unlock the power of Imagen 4 Ultra to generate high-quality, photorealistic images from text descriptions. Experience advanced AI image generation today.'
-  const defaultImage = '/img/imagen4-ultra-og-image.jpg'
-  const baseUrl = 'https://www.aimagen4.com'
-
-  const title = options.title || defaultTitle
-  const description = options.description || defaultDescription
-  const image = options.image || defaultImage
-  const url = options.url ? `${baseUrl}${options.url}` : baseUrl
+export function useSeo(options: SeoOptions = {} as SeoOptions) {
+  const url = useRequestURL()
+  const config = useRuntimeConfig()
+  const baseUrl = config.public.baseUrl || url.origin
+  const fullUrl = `${baseUrl}${url.pathname}`
+  // 去除最后面的斜杠
+  const fullUrlWithoutSlash = fullUrl.replace(/\/$/, '')
+  
+  // 确保标题不超过60个字符
+  // const title = options.title.length > 60 ? options.title.substring(0, 57) + '...' : options.title
+  const title = options.title
+  
+  // 确保描述在140-160个字符之间
+  let description = options.description
+  // if (description.length > 160) {
+  //   description = description.substring(0, 157) + '...'
+  // }
 
   useHead({
-    title,
+    title: title,
     meta: [
       {
         name: 'description',
-        content: description
+        content: description,
       },
-      // Open Graph / Facebook
-      {
-        property: 'og:type',
-        content: 'website'
-      },
+      // Open Graph
       {
         property: 'og:title',
-        content: title
+        content: options.ogTitle || title,
       },
       {
         property: 'og:description',
-        content: description
+        content: options.ogDescription || description,
       },
-      {
-        property: 'og:image',
-        content: image
-      },
-      {
-        property: 'og:url',
-        content: url
-      },
-      // Twitter
-      {
-        name: 'twitter:card',
-        content: 'summary_large_image'
-      },
+      { property: 'og:type', content: options.ogType || 'website' },
+      { property: 'og:url', content: fullUrlWithoutSlash },
+      { property: 'og:image', content: options.ogImage || `${baseUrl}/logo.png` },
+      { property: 'og:site_name', content: 'hailuo2' },
+      ...(options.other || []),
+
+      // Twitter Card
+      { name: 'twitter:card', content:  options.twitterCard || 'summary_large_image' },
       {
         name: 'twitter:title',
-        content: title
+        content: options.twitterTitle || title,
       },
       {
         name: 'twitter:description',
-        content: description
+        content: options.twitterDescription || description,
       },
-      {
-        name: 'twitter:image',
-        content: image
-      },
-      // Keywords
-      {
-        name: 'keywords',
-        content: 'Imagen 4 Ultra, AI image generation, aspect ratio customization, person generation controls, English prompts, professional image quality, safety filters, digital watermarking'
-      }
+      { name: 'twitter:image', content: options.twitterImage || `${baseUrl}/logo.png` },
     ],
-    link: [
-      {
-        rel: 'canonical',
-        href: url
-      }
-    ]
+    link: [{ rel: 'canonical', href: fullUrlWithoutSlash }],
   })
 } 

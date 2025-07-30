@@ -16,7 +16,7 @@
           <p class="text-sm font-medium text-gray-600">Upload a static image to generate animation</p>
           <p class="text-xs text-gray-400 mt-1">Supports JPG, PNG, WEBP formats</p>
         </div>
-        <div v-else class="image-preview">
+        <div v-else class="image-preview relative">
           <img :src="imagePreview" alt="Preview Image" class="preview-image" />
           <button 
             @click.stop="removeImage"
@@ -25,6 +25,8 @@
           >
             <i class="fa-solid fa-times"></i>
           </button>
+          
+
         </div>
       </div>
       <input 
@@ -41,7 +43,7 @@
       <label class="input-label">Motion Description (Optional)</label>
       <textarea
         v-model="prompt"
-        class="prompt-textarea"
+        :class="['prompt-textarea', { 'prompt-textarea-active': prompt }]"
         placeholder="Describe the motion effect you want, e.g., gentle breeze, flowing water, slow camera movement..."
         rows="3"
         @input="handleInput"
@@ -52,12 +54,14 @@
         </p>
       </div>
     </div>
-
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
+import { useVideoTaskStore } from '~/stores/videoTask'
+
+const videoTaskStore = useVideoTaskStore()
 
 // Props
 interface Props {
@@ -89,6 +93,7 @@ const fps = ref(props.modelValue?.fps || 30)
 
 // Trigger file selection
 const triggerFileInput = () => {
+  if (videoTaskStore.progress > 0) return; // Prevent changing image during generation
   fileInput.value?.click()
 }
 
@@ -104,6 +109,7 @@ const handleFileSelect = (event: Event) => {
 // Handle drag and drop
 const handleDrop = (event: DragEvent) => {
   event.preventDefault()
+  if (videoTaskStore.progress > 0) return;
   const files = event.dataTransfer?.files
   if (files && files.length > 0) {
     const file = files[0]
@@ -126,6 +132,7 @@ const setImage = (file: File) => {
 
 // Remove image
 const removeImage = () => {
+  if (videoTaskStore.progress > 0) return;
   selectedImage.value = null
   imagePreview.value = ''
   if (fileInput.value) {
@@ -156,40 +163,8 @@ watch(() => props.modelValue, (newValue) => {
   if (newValue?.prompt !== undefined) {
     prompt.value = newValue.prompt
   }
-  if (newValue?.duration !== undefined) {
-    duration.value = newValue.duration
-  }
-  if (newValue?.fps !== undefined) {
-    fps.value = newValue.fps
-  }
 }, { deep: true })
 
-// Expose methods
-defineExpose({
-  getValue: () => ({
-    image: selectedImage.value,
-    prompt: prompt.value,
-    duration: duration.value,
-    fps: fps.value
-  }),
-  setValue: (value: any) => {
-    if (value.image) {
-      setImage(value.image)
-    }
-    if (value.prompt !== undefined) {
-      prompt.value = value.prompt
-    }
-    if (value.duration !== undefined) {
-      duration.value = value.duration
-    }
-    if (value.fps !== undefined) {
-      fps.value = value.fps
-    }
-  },
-  validate: () => {
-    return !!selectedImage.value
-  }
-})
 </script>
 
 <style scoped>
@@ -210,7 +185,7 @@ defineExpose({
 }
 
 .upload-area.has-image {
-  @apply border-solid border-gray-400;
+  @apply border-solid border-gray-400 p-2; /* Adjusted padding for when image is present */
 }
 
 .upload-placeholder {
@@ -222,42 +197,39 @@ defineExpose({
 }
 
 .preview-image {
-  @apply w-full h-32 object-cover rounded-lg;
+  @apply w-full h-48 object-cover rounded-lg;
 }
 
 .remove-btn {
-  @apply absolute top-2 right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600 transition-colors;
+  @apply absolute top-2 right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600 transition-colors z-20;
 }
 
 .prompt-textarea {
-  @apply w-full p-3 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors;
+  @apply w-full p-3 border border-gray-300 rounded-lg resize-none transition-colors text-gray-800 font-medium;
+}
+
+.prompt-textarea:focus,
+.prompt-textarea-active {
+  @apply ring-2 ring-purple-500 border-transparent shadow-lg;
 }
 
 .input-hint {
   @apply flex flex-col gap-1;
 }
 
-.video-params {
-  @apply mt-4;
-}
-
-.param-row {
-  @apply grid grid-cols-2 gap-4;
-}
-
-.param-group {
-  @apply flex flex-col gap-2;
-}
-
-.param-label {
-  @apply text-sm font-medium text-gray-700;
-}
-
-.param-select {
-  @apply p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors;
-}
-
 .hidden {
   display: none;
 }
-</style> 
+
+.loading-dots::after {
+  content: '';
+  animation: dots 1.5s steps(4, end) infinite;
+}
+
+@keyframes dots {
+  0%, 20% { content: ''; }
+  40% { content: '.'; }
+  60% { content: '..'; }
+  80%, 100% { content: '...'; }
+}
+</style>

@@ -6,8 +6,8 @@
       class="min-h-[700px] relative"
     >
       <PageHero 
-        title="AI Video Generation - Transform Static Images into Dynamic Videos"
-        subtitle="Upload any static image and watch it come to life with our advanced AI animation technology - Professional video generation at your fingertips"
+        title="The Midjourney Video Generator, Redefined."
+        subtitle="From a simple sentence to a breathtaking video clip. Experience the ultimate text-to-video and image-to-video workflow, built to unleash the full cinematic power of Midjourney."
       />
       <HomeVideoGenerator 
         ref="videoGenerator"
@@ -35,7 +35,10 @@ const handleGenerate = (params: any) => {
   $toast.success('Starting video generation...', 3000)
 }
 // 使用默认的 SEO 配置
-useSeo()
+useSeo({
+  title: 'AI Video Generator - Transform Text & Images into Videos',
+  description: 'Experience the ultimate text-to-video and image-to-video workflow with our Midjourney Video Generator. Create stunning videos from simple prompts.'
+})
 
 // 处理支付回调
 onBeforeMount(() => {

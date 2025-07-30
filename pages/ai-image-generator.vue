@@ -3,8 +3,8 @@
     <main class="w-full mx-auto p-6 bg-blue-pale rounded-lg max-w-7xl min-h-screen">
     <!-- 页面标题 -->
     <PageHero 
-      title="AI Image Generator"
-      subtitle="Create stunning images with our advanced AI technology. Choose between text-to-image or image-to-image generation."
+      title="The Midjourney Image Generator, Perfected."
+      subtitle="Ditch Discord. Transform text and images into stunning, high-quality visuals with our seamless workflow, built to harness the full power of Midjourney V7."
     />
 
     <!-- 生成器区域 -->
@@ -12,7 +12,7 @@
       <!-- 左侧设置区域 -->
       <div class="settings-section">
         <ParameterSettings 
-          ref="parameterSettings"
+          ref="parameterSettingsRef"
           v-model="parameters"
           @generate="handleGenerate"
           :available-modes="['text-to-image', 'image-to-image']"
@@ -37,16 +37,32 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useSeo } from '~/composables/useSeo'
 import PageHero from '~/components/PageHero.vue'
 import ParameterSettings from '~/components/ParameterSettings.vue'
 import GenerationPreview from '~/components/GenerationPreview.vue'
-import { uploadImage, validateImageFile } from '~/utils/uploadAPI'
+import { upload, createTasks } from '~/api/index'
+import { useNuxtApp } from 'nuxt/app'
 import { downloadFileWithFetch, generateDownloadFilename, getFileExtension } from '~/utils/downloadHelper'
+import { useVideoTaskStore } from '~/stores/videoTask'
+import { storeToRefs } from 'pinia'
+
+import { useGeneration } from '~/composables/useGeneration';
 
 // 使用默认的 SEO 配置
-useSeo()
+  useSeo(
+    {
+      title: 'Genesis Engine: The Ultimate Midjourney Image Generator',
+      description: 'The ultimate Midjourney image generator, no Discord required. Genesis Engine offers intuitive text-to-image & image-to-image creation with V7. Start for free!'
+    }
+  )
+
+const { generate } = useGeneration();
+const videoTaskStore = useVideoTaskStore();
+const { currentTask, progress } = storeToRefs(videoTaskStore);
+
+const isGenerating = computed(() => !!currentTask.value?.isGenerating);
 
 // 参数状态
 const parameters = ref({
@@ -57,117 +73,40 @@ const parameters = ref({
   weirdness: 0
 })
 
-const isGenerating = ref(false)
-const progress = ref(0)
 const generatedResults = ref<any[]>([])
 const uploadedImages = ref<string[]>([])
 
+const { $toast } = useNuxtApp() as any;
+
 // 处理生成事件
 const handleGenerate = async (params: any) => {
-  console.log('Generation event triggered:', params)
-  
-  // 获取表单数据
-  const formData = {
-    mode: params.mode,
-    aspectRatio: params.aspectRatio,
-    speed: params.speed,
-    stylization: params.stylization,
-    weirdness: params.weirdness,
-    uploadedImages: uploadedImages.value
-  }
-  
-  console.log('Form data:', formData)
-  
-  // 开始生成
-  isGenerating.value = true
-  progress.value = 0
-  
-  // 模拟10秒生成进度
-  const totalTime = 10000 // 10秒
-  const interval = 100 // 每100ms更新一次
-  const step = (interval / totalTime) * 100
-  
-  const progressInterval = setInterval(() => {
-    progress.value += step
-    if (progress.value >= 100) {
-      clearInterval(progressInterval)
-      setTimeout(() => {
-        isGenerating.value = false
-        generateResults(formData)
-      }, 500)
-    }
-  }, interval)
+  await generate(params);
 }
 
-// 生成结果
-const generateResults = (formData: any) => {
-  // 根据选择的尺寸生成4个结果
-  const aspectRatio = formData.aspectRatio
-  const sizeMap = {
-    '1:1': '512x512',
-    '4:3': '512x384',
-    '3:2': '512x341',
-    '16:9': '512x288',
-    '2:1': '512x256',
-    '3:4': '384x512',
-    '2:3': '341x512',
-    '9:16': '288x512'
+watch(currentTask, (newTask, oldTask) => {
+  // 当任务从“生成中”变为“非生成中”时，处理结果
+  if (oldTask?.isGenerating && !newTask?.isGenerating && newTask?.resultUrl) {
+    // 假设 resultUrl 就是图片/视频的地址
+    // 这里我们可以创建一个或多个结果对象
+    const size = parameters.value.aspectRatio === '1:1' ? '512x512' : '512x288'; // 示例尺寸
+    generatedResults.value = [
+      {
+        id: newTask.taskId,
+        name: 'AI Generated Content',
+        url: newTask.resultUrl,
+        type: newTask.type, // 'image' or 'video'
+        size: size,
+        quality: 'High Quality',
+        model: 'Midjourney V7',
+        createdAt: Date.now(),
+        parameters: { ...parameters.value }
+      }
+    ];
+  } else if (!newTask) {
+    // 如果任务被清空，也清空结果
+    generatedResults.value = [];
   }
-  
-  const size = sizeMap[aspectRatio as keyof typeof sizeMap] || '512x512'
-  
-  // 生成4个结果
-  generatedResults.value = [
-    {
-      id: 1,
-      name: 'AI Generated Image_001',
-      url: `https://picsum.photos/${size.split('x')[0]}/${size.split('x')[1]}?random=1`,
-      type: 'image',
-      size: size,
-      quality: '高质量',
-      model: 'Stable Diffusion XL',
-      generationTime: 45,
-      createdAt: Date.now(),
-      parameters: formData
-    },
-    {
-      id: 2,
-      name: 'AI Generated Image_002',
-      url: `https://picsum.photos/${size.split('x')[0]}/${size.split('x')[1]}?random=2`,
-      type: 'image',
-      size: size,
-      quality: '超高质量',
-      model: 'Midjourney v6',
-      generationTime: 67,
-      createdAt: Date.now(),
-      parameters: formData
-    },
-    {
-      id: 3,
-      name: 'AI Generated Image_003',
-      url: `https://picsum.photos/${size.split('x')[0]}/${size.split('x')[1]}?random=3`,
-      type: 'image',
-      size: size,
-      quality: '高质量',
-      model: 'DALL-E 3',
-      generationTime: 52,
-      createdAt: Date.now(),
-      parameters: formData
-    },
-    {
-      id: 4,
-      name: 'AI Generated Image_004',
-      url: `https://picsum.photos/${size.split('x')[0]}/${size.split('x')[1]}?random=4`,
-      type: 'image',
-      size: size,
-      quality: '高质量',
-      model: 'Stable Diffusion XL',
-      generationTime: 58,
-      createdAt: Date.now(),
-      parameters: formData
-    }
-  ]
-}
+}, { deep: true });
 
 // 下载媒体文件
 const downloadMedia = async (result: any) => {

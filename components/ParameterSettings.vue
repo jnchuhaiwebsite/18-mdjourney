@@ -13,7 +13,7 @@
     </div>
 
     <!-- Input Panels -->
-    <InputPanels :selected-mode="selectedMode" />
+    <InputPanels :selected-mode="selectedMode" @input-change="handleInputChange" />
 
     <!-- Parameters Panel -->
     <div class="parameters-panel">
@@ -149,7 +149,14 @@
 
 <script setup lang="ts">
 import { ref, computed, watch, defineAsyncComponent, onMounted, onUnmounted } from 'vue'
-
+import { useUserStore } from '~/stores/user'
+import { useRouter } from 'vue-router'
+import { useNuxtApp } from 'nuxt/app'
+import { upload } from '~/api/index'
+import { createTasks } from '~/api/index'
+import { useClerkAuth } from '~/utils/authHelper';
+import { useVideoTaskStore } from '~/stores/videoTask';
+import { storeToRefs } from 'pinia';
 // 定义接口
 interface Mode {
   value: string
@@ -196,29 +203,83 @@ const emit = defineEmits<{
   'generate': [params: any]
 }>()
 
+const videoTaskStore = useVideoTaskStore();
+const { progress, currentTask } = storeToRefs(videoTaskStore);
+
+const isGenerating = computed(() => !!videoTaskStore.currentTask?.isGenerating);
+
+const durationConfig = {
+  'text-to-image': {
+    relaxed: 10,
+    fast: 5,
+    turbo: 2,
+  },
+  'image-to-image': {
+    relaxed: 15,
+    fast: 8,
+    turbo: 4,
+  },
+  'ai-video': {
+    relaxed: 120,
+    fast: 60,
+    turbo: 30,
+  }
+};
+
+const estimatedTime = computed(() => {
+  if (!currentTask.value) return 'N/A';
+  
+  const mode = currentTask.value.type;
+  const speed = currentTask.value.speed;
+  
+  const totalDuration = durationConfig[mode]?.[speed] || 60;
+  const remainingSeconds = Math.round(totalDuration * (1 - progress.value / 100));
+  
+  if (remainingSeconds > 60) {
+    return `About ${Math.round(remainingSeconds / 60)} min left`;
+  }
+  return `About ${remainingSeconds} sec left`;
+});
+
 // Reactive data
 const selectedMode = ref<string>(props.availableModes.includes(props.defaultMode) ? props.defaultMode : (props.availableModes[0] || 'text-to-image'))
 const selectedAspectRatio = ref('16:9')
 const selectedSpeed = ref('fast')
 const stylizationValue = ref(250)
 const weirdnessValue = ref(0)
-const isGenerating = ref(false)
 const showAspectRatioDropdown = ref(false)
+const prompt = ref('')
+const imageFile = ref<File | null>(null)
+const { isSignedIn } = useClerkAuth();
+
+const userStore = useUserStore()
+const router = useRouter()
+const { $toast } = useNuxtApp() as any
+
+const userCredits = computed(() => {
+  const userInfo = userStore.userInfo
+  if (!userInfo) return 0
+  return (userInfo.free_limit || 0) + (userInfo.remaining_limit || 0)
+})
+
+onMounted(() => {
+  userStore.fetchUserInfo()
+})
 
 // Credit consumption configuration
 const creditConfig: CreditConfig = {
   'ai-video': {
-    'relax': 20,
+    'relaxed': 20,
     'fast': 40,
     'turbo': 70
   },
   'image-to-image': {
-    'relax': 4,
+    'relaxed': 4,
     'fast': 8,
     'turbo': 12
   },
   'text-to-image': {
-    'relax': 4,
+    'relaxed': 4,
     'fast': 8,
     'turbo': 12
   }
@@ -255,7 +316,7 @@ const aspectRatios: AspectRatio[] = [
 
 // Speed configuration
 const speeds: Speed[] = [
-  { value: 'relax', label: 'Relax', icon: 'fa-solid fa-mug-hot' },
+  { value: 'relaxed', label: 'relaxed', icon: 'fa-solid fa-mug-hot' },
   { value: 'fast', label: 'Fast', icon: 'fa-solid fa-bolt' },
   { value: 'turbo', label: 'Turbo', icon: 'fa-solid fa-rocket' }
 ]
@@ -281,6 +342,15 @@ const selectedAspectRatioData = computed(() => {
   return aspectRatios.find(ratio => ratio.value === selectedAspectRatio.value) || aspectRatios[1] // Default to 16:9
 })
 
+const handleInputChange = (value: any) => {
+  if (value.prompt !== undefined) {
+    prompt.value = value.prompt;
+  }
+  if (value.image !== undefined) {
+    imageFile.value = value.image;
+  }
+}
+
 // Watch parameter changes
 watch(currentParams, (newParams) => {
   emit('update:modelValue', newParams)
@@ -300,14 +370,33 @@ const updateWeirdness = () => {
 }
 
 const handleGenerate = async () => {
-  isGenerating.value = true
-  try {
-    emit('generate', currentParams.value)
-  } catch (error) {
-    console.error('Generation failed:', error)
-  } finally {
-    isGenerating.value = false
+  if (!isSignedIn.value) {
+    $toast.error('Please log in to continue.');
+    return;
   }
+
+  if (userCredits.value < currentCreditCost.value) {
+    $toast.error('Insufficient credits. Please top up to continue.');
+    router.push('/pricing');
+    return;
+  }
+
+  if (selectedMode.value === 'ai-video') {
+    if (!prompt.value) {
+      $toast.error('Please enter a prompt.');
+      return;
+    }
+    if (!imageFile.value) {
+      $toast.error('Please upload an image.');
+      return;
+    }
+  }
+
+  emit('generate', {
+    ...currentParams.value,
+    prompt: prompt.value,
+    imageFile: imageFile.value,
+  });
 }
 
 const selectAspectRatio = (value: string) => {
@@ -573,4 +662,6 @@ defineExpose({
     @apply p-1;
   }
 }
+
+
 </style> 

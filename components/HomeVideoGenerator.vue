@@ -28,11 +28,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed, watch } from 'vue'
 import ParameterSettings from './ParameterSettings.vue'
 import GenerationPreview from './GenerationPreview.vue'
-import { uploadImage, validateImageFile } from '~/utils/uploadAPI'
 import { downloadFileWithFetch, generateDownloadFilename, getFileExtension } from '~/utils/downloadHelper'
+import { useGeneration } from '~/composables/useGeneration'
+import { useVideoTaskStore } from '~/stores/videoTask'
+import { storeToRefs } from 'pinia'
 
 // Reactive data
 const parameterSettings = ref<any>(null)
@@ -44,117 +46,38 @@ const parameters = ref({
   weirdness: 0
 })
 
-const isGenerating = ref(false)
-const progress = ref(0)
+const { generate } = useGeneration();
+const videoTaskStore = useVideoTaskStore();
+const { currentTask, progress } = storeToRefs(videoTaskStore);
+
+const isGenerating = computed(() => !!currentTask.value?.isGenerating);
 const generatedResults = ref<any[]>([])
-const uploadedImages = ref<string[]>([])
 
 // Methods
 const handleGenerate = async (params: any) => {
-  console.log('Starting video generation:', params)
-  
-  // 获取表单数据
-  const formData = {
-    mode: params.mode,
-    aspectRatio: params.aspectRatio,
-    speed: params.speed,
-    stylization: params.stylization,
-    weirdness: params.weirdness,
-    uploadedImages: uploadedImages.value
-  }
-  
-  console.log('Form data:', formData)
-  
-  // 开始生成
-  isGenerating.value = true
-  progress.value = 0
-  
-  // 模拟10秒生成进度
-  const totalTime = 10000 // 10秒
-  const interval = 100 // 每100ms更新一次
-  const step = (interval / totalTime) * 100
-  
-  const progressInterval = setInterval(() => {
-    progress.value += step
-    if (progress.value >= 100) {
-      clearInterval(progressInterval)
-      setTimeout(() => {
-        isGenerating.value = false
-        generateResults(formData)
-      }, 500)
-    }
-  }, interval)
+  await generate(params);
 }
 
-// 生成结果
-const generateResults = (formData: any) => {
-  // 根据选择的尺寸生成4个结果
-  const aspectRatio = formData.aspectRatio
-  const sizeMap = {
-    '1:1': '512x512',
-    '4:3': '512x384',
-    '3:2': '512x341',
-    '16:9': '512x288',
-    '2:1': '512x256',
-    '3:4': '384x512',
-    '2:3': '341x512',
-    '9:16': '288x512'
+watch(currentTask, (newTask, oldTask) => {
+  if (oldTask?.isGenerating && !newTask?.isGenerating && newTask?.resultUrl) {
+    const size = parameters.value.aspectRatio === '1:1' ? '512x512' : '512x288';
+    generatedResults.value = [
+      {
+        id: newTask.taskId,
+        name: 'AI Generated Video',
+        url: newTask.resultUrl,
+        type: newTask.type,
+        size: size,
+        quality: 'High Quality',
+        model: 'Runway Gen-3',
+        createdAt: Date.now(),
+        parameters: { ...parameters.value }
+      }
+    ];
+  } else if (!newTask) {
+    generatedResults.value = [];
   }
-  
-  const size = sizeMap[aspectRatio] || '512x288'
-  
-  // 生成4个结果
-  generatedResults.value = [
-    {
-      id: 1,
-      name: 'AI Generated Video_001',
-      url: 'https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4',
-      type: 'video',
-      size: size,
-      quality: 'High Quality',
-      model: 'Runway Gen-3',
-      generationTime: 180,
-      createdAt: Date.now(),
-      parameters: formData
-    },
-    {
-      id: 2,
-      name: 'AI Generated Video_002',
-      url: 'https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_2mb.mp4',
-      type: 'video',
-      size: size,
-      quality: 'Ultra High Quality',
-      model: 'Pika Labs',
-      generationTime: 240,
-      createdAt: Date.now(),
-      parameters: formData
-    },
-    {
-      id: 3,
-      name: 'AI Generated Video_003',
-      url: 'https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4',
-      type: 'video',
-      size: size,
-      quality: 'High Quality',
-      model: 'Stable Video Diffusion',
-      generationTime: 195,
-      createdAt: Date.now(),
-      parameters: formData
-    },
-    {
-      id: 4,
-      name: 'AI Generated Video_004',
-      url: 'https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_2mb.mp4',
-      type: 'video',
-      size: size,
-      quality: 'High Quality',
-      model: 'Runway Gen-3',
-      generationTime: 210,
-      createdAt: Date.now(),
-      parameters: formData
-    }
-  ]
-}
+}, { deep: true });
 
 // 下载媒体文件
 const downloadMedia = async (result: any) => {
