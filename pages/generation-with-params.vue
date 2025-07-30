@@ -2,8 +2,8 @@
   <div class="generation-with-params">
     <!-- 页面标题 -->
     <PageHero 
-      title="AI图像生成 - 高级参数设置"
-      subtitle="使用我们的高级参数设置组件，精确控制您的AI图像生成过程"
+      title="AI Image Generation - Advanced Parameter Settings"
+      subtitle="Use our advanced parameter settings component to precisely control your AI image generation process"
     />
 
     <!-- 主要内容区域 -->
@@ -11,7 +11,7 @@
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <!-- 左侧：参数设置 -->
         <div class="bg-white rounded-xl shadow-lg p-6">
-          <h2 class="text-2xl font-bold mb-6 text-gray-800">参数设置</h2>
+          <h2 class="text-2xl font-bold mb-6 text-gray-800">Parameter Settings</h2>
           <ParameterSettings 
             ref="paramSettings"
             v-model="parameters"
@@ -21,12 +21,12 @@
 
         <!-- 右侧：预览和结果 -->
         <div class="bg-white rounded-xl shadow-lg p-6">
-          <h2 class="text-2xl font-bold mb-6 text-gray-800">生成结果</h2>
+          <h2 class="text-2xl font-bold mb-6 text-gray-800">Generation Results</h2>
           
           <!-- 生成状态 -->
           <div v-if="isGenerating" class="text-center py-8">
             <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-            <p class="text-gray-600">正在生成中，请稍候...</p>
+            <p class="text-gray-600">Generating, please wait...</p>
           </div>
 
           <!-- 生成结果 -->
@@ -34,20 +34,20 @@
             <div class="relative">
               <img 
                 :src="generatedImage" 
-                alt="生成的图片" 
+                alt="Generated Image" 
                 class="w-full rounded-lg shadow-md"
               />
               <button 
                 @click="downloadImage"
                 class="absolute top-2 right-2 bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition-colors"
-                title="下载图片"
+                title="Download Image"
               >
                 <i class="fa-solid fa-download"></i>
               </button>
             </div>
             <div class="text-sm text-gray-600">
-              <p><strong>生成时间:</strong> {{ generationTime }}</p>
-              <p><strong>使用参数:</strong></p>
+              <p><strong>Generation Time:</strong> {{ generationTime }}</p>
+              <p><strong>Used Parameters:</strong></p>
               <pre class="bg-gray-100 p-2 rounded text-xs mt-2 overflow-auto">{{ JSON.stringify(usedParameters, null, 2) }}</pre>
             </div>
           </div>
@@ -55,14 +55,14 @@
           <!-- 默认状态 -->
           <div v-else class="text-center py-12 text-gray-500">
             <i class="fa-solid fa-image text-4xl mb-4"></i>
-            <p>设置参数后点击生成按钮开始创建</p>
+            <p>Set parameters and click the generate button to start creating</p>
           </div>
         </div>
       </div>
 
       <!-- 参数历史记录 -->
       <div v-if="generationHistory.length > 0" class="mt-8 bg-white rounded-xl shadow-lg p-6">
-        <h3 class="text-xl font-bold mb-4 text-gray-800">生成历史</h3>
+        <h3 class="text-xl font-bold mb-4 text-gray-800">Generation History</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <div 
             v-for="(item, index) in generationHistory" 
@@ -72,7 +72,7 @@
           >
             <img 
               :src="item.image" 
-              alt="历史图片" 
+              alt="History Image" 
               class="w-full h-32 object-cover rounded mb-2"
             />
             <p class="text-sm text-gray-600 truncate">{{ item.prompt }}</p>
@@ -108,7 +108,7 @@ const generationHistory = ref([])
 
 // 处理生成事件
 const handleGenerate = async (params: any) => {
-  console.log('开始生成，参数:', params)
+  console.log('Starting generation, parameters:', params)
   
   isGenerating.value = true
   usedParameters.value = { ...params }
@@ -124,7 +124,7 @@ const handleGenerate = async (params: any) => {
     // 添加到历史记录
     generationHistory.value.unshift({
       image: generatedImage.value,
-      prompt: params.prompt || '无提示词',
+      prompt: params.prompt || 'No prompt',
       timestamp: generationTime.value,
       parameters: params
     })
@@ -135,7 +135,7 @@ const handleGenerate = async (params: any) => {
     }
     
   } catch (error) {
-    console.error('生成失败:', error)
+    console.error('Generation failed:', error)
     // 这里可以显示错误提示
   } finally {
     isGenerating.value = false

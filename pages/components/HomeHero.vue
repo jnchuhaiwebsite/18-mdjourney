@@ -288,27 +288,27 @@
   
   const route = useRoute()
   const prompt = ref('')
-  const isGenerating = ref(false)//是否正在生成
-  const selectedImage = ref<File | null>(null)//选择的图片
-  const imagePreview = ref<string>('')//图片预览
+  const isGenerating = ref(false)//Whether currently generating
+  const selectedImage = ref<File | null>(null)//Selected image
+const imagePreview = ref<string>('')//Image preview
   const fileInput = ref<HTMLInputElement | null>(null)
   // const isShow = ref(false) // 是否分享到作品展示
-  const progress = ref(0) // 进度条进度
-  const videoLoading = ref(false) // 视频加载状态
-  const generatedVideoUrl = ref('') // 生成的视频URL
-  const isDownloading = ref(false) // 下载状态
-  const previewVideoLoading = ref<{ [key: string]: boolean }>({}) // 预览视频加载状态
-  let progressInterval: number | null = null // 进度条定时器
-  const isFastMode = ref(false) // 快速生成模式开关
+  const progress = ref(0) // Progress bar progress
+const videoLoading = ref(false) // Video loading status
+const generatedVideoUrl = ref('') // Generated video URL
+const isDownloading = ref(false) // Download status
+const previewVideoLoading = ref<{ [key: string]: boolean }>({}) // Preview video loading status
+let progressInterval: number | null = null // Progress bar timer
+const isFastMode = ref(false) // Fast generation mode switch
   
-  // 分辨率选项
+  // Resolution options
   const resolution = ref('768p')
   
-  // 时长选项
+  // Duration options
   const duration = ref('6')
 
-  const model = ref('1')//模型
-  // 模型选项
+  const model = ref('1')//Model
+  // Model options
   const modelOptions = [
     { value: '1', label: 'Model 1' },
     { value: '2', label: 'Model 2' },
@@ -346,14 +346,14 @@
   const videoTaskStore = useVideoTaskStore()
   const notificationStore = useNotificationStore()
   
-  // 监听所有任务完成的事件
+  // Listen for all tasks completed event
   const handleAllTasksCompleted = () => {
     console.log('All tasks completed, hiding loading and progress')
     stopProgressAnimation()
     isGenerating.value = false
   }
   
-  // 监听单个任务完成的事件
+  // Listen for single task completed event
   const handleTaskCompleted = (event: Event) => {
     const customEvent = event as CustomEvent
     console.log('Task completed event received:', customEvent.detail)
@@ -362,18 +362,18 @@
     // 检查是否是当前页面的任务
     const currentTask = videoTaskStore.latestTask
     if (currentTask && currentTask.taskId === taskId) {
-      console.log('当前任务完成，更新视频URL:', videoUrl)
+      console.log('Current task completed, updating video URL:', videoUrl)
       
-      // 更新生成的视频URL
+      // Update generated video URL
       generatedVideoUrl.value = videoUrl
       
-      // 停止进度条动画
+      // Stop progress bar animation
       stopProgressAnimation()
       
-      // 设置生成状态为false
+      // Set generation status to false
       isGenerating.value = false
       
-      // 显示成功提示
+      // Show success message
       $toast.success('Video generation completed!')
     }
   }
@@ -393,11 +393,11 @@
         imagePreview.value = latestTask.imageUrls[0] || ''
       }
       
-      // 如果任务还在进行中，只恢复生成状态，不显示进度条
+      // If tasks are still in progress, only restore generation status, don't show progress bar
       if (latestTask.isGenerating) {
         isGenerating.value = true
         
-        // 重新开始任务检查 - 只使用通知系统
+        // Restart task checking - only use notification system
         if (latestTask.taskId) {
           notificationStore.startCheckingTask(latestTask.taskId)
         }
@@ -425,10 +425,10 @@
     // 恢复任务状态（不显示进度条）
     await restoreTaskState()
     
-    // 监听所有任务完成的事件
+    // Listen for all tasks completed event
     window.addEventListener('allTasksCompleted', handleAllTasksCompleted)
     
-    // 监听单个任务完成的事件
+    // Listen for single task completed event
     window.addEventListener('taskCompleted', handleTaskCompleted)
 
     // 获取积分数据
@@ -479,7 +479,7 @@
   const previewVideoUrl = 'https://resource.aimagen43.com/veo3/veo3demo.mp4'
   const previewVideoPoster = 'https://resource.aimagen43.com/veo3/veo3-video-generated-image-demonstration.jpg'
   
-  // 处理视频加载事件
+  // Handle video load event
   const handleVideoLoadStart = (target: EventTarget | null) => {
     if (target && target instanceof HTMLVideoElement) {
       previewVideoLoading.value[target.src] = true
@@ -492,13 +492,13 @@
     }
   }
   
-  // 处理图片上传区域点击
+  // Handle image upload area click
   const handleImageUploadClick = async () => {
     if (!await checkLoginStatus()) return
     fileInput.value?.click()
   }
   
-  // 处理图片上传
+  // Handle image upload
   const handleImageUpload = async (event: Event) => {
     const input = event.target as HTMLInputElement
     if (!input.files?.length) return
@@ -555,7 +555,7 @@
     img.src = URL.createObjectURL(file)
   }
   
-  // 移除已选择的图片
+  // Remove selected image
   const removeSelectedImage = () => {
     if (imagePreview.value) {
       URL.revokeObjectURL(imagePreview.value)
@@ -564,7 +564,7 @@
     imagePreview.value = ''
   }
 
-  // 继续制作，清除所有状态
+  // Continue creating, clear all states
   const handleContinueCreating = () => {
     progress.value = 0
     isGenerating.value = false

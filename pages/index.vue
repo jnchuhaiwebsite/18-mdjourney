@@ -1,51 +1,39 @@
 <template>
-  <div class="w-full mx-auto mt-8 p-6 bg-blue-pale rounded-lg">
-    <main class="max-w-24xl mx-auto min-h-screen">
-      <!-- 首屏区块 -->
-      <section
-        id="hero"
-        class="min-h-[700px] relative pt-[64px]"
-      >
-        <PageHero 
-          title="Imagen 4 Ultra - Professional AI Art Generation Platform"
-          subtitle="Create stunning, high-quality images instantly with our cutting-edge AI technology - Professional-grade art generation at your fingertips"
-        />
-        <ParameterSettings 
-          v-model="parameters"
-          @generate="handleGenerate"
-        />
-      </section>
-
-    
-    </main>
-  </div>
+  <main class="w-full mx-auto p-6 bg-blue-pale rounded-lg max-w-24xl min-h-screen">
+    <!-- 首屏区块 -->
+    <section
+      id="hero"
+      class="min-h-[700px] relative"
+    >
+      <PageHero 
+        title="AI Video Generation - Transform Static Images into Dynamic Videos"
+        subtitle="Upload any static image and watch it come to life with our advanced AI animation technology - Professional video generation at your fingertips"
+      />
+      <HomeVideoGenerator 
+        ref="videoGenerator"
+        @generate="handleGenerate"
+      />
+    </section>
+  </main>
 </template>
 
 <script setup lang="ts">
 import { onBeforeMount, defineAsyncComponent, onMounted } from "vue";
 import { useSeo } from '~/composables/useSeo';
 import { ref } from 'vue'
-import ParameterSettings from '~/components/ParameterSettings.vue'
+import HomeVideoGenerator from '~/components/HomeVideoGenerator.vue'
 
 
 const PageHero = defineAsyncComponent(() => import('~/components/PageHero.vue'));
 
 import { useNuxtApp } from 'nuxt/app'
 const { $toast } = useNuxtApp() as any
-// 生成结果
-    // 参数状态
-const parameters = ref({
-      mode: 'text-to-image',
-      aspectRatio: '16:9',
-      speed: 'fast',
-      stylization: 250,
-      weirdness: 0
-    })
-    // 处理生成事件
-    const handleGenerate = (params: any) => {
-      console.log('生成事件触发:', params)
-      $toast.success('开始生成图像...', 3000)
-    }
+
+// 处理生成事件
+const handleGenerate = (params: any) => {
+  console.log('Generation event triggered:', params)
+  $toast.success('Starting video generation...', 3000)
+}
 // 使用默认的 SEO 配置
 useSeo()
 
@@ -72,9 +60,9 @@ onMounted(() => {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    name: "Imagen 4 Ultra",
-    description: "Advanced AI image generation platform powered by Imagen 4 Ultra technology. Create high-quality images with customizable parameters including aspect ratio and person generation controls. Supports English prompts with professional-grade output.",
-    applicationCategory: "ImageGenerationApplication",
+    name: "AI Video Generation",
+    description: "Advanced AI video generation platform that transforms static images into dynamic videos. Upload any image and watch it come to life with our cutting-edge AI animation technology. Professional video generation at your fingertips.",
+    applicationCategory: "VideoGenerationApplication",
     operatingSystem: "All",
     offers: {
       "@type": "Offer",
@@ -82,40 +70,40 @@ onMounted(() => {
       priceCurrency: "USD",
     },
     featureList: [
-      "Advanced Imagen 4 Ultra technology",
-      "English prompt support",
-      "Multiple aspect ratios (1:1, 3:4, 4:3, 9:16, 16:9)",
-      "Customizable person generation settings",
-      "Professional image quality",
-      "Fast generation (20-60 seconds)",
+      "Advanced AI video generation technology",
+      "Static image to video transformation",
+      "Customizable motion descriptions",
+      "Professional video quality",
+      "Fast video generation",
+      "Multiple video formats support",
       "Commercial usage rights",
       "Digital watermarking",
       "Safety filters and content moderation",
-      "Instant image download"
+      "Instant video download"
     ],
     additionalProperty: [
       {
         "@type": "PropertyValue",
-        "name": "supportedAspectRatios",
-        "value": ["1:1", "3:4", "4:3", "9:16", "16:9"]
+        "name": "supportedVideoFormats",
+        "value": ["MP4", "MOV", "AVI"]
       },
       {
         "@type": "PropertyValue",
-        "name": "personGenerationOptions",
-        "value": ["dont_allow", "allow_adult", "allow_all"]
+        "name": "videoDurationOptions",
+        "value": [3, 6, 10, 15]
       },
       {
         "@type": "PropertyValue",
         "name": "defaultSettings",
         "value": {
-          "batchSize": 1,
-          "aspectRatio": "1:1",
-          "personGeneration": "allow_adult"
+          "duration": 6,
+          "fps": 30,
+          "quality": "high"
         }
       }
     ],
     screenshot: "/logo.png",
-    applicationSubCategory: "AI Image Generation",
+    applicationSubCategory: "AI Video Generation",
     browserRequirements: "Requires JavaScript. Requires HTML5.",
     softwareVersion: "1.0.0",
     inLanguage: "en-US"

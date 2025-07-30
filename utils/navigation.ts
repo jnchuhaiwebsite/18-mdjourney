@@ -9,18 +9,15 @@ export interface RouteItem {
   href?: string
   badge?: string
   badgePosition?: 'center' | 'left' | 'right' // badge位置：center=上方居中, left=左上角, right=右上角
+  openInNewTab?: boolean // 是否在新标签页打开
+  showBeta?: boolean // 是否显示 Beta 标签
 }
 
 // 主路由配置
 export const mainRoutes: RouteItem[] = [
   { id: "home", name: "Home", href: "/", icon: "home" },
-  { id: "hero", name: "Image Generate ", href: "/ai-image-generator", icon: "Image Generate" },
-  // { id: "generation", name: "Generation",href: "/", icon: "tag", badge: "imagen 4 ultra", badgePosition: 'right' },
-  // { id: "how to use", name: "How to Use",href: "/how-to-use", icon: "tag" },
-  // { id: "normal vs ultra", name: "Normal vs Ultra", href: "/normal-vs-ultra", icon: "tag" },
+  { id: "image-generate", name: "Image Generate", href: "/ai-image-generator", icon: "image" },
   { id: "pricing", name: "Pricing", href: "/pricing", icon: "tag" },
-  // { id: "free", name: "Free", href: "/free", icon: "tag", badge: "Hot", badgePosition: 'right' },
-  // { id: "blog", name: "Blog", href: "/blog", icon: "book" }
 ]
 
 
@@ -33,10 +30,13 @@ export const footerRoutes: RouteItem[] = [
   { id: "blog", name: "Blog", href: "/blog", icon: "book" }
 ]
 
+export const productsSections: RouteItem[] = [
+  // { id: "image-generate", name: "Image Generate", href: "/ai-image-generator", icon: "image" },
+]
 
 export const useNavigation = () => {
   const router = useRouter()
-  const activeSection = ref('hero')
+  const activeSection = ref('home')
   const sections = mainRoutes
   const footerSections = footerRoutes
 
@@ -139,6 +139,7 @@ export const useNavigation = () => {
     executeScroll,
     handlePageNavigation,
     handleNavClick,
-    handleScroll
+    handleScroll,
+    productsSections
   }
 } 

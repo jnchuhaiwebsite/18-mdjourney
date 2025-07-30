@@ -87,7 +87,8 @@
               </template>
             </div>
           </div>
-          <div class="flex-1 text-center sm:text-left">
+          <!-- Products 部分 - 只在有内容时显示 -->
+          <div v-if="productsSections && productsSections.length > 0" class="flex-1 text-center sm:text-left">
             <div class="text-blue-footer font-medium mb-4 text-sm md:text-lg">Products</div>
             <div class="flex flex-col gap-2 items-center sm:items-start">
               <template v-for="(section, index) in productsSections" :key="index">

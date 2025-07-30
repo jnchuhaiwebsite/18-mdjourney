@@ -1,7 +1,7 @@
 <template>
   <div class="parameter-settings">
     <!-- Mode Switcher -->
-    <div class="mode-switcher">
+    <div v-if="!hideModeSwitcher" class="mode-switcher">
       <button 
         v-for="mode in modes" 
         :key="mode.value"
@@ -13,63 +13,53 @@
     </div>
 
     <!-- Input Panels -->
-    <div class="input-panels">
-      <div 
-        v-if="selectedMode === 'text-to-image'"
-        class="input-group"
-      >
-        <TextToImageInput />
-      </div>
-      <div 
-        v-if="selectedMode === 'image-to-image'"
-        class="input-group"
-      >
-        <ImageToImageInput />
-      </div>
-      <div 
-        v-if="selectedMode === 'ai-video'"
-        class="input-group"
-      >
-        <AiVideoInput />
-      </div>
-    </div>
+    <InputPanels :selected-mode="selectedMode" />
 
-    <!-- Advanced Parameters Toggle Button -->
-    <button 
-      class="parameters-toggle-btn"
-      :class="{ 'is-open': showAdvancedParams }"
-      @click="showAdvancedParams = !showAdvancedParams"
-    >
-      Advanced Parameters
-      <span class="icon">
-        <i class="fa-solid fa-chevron-down"></i>
-      </span>
-    </button>
-
-    <!-- Advanced Parameters Panel -->
-    <div 
-      class="parameters-panel"
-      :class="{ hidden: !showAdvancedParams }"
-    >
+    <!-- Parameters Panel -->
+    <div class="parameters-panel">
       <!-- Aspect Ratio Selector -->
       <div class="param-group text-blue-parameters">
         <label>Aspect Ratio</label>
-        <div class="aspect-ratio-selector">
+        <div class="aspect-ratio-dropdown">
           <button 
-            v-for="ratio in aspectRatios" 
-            :key="ratio.value"
-            :class="['ar-btn', { active: selectedAspectRatio === ratio.value }]"
-            @click="selectedAspectRatio = ratio.value"
+            class="aspect-ratio-trigger"
+            @click="showAspectRatioDropdown = !showAspectRatioDropdown"
           >
-            <div 
-              class="ar-shape" 
-              :style="{ 
-                width: ratio.width + 'px', 
-                height: ratio.height + 'px' 
-              }"
-            ></div>
-            <span class="ar-label">{{ ratio.value }}</span>
+            <div class="selected-ratio-display">
+              <div 
+                class="ar-shape" 
+                :style="{ 
+                  width: selectedAspectRatioData.width + 'px', 
+                  height: selectedAspectRatioData.height + 'px' 
+                }"
+              ></div>
+              <span class="ar-label">{{ selectedAspectRatio }}</span>
+            </div>
+            <i class="fa-solid fa-chevron-down dropdown-icon" :class="{ 'rotate-180': showAspectRatioDropdown }"></i>
           </button>
+          
+          <div 
+            class="aspect-ratio-dropdown-menu"
+            :class="{ 'show': showAspectRatioDropdown }"
+          >
+            <div class="aspect-ratio-grid">
+              <button 
+                v-for="ratio in aspectRatios" 
+                :key="ratio.value"
+                :class="['ar-grid-item', { active: selectedAspectRatio === ratio.value }]"
+                @click="selectAspectRatio(ratio.value)"
+              >
+                <span class="ar-label">{{ ratio.value }}</span>
+                <div 
+                  class="ar-shape" 
+                  :style="{ 
+                    width: ratio.width + 'px', 
+                    height: ratio.height + 'px' 
+                  }"
+                ></div>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -89,7 +79,7 @@
       </div>
 
       <!-- Stylization Slider -->
-      <div class="param-group text-blue-parameters">
+      <div v-if="selectedMode !== 'ai-video'" class="param-group text-blue-parameters">
         <label for="stylization">Stylization</label>
         <div class="slider-group">
           <input 
@@ -113,7 +103,7 @@
       </div>
 
       <!-- Weirdness Slider -->
-      <div class="param-group text-blue-parameters">
+      <div v-if="selectedMode !== 'ai-video'" class="param-group text-blue-parameters">
         <label for="weirdness">Weirdness</label>
         <div class="slider-group">
           <input 
@@ -138,19 +128,27 @@
     </div>
 
     <!-- Generate Button -->
-    <button 
-      class="generate-btn "
-      @click="handleGenerate"
-      :disabled="isGenerating"
-    >
-      <i class="fa-solid fa-wand-magic-sparkles"></i> 
-      {{ isGenerating ? 'Generating...' : 'Generate' }}
-    </button>
+    <div class="generate-button-container">
+      <div class="credit-info">
+        <span class="credit-label">Credit Cost:</span>
+        <span class="credit-amount">
+          {{ currentCreditCost }} credits
+        </span>
+      </div>
+      <button 
+        class="generate-btn"
+        @click="handleGenerate"
+        :disabled="isGenerating"
+      >
+        <i class="fa-solid fa-wand-magic-sparkles"></i> 
+        {{ isGenerating ? 'Generating...' : 'Generate' }}
+      </button>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, defineAsyncComponent } from 'vue'
+import { ref, computed, watch, defineAsyncComponent, onMounted, onUnmounted } from 'vue'
 
 // 定义接口
 interface Mode {
@@ -171,13 +169,25 @@ interface Speed {
   icon: string
 }
 
+interface CreditConfig {
+  [key: string]: {
+    [key: string]: number
+  }
+}
+
 // Props
 interface Props {
   modelValue?: any
+  hideModeSwitcher?: boolean
+  defaultMode?: string
+  availableModes?: string[]
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  modelValue: () => ({})
+  modelValue: () => ({}),
+  hideModeSwitcher: false,
+  defaultMode: 'text-to-image',
+  availableModes: () => ['text-to-image', 'image-to-image', 'ai-video']
 })
 
 // Emits
@@ -187,25 +197,47 @@ const emit = defineEmits<{
 }>()
 
 // Reactive data
-const selectedMode = ref('text-to-image')
-const showAdvancedParams = ref(true)
+const selectedMode = ref<string>(props.availableModes.includes(props.defaultMode) ? props.defaultMode : (props.availableModes[0] || 'text-to-image'))
 const selectedAspectRatio = ref('16:9')
 const selectedSpeed = ref('fast')
 const stylizationValue = ref(250)
 const weirdnessValue = ref(0)
 const isGenerating = ref(false)
+const showAspectRatioDropdown = ref(false)
+
+// Credit consumption configuration
+const creditConfig: CreditConfig = {
+  'ai-video': {
+    'relax': 20,
+    'fast': 40,
+    'turbo': 70
+  },
+  'image-to-image': {
+    'relax': 4,
+    'fast': 8,
+    'turbo': 12
+  },
+  'text-to-image': {
+    'relax': 4,
+    'fast': 8,
+    'turbo': 12
+  }
+}
 
 // Mode configuration
-const modes: Mode[] = [
+const allModes: Mode[] = [
   { value: 'text-to-image', label: 'Text to Image', component: 'TextToImageInput' },
   { value: 'image-to-image', label: 'Image to Image', component: 'ImageToImageInput' },
-  { value: 'ai-video', label: 'AI Video Generation', component: 'AiVideoInput' }
+  { value: 'ai-video', label: 'AI Video', component: 'AiVideoInput' }
 ]
 
-// Dynamically import input components
-const TextToImageInput = defineAsyncComponent(() => import('./inputs/TextToImageInput.vue'))
-const ImageToImageInput = defineAsyncComponent(() => import('./inputs/ImageToImageInput.vue'))
-const AiVideoInput = defineAsyncComponent(() => import('./inputs/AiVideoInput.vue'))
+// Filter modes based on availableModes prop
+const modes = computed(() => {
+  return allModes.filter(mode => props.availableModes.includes(mode.value))
+})
+
+// Import InputPanels component
+const InputPanels = defineAsyncComponent(() => import('./InputPanels.vue'))
 
 // Aspect ratio configuration
 const aspectRatios: AspectRatio[] = [
@@ -223,8 +255,8 @@ const aspectRatios: AspectRatio[] = [
 
 // Speed configuration
 const speeds: Speed[] = [
+  { value: 'relax', label: 'Relax', icon: 'fa-solid fa-mug-hot' },
   { value: 'fast', label: 'Fast', icon: 'fa-solid fa-bolt' },
-  { value: 'relax', label: 'Standard', icon: 'fa-solid fa-mug-hot' },
   { value: 'turbo', label: 'Turbo', icon: 'fa-solid fa-rocket' }
 ]
 
@@ -236,6 +268,18 @@ const currentParams = computed(() => ({
   stylization: stylizationValue.value,
   weirdness: weirdnessValue.value
 }))
+
+// Get current credit cost
+const currentCreditCost = computed(() => {
+  const mode = selectedMode.value as keyof CreditConfig
+  const speed = selectedSpeed.value as keyof CreditConfig[keyof CreditConfig]
+  return creditConfig[mode]?.[speed] || 0
+})
+
+// Get selected aspect ratio data
+const selectedAspectRatioData = computed(() => {
+  return aspectRatios.find(ratio => ratio.value === selectedAspectRatio.value) || aspectRatios[1] // Default to 16:9
+})
 
 // Watch parameter changes
 watch(currentParams, (newParams) => {
@@ -266,6 +310,27 @@ const handleGenerate = async () => {
   }
 }
 
+const selectAspectRatio = (value: string) => {
+  selectedAspectRatio.value = value
+  showAspectRatioDropdown.value = false
+}
+
+// Click outside to close dropdown
+const handleClickOutside = (event: Event) => {
+  const target = event.target as HTMLElement
+  if (!target.closest('.aspect-ratio-dropdown')) {
+    showAspectRatioDropdown.value = false
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('click', handleClickOutside)
+})
+
+onUnmounted(() => {
+  document.removeEventListener('click', handleClickOutside)
+})
+
 // Expose methods to parent component
 defineExpose({
   getParams: () => currentParams.value,
@@ -281,51 +346,23 @@ defineExpose({
 
 <style scoped>
 .parameter-settings {
-  @apply w-full max-w-4xl mx-auto;
+  @apply w-full max-w-4xl mx-auto bg-white rounded-2xl border border-gray-200 shadow-lg p-6;
 }
 
 .mode-switcher {
-  @apply flex justify-center gap-2 bg-gray-100 rounded-xl p-2 mb-6;
+  @apply flex justify-center gap-3 bg-gray-50 rounded-2xl p-2 mb-6 shadow-sm border border-gray-100;
 }
 
 .mode-btn {
-  @apply flex-1 py-3 px-4 rounded-lg bg-transparent border-none font-semibold text-gray-600 cursor-pointer transition-all duration-300;
+  @apply flex-1 py-1.5 px-3 rounded-xl bg-transparent border-none font-semibold text-gray-600 cursor-pointer transition-all duration-300 hover:bg-white hover:shadow-sm;
 }
 
 .mode-btn.active {
-  @apply bg-white text-blue-600 shadow-md;
-}
-
-.input-panels {
-  @apply mb-6;
-}
-
-.input-group {
-  @apply flex flex-col gap-4;
-}
-
-.input-group.hidden {
-  display: none;
-}
-
-.parameters-toggle-btn {
-  @apply font-semibold text-blue-600 cursor-pointer my-6 bg-none border-none p-0 flex items-center gap-2;
-}
-
-.parameters-toggle-btn .icon {
-  @apply transition-transform duration-300;
-}
-
-.parameters-toggle-btn.is-open .icon {
-  @apply rotate-180;
+  @apply bg-white text-blue-600 shadow-md transform scale-105;
 }
 
 .parameters-panel {
-  @apply grid grid-cols-1 gap-8;
-}
-
-.parameters-panel.hidden {
-  display: none;
+  @apply grid grid-cols-1 gap-6 pb-4 mt-6;
 }
 
 .param-group {
@@ -333,31 +370,63 @@ defineExpose({
 }
 
 .param-group label {
-  @apply block font-semibold mb-3;
+  @apply block font-semibold mb-3 text-gray-700 text-base;
 }
 
-.aspect-ratio-selector {
-  @apply grid grid-cols-5 gap-2;
+.aspect-ratio-dropdown {
+  @apply relative;
 }
 
-.ar-btn {
-  @apply bg-gray-100 border-2 border-transparent rounded-lg p-2 cursor-pointer transition-all duration-200 text-center flex flex-col items-center justify-center h-16;
+.aspect-ratio-trigger {
+  @apply w-full bg-white border-2 border-gray-200 rounded-xl p-3 cursor-pointer transition-all duration-300 flex items-center justify-between hover:border-gray-300 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm;
 }
 
-.ar-btn:hover {
-  @apply border-gray-300;
+.selected-ratio-display {
+  @apply flex items-center gap-4;
 }
 
-.ar-btn.active {
-  @apply border-blue-600 bg-blue-50;
+.dropdown-icon {
+  @apply text-gray-400 transition-transform duration-300 text-base;
+}
+
+.dropdown-icon.rotate-180 {
+  transform: rotate(180deg);
+}
+
+.aspect-ratio-dropdown-menu {
+  @apply absolute top-full left-0 right-0 bg-white border-2 border-gray-200 rounded-xl mt-2 shadow-2xl z-10 max-h-60 overflow-y-auto opacity-0 pointer-events-none transition-all duration-300 transform translate-y-3 origin-top backdrop-blur-sm;
+}
+
+.aspect-ratio-dropdown-menu.show {
+  @apply opacity-100 pointer-events-auto transform translate-y-0;
+}
+
+.aspect-ratio-grid {
+  @apply grid grid-cols-1 gap-1 p-4;
+}
+
+.ar-grid-item {
+  @apply flex items-center justify-between p-3 rounded-xl cursor-pointer transition-all duration-300 hover:bg-gray-50 border-2 border-transparent gap-3 hover:shadow-sm;
+}
+
+.ar-grid-item.active {
+  @apply bg-blue-50 text-blue-600 border-blue-600 shadow-md;
+}
+
+.ar-grid-item.active .ar-label {
+  @apply text-blue-600 font-semibold;
+}
+
+.ar-grid-item:hover {
+  @apply bg-gray-50 border-gray-300;
 }
 
 .ar-shape {
-  @apply bg-gray-400 rounded-sm mb-1;
+  @apply bg-gray-400 rounded-md flex-shrink-0 shadow-sm;
 }
 
 .ar-label {
-  @apply text-xs font-medium text-gray-600;
+  @apply text-sm font-medium text-gray-600 flex-shrink-0;
 }
 
 .speed-selector {
@@ -365,53 +434,143 @@ defineExpose({
 }
 
 .speed-btn {
-  @apply bg-gray-100 border-2 border-transparent rounded-lg py-3 px-4 cursor-pointer transition-all duration-200 text-center font-semibold text-gray-600 flex items-center justify-center gap-2;
+  @apply bg-gray-100 border-2 border-transparent rounded-xl py-1.5 px-2 cursor-pointer transition-all duration-300 text-center font-semibold text-gray-600 flex items-center justify-center gap-1 hover:shadow-md hover:border-gray-300;
 }
 
 .speed-btn:hover {
-  @apply border-gray-300;
+  @apply border-gray-300 transform scale-105;
 }
 
 .speed-btn.active {
-  @apply bg-blue-600 text-white border-blue-600;
+  @apply bg-blue-600 text-white border-blue-600 shadow-lg transform scale-105;
 }
 
 .slider-group {
-  @apply flex items-center gap-4;
+  @apply flex items-center gap-4 bg-gray-50 rounded-xl p-2;
 }
 
 .slider-group input[type="range"] {
-  @apply flex-grow;
+  @apply flex-grow h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer;
+}
+
+.slider-group input[type="range"]::-webkit-slider-thumb {
+  @apply appearance-none w-5 h-5 bg-blue-600 rounded-full cursor-pointer shadow-lg;
+}
+
+.slider-group input[type="range"]::-moz-range-thumb {
+  @apply w-5 h-5 bg-blue-600 rounded-full cursor-pointer border-0 shadow-lg;
 }
 
 .slider-group input[type="number"] {
-  @apply w-20 p-2 border border-gray-300 rounded-lg text-center;
+  @apply w-20 p-2 border-2 border-gray-200 rounded-lg text-center font-semibold text-base transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500;
+}
+
+.generate-button-container {
+  @apply mt-8;
 }
 
 .generate-btn {
-  @apply w-full py-4 px-6 bg-blue-600 text-white rounded-lg font-semibold text-lg transition-all duration-300 hover:bg-blue-700 hover:transform hover:-translate-y-1 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed;
+  @apply w-full py-4 px-6 bg-blue-600 text-white rounded-xl font-semibold text-lg transition-all duration-300 hover:bg-blue-buttonhover hover:transform hover:-translate-y-1 hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed shadow-lg;
 }
 
 .generate-btn:disabled {
-  @apply transform-none shadow-none;
+  @apply transform-none shadow-lg;
+}
+
+.credit-info {
+  @apply flex justify-between items-center mb-4 text-gray-600 text-sm;
+}
+
+.credit-label {
+  @apply font-semibold;
+}
+
+.credit-amount {
+  @apply font-bold text-blue-600;
+}
+
+.credit-icon {
+  @apply w-4 h-4 mr-1;
 }
 
 /* 响应式设计 */
 @media (max-width: 768px) {
-  .aspect-ratio-selector {
-    @apply grid-cols-3;
+  .mode-switcher {
+    @apply gap-2 p-2 mb-5;
+  }
+  
+  .mode-btn {
+    @apply py-1 px-3 text-sm;
+  }
+  
+  .parameters-panel {
+    @apply gap-5 pb-3;
+  }
+  
+  .param-group label {
+    @apply mb-2 text-sm;
+  }
+  
+  .aspect-ratio-dropdown-menu {
+    @apply max-h-48;
+  }
+  
+  .aspect-ratio-trigger {
+    @apply p-3;
+  }
+  
+  .aspect-ratio-grid {
+    @apply gap-1 p-3;
+  }
+  
+  .ar-grid-item {
+    @apply p-2 gap-2;
+  }
+  
+  .ar-label {
+    @apply text-xs;
   }
   
   .speed-selector {
-    @apply grid-cols-1;
+    @apply grid-cols-3 gap-2;
+  }
+  
+  .speed-btn {
+    @apply py-1 px-2;
   }
   
   .slider-group {
-    @apply flex-col gap-2;
+    @apply flex-col gap-2 p-2;
   }
   
   .slider-group input[type="number"] {
     @apply w-full;
+  }
+  
+  .generate-button-container {
+    @apply mt-6;
+  }
+  
+  .generate-btn {
+    @apply py-3 px-5 text-base;
+  }
+}
+
+@media (max-width: 480px) {
+  .mode-switcher {
+    @apply flex-col;
+  }
+  
+  .mode-btn {
+    @apply w-full;
+  }
+  
+  .speed-selector {
+    @apply grid-cols-3;
+  }
+  
+  .slider-group {
+    @apply p-1;
   }
 }
 </style> 

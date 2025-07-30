@@ -1,27 +1,27 @@
 <template>
-  <div
-    class="py-16 bg-blue-pale"
-    aria-labelledby="pricing-heading"
-  >
-    <div class="max-w-7xl mx-auto px-4">
-      <!-- 使用PageHero组件 -->
-      <PageHero 
-        title="Imagen 4 Ultra Pricing"
-        subtitle="Purchase credits to use our services. No subscription required - pay once, use anytime."
-      />
+  <div class="min-h-screen bg-blue-pale">
+    <main class="w-full mx-auto p-6 bg-blue-pale rounded-lg max-w-7xl min-h-screen">
+      <!-- 页面标题区域 -->
+      <header>
+        <PageHero 
+          title="Imagen 4 Ultra Pricing"
+          subtitle="Purchase credits to use our services. No subscription required - pay once, use anytime."
+        />
+      </header>
 
       <!-- 加载状态 -->
-      <div v-if="pending" class="flex justify-center items-center py-20 w-full">
+      <section v-if="pending" class="flex justify-center items-center py-20 w-full" aria-live="polite">
         <div
           class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500"
           aria-label="Loading pricing plans"
         ></div>
-      </div>
+      </section>
 
-      <!-- 定价卡片 -->
-      <div
+      <!-- 定价方案区域 -->
+      <section
         v-else
         class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
+        aria-label="Pricing plans"
       >
         <!-- 循环渲染套餐卡片 -->
         <article
@@ -34,32 +34,52 @@
               : 'border border-blue-pricingborder shadow-sm hover:shadow-md transition-shadow',
             plan.price === 0 ? 'hidden md:flex' : 'flex'
           ]"
+          :aria-labelledby="`plan-${index}-title`"
         >
+          <!-- 热门标签 -->
           <div
             v-if="plan.is_popular"
-            class="absolute -top-3 right-6 px-3 py-1 bg-blue-button text-white text-sm rounded-full"
+              class="absolute -top-3 right-6 px-3 py-1 bg-blue-button text-white text-sm rounded-full"
+            aria-label="Most popular plan"
           >
             Most Popular
           </div>
-          <h3 class="text-2xl font-bold text-white mb-2 font-medium">
-            {{ plan.name }}
-          </h3>
-          <p class="text-blue-pricingtext mb-6">{{ plan.description }}</p>
-          <div class="text-3xl font-bold text-white mb-6">
-            ${{ plan.price }}
-            <span class="text-blue-pricingtext text-base font-normal"></span>
-          </div>
-          <ul class="space-y-3 mb-8" :aria-label="`${plan.name} plan features`">
-            <li
-              v-for="(feature, fIndex) in getPlanFeatures(plan)"
-              :key="fIndex"
-              class="flex items-center text-blue-pricingtext"
+
+          <!-- 套餐标题 -->
+          <header class="mb-6">
+            <h3 
+              :id="`plan-${index}-title`"
+              class="text-2xl font-bold text-black mb-2 font-medium"
             >
-              <span class="mr-2 text-theme" aria-hidden="true">✓</span>
-              {{ feature }}
-            </li>
-          </ul>
-          <div class="mt-auto">
+              {{ plan.name }}
+            </h3>
+            <p class="text-blue-pricingtext mb-6">{{ plan.description }}</p>
+          </header>
+
+          <!-- 价格信息 -->
+          <div class="mb-6">
+            <div class="text-3xl font-bold text-black">
+              ${{ plan.price }}
+              <span class="text-blue-pricingtext text-base font-normal"></span>
+            </div>
+          </div>
+
+          <!-- 功能特性列表 -->
+          <section class="mb-8" :aria-label="`${plan.name} plan features`">
+            <ul class="space-y-3">
+              <li
+                v-for="(feature, fIndex) in getPlanFeatures(plan)"
+                :key="fIndex"
+                class="flex items-center text-blue-pricingtext"
+              >
+                <span class="mr-2 text-theme" aria-hidden="true">✓</span>
+                {{ feature }}
+              </li>
+            </ul>
+          </section>
+
+          <!-- 操作按钮 -->
+          <footer class="mt-auto">
             <button
               @click="plan.code ? handleUpgradePlan(plan) : null"
               :disabled="upgradingPlanId === plan.code"
@@ -67,14 +87,15 @@
                 'w-full py-3 px-4 rounded-lg flex items-center justify-center',
                 getButtonClass(plan),
               ]"
+              :aria-describedby="`plan-${index}-title`"
             >
-              <div v-if="upgradingPlanId === plan.code" class="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-white mr-2"></div>
+              <div v-if="upgradingPlanId === plan.code" class="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-white mr-2" aria-hidden="true"></div>
               {{ plan.button_text }}
             </button>
-          </div>
+          </footer>
         </article>
-      </div>
-    </div>
+      </section>
+    </main>
   </div>
 </template>
 
