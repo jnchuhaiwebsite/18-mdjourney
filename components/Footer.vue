@@ -1,77 +1,147 @@
 <template>
-  <footer class="relative bg-blue-pale text-gray-300 py-8 md:py-12">
-    <div class="max-w-7xl mx-auto px-4">
+  <footer class="relative bg-blue-pale text-gray-300 py-8 md:py-12 pt-8 border-t border-gray-700/30 mobile-footer">
+    <div class="max-w-7xl mx-auto px-4 mobile-padding">
       
-      <!-- 主要内容区域 -->
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 md:mb-12">
-        <!-- 友情链接区域 -->
-        <div>
-          <h3 class="text-blue-footer font-medium mb-4 text-left text-sm md:text-lg">Partner Sites</h3>
-          <div class="flex flex-wrap gap-3">
-            <a v-for="(item,index) in partnerSites" :key="index" 
-               :href="item.url" 
-               target="_blank" 
-               rel="noopener noreferrer" 
-               class="text-blue-footertext hover:text-blue-footerhover  transition-colors text-sm">
-              {{ item.name }}
-            </a>
-          </div>
-        </div>
-
-        <!-- 首页导航 -->
-        <div>
-          <h3 class="text-blue-footer font-medium mb-4 text-sm md:text-lg">Features</h3>
-          <div class="flex flex-col gap-2">
-            <NuxtLink to="/" class="text-blue-footertext hover:text-blue-footerhover  transition-colors whitespace-nowrap">Imagen 4 Ultra</NuxtLink>
-          </div>
-        </div>
-
-        <!-- 导航链接 -->
-        <div>
-          <h3 class="text-blue-footer font-medium mb-4 text-sm md:text-lg">Resources</h3>
-          <div class="flex flex-col gap-2">
-            <template v-for="(section, index) in footerSections" :key="index">
-              <NuxtLink v-if="section.href" :to="section.href" 
-                class="text-blue-footertext hover:text-blue-footerhover  transition-colors">
-                {{ section.name }}
-              </NuxtLink>
-              <div v-else @click.prevent="handleNavClick(section.id)" 
-                class="text-blue-footertext hover:text-blue-footerhover  transition-colors cursor-pointer">
-                {{ section.name }}
-              </div>
-            </template>
-          </div>
-        </div>
-
-        <!-- 法律条款 -->
-        <div>
-          <h3 class="text-blue-footer font-medium mb-4 text-sm md:text-lg">Legal</h3>
-          <div class="flex flex-col gap-2">
-            <NuxtLink to="/subsidiary/privacy-policy" class="text-blue-footertext hover:text-blue-footerhover  transition-colors">Privacy Policy</NuxtLink>
-            <NuxtLink to="/subsidiary/terms-of-service" class="text-blue-footertext hover:text-blue-footerhover  transition-colors">Terms of Service</NuxtLink>
-          </div>
+      <!-- 友情链接区域 -->
+      <div class="mb-8">
+        <div class="text-blue-footer font-medium mb-4 text-left text-sm md:text-lg">Partner Sites</div>
+        <div class="flex flex-wrap gap-x-6 gap-y-2">
+          <a v-for="(item,index) in partnerSites" :key="index" 
+             :href="item.url" 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             class="text-blue-footertext hover:text-blue-footerhover transition-colors text-sm">
+            {{ item.name }}
+          </a>
         </div>
       </div>
-      
-      <!-- Logo 和描述 -->
-      <div class="py-6 border-t border-gray-700">
-        <div class="flex flex-col items-center text-center">
-          <h1 class="text-blue-logo text-2xl md:text-3xl font-bold mb-4">MidjourneyAI</h1>
-          <p class="text-sm text-blue-footertext max-w-xl mb-4">
-            Imagen 4 Ultra delivers stunning AI-generated images with advanced technology. Supporting English prompts with customizable aspect ratios (1:1, 3:4, 4:3, 9:16, 16:9) and advanced person generation controls for professional results.
-          </p>
-          <div class="flex flex-col items-center gap-2 text-sm text-gray-500">
-            <p>© 2025 Imagen 4 Ultra. All rights reserved.</p>
-            <div class="text-center">
-              <p class="text-blue-footertext text-sm">
-                Need help? Contact us at 
-                <a href="mailto:support@aimagen4.com" class=" transition-colors">support@aimagen4.com</a>
-              </p>
+
+      <!-- 分割线 -->
+      <div class="w-full h-px bg-gray-700/30 mb-8"></div>
+
+      <!-- 主要内容区域 -->
+      <div class="flex flex-col md:flex-row gap-8 md:gap-16 mobile-footer-links">
+        <!-- Logo 和描述 -->
+        <div class="flex-1">
+          <div class="flex flex-col items-start text-left">
+            <h1 class="text-blue-logo text-2xl md:text-3xl font-bold mb-4">MidjourneyAI</h1>
+            <p class="text-sm text-blue-footertext max-w-xl mb-4">
+              Imagen 4 Ultra delivers stunning AI-generated images with advanced technology. Supporting English prompts with customizable aspect ratios (1:1, 3:4, 4:3, 9:16, 16:9) and advanced person generation controls for professional results.
+            </p>
+            <div class="flex flex-col items-start gap-2 text-sm text-gray-500">
+              <p>© 2025 Imagen 4 Ultra. All rights reserved.</p>
+              <div class="text-left">
+                <p class="text-blue-footertext text-sm">
+                  Need help? Contact us at 
+                  <a href="mailto:support@aimagen4.com" class="text-blue-footertext hover:text-blue-footerhover transition-colors">support@aimagen4.com</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 导航链接和法律条款 -->
+        <div class="flex-1 flex flex-col sm:flex-row gap-6 md:gap-8">
+          <!-- 导航链接 -->
+          <div class="flex-1 text-center sm:text-left">
+            <div class="text-blue-footer font-medium mb-4 text-sm md:text-lg">Resources</div>
+            <div class="flex flex-col gap-2 items-center sm:items-start">
+              <template v-for="(section, index) in footerSections" :key="index">
+                <div v-if="section.href && section.openInNewTab" 
+                  @click="handleLinkClick(section.href, section.openInNewTab)"
+                  class="text-blue-footertext hover:text-blue-footerhover transition-colors cursor-pointer flex items-center gap-2 justify-center sm:justify-start">
+                  <span>{{ section.name }}</span>
+                  <div class="flex items-center gap-1">
+                    <span v-if="section.showBeta" class="bg-blue-medium/50 text-white text-xs font-semibold rounded-full px-1.5 py-0.5">
+                      Beta
+                    </span>
+                    <span v-if="section.badge" class="bg-red-500 text-white text-xs font-semibold rounded-full px-1.5 py-0.5">
+                      {{ section.badge }}
+                    </span>
+                  </div>
+                </div>
+                <NuxtLink v-else-if="section.href" :to="section.href" 
+                  class="text-blue-footertext hover:text-blue-footerhover transition-colors flex items-center gap-2 justify-center sm:justify-start">
+                  <span>{{ section.name }}</span>
+                  <div class="flex items-center gap-1">
+                    <span v-if="section.showBeta" class="bg-blue-medium/50 text-white text-xs font-semibold rounded-full px-1.5 py-0.5">
+                      Beta
+                    </span>
+                    <span v-if="section.badge" class="bg-red-500 text-white text-xs font-semibold rounded-full px-1.5 py-0.5">
+                      {{ section.badge }}
+                    </span>
+                  </div>
+                </NuxtLink>
+                <div v-else @click.prevent="handleNavClick(section.id)" 
+                  class="text-blue-footertext hover:text-blue-footerhover transition-colors cursor-pointer flex items-center gap-2 justify-center sm:justify-start">
+                  <span>{{ section.name }}</span>
+                  <div class="flex items-center gap-1">
+                    <span v-if="section.showBeta" class="bg-blue-medium/50 text-white text-xs font-semibold rounded-full px-1.5 py-0.5">
+                      Beta
+                    </span>
+                    <span v-if="section.badge" class="bg-red-500 text-white text-xs font-semibold rounded-full px-1.5 py-0.5">
+                      {{ section.badge }}
+                    </span>
+                  </div>
+                </div>
+              </template>
+            </div>
+          </div>
+          <div class="flex-1 text-center sm:text-left">
+            <div class="text-blue-footer font-medium mb-4 text-sm md:text-lg">Products</div>
+            <div class="flex flex-col gap-2 items-center sm:items-start">
+              <template v-for="(section, index) in productsSections" :key="index">
+                <div v-if="section.href && section.openInNewTab" 
+                  @click="handleLinkClick(section.href, section.openInNewTab)"
+                  class="text-blue-footertext hover:text-blue-footerhover transition-colors cursor-pointer flex items-center gap-2 justify-center sm:justify-start">
+                  <span>{{ section.name }}</span>
+                  <div class="flex items-center gap-1">
+                    <span v-if="section.showBeta" class="bg-blue-medium/50 text-white text-xs font-semibold rounded-full px-1.5 py-0.5">
+                      Beta
+                    </span>
+                    <span v-if="section.badge" class="bg-red-500 text-white text-xs font-semibold rounded-full px-1.5 py-0.5">
+                      {{ section.badge }}
+                    </span>
+                  </div>
+                </div>
+                <NuxtLink v-else-if="section.href" :to="section.href" 
+                  class="text-blue-footertext hover:text-blue-footerhover transition-colors flex items-center gap-2 justify-center sm:justify-start">
+                  <span>{{ section.name }}</span>
+                  <div class="flex items-center gap-1">
+                    <span v-if="section.showBeta" class="bg-blue-medium/50 text-white text-xs font-semibold rounded-full px-1.5 py-0.5">
+                      Beta
+                    </span>
+                    <span v-if="section.badge" class="bg-red-500 text-white text-xs font-semibold rounded-full px-1.5 py-0.5">
+                      {{ section.badge }}
+                    </span>
+                  </div>
+                </NuxtLink>
+                <div v-else @click.prevent="handleNavClick(section.id)" 
+                  class="text-blue-footertext hover:text-blue-footerhover transition-colors cursor-pointer flex items-center gap-2 justify-center sm:justify-start">
+                  <span>{{ section.name }}</span>
+                  <div class="flex items-center gap-1">
+                    <span v-if="section.showBeta" class="bg-blue-medium/50 text-white text-xs font-semibold rounded-full px-1.5 py-0.5">
+                      Beta
+                    </span>
+                    <span v-if="section.badge" class="bg-red-500 text-white text-xs font-semibold rounded-full px-1.5 py-0.5">
+                      {{ section.badge }}
+                    </span>
+                  </div>
+                </div>
+              </template>
+            </div>
+          </div>
+
+          <!-- 法律条款 -->
+          <div class="flex-1 text-center sm:text-left">
+            <div class="text-blue-footer font-medium mb-4 text-sm md:text-lg">Legal</div>
+            <div class="flex flex-col gap-2 items-center sm:items-start">
+              <NuxtLink to="/subsidiary/privacy-policy" class="text-blue-footertext hover:text-blue-footerhover transition-colors text-center sm:text-left">Privacy Policy</NuxtLink>
+              <NuxtLink to="/subsidiary/terms-of-service" class="text-blue-footertext hover:text-blue-footerhover transition-colors text-center sm:text-left">Terms of Service</NuxtLink>
             </div>
           </div>
         </div>
       </div>
-
     </div>
   </footer>
 </template>
@@ -87,10 +157,17 @@ interface PartnerSite {
   name: string
 }
 
-const { activeSection, sections, footerSections, handleNavClick, handleScroll } = useNavigation()
+const { activeSection, sections, handleNavClick, handleScroll, footerSections, productsSections } = useNavigation()
+
+// 处理链接点击，支持新标签页打开
+const handleLinkClick = (href: string, openInNewTab?: boolean) => {
+  if (openInNewTab) {
+    window.open(href, '_blank', 'noopener,noreferrer');
+  }
+};
 
 // 服务端请求友情链接
-const { data: partnerSites, error } = await useAsyncData('partnerSites'+Math.random(), async () => {
+const { data: partnerSites, error } = await useAsyncData('partnerSites', async () => {
   const res = await getFriendLinkList()
   if (res.code === 200) {
     return res.data as PartnerSite[]
@@ -101,13 +178,11 @@ const { data: partnerSites, error } = await useAsyncData('partnerSites'+Math.ran
 
 <style scoped>
 /* 导航链接悬停效果 */
-a, .nuxt-link-exact-active {
+a {
   position: relative;
-  display: inline-block;  /* 改为行内块级元素 */
-  width: fit-content;     /* 宽度适应内容 */
 }
 
-a::after, .nuxt-link-exact-active::after {
+a::after {
   content: '';
   position: absolute;
   bottom: -2px;
@@ -118,7 +193,24 @@ a::after, .nuxt-link-exact-active::after {
   transition: width 0.3s ease;
 }
 
-a:hover::after, .nuxt-link-exact-active:hover::after {
+a:hover::after {
   width: 100%;
+}
+
+footer a:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* 确保标签在小屏幕上也能正确显示 */
+@media (max-width: 640px) {
+  .flex.items-center.justify-between {
+    flex-wrap: wrap;
+  }
+  
+  .flex.items-center.gap-2.ml-2 {
+    margin-left: 0;
+    margin-top: 0.25rem;
+  }
 }
 </style> 
