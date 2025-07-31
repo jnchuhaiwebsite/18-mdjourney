@@ -221,7 +221,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, nextTick, onMounted, watch, computed, inject } from "vue";
+import { ref, reactive, nextTick, onMounted, watch, computed } from "vue";
 import { useUserStore } from "~/stores/user";
 import { useClerkAuth } from "~/utils/authHelper";
 // import { createTask, getStyleList, getTaskInfo } from '~/api'; // Import getTaskInfo - 暂时注释API导入
@@ -238,8 +238,44 @@ import {
 const userStore = useUserStore();
 const { isAuthenticated, login } = useClerkAuth();
 
-// 注入 checkLoginStatus 函数
-const checkLoginStatus = inject('checkLoginStatus')
+// 防抖标记
+let isCheckingLogin = false
+
+// 声明 checkLoginStatus 函数
+const checkLoginStatus = async () => {
+  // 每次都提示用户需要登录
+  console.log('检查登录状态...')
+  
+  // 防止频繁调用登录弹窗
+  if (isCheckingLogin) {
+    console.log('请先完成登录再继续操作')
+    return false
+  }
+  
+  // 每次都重新获取最新的用户信息
+  await userStore.fetchUserInfo()
+  
+  // 检查用户是否已登录
+  if (!userStore.userInfo) {
+    console.log('用户未登录，请先登录')
+    isCheckingLogin = true
+    
+    const loginButton = document.getElementById('bindLogin')
+    if (loginButton) {
+      loginButton.click()
+    }
+    
+    // 3秒后重置防抖标记
+    setTimeout(() => {
+      isCheckingLogin = false
+    }, 3000)
+    
+    return false
+  }
+  
+  console.log('用户已登录，可以继续操作')
+  return true
+}
 
 const fileInput = ref<HTMLInputElement | null>(null);
 const isImageLoading = ref(false);
@@ -401,13 +437,8 @@ onMounted(async () => {
 
 // Handle file selection
 const handleFileChange = async (event: Event) => {
-  // 先验证登录状态
-  if (checkLoginStatus) {
-    const isLoggedIn = await checkLoginStatus()
-    if (!isLoggedIn) {
-      return
-    }
-  }
+  // 只验证登录状态，不做任何额外操作
+  await checkLoginStatus()
   
   const target = event.target as HTMLInputElement;
   if (target.files && target.files.length > 0) {

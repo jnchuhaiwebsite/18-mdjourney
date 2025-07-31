@@ -15,7 +15,6 @@
     <!-- Input Panels -->
     <InputPanels 
       :selected-mode="selectedMode" 
-      :check-login-status="checkLoginStatus"
       @input-change="handleInputChange" 
     />
 
@@ -152,7 +151,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, defineAsyncComponent, onMounted, onUnmounted, provide } from 'vue'
+import { ref, computed, watch, defineAsyncComponent, onMounted, onUnmounted } from 'vue'
 import { useUserStore } from '~/stores/user'
 import { useRouter } from 'vue-router'
 import { useNuxtApp } from 'nuxt/app'
@@ -297,23 +296,21 @@ const userInfo = computed(() => userStore.userInfo)
 
 // 修改 checkLoginStatus 函数
 const checkLoginStatus = async () => {
-  if (!userInfo.value) {
-    // 先尝试获取用户信息
-    await userStore.fetchUserInfo()
-    
-    if (!userStore.userInfo) {
-      const loginButton = document.getElementById('bindLogin')
-      if (loginButton) {
-        loginButton.click()
-      }
-      return false
+  // 每次都重新获取最新的用户信息
+  await userStore.fetchUserInfo()
+  
+  // 检查用户是否已登录
+  if (!userStore.userInfo) {
+    const loginButton = document.getElementById('bindLogin')
+    if (loginButton) {
+      loginButton.click()
     }
+    return false
   }
   return true
 }
 
-// 提供 checkLoginStatus 函数给子组件
-provide('checkLoginStatus', checkLoginStatus)
+
 
 
 onMounted(() => {

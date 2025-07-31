@@ -5,7 +5,6 @@
       class="input-group"
     >
       <TextToImageInput 
-        :check-login-status="props.checkLoginStatus"
         @input-change="emit('input-change', $event)" 
       />
     </div>
@@ -14,7 +13,6 @@
       class="input-group"
     >
       <ImageToImageInput 
-        :check-login-status="props.checkLoginStatus"
         @input-change="emit('input-change', $event)" 
       />
     </div>
@@ -23,7 +21,6 @@
       class="input-group"
     >
       <AiVideoInput 
-        :check-login-status="props.checkLoginStatus"
         @input-change="emit('input-change', $event)" 
       />
     </div>
@@ -36,7 +33,6 @@ import { defineAsyncComponent } from 'vue'
 // Props
 interface Props {
   selectedMode: string
-  checkLoginStatus?: () => Promise<boolean>
 }
 
 const props = defineProps<Props>()
