@@ -99,18 +99,8 @@
         <div class="mx-auto border border-gray-700 rounded-xl overflow-hidden bg-[#1E1C21] flex items-center justify-center relative" style="width: 300px; height: 450px;">
           <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDEwIEwgNDAgMTAgTSAxMCAwIEwgMTAgNDAgTSAwIDIwIEwgNDAgMjAgTSAyMCAwIEwgMjAgNDAgTSAwIDMwIEwgNDAgMzAgTSAzMCAwIEwgMzAgNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJkMmQyZCIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')]"></div>
           
-          <!-- Generate progress overlay -->
-          <div v-if="isGenerating" class="absolute inset-0 bg-black bg-opacity-40 z-20 flex flex-col items-center justify-center backdrop-blur-md px-8">
-            <div class="animate-spin rounded-full h-12 w-12 border-4 border-[#ec2657] border-t-transparent mb-4"></div>
-            <div class="text-white text-xl font-medium">Generating your AI pencil drawing...</div>
-            <div class="text-white text-2xl font-bold mt-2">{{ Math.round(progress) }}%</div>
-            <div class="text-white text-sm mt-6 max-w-xs text-center">
-              It takes about 1-2 minutes to generate an image.
-            </div>
-          </div>
-          
           <!-- Regular loading state (not for generation) -->
-          <div v-else-if="isImageLoading" class="absolute inset-0 flex items-center justify-center">
+          <div v-if="isImageLoading" class="absolute inset-0 flex items-center justify-center">
             <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-[#ec2657]"></div>
           </div>
 
@@ -146,12 +136,12 @@
       <button
         @click="generateAIImage"
         class="py-2.5 px-6 rounded-xl bg-[#ec2657] text-white hover:bg-[#8B5CF6] transition-colors text-base flex items-center justify-center gap-2"
-        :disabled="isGenerating || isLoading"
-        :class="{'opacity-50 cursor-not-allowed': isGenerating || isLoading}"
+        :disabled="isLoading"
+        :class="{'opacity-50 cursor-not-allowed': isLoading}"
       >
-        <EyeIcon v-if="!isGenerating && !isLoading" class="w-5 h-5" />
+        <EyeIcon v-if="!isLoading" class="w-5 h-5" />
         <div v-else class="animate-spin w-5 h-5 border-2 border-white border-t-transparent rounded-full"></div>
-        {{ isGenerating || isLoading ? 'Processing...' : 'Generate' }}
+        {{ isLoading ? 'Processing...' : 'Generate' }}
       </button>
       
       <!-- Download button -->
@@ -231,8 +221,6 @@ const userStore = useUserStore();
 const fileInput = ref<HTMLInputElement | null>(null);
 const isImageLoading = ref(false);
 const isLoading = ref(false);
-const isGenerating = ref(false);
-const progress = ref(0);
 const statusMessage = ref('');
 const generatedImage = ref<string | null>(null);
 const currentRatio = ref<string>('2:3'); // Default ratio is 2:3
@@ -599,33 +587,19 @@ const generateAIImage = async () => {
   
   // 显示处理状态
   isLoading.value = true;
-  isGenerating.value = true;
-  progress.value = 0;
 
   try {
     showToast("AI image generation in progress...", "info");
 
-    // 模拟进度更新
-    const updateProgress = () => {
-      if (progress.value < 100) {
-        progress.value += 10;
-        setTimeout(updateProgress, 500);
-      } else {
-        // 模拟生成完成
-        isGenerating.value = false;
-        isLoading.value = false;
-        // 使用上传的图片作为生成结果（仅用于演示）
-        generatedImage.value = selectedImage.value.url;
-        showToast("Image generated successfully!", "success");
-      }
-    };
-
-    // 开始模拟进度
-    setTimeout(updateProgress, 500);
+    // Mockup: Use the uploaded image as the result after a delay
+    setTimeout(() => {
+      isLoading.value = false;
+      generatedImage.value = selectedImage.value!.url;
+      showToast("Image generated successfully!", "success");
+    }, 2000);
 
   } catch (error) {
     showToast("Image generation failed", "error");
-    isGenerating.value = false;
     isLoading.value = false;
   }
 };

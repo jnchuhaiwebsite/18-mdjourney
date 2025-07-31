@@ -1,79 +1,48 @@
 <template>
-  <div class="w-full mx-auto bg-blue-pale">
-    <main class="max-w-24xl mx-auto min-h-screen">
-      <!-- 首屏区块 -->
-      <section
-        id="hero"
-        class="min-h-[700px] relative pt-[64px]"
-      >
-        <PageHero 
-          title="Imagen 4 Ultra - Professional AI Art Generation Platform"
-          subtitle="Create stunning, high-quality images instantly with our cutting-edge AI technology - Professional-grade art generation at your fingertips"
-        />
-      </section>
-
-      <!-- 展示案例 -->
-      <section id="ShowcaseExamples">
-          <ShowcaseExamples />
-      </section>
-
-      <!-- 操作步骤 -->
-      <section id="how-it-works">
-          <HowItWorks />
-      
-      </section>
-
-
-
-      <!-- 特性展示 -->
-      <section id="features-showcase">
-      
-          <FeatureShowcase />
-       
-      </section>
-
-      <!-- 用户评论 -->
-      <section id="reviews">
-      
-          <Reviews />
-        
-      </section>
-
-      <!-- 定价模块 -->
-      <!-- <section id="pricing">
-        <keep-alive>
-          <PricingPlans />
-        </keep-alive>
-      </section> -->
-
-      <!-- 常见问题模块 -->
-      <section id="faq">
-        <keep-alive>
-          <FaqSection />
-        </keep-alive>
-      </section>
-    </main>
-  </div>
+  <main class="w-full mx-auto p-6 bg-blue-pale rounded-lg max-w-24xl min-h-screen">
+    <!-- 首屏区块 -->
+    <section
+      id="hero"
+      class="min-h-[700px] relative"
+    >
+      <PageHero 
+        title="The Midjourney Video Generator"
+        subtitle="From static art to cinematic motion. Experience the premier midjourney video generator, built to transform your images into breathtaking video clips with unparalleled ease."
+      />
+      <HomeVideoGenerator 
+        ref="videoGenerator"
+      />
+    </section>
+    
+    <!-- How It Works 区块 -->
+    <HowItWorks />
+    
+    <!-- Feature Showcase 区块 -->
+    <FeatureShowcase />
+    
+    <!-- Showcase Gallery 区块 -->
+    <ShowcaseGallery />
+  </main>
 </template>
 
 <script setup lang="ts">
 import { onBeforeMount, defineAsyncComponent, onMounted } from "vue";
 import { useSeo } from '~/composables/useSeo';
+import { ref } from 'vue'
+import HomeVideoGenerator from '~/components/HomeVideoGenerator.vue'
+import HowItWorks from '~/components/HowItWorks.vue'
+import FeatureShowcase from '~/components/FeatureShowcase.vue'
+import ShowcaseGallery from '~/components/ShowcaseGallery.vue'
 
-
-const FaqSection = defineAsyncComponent(() => import('~/pages/components/FaqSection.vue'));
-const HowItWorks = defineAsyncComponent(() => import('~/pages/components/HowItWorks.vue'));
-const FeatureShowcase = defineAsyncComponent(() => import('~/pages/components/FeatureShowcase.vue'));
-const Reviews = defineAsyncComponent(() => import('~/pages/components/Reviews.vue'));
-const ShowcaseExamples = defineAsyncComponent(() => import('~/pages/components/ShowcaseExamples.vue'));
-const PromptImageGenerator = defineAsyncComponent(() => import('~/components/PromptImageGenerator.vue'));
 const PageHero = defineAsyncComponent(() => import('~/components/PageHero.vue'));
 
 import { useNuxtApp } from 'nuxt/app'
 const { $toast } = useNuxtApp() as any
-
 // 使用默认的 SEO 配置
-useSeo()
+useSeo({
+  title: 'AI Video Generator - Transform Text & Images into Videos',
+  description: 'Experience the ultimate text-to-video and image-to-video workflow with our Midjourney Video Generator. Create stunning videos from simple prompts.'
+})
 
 // 处理支付回调
 onBeforeMount(() => {
@@ -98,9 +67,9 @@ onMounted(() => {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    name: "Imagen 4 Ultra",
-    description: "Advanced AI image generation platform powered by Imagen 4 Ultra technology. Create high-quality images with customizable parameters including aspect ratio and person generation controls. Supports English prompts with professional-grade output.",
-    applicationCategory: "ImageGenerationApplication",
+    name: "AI Video Generation",
+    description: "Advanced AI video generation platform that transforms static images into dynamic videos. Upload any image and watch it come to life with our cutting-edge AI animation technology. Professional video generation at your fingertips.",
+    applicationCategory: "VideoGenerationApplication",
     operatingSystem: "All",
     offers: {
       "@type": "Offer",
@@ -108,40 +77,40 @@ onMounted(() => {
       priceCurrency: "USD",
     },
     featureList: [
-      "Advanced Imagen 4 Ultra technology",
-      "English prompt support",
-      "Multiple aspect ratios (1:1, 3:4, 4:3, 9:16, 16:9)",
-      "Customizable person generation settings",
-      "Professional image quality",
-      "Fast generation (20-60 seconds)",
+      "Advanced AI video generation technology",
+      "Static image to video transformation",
+      "Customizable motion descriptions",
+      "Professional video quality",
+      "Fast video generation",
+      "Multiple video formats support",
       "Commercial usage rights",
       "Digital watermarking",
       "Safety filters and content moderation",
-      "Instant image download"
+      "Instant video download"
     ],
     additionalProperty: [
       {
         "@type": "PropertyValue",
-        "name": "supportedAspectRatios",
-        "value": ["1:1", "3:4", "4:3", "9:16", "16:9"]
+        "name": "supportedVideoFormats",
+        "value": ["MP4", "MOV", "AVI"]
       },
       {
         "@type": "PropertyValue",
-        "name": "personGenerationOptions",
-        "value": ["dont_allow", "allow_adult", "allow_all"]
+        "name": "videoDurationOptions",
+        "value": [3, 6, 10, 15]
       },
       {
         "@type": "PropertyValue",
         "name": "defaultSettings",
         "value": {
-          "batchSize": 1,
-          "aspectRatio": "1:1",
-          "personGeneration": "allow_adult"
+          "duration": 6,
+          "fps": 30,
+          "quality": "high"
         }
       }
     ],
     screenshot: "/logo.png",
-    applicationSubCategory: "AI Image Generation",
+    applicationSubCategory: "AI Video Generation",
     browserRequirements: "Requires JavaScript. Requires HTML5.",
     softwareVersion: "1.0.0",
     inLanguage: "en-US"

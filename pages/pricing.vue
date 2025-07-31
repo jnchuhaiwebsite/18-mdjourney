@@ -1,86 +1,101 @@
 <template>
-  <div
-    class="py-16 bg-blue-pale"
-    aria-labelledby="pricing-heading"
-  >
-    <div class="max-w-7xl mx-auto px-4">
-      <!-- <div class="text-gray-300 text-center text-lg mb-2 font-medium">
-        Choose Your Plan
-      </div> -->
-      <h1
-        class="text-theme text-center text-4xl font-bold mb-4 font-medium mt-12"
-      >
-        Imagen 4 Ultra Pricing
-      </h1>
-      <p class="text-gray-400 text-center max-w-2xl mx-auto mb-12">
-        Purchase credits to use our services. No subscription required - pay once, use anytime.
-      </p>
+  <div class="min-h-screen bg-blue-pale">
+    <main class="w-full mx-auto p-6 bg-blue-pale rounded-lg max-w-7xl min-h-screen">
+      <!-- 页面标题区域 -->
+      <header>
+        <PageHero 
+          title="Simple, Transparent Pricing"
+          subtitle="Unlock the full power of Midjourney V7 with a plan that scales with your ambition. No hidden fees, cancel anytime."
+        />
+      </header>
 
       <!-- 加载状态 -->
-      <div v-if="pending" class="flex justify-center items-center py-20 w-full">
+      <section v-if="pending" class="flex justify-center items-center py-20 w-full" aria-live="polite">
         <div
           class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500"
           aria-label="Loading pricing plans"
         ></div>
-      </div>
+      </section>
 
-      <!-- 定价卡片 -->
-      <div
+      <!-- 定价方案区域 -->
+      <section
         v-else
         class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
+        aria-label="Pricing plans"
       >
         <!-- 循环渲染套餐卡片 -->
         <article
           v-for="(plan, index) in planData"
           :key="index"
           :class="[
-            'bg-gray-800 rounded-xl p-8 flex flex-col',
+            'bg-blue-pricing rounded-xl p-8 flex flex-col',
             plan.is_popular
-              ? 'border-2 border-[#ec2657] shadow-lg relative'
-              : 'border border-gray-700 shadow-sm hover:shadow-md transition-shadow',
+              ? 'border-2 border-blue-pricingPopular shadow-lg relative'
+              : 'border border-blue-pricingborder shadow-sm hover:shadow-md transition-shadow',
             plan.price === 0 ? 'hidden md:flex' : 'flex'
           ]"
+          :aria-labelledby="`plan-${index}-title`"
         >
+          <!-- 热门标签 -->
           <div
             v-if="plan.is_popular"
-            class="absolute -top-3 right-6 px-3 py-1 bg-theme text-white text-sm rounded-full"
+              class="absolute -top-3 right-6 px-3 py-1 bg-blue-button text-white text-sm rounded-full"
+            aria-label="Most popular plan"
           >
             Most Popular
           </div>
-          <h3 class="text-2xl font-bold text-white mb-2 font-medium">
-            {{ plan.name }}
-          </h3>
-          <p class="text-gray-400 mb-6">{{ plan.description }}</p>
-          <div class="text-3xl font-bold text-white mb-6">
-            ${{ plan.price }}
-            <span class="text-gray-400 text-base font-normal"></span>
-          </div>
-          <ul class="space-y-3 mb-8" :aria-label="`${plan.name} plan features`">
-            <li
-              v-for="(feature, fIndex) in getPlanFeatures(plan)"
-              :key="fIndex"
-              class="flex items-center text-gray-300"
+
+          <!-- 套餐标题 -->
+          <header class="mb-6">
+            <h3 
+              :id="`plan-${index}-title`"
+              class="text-2xl font-bold text-black mb-2 font-medium"
             >
-              <span class="mr-2 text-theme" aria-hidden="true">✓</span>
-              {{ feature }}
-            </li>
-          </ul>
-          <div class="mt-auto">
+              {{ plan.name }}
+            </h3>
+            <p class="text-blue-pricingtext mb-6">{{ plan.description }}</p>
+          </header>
+
+          <!-- 价格信息 -->
+          <div class="mb-6">
+            <div class="text-3xl font-bold text-black">
+              ${{ plan.price }}
+              <span class="text-blue-pricingtext text-base font-normal"></span>
+            </div>
+          </div>
+
+          <!-- 功能特性列表 -->
+          <section class="mb-8" :aria-label="`${plan.name} plan features`">
+            <ul class="space-y-3">
+              <li
+                v-for="(feature, fIndex) in getPlanFeatures(plan)"
+                :key="fIndex"
+                class="flex items-center text-blue-pricingtext"
+              >
+                <span class="mr-2 text-theme" aria-hidden="true">✓</span>
+                {{ feature }}
+              </li>
+            </ul>
+          </section>
+
+          <!-- 操作按钮 -->
+          <footer class="mt-auto">
             <button
               @click="plan.code ? handleUpgradePlan(plan) : null"
               :disabled="upgradingPlanId === plan.code"
               :class="[
-                'w-full py-3 px-4 rounded-lg flex items-center justify-center hover-theme',
+                'w-full py-3 px-4 rounded-lg flex items-center justify-center',
                 getButtonClass(plan),
               ]"
+              :aria-describedby="`plan-${index}-title`"
             >
-              <div v-if="upgradingPlanId === plan.code" class="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-white mr-2"></div>
+              <div v-if="upgradingPlanId === plan.code" class="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-white mr-2" aria-hidden="true"></div>
               {{ plan.button_text }}
             </button>
-          </div>
+          </footer>
         </article>
-      </div>
-    </div>
+      </section>
+    </main>
   </div>
 </template>
 
@@ -90,12 +105,23 @@ import { getSubPlans, payOrder } from "~/api/index";
 import { useClerkAuth } from '~/utils/authHelper';
 import { useSeo } from '~/composables/useSeo';
 import { useAsyncData } from 'nuxt/app';
+import PageHero from '~/components/PageHero.vue';
+
+// 定义套餐数据类型
+interface PricingPlan {
+  name: string;
+  description: string;
+  price: number;
+  code: string;
+  button_text: string;
+  is_popular: boolean;
+  features: string | string[];
+}
 
 // 设置SEO
 useSeo({
-  title: 'Imagen 4 Ultra Pricing | AI Image Generation Plans',
-  description: 'Choose from our flexible pricing plans for Imagen 4 Ultra AI image generation. Pay-as-you-go credits system with no subscription required.',
-  url: '/pricing'
+  title: 'Genesis Engine | Midjourney Pricing & Plans',
+  description: 'Explore simple Midjourney pricing on Genesis Engine. Get unlimited AI art & video with V7. No Discord needed. Find the perfect plan and start for free!',
 });
 
 // 引入auth认证
@@ -110,7 +136,7 @@ const upgradingPlanId = ref<string | null>(null);
 const { data, pending, error } = await useAsyncData('pricingPlans', async () => {
   try {
     const response = await getSubPlans();
-    return response.data;
+    return response.data as PricingPlan[];
   } catch (err) {
     console.error('Error fetching pricing plans:', err);
     throw err;
@@ -130,7 +156,7 @@ const planData = computed(() => {
 });
 
 // 获取套餐特性列表
-const getPlanFeatures = (plan: any): string[] => {
+const getPlanFeatures = (plan: PricingPlan): string[] => {
   if (!plan.features) return [];
   // 如果特性是字符串，按逗号分割
   if (typeof plan.features === 'string') {
@@ -141,18 +167,18 @@ const getPlanFeatures = (plan: any): string[] => {
 };
 
   // 获取按钮样式
-const getButtonClass = (plan: any): string => {
+const getButtonClass = (plan: PricingPlan): string => {
   if (plan.price === 0) {
     return "bg-gray-100 text-white hover:bg-gray-200";
   } else if (plan.is_popular) {
-    return "bg-theme text-white hover:bg-theme-hover";
+    return "bg-blue-button text-white hover:bg-blue-buttonhover";
   } else {
-    return "bg-theme text-white hover:bg-theme-hover";
+    return "bg-blue-button text-white hover:bg-blue-buttonhover";
   }
 };
 
 // 处理升级计划
-const handleUpgradePlan = async (plan: any) => {
+const handleUpgradePlan = async (plan: PricingPlan) => {
   // 如果没有登录，则提示登录并触发登录
   if (!isSignedIn.value) {
     try {
