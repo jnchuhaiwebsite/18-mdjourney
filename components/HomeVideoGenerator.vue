@@ -14,6 +14,16 @@
 
       <!-- 右侧预览区域 -->
       <div class="preview-section">
+        <!-- 测试按钮 -->
+        <!-- <div style="padding: 10px; background: #f0f0f0; margin-bottom: 10px;">
+          <button @click="testResults" style="padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 4px; margin-right: 10px;">
+            测试显示结果
+          </button>
+          <button @click="clearResults" style="padding: 5px 10px; background: #dc3545; color: white; border: none; border-radius: 4px;">
+            清空结果
+          </button>
+        </div> -->
+        
         <GenerationPreview
           mode="video"
           :is-generating="isGenerating"
@@ -48,36 +58,98 @@ const parameters = ref({
 
 const { generate } = useGeneration();
 const videoTaskStore = useVideoTaskStore();
-const { currentTask, progress } = storeToRefs(videoTaskStore);
+const { currentTask, progress, generatedResults } = storeToRefs(videoTaskStore);
 
 const isGenerating = computed(() => !!currentTask.value?.isGenerating);
-const generatedResults = ref<any[]>([])
+const uploadedImages = ref<string[]>([]);
+
+// 根据URL检测文件类型
+const detectFileType = (url: string): 'image' | 'video' => {
+  const extension = url.split('.').pop()?.toLowerCase();
+  const videoExtensions = ['mp4', 'webm', 'mov', 'avi'];
+  const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+  
+  if (videoExtensions.includes(extension || '')) {
+    return 'video';
+  } else if (imageExtensions.includes(extension || '')) {
+    return 'image';
+  }
+  // 默认返回视频类型（因为这是视频生成器）
+  return 'video';
+}
+
+// 验证图片文件
+const validateImageFile = (file: File) => {
+  const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
+  const maxSize = 10 * 1024 * 1024; // 10MB
+
+  if (!allowedTypes.includes(file.type)) {
+    throw new Error('Please upload a valid image file (JPEG, PNG, GIF, or WebP)');
+  }
+
+  if (file.size > maxSize) {
+    throw new Error('File size must be less than 10MB');
+  }
+}
+
+// 上传图片
+const uploadImage = async (file: File) => {
+  // 这里应该调用实际的上传API，暂时返回模拟结果
+  try {
+    // TODO: 实现实际的图片上传逻辑
+    // const result = await upload({ file });
+    // return { success: true, url: result.data };
+    
+    // 临时模拟上传成功
+    return {
+      success: true,
+      url: URL.createObjectURL(file), // 临时使用本地URL
+      message: 'Upload successful'
+    };
+  } catch (error) {
+    return {
+      success: false,
+      url: '',
+      message: error instanceof Error ? error.message : 'Upload failed'
+    };
+  }
+}
+
+// 测试函数
+const testResults = () => {
+  console.log('🧪 测试显示结果');
+  const testUrls = [
+    'https://resp.midjourneyai.net/midjourney/202507/31/86f48305-d820-4e7f-91e2-c5f32017bdef.mp4',
+    'https://resp.midjourneyai.net/midjourney/202507/31/e12fd1e4-948d-4671-bfbd-42c2427ae8ec.mp4',
+    'https://resp.midjourneyai.net/midjourney/202507/31/c487dfcd-7fc3-4489-b525-d66ad09f8ef7.mp4',
+    'https://resp.midjourneyai.net/midjourney/202507/31/c483754a-cfdd-4694-83ed-49096682765d.mp4'
+  ];
+  videoTaskStore.displayResults(testUrls, 'test-task-id');
+}
+
+const clearResults = () => {
+  console.log('🧹 清空结果');
+  videoTaskStore.clearResults();
+}
 
 // Methods
 const handleGenerate = async (params: any) => {
-  await generate(params);
+  console.log('HomeVideoGenerator handleGenerate 被调用，参数:', params);
+  try {
+    await generate(params);
+    console.log('HomeVideoGenerator generate 调用完成');
+  } catch (error) {
+    console.error('HomeVideoGenerator generate 调用失败:', error);
+  }
 }
 
-watch(currentTask, (newTask, oldTask) => {
-  if (oldTask?.isGenerating && !newTask?.isGenerating && newTask?.resultUrl) {
-    const size = parameters.value.aspectRatio === '1:1' ? '512x512' : '512x288';
-    generatedResults.value = [
-      {
-        id: newTask.taskId,
-        name: 'AI Generated Video',
-        url: newTask.resultUrl,
-        type: newTask.type,
-        size: size,
-        quality: 'High Quality',
-        model: 'Runway Gen-3',
-        createdAt: Date.now(),
-        parameters: { ...parameters.value }
-      }
-    ];
-  } else if (!newTask) {
-    generatedResults.value = [];
-  }
-}, { deep: true });
+// 简化的监听逻辑 - 只在任务被清空时清空结果
+// watch(currentTask, (newTask, oldTask) => {
+//   if (!newTask && oldTask) {
+//     console.log('HomeVideoGenerator 任务被清空，清空结果');
+//     videoTaskStore.clearResults();
+//   }
+// }, { deep: true });
 
 // 下载媒体文件
 const downloadMedia = async (result: any) => {

@@ -192,9 +192,8 @@ export const getUserOpus = async () => {
  * @returns 用户作品列表
  */
 export const getOpusList = async (data: any) => {
-  return apiRequest(urlList.opusList+`?page=${data.page}&page_size=${data.page_size}&status=${data.status}`, 'GET', undefined, true);
+  return apiRequest(urlList.opusList+`?page=${data.page}&page_size=${data.page_size}&status=${data.status}&task_type=${data.task_type}`, 'GET', undefined, true);
 }
-
 /**
  * 检查任务
  * @param task_id 任务id

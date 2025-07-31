@@ -6,14 +6,22 @@
       class="min-h-[700px] relative"
     >
       <PageHero 
-        title="The Midjourney Video Generator, Redefined."
+        title="The Midjourney Video Generator"
         subtitle="From a simple sentence to a breathtaking video clip. Experience the ultimate text-to-video and image-to-video workflow, built to unleash the full cinematic power of Midjourney."
       />
       <HomeVideoGenerator 
         ref="videoGenerator"
-        @generate="handleGenerate"
       />
     </section>
+    
+    <!-- How It Works 区块 -->
+    <HowItWorks />
+    
+    <!-- Feature Showcase 区块 -->
+    <FeatureShowcase />
+    
+    <!-- Showcase Gallery 区块 -->
+    <ShowcaseGallery />
   </main>
 </template>
 
@@ -22,18 +30,14 @@ import { onBeforeMount, defineAsyncComponent, onMounted } from "vue";
 import { useSeo } from '~/composables/useSeo';
 import { ref } from 'vue'
 import HomeVideoGenerator from '~/components/HomeVideoGenerator.vue'
-
+import HowItWorks from '~/components/HowItWorks.vue'
+import FeatureShowcase from '~/components/FeatureShowcase.vue'
+import ShowcaseGallery from '~/components/ShowcaseGallery.vue'
 
 const PageHero = defineAsyncComponent(() => import('~/components/PageHero.vue'));
 
 import { useNuxtApp } from 'nuxt/app'
 const { $toast } = useNuxtApp() as any
-
-// 处理生成事件
-const handleGenerate = (params: any) => {
-  console.log('Generation event triggered:', params)
-  $toast.success('Starting video generation...', 3000)
-}
 // 使用默认的 SEO 配置
 useSeo({
   title: 'AI Video Generator - Transform Text & Images into Videos',

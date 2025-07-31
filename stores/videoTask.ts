@@ -42,6 +42,7 @@ export const useVideoTaskStore = defineStore('videoTask', {
     progress: 0,
     progressInterval: null as NodeJS.Timeout | null,
     pollingInterval: null as NodeJS.Timeout | null,
+    generatedResults: [] as any[], // 直接存储生成结果
   }),
   
   getters: {
@@ -119,13 +120,40 @@ export const useVideoTaskStore = defineStore('videoTask', {
       this.pollingInterval = setInterval(async () => {
         try {
           const response = await checkTask(taskId);
+          console.log('轮询响应:', response);
+          
           if (response.code === 200 && response.data) {
+            console.log('任务状态:', response.data.status);
+            
             if (response.data.status === 1 || response.data.status === -1) {
+              console.log('任务完成，处理结果');
               this.stopPolling();
               this.progress = 100; // Mark as complete
+              
               if (this.currentTask) {
                 this.currentTask.isGenerating = false;
+                
+                const imageUrls = [];
+                if (response.data.url1) imageUrls.push(response.data.url1);
+                if (response.data.url2) imageUrls.push(response.data.url2);
+                if (response.data.url3) imageUrls.push(response.data.url3);
+                if (response.data.url4) imageUrls.push(response.data.url4);
+                
+                console.log('提取的imageUrls:', imageUrls);
+                
+                this.currentTask.imageUrls = imageUrls;
                 this.currentTask.resultUrl = response.data.url || '';
+                
+                console.log('更新后的currentTask:', {
+                  taskId: this.currentTask.taskId,
+                  isGenerating: this.currentTask.isGenerating,
+                  imageUrls: this.currentTask.imageUrls,
+                  resultUrl: this.currentTask.resultUrl
+                });
+                
+                // 直接触发结果显示
+                this.displayResults(imageUrls, this.currentTask.taskId);
+           
                 this.completeTask(this.currentTask.taskId);
               }
               // Hide progress bar after a short delay
@@ -170,6 +198,46 @@ export const useVideoTaskStore = defineStore('videoTask', {
       this.stopPolling();
       this.stopProgressAnimation();
       this.currentTask = null;
+    },
+
+    displayResults(urls: string[], taskId: string) {
+      console.log('🎯 displayResults 被调用:', { urls, taskId });
+      
+      // 检测文件类型的函数
+      const detectFileType = (url: string): 'image' | 'video' => {
+        const extension = url.split('.').pop()?.toLowerCase();
+        const videoExtensions = ['mp4', 'webm', 'mov', 'avi'];
+        const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+        
+        if (videoExtensions.includes(extension || '')) {
+          return 'video';
+        } else if (imageExtensions.includes(extension || '')) {
+          return 'image';
+        }
+        return 'video'; // 默认返回视频类型
+      }
+      
+      // 生成结果数组
+      this.generatedResults = urls.map((url, index) => {
+        const fileType = detectFileType(url);
+        return {
+          id: `${taskId}-${index}`,
+          name: `AI Generated ${fileType === 'video' ? 'Video' : 'Image'} ${index + 1}`,
+          url: url,
+          type: fileType,
+          size: '512x288', // 默认尺寸
+          quality: 'High Quality',
+          model: 'Midjourney V7',
+          createdAt: Date.now(),
+          parameters: {}
+        };
+      });
+      
+      console.log('🎯 设置的 generatedResults:', this.generatedResults);
+    },
+
+    clearResults() {
+      this.generatedResults = [];
     },
   }
 })

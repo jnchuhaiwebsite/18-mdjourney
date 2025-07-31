@@ -10,9 +10,6 @@
         @input="handleInput"
       ></textarea>
       <div class="input-hint">
-        <p class="text-sm text-gray-500">
-          Please enter detailed English descriptions. The more specific the description, the better the generation results
-        </p>
         <p v-if="promptError" class="text-sm text-red-500 mt-1">
           Please enter a prompt to generate an image
         </p>

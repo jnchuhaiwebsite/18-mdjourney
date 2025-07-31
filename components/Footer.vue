@@ -3,7 +3,7 @@
     <div class="max-w-7xl mx-auto px-4 mobile-padding">
       
       <!-- 友情链接区域 -->
-      <div class="mb-8">
+      <div class="mb-8" v-if="partnerSites && partnerSites.length > 0">
         <div class="text-blue-footer font-medium mb-4 text-left text-sm md:text-lg">Partner Sites</div>
         <div class="flex flex-wrap gap-x-6 gap-y-2">
           <a v-for="(item,index) in partnerSites" :key="index" 
@@ -17,7 +17,7 @@
       </div>
 
       <!-- 分割线 -->
-      <div class="w-full h-px bg-gray-700/30 mb-8"></div>
+      <div class="w-full h-px bg-gray-700/30 mb-8" v-if="partnerSites && partnerSites.length > 0"></div>
 
       <!-- 主要内容区域 -->
       <div class="flex flex-col md:flex-row gap-8 md:gap-16 mobile-footer-links">
@@ -26,7 +26,7 @@
           <div class="flex flex-col items-start text-left">
             <h1 class="text-blue-logo text-2xl md:text-3xl font-bold mb-4">MidjourneyAI</h1>
             <p class="text-sm text-blue-footertext max-w-xl mb-4">
-              Imagen 4 Ultra delivers stunning AI-generated images with advanced technology. Supporting English prompts with customizable aspect ratios (1:1, 3:4, 4:3, 9:16, 16:9) and advanced person generation controls for professional results.
+              Genesis Engine is your direct gateway to the revolutionary Midjourney V7 engine. We've stripped away the complexity, providing a beautiful and hyper-efficient workspace for all your AI generation needs—from photorealistic images to dynamic video clips. Stop wrestling with tools and start creating your next masterpiece. Welcome to the future of digital art.
             </p>
             <div class="flex flex-col items-start gap-2 text-sm text-gray-500">
               <p>© 2025 Imagen 4 Ultra. All rights reserved.</p>

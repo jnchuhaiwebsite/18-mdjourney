@@ -47,9 +47,6 @@
         @input="handleInput"
       ></textarea>
       <div class="input-hint">
-        <p class="text-sm text-gray-500">
-          Describe how you want to modify or transform this image
-        </p>
         <p v-if="promptError" class="text-sm text-red-500 mt-1">
           Please enter a transformation description
         </p>

@@ -60,7 +60,7 @@ import { useGeneration } from '~/composables/useGeneration';
 
 const { generate } = useGeneration();
 const videoTaskStore = useVideoTaskStore();
-const { currentTask, progress } = storeToRefs(videoTaskStore);
+const { currentTask, progress, generatedResults } = storeToRefs(videoTaskStore);
 
 const isGenerating = computed(() => !!currentTask.value?.isGenerating);
 
@@ -72,8 +72,6 @@ const parameters = ref({
   stylization: 250,
   weirdness: 0
 })
-
-const generatedResults = ref<any[]>([])
 const uploadedImages = ref<string[]>([])
 
 const { $toast } = useNuxtApp() as any;
@@ -83,28 +81,26 @@ const handleGenerate = async (params: any) => {
   await generate(params);
 }
 
+// 根据URL检测文件类型
+const detectFileType = (url: string): 'image' | 'video' => {
+  const extension = url.split('.').pop()?.toLowerCase();
+  const videoExtensions = ['mp4', 'webm', 'mov', 'avi'];
+  const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+  
+  if (videoExtensions.includes(extension || '')) {
+    return 'video';
+  } else if (imageExtensions.includes(extension || '')) {
+    return 'image';
+  }
+  // 默认返回图片类型
+  return 'image';
+}
+
+// 简化的监听逻辑 - 只在任务被清空时清空结果
 watch(currentTask, (newTask, oldTask) => {
-  // 当任务从“生成中”变为“非生成中”时，处理结果
-  if (oldTask?.isGenerating && !newTask?.isGenerating && newTask?.resultUrl) {
-    // 假设 resultUrl 就是图片/视频的地址
-    // 这里我们可以创建一个或多个结果对象
-    const size = parameters.value.aspectRatio === '1:1' ? '512x512' : '512x288'; // 示例尺寸
-    generatedResults.value = [
-      {
-        id: newTask.taskId,
-        name: 'AI Generated Content',
-        url: newTask.resultUrl,
-        type: newTask.type, // 'image' or 'video'
-        size: size,
-        quality: 'High Quality',
-        model: 'Midjourney V7',
-        createdAt: Date.now(),
-        parameters: { ...parameters.value }
-      }
-    ];
-  } else if (!newTask) {
-    // 如果任务被清空，也清空结果
-    generatedResults.value = [];
+  if (!newTask && oldTask) {
+    console.log('ai-image-generator 任务被清空，清空结果');
+    videoTaskStore.clearResults();
   }
 }, { deep: true });
 

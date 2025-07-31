@@ -48,11 +48,7 @@
         rows="3"
         @input="handleInput"
       ></textarea>
-      <div class="input-hint">
-        <p class="text-sm text-gray-500">
-          Optional: Describe your desired motion effect. AI will automatically generate appropriate animation based on the image content
-        </p>
-      </div>
+      
     </div>
   </div>
 </template>

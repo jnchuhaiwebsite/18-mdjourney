@@ -3,12 +3,12 @@
     <!-- 预览头部 -->
     <div class="preview-header">
       <h3 class="preview-title">{{ title }}</h3>
-      <div v-if="generatedResults.length > 0" class="preview-stats">
+      <!-- <div v-if="generatedResults.length > 0" class="preview-stats">
         <span class="stat-item">
           <i class="fa-solid fa-image"></i>
           {{ generatedResults.length }} 个结果
         </span>
-      </div>
+      </div> -->
     </div>
 
     <!-- 预览内容 -->
@@ -41,60 +41,83 @@
             :key="result.id"
             class="result-item"
           >
-            <div class="result-preview">
-              <!-- 比例容器 -->
-              <div 
-                class="aspect-ratio-container"
-                :style="getContainerStyle(result.size)"
-              >
-                              <!-- 视频预览 -->
+            <!-- 视频预览 -->
+            <div 
+              v-if="result.type === 'video'"
+              class="aspect-ratio-container video-container"
+              :style="getContainerStyle(result.size)"
+              @mouseenter="playVideo"
+              @mouseleave="pauseVideo"
+              @click="togglePlay"
+            >
               <video 
-                v-if="result.type === 'video'"
+                ref="videoElement"
                 :src="result.url" 
                 class="result-media"
                 muted
                 loop
+                preload="metadata"
                 @error="handleMediaError"
+                @play="updatePlayState(result.id, true)"
+                @pause="updatePlayState(result.id, false)"
               ></video>
-              <!-- 图片预览 -->
+              <!-- 播放状态指示器 -->
+              <div 
+                v-if="!getPlayState(result.id)" 
+                class="play-indicator"
+              >
+                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+            </div>
+            <!-- 图片预览 -->
+            <div 
+              v-else
+              class="aspect-ratio-container"
+              :style="getContainerStyle(result.size)"
+            >
               <img 
-                v-else
                 :src="result.url" 
                 :alt="result.name"
                 class="result-media"
                 @error="handleMediaError"
               />
-              
-              <!-- 占位符内容 -->
-              <div v-if="result.loadError" class="placeholder-content">
-                <i class="fa-solid fa-image text-4xl text-gray-400 mb-2"></i>
-                <p class="text-sm text-gray-500">{{ result.type === 'video' ? '视频预览' : '图片预览' }}</p>
-              </div>
-                
-                <!-- 尺寸标签 -->
-                <div class="size-label">
-                  {{ result.size }}
-                </div>
-              </div>
-              
-              <!-- 下载按钮 -->
-              <button 
-                class="download-btn" 
-                @click="downloadMedia(result)"
-                title="Download"
-              >
-                <i class="fa-solid fa-download"></i>
-              </button>
             </div>
+            
+            <!-- 占位符内容 -->
+            <div v-if="result.loadError" class="placeholder-content">
+              <i class="fa-solid fa-image text-4xl text-gray-400 mb-2"></i>
+              <p class="text-sm text-gray-500">{{ result.type === 'video' ? '视频预览' : '图片预览' }}</p>
+            </div>
+              
+              <!-- 尺寸标签 -->
+              <!-- <div class="size-label">
+                {{ result.size }}
+              </div> -->
+            
+                          <!-- 下载按钮 -->
+            <button 
+              class="download-btn" 
+              @click="downloadMedia(result)"
+              title="Download"
+            >
+              <svg class="w-5 h-5" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <path d="M512 741.877551c-11.493878 0-20.897959-9.404082-20.897959-20.897959V303.020408c0-11.493878 9.404082-20.897959 20.897959-20.897959s20.897959 9.404082 20.897959 20.897959v417.959184c0 11.493878-9.404082 20.897959-20.897959 20.897959z" fill="currentColor"></path>
+                <path d="M512 741.877551c-5.22449 0-10.44898-2.089796-14.628571-6.269388-8.359184-8.359184-8.359184-21.420408 0-29.779592l169.273469-169.273469c8.359184-8.359184 21.420408-8.359184 29.779592 0 8.359184 8.359184 8.359184 21.420408 0 29.779592l-169.27347 169.273469c-4.702041 4.179592-9.926531 6.269388-15.15102 6.269388z" fill="currentColor"></path>
+                <path d="M512 741.877551c-5.22449 0-10.44898-2.089796-14.628571-6.269388l-169.27347-169.273469c-8.359184-8.359184-8.359184-21.420408 0-29.779592 8.359184-8.359184 21.420408-8.359184 29.779592 0l169.273469 169.273469c8.359184 8.359184 8.359184 21.420408 0 29.779592-4.702041 4.179592-9.926531 6.269388-15.15102 6.269388z" fill="currentColor"></path>
+                <path d="M512 929.959184c-230.4 0-417.959184-187.559184-417.959184-417.959184s187.559184-417.959184 417.959184-417.959184 417.959184 187.559184 417.959184 417.959184-187.559184 417.959184-417.959184 417.959184z m0-794.122449c-207.412245 0-376.163265 168.75102-376.163265 376.163265s168.75102 376.163265 376.163265 376.163265 376.163265-168.75102 376.163265-376.163265-168.75102-376.163265-376.163265-376.163265z" fill="currentColor"></path>
+              </svg>
+            </button>
 
             <!-- 结果信息 -->
-            <div class="result-info">
+            <!-- <div class="result-info">
               <h4 class="result-name">{{ result.name }}</h4>
               <div class="result-meta">
                 <span class="meta-item">{{ result.quality }}</span>
                 <span class="meta-item">{{ result.model }}</span>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -140,6 +163,7 @@ const emit = defineEmits<{
 
 // Reactive data
 const estimatedTime = ref('About 10 seconds')
+const playStates = ref<Record<string, boolean>>({})
 
 // Computed properties
 const generatingTitle = computed(() => {
@@ -207,6 +231,48 @@ const handleMediaError = (event: Event) => {
       props.generatedResults[resultIndex].loadError = true
     }
   }
+}
+
+// 视频播放控制
+const playVideo = (event: Event) => {
+  const container = event.currentTarget as HTMLElement
+  const video = container.querySelector('video') as HTMLVideoElement
+  if (video) {
+    video.play().catch(err => {
+      console.warn('Video play failed:', err)
+    })
+  }
+}
+
+const pauseVideo = (event: Event) => {
+  const container = event.currentTarget as HTMLElement
+  const video = container.querySelector('video') as HTMLVideoElement
+  if (video) {
+    video.pause()
+  }
+}
+
+const togglePlay = (event: Event) => {
+  const container = event.currentTarget as HTMLElement
+  const video = container.querySelector('video') as HTMLVideoElement
+  if (video) {
+    if (video.paused) {
+      video.play().catch(err => {
+        console.warn('Video play failed:', err)
+      })
+    } else {
+      video.pause()
+    }
+  }
+}
+
+// 播放状态管理
+const updatePlayState = (resultId: string, isPlaying: boolean) => {
+  playStates.value[resultId] = isPlaying
+}
+
+const getPlayState = (resultId: string) => {
+  return playStates.value[resultId] || false
 }
 
 // Expose methods
@@ -288,23 +354,19 @@ defineExpose({
 }
 
 .result-item {
-  @apply bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-200;
+  @apply relative bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-xl hover:scale-[1.02] transition-all duration-300 cursor-pointer;
+  @apply bg-gradient-to-br from-gray-50 to-gray-100 flex justify-center items-center p-3;
   height: fit-content;  /* 适应内容高度 */
-  max-height: 300px;    /* 限制最大高度 */
+  min-height: 240px;  /* 固定最小高度 */
+  max-height: 350px;  /* 限制最大高度 */
 }
 
-.result-preview {
-  @apply relative bg-gray-100 flex justify-center items-center p-4;
-  min-height: 220px;  /* 固定最小高度 */
-  max-height: 220px;  /* 固定最大高度 */
-}
-
-.result-preview::before {
+.result-item::before {
   content: '';
   @apply absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 transition-opacity duration-200;
 }
 
-.result-item:hover .result-preview::before {
+.result-item:hover::before {
   @apply opacity-100;
 }
 
@@ -318,9 +380,29 @@ defineExpose({
 }
 
 .result-media {
-  @apply w-full h-full object-cover;
+  @apply w-full h-full object-cover rounded-lg transition-all duration-300;
   max-height: 200px;  /* 限制媒体元素最大高度 */
   object-fit: contain;  /* 确保内容完整显示 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.result-media:hover {
+  @apply shadow-lg;
+  transform: scale(1.02);
+}
+
+.video-container {
+  @apply relative;
+}
+
+.play-indicator {
+  @apply absolute inset-0 flex items-center justify-center text-white opacity-80 hover:opacity-100 transition-opacity duration-200 cursor-pointer;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(2px);
+}
+
+.play-indicator:hover {
+  background: rgba(0, 0, 0, 0.4);
 }
 
 .size-label {
@@ -332,7 +414,15 @@ defineExpose({
 }
 
 .download-btn {
-  @apply absolute top-2 right-2 w-10 h-10 bg-white/90 rounded-full flex items-center justify-center text-gray-700 hover:bg-white hover:scale-110 transition-all duration-200 shadow-lg;
+  @apply absolute top-2 right-2 w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white hover:bg-blue-600 hover:scale-110 transition-all duration-200 shadow-lg;
+}
+
+.download-btn:hover {
+  @apply shadow-xl;
+}
+
+.download-btn i {
+  @apply text-sm;
 }
 
 .result-info {
