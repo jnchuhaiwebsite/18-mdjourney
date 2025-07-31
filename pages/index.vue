@@ -7,7 +7,7 @@
     >
       <PageHero 
         title="The Midjourney Video Generator"
-        subtitle="From a simple sentence to a breathtaking video clip. Experience the ultimate text-to-video and image-to-video workflow, built to unleash the full cinematic power of Midjourney."
+        subtitle="From static art to cinematic motion. Experience the premier midjourney video generator, built to transform your images into breathtaking video clips with unparalleled ease."
       />
       <HomeVideoGenerator 
         ref="videoGenerator"
