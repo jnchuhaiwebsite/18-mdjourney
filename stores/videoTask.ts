@@ -16,6 +16,7 @@ interface VideoTask {
   resultUrl?: string
 }
 
+//生成耗时
 const durationConfig = {
   'text-to-image': {
     relaxed: 10 * 1000,
@@ -28,9 +29,9 @@ const durationConfig = {
     turbo: 4 * 1000,
   },
   'ai-video': {
-    relaxed: 120 * 1000,
-    fast: 60 * 1000,
-    turbo: 30 * 1000,
+    relaxed: 280 * 1000,
+    fast: 280 * 1000,
+    turbo: 280 * 1000,
   }
 };
 
