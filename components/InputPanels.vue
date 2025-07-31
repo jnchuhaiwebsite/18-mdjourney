@@ -4,19 +4,28 @@
       v-if="selectedMode === 'text-to-image'"
       class="input-group"
     >
-      <TextToImageInput @input-change="emit('input-change', $event)" />
+      <TextToImageInput 
+        :check-login-status="props.checkLoginStatus"
+        @input-change="emit('input-change', $event)" 
+      />
     </div>
     <div 
       v-if="selectedMode === 'image-to-image'"
       class="input-group"
     >
-      <ImageToImageInput @input-change="emit('input-change', $event)" />
+      <ImageToImageInput 
+        :check-login-status="props.checkLoginStatus"
+        @input-change="emit('input-change', $event)" 
+      />
     </div>
     <div 
       v-if="selectedMode === 'ai-video'"
       class="input-group"
     >
-      <AiVideoInput @input-change="emit('input-change', $event)" />
+      <AiVideoInput 
+        :check-login-status="props.checkLoginStatus"
+        @input-change="emit('input-change', $event)" 
+      />
     </div>
   </div>
 </template>
@@ -27,6 +36,7 @@ import { defineAsyncComponent } from 'vue'
 // Props
 interface Props {
   selectedMode: string
+  checkLoginStatus?: () => Promise<boolean>
 }
 
 const props = defineProps<Props>()

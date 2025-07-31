@@ -47,6 +47,7 @@
         placeholder="Describe the motion effect you want, e.g., gentle breeze, flowing water, slow camera movement..."
         rows="3"
         @input="handleInput"
+        @focus="handleFocus"
       ></textarea>
       
     </div>
@@ -67,6 +68,7 @@ interface Props {
     duration?: number
     fps?: number
   }
+  checkLoginStatus?: () => Promise<boolean>
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -88,13 +90,25 @@ const duration = ref(props.modelValue?.duration || 6)
 const fps = ref(props.modelValue?.fps || 30)
 
 // Trigger file selection
-const triggerFileInput = () => {
+const triggerFileInput = async () => {
   if (videoTaskStore.progress > 0) return; // Prevent changing image during generation
+  if (props.checkLoginStatus) {
+    const isLoggedIn = await props.checkLoginStatus()
+    if (!isLoggedIn) {
+      return
+    }
+  }
   fileInput.value?.click()
 }
 
 // Handle file selection
-const handleFileSelect = (event: Event) => {
+const handleFileSelect = async (event: Event) => {
+  if (props.checkLoginStatus) {
+    const isLoggedIn = await props.checkLoginStatus()
+    if (!isLoggedIn) {
+      return
+    }
+  }
   const target = event.target as HTMLInputElement
   const file = target.files?.[0]
   if (file && file.type.startsWith('image/')) {
@@ -138,7 +152,13 @@ const removeImage = () => {
 }
 
 // Handle input changes
-const handleInput = () => {
+const handleInput = async () => {
+  if (props.checkLoginStatus) {
+    const isLoggedIn = await props.checkLoginStatus()
+    if (!isLoggedIn) {
+      return
+    }
+  }
   emitChange()
 }
 

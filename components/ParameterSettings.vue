@@ -13,7 +13,11 @@
     </div>
 
     <!-- Input Panels -->
-    <InputPanels :selected-mode="selectedMode" @input-change="handleInputChange" />
+    <InputPanels 
+      :selected-mode="selectedMode" 
+      :check-login-status="checkLoginStatus"
+      @input-change="handleInputChange" 
+    />
 
     <!-- Parameters Panel -->
     <div class="parameters-panel">
@@ -148,7 +152,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, defineAsyncComponent, onMounted, onUnmounted } from 'vue'
+import { ref, computed, watch, defineAsyncComponent, onMounted, onUnmounted, provide } from 'vue'
 import { useUserStore } from '~/stores/user'
 import { useRouter } from 'vue-router'
 import { useNuxtApp } from 'nuxt/app'
@@ -189,6 +193,32 @@ interface Props {
   defaultMode?: string
   availableModes?: string[]
 }
+
+
+// // 使用用户信息 store
+// const userStore = useUserStore()
+// const userInfo = computed(() => userStore.userInfo)
+// const remainingTimes = ref(userStore.userInfo?.free_limit+userStore.userInfo?.remaining_limit|| 0)
+
+// // 修改 checkLoginStatus 函数
+// const checkLoginStatus = async () => {
+//   if (!userInfo.value) {
+//     // 先尝试获取用户信息
+//     await userStore.fetchUserInfo()
+    
+//     if (!userStore.userInfo) {
+//       // 缓存当前表单数据（用于请求时）
+//       cacheFormData()
+//       const loginButton = document.getElementById('bindLogin')
+//       if (loginButton) {
+//         loginButton.click()
+//       }
+//       return false
+//     }
+//   }
+//   return true
+// }
+
 
 const props = withDefaults(defineProps<Props>(), {
   modelValue: () => ({}),
@@ -261,6 +291,30 @@ const userCredits = computed(() => {
   if (!userInfo) return 0
   return (userInfo.free_limit || 0) + (userInfo.remaining_limit || 0)
 })
+
+// 使用用户信息 store
+const userInfo = computed(() => userStore.userInfo)
+
+// 修改 checkLoginStatus 函数
+const checkLoginStatus = async () => {
+  if (!userInfo.value) {
+    // 先尝试获取用户信息
+    await userStore.fetchUserInfo()
+    
+    if (!userStore.userInfo) {
+      const loginButton = document.getElementById('bindLogin')
+      if (loginButton) {
+        loginButton.click()
+      }
+      return false
+    }
+  }
+  return true
+}
+
+// 提供 checkLoginStatus 函数给子组件
+provide('checkLoginStatus', checkLoginStatus)
+
 
 onMounted(() => {
   userStore.fetchUserInfo()

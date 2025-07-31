@@ -45,8 +45,12 @@
         placeholder="Describe how you want to transform this image, e.g., change style, add elements, adjust colors, etc..."
         rows="3"
         @input="handleInput"
+        @focus="handleFocus"
       ></textarea>
       <div class="input-hint">
+        <p class="text-sm text-gray-500">
+          Describe how you want to modify or transform this image
+        </p>
         <p v-if="promptError" class="text-sm text-red-500 mt-1">
           Please enter a transformation description
         </p>
@@ -64,6 +68,7 @@ interface Props {
     image?: File
     prompt?: string
   }
+  checkLoginStatus?: () => Promise<boolean>
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -84,12 +89,24 @@ const prompt = ref(props.modelValue?.prompt || '')
 const promptError = ref(false)
 
 // Trigger file selection
-const triggerFileInput = () => {
+const triggerFileInput = async () => {
+  if (props.checkLoginStatus) {
+    const isLoggedIn = await props.checkLoginStatus()
+    if (!isLoggedIn) {
+      return
+    }
+  }
   fileInput.value?.click()
 }
 
 // Handle file selection
-const handleFileSelect = (event: Event) => {
+const handleFileSelect = async (event: Event) => {
+  if (props.checkLoginStatus) {
+    const isLoggedIn = await props.checkLoginStatus()
+    if (!isLoggedIn) {
+      return
+    }
+  }
   const target = event.target as HTMLInputElement
   const file = target.files?.[0]
   if (file && file.type.startsWith('image/')) {
@@ -131,9 +148,19 @@ const removeImage = () => {
 }
 
 // Handle input changes
-const handleInput = () => {
+const handleInput = async () => {
   promptError.value = false
   emitChange()
+}
+
+// Handle focus - check login status
+const handleFocus = async () => {
+  if (props.checkLoginStatus) {
+    const isLoggedIn = await props.checkLoginStatus()
+    if (!isLoggedIn) {
+      return
+    }
+  }
 }
 
 // Emit change event
@@ -219,7 +246,7 @@ defineExpose({
 }
 
 .prompt-textarea {
-  @apply w-full p-3 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors text-blue-inputtext;
+  @apply w-full p-3 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors;
 }
 
 .input-hint {

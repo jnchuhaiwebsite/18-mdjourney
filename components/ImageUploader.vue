@@ -49,12 +49,30 @@
           <div v-else class="w-full h-full flex flex-col items-center justify-center">
             <button
               @click="triggerFileInput"
-              class="px-4 py-2 bg-[#ec2657] text-white rounded-lg hover:bg-[#8B5CF6] transition-all flex items-center gap-2"
+              :class="[
+                'px-4 py-2 rounded-lg transition-all flex items-center gap-2',
+                isAuthenticated 
+                  ? 'bg-[#ec2657] text-white hover:bg-[#8B5CF6]' 
+                  : 'bg-gray-600 text-gray-300 cursor-not-allowed'
+              ]"
+              :disabled="!isAuthenticated"
             >
               <ArrowUpTrayIcon class="w-5 h-5" />
-              Upload Photos
+              {{ isAuthenticated ? 'Upload Photos' : '请先登录' }}
             </button>
-            <p class="text-gray-400 text-sm mt-2">Upload photos, one-click convert to exquisite pencil drawings</p>
+            <p class="text-gray-400 text-sm mt-2">
+              {{ isAuthenticated 
+                ? 'Upload photos, one-click convert to exquisite pencil drawings' 
+                : '登录后即可上传图片并生成精美的铅笔画' 
+              }}
+            </p>
+            <button 
+              v-if="!isAuthenticated"
+              @click="login"
+              class="mt-2 px-3 py-1 bg-[#ec2657] text-white text-sm rounded hover:bg-[#8B5CF6] transition-all"
+            >
+              点击登录
+            </button>
           </div>
         </div>
 
@@ -203,8 +221,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, nextTick, onMounted, watch, computed } from "vue";
+import { ref, reactive, nextTick, onMounted, watch, computed, inject } from "vue";
 import { useUserStore } from "~/stores/user";
+import { useClerkAuth } from "~/utils/authHelper";
 // import { createTask, getStyleList, getTaskInfo } from '~/api'; // Import getTaskInfo - 暂时注释API导入
 // Import icons used in the page
 import { 
@@ -215,8 +234,12 @@ import {
   PhotoIcon
 } from '@heroicons/vue/24/outline';
 
-// Use user info store
+// Use user info store and auth
 const userStore = useUserStore();
+const { isAuthenticated, login } = useClerkAuth();
+
+// 注入 checkLoginStatus 函数
+const checkLoginStatus = inject('checkLoginStatus')
 
 const fileInput = ref<HTMLInputElement | null>(null);
 const isImageLoading = ref(false);
@@ -348,6 +371,13 @@ const fetchStyleList = async () => {
 
 // Trigger file selection
 const triggerFileInput = () => {
+  // Check if user is logged in
+  if (!isAuthenticated.value) {
+    showToast("请先登录后再上传图片", "error");
+    login(); // Trigger login modal
+    return;
+  }
+  
   if (fileInput.value) {
     fileInput.value.click();
   }
@@ -370,7 +400,15 @@ onMounted(async () => {
 });
 
 // Handle file selection
-const handleFileChange = (event: Event) => {
+const handleFileChange = async (event: Event) => {
+  // 先验证登录状态
+  if (checkLoginStatus) {
+    const isLoggedIn = await checkLoginStatus()
+    if (!isLoggedIn) {
+      return
+    }
+  }
+  
   const target = event.target as HTMLInputElement;
   if (target.files && target.files.length > 0) {
     const file = target.files[0];
@@ -577,6 +615,13 @@ const remainingTimes = computed(() => {
 
 // 修改生成图片函数为使用模拟数据
 const generateAIImage = async () => {
+  // Check if user is logged in
+  if (!isAuthenticated.value) {
+    showToast("请先登录后再生成图片", "error");
+    login(); // Trigger login modal
+    return;
+  }
+
   if (!selectedImage.value) {
     showToast("Please upload an image first", "error");
     return;
