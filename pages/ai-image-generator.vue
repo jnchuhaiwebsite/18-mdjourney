@@ -3,7 +3,7 @@
     <main class="w-full mx-auto p-6 bg-blue-pale rounded-lg max-w-7xl min-h-screen">
     <!-- 页面标题 -->
     <PageHero 
-      title="The Midjourney Image Generator, Perfected."
+      title="The Midjourney Image Generator"
       subtitle="Ditch Discord. Transform text and images into stunning, high-quality visuals with our seamless workflow, built to harness the full power of Midjourney V7."
     />
 
@@ -97,12 +97,12 @@ const detectFileType = (url: string): 'image' | 'video' => {
 }
 
 // 简化的监听逻辑 - 只在任务被清空时清空结果
-watch(currentTask, (newTask, oldTask) => {
-  if (!newTask && oldTask) {
-    console.log('ai-image-generator 任务被清空，清空结果');
-    videoTaskStore.clearResults();
-  }
-}, { deep: true });
+// watch(currentTask, (newTask, oldTask) => {
+//   if (!newTask && oldTask) {
+//     console.log('ai-image-generator 任务被清空，清空结果');
+//     videoTaskStore.clearResults();
+//   }
+// }, { deep: true });
 
 // 下载媒体文件
 const downloadMedia = async (result: any) => {

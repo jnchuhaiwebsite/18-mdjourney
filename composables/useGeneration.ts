@@ -54,13 +54,13 @@ export function useGeneration() {
       }
 
       console.log('🔄 准备创建任务，参数:', taskParams);
-      // const response = await createTasks(taskParams) as any;
-      const response = {
-        code: 200,
-        data: {
-          task_id: '63b76e9ae93d0839dc4a02227c71ae31'
-        }
-      }
+      const response = await createTasks(taskParams) as any;
+      // const response = {
+      //   code: 200,
+      //   data: {
+      //     task_id: '63b76e9ae93d0839dc4a02227c71ae31'
+      //   }
+      // }
       console.log('🔄 创建任务响应:', response);
       
       if (response.code === 200) {

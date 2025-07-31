@@ -23,40 +23,43 @@ import { ref, watch } from 'vue'
 
 // Props
 interface Props {
-  modelValue?: string
+  modelValue?: {
+    prompt?: string
+  }
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  modelValue: ''
+  modelValue: () => ({})
 })
 
 // Emits
 const emit = defineEmits<{
-  'update:modelValue': [value: string]
-  'input-change': [value: string]
+  'update:modelValue': [value: any]
+  'input-change': [value: any]
 }>()
 
 // Reactive data
-const prompt = ref(props.modelValue)
+const prompt = ref(props.modelValue?.prompt || '')
 const promptError = ref(false)
 
 // Handle input changes
 const handleInput = () => {
   promptError.value = false
-  emit('update:modelValue', prompt.value)
-  emit('input-change', prompt.value)
+  const value = { prompt: prompt.value }
+  emit('update:modelValue', value)
+  emit('input-change', value)
 }
 
 // Watch for external value changes
 watch(() => props.modelValue, (newValue) => {
-  prompt.value = newValue
-})
+  prompt.value = newValue?.prompt || ''
+}, { deep: true })
 
 // Expose methods
 defineExpose({
-  getValue: () => prompt.value,
-  setValue: (value: string) => {
-    prompt.value = value
+  getValue: () => ({ prompt: prompt.value }),
+  setValue: (value: any) => {
+    prompt.value = value?.prompt || ''
   },
   validate: () => {
     if (!prompt.value.trim()) {
@@ -83,7 +86,7 @@ defineExpose({
 }
 
 .prompt-textarea {
-  @apply w-full p-3 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors;
+  @apply w-full p-3 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors text-blue-inputtext;
 }
 
 .input-hint {

@@ -47,10 +47,11 @@ export default {
 				pricingborderhover: '#2574E9',// 悬停时边框颜色变为品牌蓝。
 				pricingborderbg: '#FFFFFF', // 卡片背景色。
 				pricingbordertext: '#4A5568',// 卡片内文字颜色。
-				pricingborderhovertext: '#2574E9',// 悬停时，文字颜色也变为品牌蓝，加强反馈。
+								pricingborderhovertext: '#2574E9',// 悬停时，文字颜色也变为品牌蓝，加强反馈。
 				pricingborderbghover: '#FFFFFF',// 悬停时背景色保持不变，避免闪烁。
 				pricingborderborder: '#E2E8F0', // 卡片默认边框色。
-  			},
+				inputtext: '#000000', // 输入框中提示词的专用黑色文字颜色。
+ 			},
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
