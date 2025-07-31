@@ -3,7 +3,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
         <h2 class="text-4xl font-extrabold text-[#ec2657] sm:text-5xl">
-          Imagen 4 Ultra Features
+          Midjourney Video Generator Features
         </h2>
         <p class="mt-4 text-xl text-gray-300">
           Professional AI Image Generation with Advanced Controls

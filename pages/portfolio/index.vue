@@ -3,10 +3,10 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center">
           <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
-            Discover Creative Works from the Imagen 4 Ultra AI Community
+            Discover Creative Works from the Midjourney Video Generator Community
           </h2>
           <p class="mt-4 text-xl text-gray-300">
-            From cinematic sci-fi flights to fantasy warrior animations, these videos are created by Imagen 4 Ultra AI users using our AI image animator technology. Explore their imagination, get inspired, and start crafting your own AI-powered stories.
+            From cinematic sci-fi flights to fantasy warrior animations, these videos are created by Midjourney Video Generator users using our AI video generation technology. Explore their imagination, get inspired, and start crafting your own AI-powered stories.
           </p>
         </div>
         <div v-if="pending" class="flex justify-center items-center py-20">
@@ -121,8 +121,8 @@
 
 
 useSeo({
-  title: "Imagen 4 Ultra AI Gallery - AI Image Animator Examples",
-  description: "Browse our gallery of stunning animated videos created with Imagen 4 Ultra AI's AI image animator technology. See how static images transform into dynamic videos using advanced AI technology."
+      title: "Midjourney Video Generator Gallery - AI Video Creation Examples",
+    description: "Browse our gallery of stunning animated videos created with the Midjourney Video Generator's AI video creation technology. See how static images transform into dynamic videos using advanced AI technology."
 });
 
 

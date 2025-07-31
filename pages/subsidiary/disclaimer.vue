@@ -16,7 +16,7 @@
       <div class="space-y-6 text-white">
         <section>
           <h2 class="text-xl font-semibold mb-4">1. General Information</h2>
-          <p>Imagen 4 Ultra is an AI-powered image generation platform. This disclaimer outlines important information about our services and your use of our platform.</p>
+          <p>The Midjourney Video Generator is an AI-powered video generation platform. This disclaimer outlines important information about our services and your use of our platform.</p>
         </section>
 
         <section>
@@ -32,7 +32,7 @@
 
         <section>
           <h2 class="text-xl font-semibold mb-4">3. Usage Limitations</h2>
-          <p>Imagen 4 Ultra's services are provided "as is" without warranties of any kind. We do not guarantee:</p>
+          <p>The Midjourney Video Generator's services are provided "as is" without warranties of any kind. We do not guarantee:</p>
           <ul class="list-disc pl-6 mt-2">
             <li>Uninterrupted or error-free service</li>
             <li>Specific results or outcomes from using our image generation tools</li>
@@ -48,7 +48,7 @@
             <li>Our AI models have been trained on diverse datasets</li>
             <li>Generated images may inadvertently bear similarity to existing works</li>
             <li>Users are responsible for ensuring their use of generated images does not infringe on third-party rights</li>
-            <li>Imagen 4 Ultra is not liable for intellectual property disputes arising from use of our services</li>
+            <li>The Midjourney Video Generator is not liable for intellectual property disputes arising from use of our services</li>
           </ul>
         </section>
 
@@ -64,17 +64,17 @@
 
         <section>
           <h2 class="text-xl font-semibold mb-4">6. Limitation of Liability</h2>
-          <p>In no event shall Imagen 4 Ultra be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, or business opportunities arising out of your use of our services.</p>
+          <p>In no event shall The Midjourney Video Generator be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, or business opportunities arising out of your use of our services.</p>
         </section>
 
         <section>
           <h2 class="text-xl font-semibold mb-4">7. Service Changes</h2>
-          <p>Imagen 4 Ultra reserves the right to modify, suspend, or discontinue any aspect of our service at any time, including the availability of any feature, database, or content.</p>
+          <p>The Midjourney Video Generator reserves the right to modify, suspend, or discontinue any aspect of our service at any time, including the availability of any feature, database, or content.</p>
         </section>
 
         <section>
           <h2 class="text-xl font-semibold mb-4">8. Governing Law</h2>
-          <p>This disclaimer and any disputes arising out of or related to your use of Imagen 4 Ultra shall be governed by the laws of the jurisdiction where Imagen 4 Ultra is registered, without regard to its conflict of law provisions.</p>
+          <p>This disclaimer and any disputes arising out of or related to your use of The Midjourney Video Generator shall be governed by the laws of the jurisdiction where The Midjourney Video Generator is registered, without regard to its conflict of law provisions.</p>
         </section>
 
         <section>
@@ -100,8 +100,8 @@ definePageMeta({
 })
 
 useSeo({
-  title: 'Imagen 4 Ultra AI | Disclaimer',
-  description: 'Read the disclaimer for Imagen 4 Ultra AI - important information about our AI image generation platform and your use of our services.'
+  title: 'The Midjourney Video Generator | Disclaimer',
+  description: 'Read the disclaimer for The Midjourney Video Generator - important information about our AI video generation platform and your use of our services.'
 })
 </script>
 

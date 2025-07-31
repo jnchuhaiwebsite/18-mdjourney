@@ -16,12 +16,12 @@
       <div class="space-y-6 text-white">
         <section>
           <h2 class="text-xl font-semibold mb-4">1. Acceptance of Terms</h2>
-          <p>By accessing or using Imagen 4 Ultra's image generation services, you agree to be bound by these Terms of Service. If you disagree with any part of these terms, you may not access our service.</p>
+          <p>By accessing or using The Midjourney Video Generator's video generation services, you agree to be bound by these Terms of Service. If you disagree with any part of these terms, you may not access our service.</p>
         </section>
 
         <section>
           <h2 class="text-xl font-semibold mb-4">2. Service Description</h2>
-          <p>Imagen 4 Ultra provides AI-powered image generation services, including:</p>
+          <p>The Midjourney Video Generator provides AI-powered video generation services, including:</p>
           <ul class="list-disc pl-6 mt-2">
             <li>Text-to-image generation (available in both Normal and Ultra models)</li>
             <li>Generation of 1K resolution images</li>
@@ -43,7 +43,7 @@
 
         <section>
           <h2 class="text-xl font-semibold mb-4">4. Intellectual Property Rights</h2>
-          <p>Users retain rights to their uploaded content. However, you grant Imagen 4 Ultra a license to use, process, and store your content for service provision. Generated images are subject to our fair use policy.</p>
+          <p>Users retain rights to their uploaded content. However, you grant The Midjourney Video Generator a license to use, process, and store your content for service provision. Generated videos are subject to our fair use policy.</p>
         </section>
 
         <section>
@@ -95,8 +95,8 @@ definePageMeta({
 })
 
 useSeo({
-  title: 'Imagen 4 Ultra AI | Terms of Service',
-  description: 'Read our terms of service for using Imagen 4 Ultra AI - the leading AI image generation platform powered by advanced AI technology.'
+  title: 'The Midjourney Video Generator | Terms of Service',
+  description: 'Read our terms of service for using The Midjourney Video Generator - the premier platform for transforming images into stunning video clips.'
 })
 </script>
 

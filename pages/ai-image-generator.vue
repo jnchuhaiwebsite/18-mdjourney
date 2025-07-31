@@ -3,8 +3,9 @@
     <main class="w-full mx-auto p-6 bg-blue-pale rounded-lg max-w-7xl min-h-screen">
     <!-- 页面标题 -->
     <PageHero 
-      title="The Midjourney Image Generator"
-      subtitle="Ditch Discord. Transform text and images into stunning, high-quality visuals with our seamless workflow, built to harness the full power of Midjourney V7."
+      title="The Midjourney Video Generator"
+      subtitle="
+Experience the future of digital art. Transform your text and images into stunning, high-quality visuals with our intuitive midjourney image generator, built to harness the full power of Midjourney V7"
     />
 
     <!-- 生成器区域 -->
@@ -53,8 +54,8 @@ import { useGeneration } from '~/composables/useGeneration';
 // 使用默认的 SEO 配置
   useSeo(
     {
-      title: 'Genesis Engine: The Ultimate Midjourney Image Generator',
-      description: 'The ultimate Midjourney image generator, no Discord required. Genesis Engine offers intuitive text-to-image & image-to-image creation with V7. Start for free!'
+      title: 'The Midjourney Video Generator: Transform Images to Videos',
+      description: 'Transform your static images into stunning video clips with our premier midjourney video generator. From art to cinematic motion with unparalleled ease.'
     }
   )
 

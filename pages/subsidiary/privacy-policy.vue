@@ -16,7 +16,7 @@
       <div class="space-y-6 text-white">
         <section>
           <h2 class="text-xl font-semibold mb-4">1. Introduction</h2>
-          <p>Welcome to Imagen 4 Ultra. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our AI-powered image generation service.</p>
+          <p>Welcome to The Midjourney Video Generator. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our AI-powered video generation service.</p>
         </section>
 
         <section>
@@ -109,8 +109,8 @@ definePageMeta({
 })
 
 useSeo({
-  title: 'Imagen 4 Ultra AI | Privacy Policy',
-  description: 'Read our privacy policy for using Imagen 4 Ultra AI - the leading AI image generation platform powered by advanced AI technology.'
+      title: 'The Midjourney Video Generator | Privacy Policy',
+    description: 'Read our privacy policy for using The Midjourney Video Generator - the premier platform for transforming images into stunning video clips.'
 })
 </script>
 
