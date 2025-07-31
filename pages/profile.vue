@@ -484,9 +484,11 @@ import { useUserStore } from '~/stores/user'
 import { getOpusList, checkTask, getTimesLog } from '~/api'
 import { SparklesIcon } from '@heroicons/vue/24/outline'
 import { useNotificationStore } from '~/stores/notification'
+import { useNuxtApp } from 'nuxt/app'
 
 // Get user info
 const userStore = useUserStore()
+const { $toast } = useNuxtApp() as any
 
 interface UserInfo {
   avatar: string
@@ -689,7 +691,8 @@ const fetchWorks = async () => {
     notificationStore.addNotification({
       taskId: `works-error-${Date.now()}`,
       status: 'error',
-      message: 'Failed to load works'
+      message: 'Failed to load works',
+      timestamp: Date.now()
     })
   } finally {
     loading.value = false
@@ -746,7 +749,8 @@ const handleDownload = async (fileUrl: string) => {
     notificationStore.addNotification({
       taskId: `download-error-${Date.now()}`,
       status: 'error',
-      message: 'Download failed, please try again later'
+      message: 'Download failed, please try again later',
+      timestamp: Date.now()
     })
   } finally {
     isDownloading.value = false
@@ -767,18 +771,10 @@ const handleVideoLoadStart = (taskId: string) => {
 const copyPrompt = async (prompt: string) => {
   try {
     await navigator.clipboard.writeText(prompt)
-    notificationStore.addNotification({
-      taskId: `copy-success-${Date.now()}`,
-      status: 'success',
-      message: 'Prompt copied to clipboard'
-    })
+    $toast.success('Prompt copied to clipboard', 3000, 'center')
   } catch (error) {
     console.error('Failed to copy prompt:', error)
-    notificationStore.addNotification({
-      taskId: `copy-error-${Date.now()}`,
-      status: 'error',
-      message: 'Failed to copy prompt'
-    })
+    $toast.error('Failed to copy prompt', 3000, 'center')
   }
 }
 
@@ -801,7 +797,8 @@ const fetchCreditRecords = async () => {
     notificationStore.addNotification({
       taskId: `credits-error-${Date.now()}`,
       status: 'error',
-      message: 'Failed to load credit records'
+      message: 'Failed to load credit records',
+      timestamp: Date.now()
     })
   } finally {
     creditLoading.value = false
