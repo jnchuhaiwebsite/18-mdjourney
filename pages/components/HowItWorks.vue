@@ -3,7 +3,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
         <h2 class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#ec2657] to-[#ec2657] sm:text-5xl animate-fade-in">
-          How to Create AI Images with Imagen 4 Ultra
+          How to Create AI Videos with Midjourney Video Generator
         </h2>
         <p class="mt-4 text-xl text-gray-300 animate-slide-up">
           Transform Your Ideas into Professional AI-Generated Images in Three Simple Steps
@@ -64,7 +64,7 @@ const steps = [
   },
   {
     title: "Generate and Save Your Creation",
-    description: "Click the generate button to create your AI masterpiece using our advanced Imagen 4 Ultra technology. Once verified, download your high-quality image instantly.",
+            description: "Click the generate button to create your AI masterpiece using our advanced Midjourney Video Generator technology. Once verified, download your high-quality video instantly.",
     icon: CloudArrowDownIcon
   }
 ];

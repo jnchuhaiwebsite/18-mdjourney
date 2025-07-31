@@ -6,10 +6,10 @@
     <div class="container mx-auto px-4 py-12 md:py-20">
       <div class="text-center max-w-3xl mx-auto mt-8">
         <h1 class="text-2xl md:text-4xl font-bold  text-center sm:text-5xl bg-gradient-to-r from-[#ec2657] via-[#990066] to-[#ec2657] bg-clip-text text-transparent mb-4">
-          Imagen 4 Ultra Free | Explore AI Image Generation with 20 Free Credits
+          Midjourney Video Generator Free | Explore AI Video Generation with 20 Free Credits
         </h1>
         <p class="text-lg md:text-xl text-gray-400 mb-8">
-          Join Imagen 4 Ultra Free today and receive <strong>20 complimentary credits</strong> to explore the forefront of AI image creation. No credit card required. Experience the transformative power of Imagen 4 Ultra Free and elevate your creative process.
+          Join Midjourney Video Generator Free today and receive <strong>20 complimentary credits</strong> to explore the forefront of AI video creation. No credit card required. Experience the transformative power of Midjourney Video Generator Free and elevate your creative process.
         </p>
       </div>
 
@@ -17,7 +17,7 @@
         <div class="bg-[#19171C] rounded-lg shadow-xl p-8 border border-[#ec2657]/20">
           <h2 class="text-2xl font-semibold mb-4 text-white">What You Get with 20 Credits</h2>
           <p class="text-gray-400 mb-4">
-            Your free credits give you the perfect opportunity to test our powerful generation models with Imagen 4 Ultra Free:
+            Your free credits give you the perfect opportunity to test our powerful generation models with Midjourney Video Generator Free:
           </p>
           <ul class="space-y-3 text-gray-300">
             <li>✨ <strong>Generate 1 Ultra-Quality Image:</strong> Experience our most advanced model, delivering exceptional detail, realism, and prompt accuracy.</li>
@@ -30,8 +30,8 @@
         <div class="bg-[#19171C] rounded-lg shadow-xl p-8 border border-gray-800">
           <h2 class="text-2xl font-semibold mb-4 text-white">How to Get Started</h2>
           <ol class="space-y-3 text-gray-300 list-decimal list-inside">
-            <li><strong>Create a Free Account:</strong> Quick and simple sign-up to access Imagen 4 Ultra Free.</li>
-            <li><strong>Receive 20 Free Credits:</strong> Credits are added to your account instantly, allowing you to explore Imagen 4 Ultra Free.</li>
+                    <li><strong>Create a Free Account:</strong> Quick and simple sign-up to access Midjourney Video Generator Free.</li>
+        <li><strong>Receive 20 Free Credits:</strong> Credits are added to your account instantly, allowing you to explore Midjourney Video Generator Free.</li>
             <li><strong>Start Creating:</strong> Use our intuitive prompt editor to bring your ideas to life.</li>
           </ol>
         </div>
@@ -40,7 +40,7 @@
       <div class="mt-16 text-center bg-[#19171C] rounded-lg p-8 border border-gray-800 shadow-xl">
         <h2 class="text-2xl font-semibold mb-3 text-white">Coming Soon: Earn More Credits!</h2>
         <p class="text-gray-400 max-w-2xl mx-auto">
-          We're launching a referral program! Soon, you'll be able to share a unique link from your user dashboard. When a friend signs up and subscribes, you'll receive a generous amount of credits based on their first plan. It's our way of saying thank you for spreading the word about Imagen 4 Ultra Free.
+          We're launching a referral program! Soon, you'll be able to share a unique link from your user dashboard. When a friend signs up and subscribes, you'll receive a generous amount of credits based on their first plan. It's our way of saying thank you for spreading the word about Midjourney Video Generator Free.
         </p>
       </div>
 
@@ -83,8 +83,8 @@ const scrollToGenerator = () => {
 }
 
 useSeo({
-  title: 'Imagen 4 Ultra Free | Get 20 Free AI Image Credits',
-  description: 'Sign up for Imagen 4 Ultra Free and receive 20 free credits to explore AI image generation. No credit card required. Start creating today!',
+      title: 'Midjourney Video Generator Free | Get 20 Free AI Video Credits',
+    description: 'Sign up for Midjourney Video Generator Free and receive 20 free credits to explore AI video generation. No credit card required. Start creating today!',
   url: '/free'
 });
 </script> 

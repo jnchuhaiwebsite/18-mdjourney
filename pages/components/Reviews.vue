@@ -3,10 +3,10 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center">
         <h2 id="testimonials-title" class="text-3xl font-extrabold text-white sm:text-4xl">
-          What Our Users Say About Imagen 4 Ultra
+          What Our Users Say About Midjourney Video Generator
         </h2>
         <p class="mt-4 text-lg text-gray-300">
-          Discover how professionals are leveraging Imagen 4 Ultra's advanced AI capabilities to create stunning visuals with precision and ease.
+          Discover how professionals are leveraging Midjourney Video Generator's advanced AI capabilities to create stunning videos with precision and ease.
         </p>
       </div>
 
@@ -40,7 +40,7 @@
         <button
           @click="scrollToHero"
           class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#ec2657] to-[#ec2657] hover:from-[#ec2657]/90 hover:to-[#ec2657]/80 text-white rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-200"
-          aria-label="Start creating with Imagen 4 Ultra"
+          aria-label="Start creating with Midjourney Video Generator"
         >
           Start Creating Today
           <svg 
@@ -71,7 +71,7 @@ const reviews = [
     author: "Emily Anderson",
     title: "Digital Artist",
     location: "San Francisco, CA",
-    content: "Imagen 4 Ultra's aspect ratio flexibility is a game-changer! I can seamlessly create content for any platform - from Instagram squares to YouTube thumbnails. The AI consistently delivers professional-quality results that exceed my expectations.",
+        content: "Midjourney Video Generator's aspect ratio flexibility is a game-changer! I can seamlessly create content for any platform - from Instagram squares to YouTube thumbnails. The AI consistently delivers professional-quality results that exceed my expectations.",
     rating: 5
   },
   {
@@ -85,7 +85,7 @@ const reviews = [
     author: "Sarah Thompson",
     title: "Marketing Strategist",
     location: "Austin, TX",
-    content: "What sets Imagen 4 Ultra apart is its precision. The English prompts translate perfectly into visuals, and the customizable formats make it our go-to tool for cross-platform campaigns. It's revolutionized our content creation process.",
+        content: "What sets Midjourney Video Generator apart is its precision. The English prompts translate perfectly into videos, and the customizable formats make it our go-to tool for cross-platform campaigns. It's revolutionized our content creation process.",
     rating: 5
   }
 ];

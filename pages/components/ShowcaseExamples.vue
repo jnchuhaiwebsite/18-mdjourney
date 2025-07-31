@@ -6,7 +6,7 @@
           Case Showcase - Explore Our Creative Works
         </h2>
         <p class="mt-2 sm:mt-4 text-base sm:text-lg lg:text-xl text-gray-300">
-          Browse the amazing works created with Imagen 4 Ultra and experience the limitless possibilities of AI image generation.
+          Browse the amazing works created with Midjourney Video Generator and experience the limitless possibilities of AI video generation.
         </p>
       </div>
 

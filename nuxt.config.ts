@@ -34,22 +34,22 @@ export default defineNuxtConfig({
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         {
           name: 'description',
-          content: 'Imagen 4 Ultra - Advanced AI image generation with multi-language support. Create stunning images with digital watermarking and customizable safety settings.'
+          content: 'The Premier Midjourney Video Generator - Transform static images into breathtaking video clips with unparalleled ease and cinematic motion.'
         },
         // Open Graph / Facebook
         { property: 'og:type', content: 'website' },
-        { property: 'og:title', content: 'Imagen 4 Ultra - Next Generation AI Image Creation' },
-        { property: 'og:description', content: 'Experience state-of-the-art AI image generation with Imagen 4 Ultra. Support for multiple languages, digital watermarking, and enhanced prompt rewriting.' },
+        { property: 'og:title', content: 'The Midjourney Video Generator - Transform Images to Videos' },
+        { property: 'og:description', content: 'From static art to cinematic motion. Experience the premier midjourney video generator, built to transform your images into breathtaking video clips.' },
         { property: 'og:image', content: '/img/imagen-4-ultra-og-image.jpg' },
         // Twitter
         { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:title', content: 'Imagen 4 Ultra - Advanced AI Image Generation' },
-        { name: 'twitter:description', content: 'Create professional quality images with Imagen 4 Ultra. Features multi-language support, digital watermarking, and customizable safety settings.' },
+        { name: 'twitter:title', content: 'The Midjourney Video Generator - Image to Video AI' },
+        { name: 'twitter:description', content: 'Transform your static images into stunning video clips with our premier midjourney video generator. From art to cinematic motion in seconds.' },
         { name: 'twitter:image', content: '/img/imagen-4-ultra-og-image.jpg' },
         // Keywords
-        { name: 'keywords', content: 'Imagen 4 Ultra, AI image generation, digital watermarking, multi-language support, safety settings, prompt rewriting' },
-        { name: 'author', content: 'Imagen 4 Ultra Team' },
-        { name: 'application-name', content: 'Imagen 4 Ultra' },
+        { name: 'keywords', content: 'midjourney video generator, image to video, AI video creation, static to motion, cinematic video, AI animation' },
+        { name: 'author', content: 'Midjourney Video Generator Team' },
+        { name: 'application-name', content: 'Midjourney Video Generator' },
       ],
       script: [
         { src: '/js/c6h.js', async: true } 

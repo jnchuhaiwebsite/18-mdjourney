@@ -4,7 +4,7 @@
       <!-- 页面标题区域 -->
       <header>
         <PageHero 
-          title="Imagen 4 Ultra Pricing"
+          title="Midjourney Video Generator Pricing"
           subtitle="Purchase credits to use our services. No subscription required - pay once, use anytime."
         />
       </header>

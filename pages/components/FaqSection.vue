@@ -1,7 +1,7 @@
 <template>
   <section id="faq" class="py-20 bg-blue-pale">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 id="faq-heading" class="text-3xl font-bold text-center mb-12 text-[#ec2657]">Frequently Asked Questions - Imagen 4 Ultra</h2>
+      <h2 id="faq-heading" class="text-3xl font-bold text-center mb-12 text-[#ec2657]">Frequently Asked Questions - Midjourney Video Generator</h2>
   
     <div class="space-y-8">
       <div 
@@ -45,7 +45,7 @@
       <button
         @click="scrollToHero"
         class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#ec2657] to-[#ec2657] hover:opacity-90 text-white rounded-lg font-medium text-base transition-colors duration-200"
-        aria-label="Start creating with Imagen 4 Ultra"
+                  aria-label="Start creating with Midjourney Video Generator"
       >
         Start Creating Today
         <!-- <svg 
@@ -79,7 +79,7 @@ const faqs = [
   },
   {
     question: "What's the difference between the Ultra and Normal models? Which one should I choose?",
-    answer: "The <strong>Ultra model</strong> is powered by Google's Imagen 4 Ultra and delivers: Sharper image quality with richer detail, clearer text rendering, perfect for posters, marketing materials, or presentations.<br><br>The <strong>Normal model</strong> is faster and uses fewer credits — ideal for quick drafts or casual creative use.<br><br>✅ <strong>Tip:</strong> Start with the Normal model to test your ideas. Once you're happy, switch to Ultra for your final version.<br><br>👉 <a href='/normal-vs-ultra' class='text-[#ec2657] hover:underline'>Imagen 4.0 vs Ultra →</a>"
+    answer: "The <strong>Ultra model</strong> is powered by Google's Midjourney Video Generator and delivers: Sharper video quality with richer detail, clearer motion rendering, perfect for social media, marketing materials, or presentations.<br><br>The <strong>Normal model</strong> is faster and uses fewer credits — ideal for quick drafts or casual creative use.<br><br>✅ <strong>Tip:</strong> Start with the Normal model to test your ideas. Once you're happy, switch to Ultra for your final version.<br><br>👉 <a href='/normal-vs-ultra' class='text-[#ec2657] hover:underline'>Imagen 4.0 vs Ultra →</a>"
   },
   {
     question: "How should I write a prompt to get the image I want?",
@@ -91,11 +91,11 @@ const faqs = [
   },
   {
     question: "What can I do when I run out of credits?",
- answer: "Once your credits are used up, you can <strong>purchase a credit pack</strong> to continue generating images. <br>Visit the <strong>pricing</strong> section in 👉 <a href='/pricing' class='text-[#ec2657] hover:underline'>Imagen 4 Ultra Pricing</a> to view available packages and pricing.<br>"
+ answer: "Once your credits are used up, you can <strong>purchase a credit pack</strong> to continue generating videos. <br>Visit the <strong>pricing</strong> section in 👉 <a href='/pricing' class='text-[#ec2657] hover:underline'>Midjourney Video Generator Pricing</a> to view available packages and pricing.<br>"
   },
   {
     question: "Can I use the images commercially? What about copyright?",
-    answer: "Yes — all images generated with AIMage4 are safe for <strong>commercial use</strong>. Our platform uses Google's Imagen 4 Ultra, which includes <strong>SynthID</strong> digital watermarking, ensuring your content is secure and traceable.<br><br>✅ <strong>Note:</strong> If your prompt includes copyrighted names or likenesses (e.g., brands, celebrities), those outputs may carry legal risks. We recommend using original or generic terms for business-related creations."
+    answer: "Yes — all videos generated with Midjourney Video Generator are safe for <strong>commercial use</strong>. Our platform uses advanced AI video generation technology, which includes <strong>SynthID</strong> digital watermarking, ensuring your content is secure and traceable.<br><br>✅ <strong>Note:</strong> If your prompt includes copyrighted names or likenesses (e.g., brands, celebrities), those outputs may carry legal risks. We recommend using original or generic terms for business-related creations."
   }
 ];
 

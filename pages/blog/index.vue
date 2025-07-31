@@ -2,8 +2,8 @@
   <div class="min-h-screen bg-blue-pale pb-10">
     <!-- Page title -->
     <div class="pt-32 pb-12 text-center">
-      <h1 class="text-3xl md:text-4xl font-bold mb-2 text-[#990066]">Imagen 4 Ultra Blog</h1>
-      <p class="text-gray-400">Tips, tutorials, and inspiration for creating professional-quality visuals with Imagen 4 Ultra AI image generation technology</p>
+          <h1 class="text-3xl md:text-4xl font-bold mb-2 text-[#990066]">Midjourney Video Generator Blog</h1>
+    <p class="text-gray-400">Tips, tutorials, and inspiration for creating professional-quality videos with Midjourney Video Generator AI video generation technology</p>
     </div>
     
     <div class="flex flex-col md:flex-row gap-4 md:gap-8 mb-16 mx-auto w-11/12 max-w-7xl">
@@ -137,8 +137,8 @@ declare const useAsyncData: <T>(key: string, handler: () => Promise<T>) => Promi
 const router = useRouter()
 
 useSeo({
-  title: "Imagen 4 Ultra Blog: AI Image Generation & Animation Guide",
-  description: "Discover Imagen 4 Ultra's AI technology for creating professional images and animations. Get tips and updates to enhance your visual content.",
+      title: "Midjourney Video Generator Blog: AI Video Generation & Animation Guide",
+    description: "Discover Midjourney Video Generator's AI technology for creating professional videos and animations. Get tips and updates to enhance your visual content.",
   image: "/logo.png",
   url: "/blog"
 });
@@ -323,12 +323,12 @@ onMounted(() => {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Blog",
-    name: "Imagen 4 Ultra Blog",
+          name: "Midjourney Video Generator Blog",
     description: "Professional AI image generation and animation technology tutorials and insights",
     url: "https://www.midjourneyai.net/blog",
     publisher: {
       "@type": "Organization",
-      name: "Imagen 4 Ultra",
+      name: "Midjourney Video Generator",
       logo: {
         "@type": "ImageObject",
         url: "/logo.png"

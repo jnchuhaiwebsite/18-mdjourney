@@ -110,7 +110,7 @@
               class="h-8 px-3 text-sm border rounded-md transition-colors flex items-center gap-1"
               :class="selectedModel === 'imagen-4-ultra' ? 'border-[#ec2657] bg-[#ec2657]/10 text-[#ec2657]' : 'border-gray-700 text-gray-300 hover:border-gray-600'"
             >
-            imagen 4 ultra
+            midjourney video generator
               <!-- <span v-if="modelScores['imagen-4-ultra']" class="ml-1 text-xs opacity-80">({{ modelScores['imagen-4-ultra'] }} points)</span> -->
             </button>
             <button
@@ -216,8 +216,8 @@ const remainingCredits = computed(() => {
   return userStore.userInfo.free_limit + userStore.userInfo.remaining_limit || 0;
 });
 
-const title = 'Imagen 4 Ultra | Free Online AI Image Generator'
-const description = 'Create high-quality images with Imagen 4 Ultra\'s advanced AI. Instantly turn your ideas into stunning visuals with clear text—free image generation included.'
+const title = 'Midjourney Video Generator | Free Online AI Video Generator'
+const description = 'Create high-quality videos with Midjourney Video Generator\'s advanced AI. Instantly turn your ideas into stunning video clips with clear motion—free video generation included.'
 useSeo({
   title,
   description,
