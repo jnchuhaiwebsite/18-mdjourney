@@ -19,14 +19,14 @@ interface VideoTask {
 //生成耗时
 const durationConfig = {
   'text-to-image': {
-    relaxed: 120 * 1000,
-    fast: 120 * 1000,
-    turbo: 120 * 1000,
+    relaxed: 180 * 1000,
+    fast: 60 * 1000,
+    turbo: 60 * 1000,
   },
   'image-to-image': {
-    relaxed: 120 * 1000,
-    fast: 120 * 1000,
-    turbo: 120 * 1000,
+    relaxed: 180 * 1000,
+    fast: 60 * 1000,
+    turbo: 60 * 1000,
   },
   'ai-video': {
     relaxed: 280 * 1000,
