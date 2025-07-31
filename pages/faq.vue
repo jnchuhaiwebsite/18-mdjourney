@@ -136,7 +136,7 @@ const toggleFaq = (index: number) => {
 
 // Scroll to generator page
 const scrollToGenerator = () => {
-  router.push('/generation-demo');
+  router.push('/');
 };
 
 // Format answer text with HTML
