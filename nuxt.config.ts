@@ -40,12 +40,12 @@ export default defineNuxtConfig({
         { property: 'og:type', content: 'website' },
         { property: 'og:title', content: 'The Midjourney Video Generator - Transform Images to Videos' },
         { property: 'og:description', content: 'From static art to cinematic motion. Experience the premier midjourney video generator, built to transform your images into breathtaking video clips.' },
-        { property: 'og:image', content: '/img/imagen-4-ultra-og-image.jpg' },
+        { property: 'og:image', content: '/favicon.ico' },
         // Twitter
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:title', content: 'The Midjourney Video Generator - Image to Video AI' },
         { name: 'twitter:description', content: 'Transform your static images into stunning video clips with our premier midjourney video generator. From art to cinematic motion in seconds.' },
-        { name: 'twitter:image', content: '/img/imagen-4-ultra-og-image.jpg' },
+        { name: 'twitter:image', content: '/favicon.ico' },
         // Keywords
         { name: 'keywords', content: 'midjourney video generator, image to video, AI video creation, static to motion, cinematic video, AI animation' },
         { name: 'author', content: 'Midjourney Video Generator Team' },
