@@ -104,42 +104,53 @@ export default defineNuxtConfig({
   // 使用vite的正确配置方式
   vite: {
     build: {
-      cssCodeSplit: true,
+      cssCodeSplit: false,
       // 强制提取CSS到单独文件
       rollupOptions: {
         output: {
           assetFileNames: (assetInfo) => {
-            if (assetInfo.name.endsWith('.css')) {
-              return '_nuxt/css/[name]-[hash][extname]';
+            if (assetInfo.name?.endsWith('.css')) {
+              return '_nuxt/css/[hash][extname]';
             }
-            return '_nuxt/assets/[name]-[hash][extname]';
+            return '_nuxt/assets/[hash][extname]';
+          },
+          // 优化代码分割
+          manualChunks: {
+            // 将 Vue 相关代码分离
+            'vue-vendor': ['vue', 'vue-router'],
+            // 将 UI 组件分离
+            'ui-components': ['@heroicons/vue'],
+            // 将工具库分离
+            'utils': ['pinia', 'exifr']
           }
         }
-      }
+      },
+      // 代码压缩配置 - 正确的位置
+      minify: 'terser',
+      terserOptions: {
+        compress: {
+          drop_console: true, // 移除 console 语句
+          drop_debugger: true, // 移除 debugger 语句
+          pure_funcs: ['console.log', 'console.info', 'console.warn', 'console.error'], // 移除特定的函数调用
+          passes: 3, // 增加压缩次数
+          dead_code: true, // 移除未使用的代码
+          global_defs: {
+            'process.env.NODE_ENV': '"production"' // 定义全局变量
+          }
+        },
+        mangle: true, // 混淆变量名
+        format: {
+          comments: false // 移除注释
+        }
+      },
+      // 优化资源大小
+      chunkSizeWarningLimit: 1000,
+      // 启用 gzip 压缩
+      reportCompressedSize: true
     },
     // 确保CSS的sourcemap
     css: {
       devSourcemap: true
-    }
-  },
-  build: {
-    analyze: true, // 启用打包分析
-    // 代码压缩配置
-    terser: {
-      compress: {
-        drop_console: true, // 移除 console 语句
-        drop_debugger: true, // 移除 debugger 语句
-        pure_funcs: ['console.log', 'console.info'], // 移除特定的函数调用
-        passes: 3, // 增加压缩次数
-        dead_code: true, // 移除未使用的代码
-        global_defs: {
-          'process.env.NODE_ENV': 'production' // 定义全局变量
-        }
-      },
-      mangle: true, // 混淆变量名
-      output: {
-        comments: false // 移除注释
-      }
     }
   },
   // 强制CSS提取的配置

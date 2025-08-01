@@ -404,8 +404,15 @@ const getCookie = (name: string): string | null => {
  * @param name cookie名
  */
 const deleteCookie = (name: string) => {
-  if (typeof document === 'undefined') return; // 服务端渲染时跳过
-  document.cookie = `${name}=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;`;
+  console.log(`🍪 [api] deleteCookie函数执行: ${name}`)
+  if (typeof document === 'undefined') {
+    console.log('⚠️ [api] 服务端渲染环境，跳过cookie删除')
+    return; // 服务端渲染时跳过
+  }
+  const cookieString = `${name}=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;`;
+  console.log(`🍪 [api] 设置cookie删除字符串: ${cookieString}`)
+  document.cookie = cookieString;
+  console.log(`✅ [api] cookie删除操作完成: ${name}`)
 };
 
 /**
@@ -479,21 +486,30 @@ const getValidToken = (): string | null => {
  * 清除访问令牌
  */
 export const clearAccessToken = () => {
+  console.log('🗑️ [api] clearAccessToken开始执行')
+  console.log('🍪 [api] 删除cookie:', TOKEN_COOKIE_NAME)
   deleteCookie(TOKEN_COOKIE_NAME);
+  console.log('🍪 [api] 删除cookie:', TOKEN_EXPIRY_COOKIE_NAME)
   deleteCookie(TOKEN_EXPIRY_COOKIE_NAME);
+  console.log('✅ [api] clearAccessToken执行完成')
 }
 
 /**
  * 退出登录，清除所有与用户身份相关的数据
  */
 export const logoutCookie = () => {
+  console.log('🍪 [api] logoutCookie函数开始执行')
   // 清除访问令牌相关的cookie
+  console.log('🗑️ [api] 调用clearAccessToken清除访问令牌')
   clearAccessToken();
   // 重置token Promise状态
+  console.log('🔄 [api] 重置token Promise状态')
   tokenPromise = null;
   tokenResolve = null;
   // 清除用户请求缓存
+  console.log('🗂️ [api] 清除用户请求缓存')
   pendingUserInfoRequest = null;
+  console.log('✅ [api] logoutCookie函数执行完成')
 }
 
 /**
