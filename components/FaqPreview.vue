@@ -84,22 +84,22 @@ defineOptions({
 
 // FAQ数据 - 来自FAQ页面的前四个问题
 const faqPreviewData = [
-  {
-    question: "What is Genesis Engine, and how is it related to Midjourney?",
-    answer: "Genesis Engine is a premium web platform that serves as a powerful, intuitive interface for the state-of-the-art Midjourney V1 AI model. While Midjourney provides the incredible core technology, we provide the seamless creative experience. Our mission is to eliminate the steep learning curve and clunky workflow of Discord, allowing you to access the full potential of Midjourney V1 through a beautiful, streamlined, and feature-rich application. We are an independent service dedicated to creating the best possible user experience for this powerful technology."
-  },
-  {
-    question: "How do I use the AI Video Generator feature?",
-    answer: "It's designed to be incredibly simple! Here's the 3-step process:<br><br><strong>1.</strong> Select the \"AI Video\" mode in the generator.<br><strong>2.</strong> Upload a high-quality static image you've created or one of your own.<br><strong>3.</strong> (Optional) Add a text prompt to guide the motion, like \"gentle breeze through the trees\" or \"slow zoom in.\"<br><br>Our engine will then analyze the image and bring it to life with subtle, realistic motion, creating a captivating short video clip perfect for social media and presentations."
-  },
-  {
-    question: "How does Genesis Engine's pricing compare to a direct Midjourney subscription?",
-    answer: "Our pricing is designed to provide exceptional value beyond just raw generation credits. While a direct Midjourney subscription gives you access via their Discord server, a Genesis Engine plan provides a comprehensive creative suite. Your subscription includes not only the generation time but also access to our streamlined user interface, future workflow tools (like project management and asset libraries), and dedicated support—all without ever having to navigate the complexities of Discord. We bundle the cost and the superior experience into one simple price."
-  },
-  {
-    question: "Can I use the art and videos I create for commercial projects?",
-    answer: "Absolutely. This is a core benefit for our users. Our Creator and Studio plans grant you a full commercial license for every image and video you generate. This means you have the rights to use your creations in marketing campaigns, product designs, client work, and any other for-profit venture. Our licensing aligns with Midjourney's own commercial use terms, giving you complete peace of mind."
-  }
+    {
+      question: "What can I create with Midjourney?",
+      answer: "Midjourney is a powerful AI platform that allows you to create stunning, high-quality images and videos from text prompts or by transforming existing images. You can generate artwork, concept designs, marketing visuals, social media content, portraits, landscapes, and cinematic videos with incredible detail and artistic quality. Our platform supports multiple generation modes including text-to-image, image-to-image, and AI video creation, with various aspect ratios and generation speeds to fit your creative workflow."
+    },
+    {
+      question: "How do I use the AI Video Generator feature?",
+      answer: "It's designed to be incredibly simple! Here's the 3-step process:<br><br><strong>1.</strong> Select the \"AI Video\" mode in the generator.<br><strong>2.</strong> Upload a high-quality static image you've created or one of your own.<br><strong>3.</strong> (Optional) Add a text prompt to guide the motion, like \"gentle breeze through the trees\" or \"slow zoom in.\"<br><br>Our engine will then analyze the image and bring it to life with subtle, realistic motion, creating a captivating short video clip perfect for social media and presentations."
+    },
+    {
+      question: "How does Midjourney pricing work?",
+      answer: "Midjourney uses a flexible credit-based pricing system designed to give you maximum value and control. Instead of restrictive monthly subscriptions, you purchase credit packages that never expire. Different generation types consume different amounts of credits: AI video generation requires more credits due to computational complexity, while image generation uses fewer credits. You can choose from relaxed, fast, or turbo generation speeds, with faster speeds consuming more credits but delivering results quicker. This system lets you create at your own pace without worrying about monthly deadlines."
+    },
+    {
+      question: "Can I use the art and videos I create for commercial projects?",
+      answer: "Absolutely. This is a core benefit for our users. Our Creator and Studio plans grant you a full commercial license for every image and video you generate. This means you have the rights to use your creations in marketing campaigns, product designs, client work, and any other for-profit venture. Our licensing aligns with Midjourney's own commercial use terms, giving you complete peace of mind."
+    },
 ]
 
 // 跟踪每个FAQ项目的展开状态 - 默认全部折叠
