@@ -4,19 +4,25 @@
       v-if="selectedMode === 'text-to-image'"
       class="input-group"
     >
-      <TextToImageInput @input-change="emit('input-change', $event)" />
+      <TextToImageInput 
+        @input-change="emit('input-change', $event)" 
+      />
     </div>
     <div 
       v-if="selectedMode === 'image-to-image'"
       class="input-group"
     >
-      <ImageToImageInput @input-change="emit('input-change', $event)" />
+      <ImageToImageInput 
+        @input-change="emit('input-change', $event)" 
+      />
     </div>
     <div 
       v-if="selectedMode === 'ai-video'"
       class="input-group"
     >
-      <AiVideoInput @input-change="emit('input-change', $event)" />
+      <AiVideoInput 
+        @input-change="emit('input-change', $event)" 
+      />
     </div>
   </div>
 </template>

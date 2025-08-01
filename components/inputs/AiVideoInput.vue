@@ -47,6 +47,7 @@
         placeholder="Describe the motion effect you want, e.g., gentle breeze, flowing water, slow camera movement..."
         rows="3"
         @input="handleInput"
+        @focus="handleFocus"
       ></textarea>
       
     </div>
@@ -56,6 +57,8 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { useVideoTaskStore } from '~/stores/videoTask'
+import { useUserStore } from '~/stores/user'
+import { useNuxtApp } from 'nuxt/app'
 
 const videoTaskStore = useVideoTaskStore()
 
@@ -86,15 +89,56 @@ const imagePreview = ref<string>('')
 const prompt = ref(props.modelValue?.prompt || '')
 const duration = ref(props.modelValue?.duration || 6)
 const fps = ref(props.modelValue?.fps || 30)
+const userStore = useUserStore()
+const { $toast } = useNuxtApp() as any
+
+// 防抖标记
+let isCheckingLogin = false
+
+// 声明 checkLoginStatus 函数
+const checkLoginStatus = async () => {
+  // 防止频繁调用登录弹窗
+  if (isCheckingLogin) {
+    $toast.warning('Please complete the login process first')
+    return false
+  }
+  
+  // 每次都重新获取最新的用户信息
+  await userStore.fetchUserInfo()
+  
+  // 检查用户是否已登录
+  if (!userStore.userInfo) {
+    $toast.info('Please log in to continue')
+    isCheckingLogin = true
+    
+    const loginButton = document.getElementById('bindLogin')
+    if (loginButton) {
+      loginButton.click()
+    }
+    
+    // 3秒后重置防抖标记
+    setTimeout(() => {
+      isCheckingLogin = false
+    }, 3000)
+    
+    return false
+  }
+  
+  return true
+}
 
 // Trigger file selection
-const triggerFileInput = () => {
+const triggerFileInput = async () => {
   if (videoTaskStore.progress > 0) return; // Prevent changing image during generation
+  // 只验证登录状态，不做任何额外操作
+  await checkLoginStatus()
   fileInput.value?.click()
 }
 
 // Handle file selection
-const handleFileSelect = (event: Event) => {
+const handleFileSelect = async (event: Event) => {
+  // 只验证登录状态，不做任何额外操作
+  await checkLoginStatus()
   const target = event.target as HTMLInputElement
   const file = target.files?.[0]
   if (file && file.type.startsWith('image/')) {
@@ -138,8 +182,15 @@ const removeImage = () => {
 }
 
 // Handle input changes
-const handleInput = () => {
+const handleInput = async () => {
+  // 先更新输入内容
   emitChange()
+}
+
+// Handle focus - check login status
+const handleFocus = async () => {
+  // 只验证登录状态，不做任何额外操作
+  await checkLoginStatus()
 }
 
 // Emit change events

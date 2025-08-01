@@ -162,7 +162,7 @@ const emit = defineEmits<{
 }>()
 
 // Reactive data
-const estimatedTime = ref('About 10 seconds')
+const estimatedTime = ref()
 const playStates = ref<Record<string, boolean>>({})
 
 // Computed properties

@@ -8,8 +8,12 @@
         placeholder="e.g., A majestic lion running across the savanna at sunset, cinematic photography style..."
         rows="4"
         @input="handleInput"
+        @focus="handleFocus"
       ></textarea>
       <div class="input-hint">
+        <p class="text-sm text-gray-500">
+          Please enter detailed English descriptions. The more specific the description, the better the generation results
+        </p>
         <p v-if="promptError" class="text-sm text-red-500 mt-1">
           Please enter a prompt to generate an image
         </p>
@@ -20,46 +24,89 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
+import { useUserStore } from '~/stores/user'
+import { useNuxtApp } from 'nuxt/app'
 
 // Props
 interface Props {
-  modelValue?: {
-    prompt?: string
-  }
+  modelValue?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  modelValue: () => ({})
+  modelValue: ''
 })
 
 // Emits
 const emit = defineEmits<{
-  'update:modelValue': [value: any]
-  'input-change': [value: any]
+  'update:modelValue': [value: string]
+  'input-change': [value: string]
 }>()
 
 // Reactive data
-const prompt = ref(props.modelValue?.prompt || '')
+const prompt = ref(props.modelValue)
 const promptError = ref(false)
+const userStore = useUserStore()
+const { $toast } = useNuxtApp() as any
+
+// 防抖标记
+let isCheckingLogin = false
+
+// 声明 checkLoginStatus 函数
+const checkLoginStatus = async () => {
+  // 防止频繁调用登录弹窗
+  if (isCheckingLogin) {
+    $toast.warning('Please complete the login process first')
+    return false
+  }
+  
+  // 每次都重新获取最新的用户信息
+  await userStore.fetchUserInfo()
+  
+  // 检查用户是否已登录
+  if (!userStore.userInfo) {
+    $toast.info('Please log in to continue')
+    isCheckingLogin = true
+    
+    const loginButton = document.getElementById('bindLogin')
+    if (loginButton) {
+      loginButton.click()
+    }
+    
+    // 3秒后重置防抖标记
+    setTimeout(() => {
+      isCheckingLogin = false
+    }, 3000)
+    
+    return false
+  }
+  
+  return true
+}
 
 // Handle input changes
-const handleInput = () => {
+const handleInput = async () => {
+  // 先更新输入内容
   promptError.value = false
-  const value = { prompt: prompt.value }
-  emit('update:modelValue', value)
-  emit('input-change', value)
+  emit('update:modelValue', prompt.value)
+  emit('input-change', prompt.value)
+}
+
+// Handle focus - check login status
+const handleFocus = async () => {
+  // 只验证登录状态，不做任何额外操作
+  await checkLoginStatus()
 }
 
 // Watch for external value changes
 watch(() => props.modelValue, (newValue) => {
-  prompt.value = newValue?.prompt || ''
-}, { deep: true })
+  prompt.value = newValue
+})
 
 // Expose methods
 defineExpose({
-  getValue: () => ({ prompt: prompt.value }),
-  setValue: (value: any) => {
-    prompt.value = value?.prompt || ''
+  getValue: () => prompt.value,
+  setValue: (value: string) => {
+    prompt.value = value
   },
   validate: () => {
     if (!prompt.value.trim()) {
@@ -86,7 +133,7 @@ defineExpose({
 }
 
 .prompt-textarea {
-  @apply w-full p-3 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors text-blue-inputtext;
+  @apply w-full p-3 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors;
 }
 
 .input-hint {

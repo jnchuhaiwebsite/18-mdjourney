@@ -26,14 +26,14 @@
           <div class="flex flex-col items-start text-left">
             <h1 class="text-blue-logo text-2xl md:text-3xl font-bold mb-4">MidjourneyAI</h1>
             <p class="text-sm text-blue-footertext max-w-xl mb-4">
-              Genesis Engine is your direct gateway to the revolutionary Midjourney V7 engine. We've stripped away the complexity, providing a beautiful and hyper-efficient workspace for all your AI generation needs—from photorealistic images to dynamic video clips. Stop wrestling with tools and start creating your next masterpiece. Welcome to the future of digital art.
+              Genesis Engine is your direct gateway to the revolutionary Midjourney engine. We've stripped away the complexity, providing a beautiful and hyper-efficient workspace for all your AI generation needs—from photorealistic images to dynamic video clips. Stop wrestling with tools and start creating your next masterpiece. Welcome to the future of digital art.
             </p>
             <div class="flex flex-col items-start gap-2 text-sm text-gray-500">
-              <p>© 2025 Midjourney Video Generator. All rights reserved.</p>
+              <p>© 2025 Midjourney All rights reserved.</p>
               <div class="text-left">
                 <p class="text-blue-footertext text-sm">
-                  Need help? Contact us at 
-                  <a href="mailto:support@aimagen4.com" class="text-blue-footertext hover:text-blue-footerhover transition-colors">support@midjourney.com</a>
+    
+                  <a href="mailto:support@midjourney.com" class="text-blue-h1 hover:text-blue-footerhover transition-colors">support@midjourney.com</a>
                 </p>
               </div>
             </div>

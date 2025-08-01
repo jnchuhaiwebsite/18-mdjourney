@@ -13,7 +13,10 @@
     </div>
 
     <!-- Input Panels -->
-    <InputPanels :selected-mode="selectedMode" @input-change="handleInputChange" />
+    <InputPanels 
+      :selected-mode="selectedMode" 
+      @input-change="handleInputChange" 
+    />
 
     <!-- Parameters Panel -->
     <div class="parameters-panel">
@@ -190,6 +193,32 @@ interface Props {
   availableModes?: string[]
 }
 
+
+// // 使用用户信息 store
+// const userStore = useUserStore()
+// const userInfo = computed(() => userStore.userInfo)
+// const remainingTimes = ref(userStore.userInfo?.free_limit+userStore.userInfo?.remaining_limit|| 0)
+
+// // 修改 checkLoginStatus 函数
+// const checkLoginStatus = async () => {
+//   if (!userInfo.value) {
+//     // 先尝试获取用户信息
+//     await userStore.fetchUserInfo()
+    
+//     if (!userStore.userInfo) {
+//       // 缓存当前表单数据（用于请求时）
+//       cacheFormData()
+//       const loginButton = document.getElementById('bindLogin')
+//       if (loginButton) {
+//         loginButton.click()
+//       }
+//       return false
+//     }
+//   }
+//   return true
+// }
+
+
 const props = withDefaults(defineProps<Props>(), {
   modelValue: () => ({}),
   hideModeSwitcher: false,
@@ -261,6 +290,28 @@ const userCredits = computed(() => {
   if (!userInfo) return 0
   return (userInfo.free_limit || 0) + (userInfo.remaining_limit || 0)
 })
+
+// 使用用户信息 store
+const userInfo = computed(() => userStore.userInfo)
+
+// 修改 checkLoginStatus 函数
+const checkLoginStatus = async () => {
+  // 每次都重新获取最新的用户信息
+  await userStore.fetchUserInfo()
+  
+  // 检查用户是否已登录
+  if (!userStore.userInfo) {
+    const loginButton = document.getElementById('bindLogin')
+    if (loginButton) {
+      loginButton.click()
+    }
+    return false
+  }
+  return true
+}
+
+
+
 
 onMounted(() => {
   userStore.fetchUserInfo()
