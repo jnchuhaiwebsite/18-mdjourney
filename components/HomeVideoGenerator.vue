@@ -15,14 +15,14 @@
       <!-- 右侧预览区域 -->
       <div class="preview-section">
         <!-- 测试按钮 -->
-        <div style="padding: 10px; background: #f0f0f0; margin-bottom: 10px;">
+        <!-- <div style="padding: 10px; background: #f0f0f0; margin-bottom: 10px;">
           <button @click="testResults" style="padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 4px; margin-right: 10px;">
             测试显示结果
           </button>
           <button @click="clearResults" style="padding: 5px 10px; background: #dc3545; color: white; border: none; border-radius: 4px;">
             清空结果
           </button>
-        </div>
+        </div> -->
         
         <GenerationPreview
           mode="video"
