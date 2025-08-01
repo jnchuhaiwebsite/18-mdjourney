@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- 主页 -->
+
   <url>
     <loc>https://www.midjourneyai.net</loc>
     <lastmod>2025-01-14T12:00:00.000Z</lastmod>
@@ -8,7 +8,7 @@
     <priority>1.0</priority>
   </url>
   
-  <!-- AI图片生成器 -->
+
   <url>
     <loc>https://www.midjourneyai.net/ai-image-generator</loc>
     <lastmod>2025-01-14T12:00:00.000Z</lastmod>
@@ -16,7 +16,6 @@
     <priority>0.9</priority>
   </url>
   
-  <!-- 定价页面 -->
   <url>
     <loc>https://www.midjourneyai.net/pricing</loc>
     <lastmod>2025-01-14T12:00:00.000Z</lastmod>
@@ -24,7 +23,6 @@
     <priority>0.9</priority>
   </url>
   
-  <!-- FAQ页面 -->
   <url>
     <loc>https://www.midjourneyai.net/faq</loc>
     <lastmod>2025-01-14T12:00:00.000Z</lastmod>
@@ -34,7 +32,6 @@
   
   
 
-  <!-- 博客页面 -->
   <url>
     <loc>https://www.midjourneyai.net/blog</loc>
     <lastmod>2025-01-14T12:00:00.000Z</lastmod>
@@ -42,7 +39,6 @@
     <priority>0.8</priority>
   </url>
   
-  <!-- 博客文章 -->
   <url>
     <loc>https://www.midjourneyai.net/blog/breathing-life-into-pixels</loc>
     <lastmod>2025-01-14T12:00:00.000Z</lastmod>
@@ -64,7 +60,7 @@
     <priority>0.6</priority>
   </url>
   
-  <!-- 法律页面 -->
+
   <url>
     <loc>https://www.midjourneyai.net/subsidiary/terms-of-service</loc>
     <lastmod>2025-01-14T12:00:00.000Z</lastmod>
