@@ -38,13 +38,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed, watch } from 'vue'
+import { ref, onMounted, computed, watch, reactive, nextTick } from 'vue'
 import ParameterSettings from './ParameterSettings.vue'
 import GenerationPreview from './GenerationPreview.vue'
 import { downloadFileWithFetch, generateDownloadFilename, getFileExtension } from '~/utils/downloadHelper'
 import { useGeneration } from '~/composables/useGeneration'
 import { useVideoTaskStore } from '~/stores/videoTask'
 import { storeToRefs } from 'pinia'
+import toast from '~/plugins/toast'
 
 // Reactive data
 const parameterSettings = ref<any>(null)
@@ -150,6 +151,27 @@ const handleGenerate = async (params: any) => {
 //     videoTaskStore.clearResults();
 //   }
 // }, { deep: true });
+const toast = reactive({
+  show: false,
+  title: "",
+  message: "",
+  type: "info" as "success" | "error" | "info",
+});
+const showToast = (
+  message: string,
+  type: "success" | "error" | "info" = "info",
+  title?: string
+) => {
+  // First close the previous toast
+  toast.show = false;
+  // Use nextTick to ensure the new toast is shown in the next DOM update cycle
+  nextTick(() => {
+    toast.show = true;
+    toast.message = message;
+    toast.type = type;
+    toast.title = title || "";
+  });
+};
 
 // 下载媒体文件
 const downloadMedia = async (result: any) => {
@@ -164,7 +186,7 @@ const downloadMedia = async (result: any) => {
     console.log('Download successful:', filename)
   } catch (error) {
     console.error('Download failed:', error)
-    alert('Download failed, please try again')
+    showToast("Download failed, please try again", "error");
   }
 }
 
