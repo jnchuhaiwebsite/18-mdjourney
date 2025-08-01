@@ -82,6 +82,7 @@
           <!-- 退出按钮 -->
           <SignOutButton>
             <button
+              @click="() => console.log('👆 [UserMenu] PC端退出按钮被点击')"
               class="block w-full text-left px-4 py-2 text-sm text-blue-navtext hover:bg-blue-medium/10 flex items-center transition-all duration-200 hover:translate-x-1 hover:text-blue-dark"
             >
               <!-- Heroicons: logout/arrow-right-on-rectangle -->
@@ -182,6 +183,7 @@
       <!-- 退出按钮 -->
       <SignOutButton>
         <button
+          @click="() => console.log('👆 [UserMenu] 移动端退出按钮被点击')"
           class="mt-6 w-full py-3 px-4 flex items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-red-50 to-pink-50 hover:from-red-100 hover:to-pink-100 active:scale-[0.98] transition-all duration-200 text-sm font-medium text-red-600 border border-red-100/50 shadow-sm">
           <div class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center">
             <!-- Heroicons: logout/arrow-right-on-rectangle -->
@@ -383,9 +385,15 @@ onMounted(async () => {
     });
     
     on('logout', async () => {
+      console.log('📺 [UserMenu] 收到logout事件')
       // 清除用户界面状态
+      console.log('🧹 [UserMenu] 清除用户界面状态')
+      document.cookie = `auth_token=; Path=/; max-age=0;`;
+      document.cookie = `auth_token_expiry=; Path=/; max-age=0;`;
+      console.log('清除cookie成功');
       vipLastTime.value = "";
       isAuthLoading.value = false;
+      console.log('✅ [UserMenu] logout事件处理完成')
     });
 
     // 监听Clerk加载完成事件，更新认证加载状态

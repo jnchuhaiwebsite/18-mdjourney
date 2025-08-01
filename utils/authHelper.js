@@ -77,14 +77,19 @@ export function useClerkAuth() {
    * 监听用户登录状态变化
    */
   function watchLoginStatus() {
+    console.log('👁️ [authHelper] watchLoginStatus函数开始设置监听')
     watchEffect(() => {
+      console.log('🔄 [authHelper] watchEffect触发，检查登录状态变化')
+      console.log('🔍 [authHelper] isLoaded.value:', isLoaded.value, 'isSignedIn.value:', isSignedIn.value)
       if (isLoaded.value) {
+        console.log('📋 [authHelper] Clerk已加载完成，开始处理登录状态')
         authState.value.isLoaded = true
         authState.value.isLoading = false
         authState.value.isInitializing = false
         
         if (isSignedIn.value) {
           // 如果之前未登录，现在登录了，视为有效的登录状态变化
+          console.log('✅ [authHelper] watchLoginStatus检测到用户已登录')
           const wasLoggedIn = authState.value.isLoggedIn
           
           authState.value.isLoggedIn = true//已登录
@@ -100,14 +105,19 @@ export function useClerkAuth() {
           isHandlingSignOut = false
         } else {
           // 用户已退出登录
+          console.log('🔍 [authHelper] watchLoginStatus检测到用户已退出登录')
           const wasLoggedIn = authState.value.isLoggedIn
+          console.log('🔍 [authHelper] wasLoggedIn:', wasLoggedIn)
           authState.value.isLoggedIn = false
           authState.value.loginStatus = 'Logged out'
           authState.value.authStatus = 'Logged out'
           
           // 如果状态从已登录变为未登录，触发登出事件
           if (wasLoggedIn) {
+            console.log('🔥 [authHelper] 触发logout事件')
             authEventBus.emit('logout')
+          } else {
+            console.log('⚠️ [authHelper] 跳过logout事件，因为wasLoggedIn为false')
           }
         }
       } else {
@@ -124,13 +134,18 @@ export function useClerkAuth() {
    * 处理用户退出登录
    */
   function handleSignOut() {
+    console.log('🎯 [authHelper] handleSignOut函数开始执行')
     // 清除本地用户信息
     const userStore = useUserStore()
-    userStore.clearUser()
+    console.log('🗂️ [authHelper] 清除用户store信息')
+    userStore.clearUserInfo()
     // 清除后端cookie
+    console.log('🍪 [authHelper] 调用logoutCookie清除后端cookie')
     logoutCookie()
     // 触发登出事件
+    console.log('📢 [authHelper] handleSignOut触发logout事件')
     authEventBus.emit('logout')
+    console.log('✅ [authHelper] handleSignOut函数执行完成')
   }
 
   /**
@@ -178,17 +193,29 @@ export function useClerkAuth() {
    * 主动触发退出登录操作
    */
   async function logout() {
-    // logoutCookie()
+    console.log('🚀 [authHelper] logout函数开始执行')
+    document.cookie = `auth_token=; Path=/; max-age=0;`;
+    document.cookie = `auth_token_expiry=; Path=/; max-age=0;`;
+    console.log('🍪 [authHelper] logout函数中直接清除cookie成功')
+    
     // 如果已经在处理退出流程，则不重复执行
-    if (isHandlingSignOut) return
+    if (isHandlingSignOut) {
+      console.log('⚠️ [authHelper] 已经在处理退出流程，跳过')
+      return
+    }
+    
     try {
+      console.log('🔄 [authHelper] 设置退出处理标记')
       // 设置标记，避免重复处理
       isHandlingSignOut = true
+      console.log('🏃 [authHelper] 调用clerk.signOut()')
       await clerk.signOut()
+      console.log('✅ [authHelper] clerk.signOut()执行完成')
       // 用户主动触发的退出
+      console.log('🎯 [authHelper] 调用handleSignOut()')
       handleSignOut()
     } catch (error) {
-      console.error('退出登录失败:', error)
+      console.error('❌ [authHelper] 退出登录失败:', error)
       authState.value.error = error
       authEventBus.emit('error', { type: 'logoutFailed', error })
       // 退出失败，重置标记
@@ -200,8 +227,12 @@ export function useClerkAuth() {
    * 初始化认证，自动监听状态变化
    */
   function initAuth() {
+    console.log('🚀 [authHelper] initAuth函数开始执行，初始化认证系统')
     watchLoginStatus()//监听用户登录状态变化
+    console.log('👁️ [authHelper] watchLoginStatus监听器已启动')
     watchClerkStatus()//监听Clerk加载状态
+    console.log('📡 [authHelper] watchClerkStatus监听器已启动')
+    console.log('✅ [authHelper] 认证系统初始化完成')
   }
 
   // 返回必要的状态和方法

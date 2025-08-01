@@ -116,10 +116,12 @@ export const useUserStore = defineStore('user', () => {
 
   // 清除用户信息
   const clearUserInfo = () => {
+    console.log('🗂️ [userStore] clearUserInfo函数开始执行')
     userInfo.value = null
     error.value = null
     hasFetched.value = false
     pendingFetch = null
+    console.log('✅ [userStore] clearUserInfo函数执行完成')
   }
 
   // 监听 cookie 变化
