@@ -4,7 +4,7 @@
       <!-- 页面标题区域 -->
       <header>
         <PageHero 
-          title="Midjourney Pricing"
+          title="Midjourney AI Video & Image Pricing"
           subtitle="Unlock the full power of Midjourney with a plan that scales with your ambition. No hidden fees, cancel anytime."
         />
       </header>
