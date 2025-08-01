@@ -130,15 +130,17 @@ const checkLoginStatus = async () => {
 // Trigger file selection
 const triggerFileInput = async () => {
   if (videoTaskStore.progress > 0) return; // Prevent changing image during generation
-  // 只验证登录状态，不做任何额外操作
-  await checkLoginStatus()
+  // 验证登录状态，如果未登录则不继续执行
+  const isLoggedIn = await checkLoginStatus()
+  if (!isLoggedIn) return
   fileInput.value?.click()
 }
 
 // Handle file selection
 const handleFileSelect = async (event: Event) => {
-  // 只验证登录状态，不做任何额外操作
-  await checkLoginStatus()
+  // 验证登录状态，如果未登录则不继续执行
+  const isLoggedIn = await checkLoginStatus()
+  if (!isLoggedIn) return
   const target = event.target as HTMLInputElement
   const file = target.files?.[0]
   if (file && file.type.startsWith('image/')) {
@@ -147,9 +149,14 @@ const handleFileSelect = async (event: Event) => {
 }
 
 // Handle drag and drop
-const handleDrop = (event: DragEvent) => {
+const handleDrop = async (event: DragEvent) => {
   event.preventDefault()
   if (videoTaskStore.progress > 0) return;
+  
+  // 验证登录状态，如果未登录则不继续执行
+  const isLoggedIn = await checkLoginStatus()
+  if (!isLoggedIn) return
+  
   const files = event.dataTransfer?.files
   if (files && files.length > 0) {
     const file = files[0]
@@ -189,8 +196,9 @@ const handleInput = async () => {
 
 // Handle focus - check login status
 const handleFocus = async () => {
-  // 只验证登录状态，不做任何额外操作
-  await checkLoginStatus()
+  // 验证登录状态，如果未登录则不继续执行
+  const isLoggedIn = await checkLoginStatus()
+  if (!isLoggedIn) return
 }
 
 // Emit change events
@@ -244,7 +252,7 @@ watch(() => props.modelValue, (newValue) => {
 }
 
 .preview-image {
-  @apply w-full h-48 object-cover rounded-lg;
+  @apply w-full max-h-64 object-contain rounded-lg bg-gray-50;
 }
 
 .remove-btn {
