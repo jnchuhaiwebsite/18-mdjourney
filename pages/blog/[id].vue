@@ -47,7 +47,7 @@
             <NuxtLink 
               v-for="relatedPost in relatedPosts" 
               :key="relatedPost.id"
-              :to="`/blog/${relatedPost.id}`"
+              :to="`/blog/${relatedPost.url}`"
               class="p-4 border border-blue-pricingborder rounded-lg hover:bg-blue-light hover:border-blue-dark transition-all group"
             >
               <h2 class="font-medium mb-2 text-lg text-blue-h1 group-hover:text-blue-dark transition-colors">{{ relatedPost.title }}</h2>
@@ -295,20 +295,8 @@ const title = computed(() => {
 // Set page metadata
 useSeo({
   title: `${title.value}`,
-  description: metaDescription.value,
-  type: 'article',
-  ogTitle: `${title.value} - aimagen4 Blog`,
-  ogDescription: metaDescription.value,
-  twitterTitle: `${title.value} - aimagen4 Blog`,
-  twitterDescription: metaDescription.value,
-  other: [
-    { property: 'article:published_time', content: post.value?.created_time ? new Date(post.value.created_time * 1000).toISOString() : '' },
-    { property: 'article:section', content: getCategoryLabel(post.value?.class_id || 0) },
-    { property: 'article:tag', content: post.value?.keywords || 'AI video generation, text to video, image to video, video creation' },
-    { property: 'article:author', content: 'Midjourney Video Generator Team' },
-    { property: 'article:publisher', content: 'Midjourney Video Generator' }
-  ]
-} as SeoOptions);
+  description: metaDescription.value
+});
 
 // Load data when page mounts
 const loadBlogData = async () => {

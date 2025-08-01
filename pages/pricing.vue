@@ -4,7 +4,7 @@
       <!-- 页面标题区域 -->
       <header>
         <PageHero 
-          title="Midjourney Pricing"
+          title="Midjourney AI Video & Image Pricing"
           subtitle="Unlock the full power of Midjourney with a plan that scales with your ambition. No hidden fees, cancel anytime."
         />
       </header>
@@ -30,7 +30,7 @@
           :class="[
             'bg-blue-pricing rounded-xl p-8 flex flex-col',
             plan.is_popular
-              ? 'border-2 border-blue-pricingPopular shadow-lg relative'
+              ? 'border-2 border-blue-button shadow-lg'
               : 'border border-blue-pricingborder shadow-sm hover:shadow-md transition-shadow',
             plan.price === 0 ? 'hidden md:flex' : 'flex'
           ]"
@@ -72,7 +72,7 @@
                 :key="fIndex"
                 class="flex items-center text-blue-pricingtext"
               >
-                <span class="mr-2 text-theme" aria-hidden="true">✓</span>
+                <!-- <span class="mr-2 text-theme" aria-hidden="true">✓</span> -->
                 {{ feature }}
               </li>
             </ul>
@@ -94,6 +94,150 @@
             </button>
           </footer>
         </article>
+      </section>
+
+      <!-- 积分消耗说明区域 -->
+      <section 
+        class="mt-16 bg-blue-pricing rounded-xl border-2 border-blue-button shadow-lg"
+        aria-label="Credit consumption guide"
+      >
+        <!-- 标题部分 -->
+        <header class="px-8 py-6 border-b border-blue-pricingborder">
+          <h2 class="text-2xl font-bold text-black mb-2">
+            Credit Consumption Guide
+          </h2>
+          <p class="text-blue-pricingtext">
+            Different generation types and speeds consume different amounts of credits. Choose the option that best fits your needs.
+          </p>
+        </header>
+
+        <!-- 主要内容区域 -->
+        <div class="p-8">
+          <!-- AI Video Generation -->
+          <div class="mb-10">
+            <h3 class="text-xl font-semibold text-black mb-4 flex items-center">
+              <div class="w-3 h-3 bg-blue-accent rounded-full mr-3"></div>
+              AI Video Generation
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="bg-blue-pale rounded-lg p-4 border border-blue-pricingborder hover:border-blue-button transition-colors">
+                <div class="flex items-center justify-between mb-2">
+                  <span class="font-medium text-blue-dark">Relaxed Mode</span>
+                  <span class="text-blue-button font-bold">20 Credits</span>
+                </div>
+                <p class="text-sm text-blue-pricingtext">
+                  Slower generation, best quality output
+                </p>
+              </div>
+              <div class="bg-blue-pale rounded-lg p-4 border border-blue-pricingborder hover:border-blue-button transition-colors">
+                <div class="flex items-center justify-between mb-2">
+                  <span class="font-medium text-blue-dark">Fast Mode</span>
+                  <span class="text-blue-button font-bold">40 Credits</span>
+                </div>
+                <p class="text-sm text-blue-pricingtext">
+                  Balanced speed and quality
+                </p>
+              </div>
+              <div class="bg-blue-pale rounded-lg p-4 border border-blue-pricingborder hover:border-blue-button transition-colors">
+                <div class="flex items-center justify-between mb-2">
+                  <span class="font-medium text-blue-dark">Turbo Mode</span>
+                  <span class="text-blue-button font-bold">70 Credits</span>
+                </div>
+                <p class="text-sm text-blue-pricingtext">
+                  Lightning-fast generation
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Image Generation -->
+          <div class="mb-10">
+            <h3 class="text-xl font-semibold text-black mb-4 flex items-center">
+              <div class="w-3 h-3 bg-blue-medium rounded-full mr-3"></div>
+              Image Generation
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <!-- Text to Image -->
+              <div class="space-y-4">
+                <h4 class="font-medium text-blue-dark">Text to Image</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div class="bg-blue-pale rounded-lg p-3 border border-blue-pricingborder text-center">
+                    <div class="font-medium text-blue-dark">Relaxed</div>
+                    <div class="text-blue-button font-bold">4 Credits</div>
+                  </div>
+                  <div class="bg-blue-pale rounded-lg p-3 border border-blue-pricingborder text-center">
+                    <div class="font-medium text-blue-dark">Fast</div>
+                    <div class="text-blue-button font-bold">8 Credits</div>
+                  </div>
+                  <div class="bg-blue-pale rounded-lg p-3 border border-blue-pricingborder text-center">
+                    <div class="font-medium text-blue-dark">Turbo</div>
+                    <div class="text-blue-button font-bold">12 Credits</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Image to Image -->
+              <div class="space-y-4">
+                <h4 class="font-medium text-blue-dark">Image to Image</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div class="bg-blue-pale rounded-lg p-3 border border-blue-pricingborder text-center">
+                    <div class="font-medium text-blue-dark">Relaxed</div>
+                    <div class="text-blue-button font-bold">4 Credits</div>
+                  </div>
+                  <div class="bg-blue-pale rounded-lg p-3 border border-blue-pricingborder text-center">
+                    <div class="font-medium text-blue-dark">Fast</div>
+                    <div class="text-blue-button font-bold">8 Credits</div>
+                  </div>
+                  <div class="bg-blue-pale rounded-lg p-3 border border-blue-pricingborder text-center">
+                    <div class="font-medium text-blue-dark">Turbo</div>
+                    <div class="text-blue-button font-bold">12 Credits</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Supported Aspect Ratios -->
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold text-black mb-4 flex items-center">
+              <div class="w-3 h-3 bg-blue-light rounded-full mr-3"></div>
+              Supported Aspect Ratios
+            </h3>
+            <div class="grid grid-cols-2 sm:grid-cols-5 lg:grid-cols-10 gap-3">
+              <div v-for="ratio in ['2:1', '16:9', '4:3', '3:2', '6:5', '1:1', '5:6', '3:4', '2:3', '9:16']" 
+                   :key="ratio"
+                   class="bg-blue-pale rounded-lg p-3 border border-blue-pricingborder text-center hover:border-blue-button transition-colors">
+                <div class="font-medium text-blue-dark text-sm">{{ ratio }}</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pro Tips -->
+          <div class="bg-gradient-to-r from-blue-light to-blue-pale rounded-lg p-6 border border-blue-pricingborder">
+            <h3 class="text-lg font-semibold text-blue-dark mb-3 flex items-center">
+              <i class="fa-solid fa-lightbulb text-blue-button mr-2"></i>
+              Pro Tips
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-blue-pricingtext">
+              <div class="flex items-start">
+                <i class="fa-solid fa-check text-blue-button mr-2 mt-1 text-xs"></i>
+                <span>Use <strong>Relaxed Mode</strong> for highest quality when time isn't critical</span>
+              </div>
+              <div class="flex items-start">
+                <i class="fa-solid fa-check text-blue-button mr-2 mt-1 text-xs"></i>
+                <span>Choose <strong>Fast Mode</strong> for the perfect balance of speed and quality</span>
+              </div>
+              <div class="flex items-start">
+                <i class="fa-solid fa-check text-blue-button mr-2 mt-1 text-xs"></i>
+                <span>Select <strong>Turbo Mode</strong> when you need results immediately</span>
+              </div>
+              <div class="flex items-start">
+                <i class="fa-solid fa-check text-blue-button mr-2 mt-1 text-xs"></i>
+                <span>AI Video generation requires more credits due to computational complexity</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
   </div>
