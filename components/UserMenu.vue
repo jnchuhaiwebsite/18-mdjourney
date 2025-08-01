@@ -368,7 +368,7 @@ onMounted(async () => {
         user.fullName || '';
 
       const token = await getToken.value();
-      loginAuth({
+      setUserInfo({
         uuid: user.id,
         email,
         from_login,
