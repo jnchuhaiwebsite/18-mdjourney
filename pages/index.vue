@@ -22,6 +22,8 @@
     
     <!-- Showcase Gallery 区块 -->
     <ShowcaseGallery />
+
+    <FaqPreview />
   </main>
 </template>
 
@@ -37,10 +39,11 @@ import ShowcaseGallery from '~/components/ShowcaseGallery.vue'
 const PageHero = defineAsyncComponent(() => import('~/components/PageHero.vue'));
 
 import { useNuxtApp } from 'nuxt/app'
+import FaqPreview from "~/components/FaqPreview.vue";
 const { $toast } = useNuxtApp() as any
 // 使用默认的 SEO 配置
 useSeo({
-  title: 'AI Video Generator - Transform Text & Images into Videos',
+  title: 'Midjourney Video Generator - Animate Your Images with AI',
   description: 'Experience the ultimate text-to-video and image-to-video workflow with our Midjourney Video Generator. Create stunning videos from simple prompts.'
 })
 

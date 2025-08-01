@@ -3,12 +3,12 @@
     <!-- 预览头部 -->
     <div class="preview-header">
       <h3 class="preview-title">{{ title }}</h3>
-      <!-- <div v-if="generatedResults.length > 0" class="preview-stats">
+      <div v-if="generatedResults.length > 0" class="preview-stats">
         <span class="stat-item">
           <i class="fa-solid fa-image"></i>
-          {{ generatedResults.length }} 个结果
+          {{ generatedResults.length }} results
         </span>
-      </div> -->
+      </div>
     </div>
 
     <!-- 预览内容 -->
@@ -40,55 +40,47 @@
             v-for="(result, index) in generatedResults" 
             :key="result.id"
             class="result-item"
+            @mouseenter="result.type === 'video' ? playVideo($event) : null"
+            @mouseleave="result.type === 'video' ? pauseVideo($event) : null"
+            @click="result.type === 'video' ? togglePlay($event) : null"
           >
             <!-- 视频预览 -->
-            <div 
+            <video 
               v-if="result.type === 'video'"
-              class="aspect-ratio-container video-container"
-              :style="getContainerStyle(result.size)"
-              @mouseenter="playVideo"
-              @mouseleave="pauseVideo"
-              @click="togglePlay"
-            >
-              <video 
-                ref="videoElement"
-                :src="result.url" 
-                class="result-media"
-                muted
-                loop
-                preload="metadata"
-                @error="handleMediaError"
-                @play="updatePlayState(result.id, true)"
-                @pause="updatePlayState(result.id, false)"
-              ></video>
-              <!-- 播放状态指示器 -->
-              <div 
-                v-if="!getPlayState(result.id)" 
-                class="play-indicator"
-              >
-                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M8 5v14l11-7z"/>
-                </svg>
-              </div>
-            </div>
+              ref="videoElement"
+              :src="result.url" 
+              class="result-media video-media"
+              muted
+              loop
+              preload="metadata"
+              @error="handleMediaError"
+              @play="updatePlayState(result.id, true)"
+              @pause="updatePlayState(result.id, false)"
+            ></video>
+            
             <!-- 图片预览 -->
-            <div 
+            <img 
               v-else
-              class="aspect-ratio-container"
-              :style="getContainerStyle(result.size)"
+              :src="result.url" 
+              :alt="result.name"
+              class="result-media image-media"
+              @error="handleMediaError"
+            />
+            
+            <!-- 播放状态指示器 -->
+            <div 
+              v-if="result.type === 'video' && !getPlayState(result.id)" 
+              class="play-indicator"
             >
-              <img 
-                :src="result.url" 
-                :alt="result.name"
-                class="result-media"
-                @error="handleMediaError"
-              />
+              <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
             </div>
             
             <!-- 占位符内容 -->
             <div v-if="result.loadError" class="placeholder-content">
               <i class="fa-solid fa-image text-4xl text-gray-400 mb-2"></i>
-              <p class="text-sm text-gray-500">{{ result.type === 'video' ? '视频预览' : '图片预览' }}</p>
+              <p class="text-sm text-gray-500">{{ result.type === 'video' ? 'video preview' : 'image preview' }}</p>
             </div>
               
               <!-- 尺寸标签 -->
@@ -186,34 +178,34 @@ const emptySubtitle = computed(() => {
     : 'Set parameters and click the generate button to start creating image'
 })
 
-// 根据尺寸计算容器样式
-const getContainerStyle = (size: string) => {
+// 根据尺寸计算媒体元素样式
+const getMediaStyle = (size: string) => {
   const [width, height] = size.split('x').map(Number)
   const aspectRatio = width / height
   
-  // 设置最大宽度和高度，确保纵向内容不会撑开布局
-  const maxWidth = 280
-  const maxHeight = 200  // 降低最大高度，避免纵向内容撑开
+  // 设置最大宽度和高度，让媒体元素更好地填充容器
+  const maxWidth = 320
+  const maxHeight = 280  // 增加最大高度，更好地利用容器空间
   
-  let containerWidth, containerHeight
+  let mediaWidth, mediaHeight
   
   if (aspectRatio >= 1) {
     // 横向或正方形
-    containerWidth = Math.min(maxWidth, width)
-    containerHeight = containerWidth / aspectRatio
+    mediaWidth = Math.min(maxWidth, width)
+    mediaHeight = mediaWidth / aspectRatio
   } else {
     // 纵向 - 限制最大高度
-    containerHeight = Math.min(maxHeight, height)
-    containerWidth = containerHeight * aspectRatio
+    mediaHeight = Math.min(maxHeight, height)
+    mediaWidth = mediaHeight * aspectRatio
   }
   
-  console.log(`尺寸: ${size}, 宽: ${containerWidth}px, 高: ${containerHeight}px, 比例: ${aspectRatio.toFixed(2)}`)
+  console.log(`尺寸: ${size}, 宽: ${mediaWidth}px, 高: ${mediaHeight}px, 比例: ${aspectRatio.toFixed(2)}`)
   
   return {
-    width: `${containerWidth}px`,
-    height: `${containerHeight}px`,
+    width: `${mediaWidth}px`,
+    height: `${mediaHeight}px`,
     aspectRatio: `${width} / ${height}`,
-    maxHeight: `${maxHeight}px`  // 添加最大高度限制
+    maxHeight: `${maxHeight}px`  // 最大高度限制
   }
 }
 
@@ -354,11 +346,10 @@ defineExpose({
 }
 
 .result-item {
-  @apply relative bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-xl hover:scale-[1.02] transition-all duration-300 cursor-pointer;
-  @apply bg-gradient-to-br from-gray-50 to-gray-100 flex justify-center items-center p-3;
-  height: fit-content;  /* 适应内容高度 */
-  min-height: 240px;  /* 固定最小高度 */
-  max-height: 350px;  /* 限制最大高度 */
+  @apply relative bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-xl hover:scale-[1.02] transition-all duration-300;
+  @apply bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center;
+  width: 100%;
+  height: 280px;  /* 固定高度 */
 }
 
 .result-item::before {
@@ -370,19 +361,8 @@ defineExpose({
   @apply opacity-100;
 }
 
-.aspect-ratio-container {
-  @apply relative bg-gray-200 rounded-lg overflow-hidden shadow-sm flex items-center justify-center;
-  border: 2px dashed #d1d5db;
-  min-width: 100px;
-  min-height: 100px;
-  max-height: 200px;  /* 固定最大高度 */
-  object-fit: contain;  /* 确保内容适应容器 */
-}
-
 .result-media {
-  @apply w-full h-full object-cover rounded-lg transition-all duration-300;
-  max-height: 200px;  /* 限制媒体元素最大高度 */
-  object-fit: contain;  /* 确保内容完整显示 */
+  @apply max-w-full max-h-full object-contain rounded-lg transition-all duration-300;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
@@ -391,18 +371,26 @@ defineExpose({
   transform: scale(1.02);
 }
 
-.video-container {
-  @apply relative;
+.video-media {
+  @apply cursor-pointer;
+}
+
+.image-media {
+  @apply cursor-default;
 }
 
 .play-indicator {
-  @apply absolute inset-0 flex items-center justify-center text-white opacity-80 hover:opacity-100 transition-opacity duration-200 cursor-pointer;
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(2px);
+  @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
+  @apply flex items-center justify-center text-white opacity-80 hover:opacity-100 transition-all duration-200 cursor-pointer;
+  @apply w-16 h-16 rounded-full;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 10;
 }
 
 .play-indicator:hover {
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.6);
+  @apply scale-110;
 }
 
 .size-label {

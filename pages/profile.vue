@@ -632,10 +632,10 @@ const handleTabChange = (tabValue: number) => {
   currentTab.value = tabValue
   if(tabValue === 2){
     task_type.value = 1
-  }else{
+  }else if(tabValue === 1){
     task_type.value = 3
   }
- 
+  // In Progress (tabValue === 0) 时不设置task_type
 
   // 重置分页和数据
   page.value = 1
@@ -668,12 +668,19 @@ const checkTaskStatus = async (taskId: string) => {
 const fetchWorks = async () => {
   loading.value = true
   try {
-    const response = await getOpusList({
+    // 构建请求参数
+    const params: any = {
       page: page.value,
       page_size: pageSize.value,
       status: currentTab.value === 2 ? 1 : currentTab.value,
-      task_type:task_type.value
-    }) as any
+    }
+    
+    // 只有在非 In Progress 状态时才传递 task_type
+    if (currentTab.value !== 0) {
+      params.task_type = task_type.value
+    }
+    
+    const response = await getOpusList(params) as any
     const data = response.data
     
     worksCount.value = data.count

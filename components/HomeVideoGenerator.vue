@@ -22,8 +22,8 @@
           <button @click="clearResults" style="padding: 5px 10px; background: #dc3545; color: white; border: none; border-radius: 4px;">
             清空结果
           </button>
-        </div> -->
-        
+        </div>
+         -->
         <GenerationPreview
           mode="video"
           :is-generating="isGenerating"

@@ -189,10 +189,20 @@ export const getUserOpus = async () => {
  * @param data 用户作品列表数据
  * @param page 页码
  * @param page_size 每页数量
+ * @param status 状态
+ * @param task_type 任务类型（可选）
  * @returns 用户作品列表
  */
 export const getOpusList = async (data: any) => {
-  return apiRequest(urlList.opusList+`?page=${data.page}&page_size=${data.page_size}&status=${data.status}&task_type=${data.task_type}`, 'GET', undefined, true);
+  // 构建基础URL参数
+  let url = `${urlList.opusList}?page=${data.page}&page_size=${data.page_size}&status=${data.status}`
+  
+  // 只有当task_type存在时才添加到URL中
+  if (data.task_type !== undefined && data.task_type !== null) {
+    url += `&task_type=${data.task_type}`
+  }
+  
+  return apiRequest(url, 'GET', undefined, true);
 }
 /**
  * 检查任务
