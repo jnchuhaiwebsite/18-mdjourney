@@ -2,13 +2,13 @@
   <div class="min-h-screen bg-blue-pale flex items-center justify-center px-4 pt-12 pb-4">
     <!-- Loading Dots -->
     <div v-if="isLoading" class="flex space-x-3">
-      <div class="w-3 h-3 bg-theme rounded-full animate-bounce-1 opacity-75"></div>
-      <div class="w-3 h-3 bg-theme rounded-full animate-bounce-2 opacity-75"></div>
-      <div class="w-3 h-3 bg-theme rounded-full animate-bounce-3 opacity-75"></div>
+      <div class="w-3 h-3 bg-blue-button rounded-full animate-bounce-1 opacity-75"></div>
+      <div class="w-3 h-3 bg-blue-button rounded-full animate-bounce-2 opacity-75"></div>
+      <div class="w-3 h-3 bg-blue-button rounded-full animate-bounce-3 opacity-75"></div>
     </div>
 
     <!-- Content -->
-    <div v-else-if="paymentStatus" class="w-full max-w-2xl bg-gray-800 rounded-2xl md:p-8 p-4 text-center">
+    <div v-else-if="paymentStatus" class="w-full max-w-2xl bg-blue-pricing rounded-2xl md:p-8 p-4 text-center shadow-lg border border-blue-pricingborder">
       <div class="max-w-xl mx-auto">
         <!-- 图标 -->
         <div
@@ -26,54 +26,54 @@
         </div>
         
         <!-- Title and Description -->
-        <h1 class="text-xl md:text-3xl font-bold text-white mb-2 md:mb-4">
+        <h1 class="text-xl md:text-3xl font-bold text-blue-h1 mb-2 md:mb-4">
           {{ paymentStatus === 'success' ? 'Payment Successful!' : 'Payment not successful' }}
         </h1>
-        <p class="text-sm md:text-lg text-gray-400 mb-4 md:mb-8">
+        <p class="text-sm md:text-lg text-blue-pricingtext mb-4 md:mb-8">
           {{ paymentStatus === 'success' 
             ? 'Thank you for your support! Your membership benefits are now activated.'
             : 'Payment was not successful. Please return to the home page and place your order again.' }}
         </p>
 
         <!-- Plan Information (Only show on success) -->
-        <div v-if="paymentStatus === 'success' && planInfo" class="md:w-full mx-auto bg-gray-700/50 rounded-xl p-4 md:p-8 mb-4 md:mb-8">
+        <div v-if="paymentStatus === 'success' && planInfo" class="md:w-full mx-auto bg-blue-light rounded-xl p-4 md:p-8 mb-4 md:mb-8 border border-blue-pricingborder">
           <div class="grid md:grid-cols-2 gap-4 md:gap-8">
             <!-- Plan Details -->
             <div class="text-left">
-              <h2 class="text-base md:text-xl font-semibold text-white mb-3 md:mb-6">Plan Details</h2>
+              <h2 class="text-base md:text-xl font-semibold text-blue-h1 mb-3 md:mb-6">Plan Details</h2>
               <!-- Mobile: Single line display -->
               <div class="flex justify-between items-center md:hidden">
                 <div class="flex flex-col">
-                  <span class="text-sm text-gray-400">Plan Name</span>
-                  <span class="text-md text-white font-medium">{{ planInfo.name }}</span>
+                  <span class="text-sm text-blue-pricingtext">Plan Name</span>
+                  <span class="text-md text-blue-h1 font-medium">{{ planInfo.name }}</span>
                 </div>
                 <div class="flex flex-col text-right">
-                  <span class="text-sm text-gray-400">Price</span>
-                  <span class="text-md text-white font-medium">${{ planInfo.price }}</span>
+                  <span class="text-sm text-blue-pricingtext">Price</span>
+                  <span class="text-md text-blue-h1 font-medium">${{ planInfo.price }}</span>
                 </div>
               </div>
               <!-- Desktop: Stacked display -->
               <div class="hidden md:block space-y-4">
                 <div class="flex flex-col">
-                  <span class="text-gray-400 mb-1">Plan Name</span>
-                  <span class="text-lg text-white font-medium">{{ planInfo.name }}</span>
+                  <span class="text-blue-pricingtext mb-1">Plan Name</span>
+                  <span class="text-lg text-blue-h1 font-medium">{{ planInfo.name }}</span>
                 </div>
                 <div class="flex flex-col">
-                  <span class="text-gray-400 mb-1">Price</span>
-                  <span class="text-lg text-white font-medium">${{ planInfo.price }}</span>
+                  <span class="text-blue-pricingtext mb-1">Price</span>
+                  <span class="text-lg text-blue-h1 font-medium">${{ planInfo.price }}</span>
                 </div>
               </div>
             </div>
             
             <!-- Plan Benefits -->
             <div class="text-left mt-4 md:mt-0">
-              <h2 class="text-base md:text-xl font-semibold text-white mb-3 md:mb-6">Plan Benefits</h2>
+              <h2 class="text-base md:text-xl font-semibold text-blue-h1 mb-3 md:mb-6">Plan Benefits</h2>
               <ul class="space-y-2 md:space-y-3">
                 <li v-for="(feature, index) in getPlanFeatures(planInfo)" 
                     :key="index" 
-                    class="flex items-start text-gray-300">
-                  <span class="mr-2 md:mr-3 flex-shrink-0 w-4 h-4 md:w-5 md:h-5 bg-green-500/20 rounded-full flex items-center justify-center mt-0.5">
-                    <span class="text-green-500 text-xs md:text-sm">✓</span>
+                    class="flex items-start text-blue-navtext">
+                  <span class="mr-2 md:mr-3 flex-shrink-0 w-4 h-4 md:w-5 md:h-5 bg-blue-button/20 rounded-full flex items-center justify-center mt-0.5">
+                    <span class="text-blue-button text-xs md:text-sm">✓</span>
                   </span>
                   <span class="text-sm md:text-base">{{ feature }}</span>
                 </li>
@@ -85,7 +85,7 @@
         <!-- Back to Home Button -->
         <NuxtLink 
           to="/" 
-          class="inline-block bg-theme text-white font-medium px-5 py-2 md:px-8 md:py-3 rounded-lg hover:bg-theme-hover transition-colors text-sm md:text-lg">
+          class="inline-block bg-blue-button text-blue-buttontext font-medium px-5 py-2 md:px-8 md:py-3 rounded-lg hover:bg-blue-buttonhover transition-colors text-sm md:text-lg">
           Back to Home
         </NuxtLink>
       </div>
@@ -162,15 +162,6 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-.bg-theme {
-  background-color: var(--theme-primary);
-}
-.hover\:bg-theme-hover:hover {
-  background-color: var(--theme-primary-hover);
-}
-.border-theme {
-  border-color: var(--theme-primary);
-}
 
 @keyframes bounce {
   0%, 100% {

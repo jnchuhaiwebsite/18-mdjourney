@@ -118,8 +118,8 @@
       <div v-else class="empty-state">
         <div class="empty-animation">
           <div class="floating-icon">🎨</div>
-          <div class="floating-icon delay-1">✨</div>
-          <div class="floating-icon delay-2">🚀</div>
+          <div class="floating-icon">✨</div>
+          <div class="floating-icon">🚀</div>
         </div>
         <h3 class="empty-title">{{ emptyTitle }}</h3>
         <p class="empty-subtitle">{{ emptySubtitle }}</p>
@@ -295,7 +295,23 @@ defineExpose({
 }
 
 .preview-content {
-  @apply p-6 h-full flex flex-col;
+  @apply h-full flex flex-col;
+  padding: 1.5rem;
+}
+
+.preview-content .empty-state {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 /* 生成状态样式 */
@@ -431,31 +447,52 @@ defineExpose({
 
 /* 空状态样式 */
 .empty-state {
-  @apply flex flex-col items-center justify-center py-12 flex-1;
+  @apply flex flex-col items-center justify-center py-12 flex-1 w-full;
 }
 
 .empty-animation {
   @apply relative w-32 h-32 mb-6;
+  margin: 0 auto;
 }
 
 .floating-icon {
   @apply absolute text-4xl animate-bounce;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  padding: 0;
 }
 
-.floating-icon.delay-1 {
-  animation-delay: 0.5s;
+.floating-icon:nth-child(1) {
+  animation-delay: 0s;
+  left: 50%;
+  top: 50%;
 }
 
-.floating-icon.delay-2 {
-  animation-delay: 1s;
+.floating-icon:nth-child(2) {
+  animation-delay: 0.33s;
+  left: 30%;
+  top: 35%;
+  transform: translate(-50%, -50%) scale(0.8);
+}
+
+.floating-icon:nth-child(3) {
+  animation-delay: 0.66s;
+  left: 70%;
+  top: 65%;
+  transform: translate(-50%, -50%) scale(0.9);
 }
 
 .empty-title {
-  @apply text-xl font-semibold text-gray-800 mb-2;
+  @apply text-xl font-semibold text-gray-800 mb-2 text-center w-full;
+  margin: 0 auto;
 }
 
 .empty-subtitle {
-  @apply text-gray-600 mb-6 text-center;
+  @apply text-gray-600 mb-6 text-center w-full;
+  margin: 0 auto;
 }
 
 /* 响应式设计 */
