@@ -178,7 +178,7 @@ export function useClerkAuth() {
    * 主动触发退出登录操作
    */
   async function logout() {
-    logoutCookie()
+    // logoutCookie()
     // 如果已经在处理退出流程，则不重复执行
     if (isHandlingSignOut) return
     try {
