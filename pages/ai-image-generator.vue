@@ -33,6 +33,7 @@ Experience the future of digital art. Transform your text and images into stunni
         />
       </div>
     </section>
+    <!-- <FreeCta /> -->
       </main>
   </div>
 </template>
