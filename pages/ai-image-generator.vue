@@ -3,7 +3,7 @@
     <main class="w-full mx-auto p-6 bg-blue-pale rounded-lg max-w-7xl min-h-screen">
     <!-- 页面标题 -->
     <PageHero 
-      title="The Midjourney Image Generator"
+      title="Midjourney 7 Image Generator - Text-to-Image & Image-to-Image"
       subtitle="
 Experience the future of digital art. Transform your text and images into stunning, high-quality visuals with our intuitive midjourney image generator, built to harness the full power of Midjourney V7"
     />
