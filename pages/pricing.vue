@@ -20,7 +20,7 @@
       <!-- 定价方案区域 -->
       <section
         v-else
-        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
+        class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto place-items-stretch"
         aria-label="Pricing plans"
       >
         <!-- 循环渲染套餐卡片 -->
@@ -28,10 +28,10 @@
           v-for="(plan, index) in planData"
           :key="index"
           :class="[
-            'bg-blue-pricing rounded-xl p-8 flex flex-col',
+            'relative bg-blue-pricing rounded-xl p-6 flex flex-col h-full',
             plan.is_popular
-              ? 'border-2 border-blue-button shadow-lg'
-              : 'border border-blue-pricingborder shadow-sm hover:shadow-md transition-shadow',
+              ? 'border-2 border-blue-button shadow-xl scale-105 z-10'
+              : 'border border-blue-pricingborder shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300',
             plan.price === 0 ? 'hidden md:flex' : 'flex'
           ]"
           :aria-labelledby="`plan-${index}-title`"
@@ -39,52 +39,40 @@
           <!-- 热门标签 -->
           <div
             v-if="plan.is_popular"
-              class="absolute -top-3 right-6 px-3 py-1 bg-blue-button text-white text-sm rounded-full"
+            class="absolute -top-4 left-1/2 transform -translate-x-1/2 px-4 py-2 bg-gradient-to-r from-blue-button to-blue-600 text-white text-sm font-semibold rounded-full z-20 shadow-lg"
             aria-label="Most popular plan"
           >
-            Most Popular
+            ⭐ Most Popular
           </div>
 
           <!-- 套餐标题 -->
-          <header class="mb-6">
+          <header class="text-center mb-6">
             <h3 
               :id="`plan-${index}-title`"
-              class="text-2xl font-bold text-black mb-2 font-medium"
+              class="text-2xl font-bold text-black mb-3"
             >
               {{ plan.name }}
             </h3>
-            <p class="text-blue-pricingtext mb-6">{{ plan.description }}</p>
+            <p class="text-blue-pricingtext text-sm leading-relaxed" v-html="plan.description"></p>
           </header>
 
           <!-- 价格信息 -->
-          <div class="mb-6">
-            <div class="text-3xl font-bold text-black">
-              ${{ plan.price }}
-              <span class="text-blue-pricingtext text-base font-normal"></span>
+          <div class="mb-6 text-center">
+            <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6 border border-blue-200 shadow-sm">
+              <div class="inline-flex items-baseline gap-2">
+                <span class="text-4xl font-bold text-blue-button">${{ plan.price }}</span>
+                <span class="text-sm text-blue-pricingtext font-medium bg-white px-3 py-1 rounded-full shadow-sm">one-time</span>
+              </div>
             </div>
           </div>
 
-          <!-- 功能特性列表 -->
-          <section class="mb-8" :aria-label="`${plan.name} plan features`">
-            <ul class="space-y-3">
-              <li
-                v-for="(feature, fIndex) in getPlanFeatures(plan)"
-                :key="fIndex"
-                class="flex items-center text-blue-pricingtext"
-              >
-                <!-- <span class="mr-2 text-theme" aria-hidden="true">✓</span> -->
-                {{ feature }}
-              </li>
-            </ul>
-          </section>
-
           <!-- 操作按钮 -->
-          <footer class="mt-auto">
+          <div class="mb-8">
             <button
               @click="plan.code ? handleUpgradePlan(plan) : null"
               :disabled="upgradingPlanId === plan.code"
               :class="[
-                'w-full py-3 px-4 rounded-lg flex items-center justify-center',
+                'w-full py-4 px-6 rounded-xl font-semibold text-base flex items-center justify-center transition-all duration-300 transform hover:scale-105',
                 getButtonClass(plan),
               ]"
               :aria-describedby="`plan-${index}-title`"
@@ -92,7 +80,22 @@
               <div v-if="upgradingPlanId === plan.code" class="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-white mr-2" aria-hidden="true"></div>
               {{ plan.button_text }}
             </button>
-          </footer>
+          </div>
+
+          <!-- 功能特性列表 -->
+          <section class="flex-grow" :aria-label="`${plan.name} plan features`">
+            <!-- <h4 class="text-sm font-semibold text-black mb-4 text-center">What's included:</h4> -->
+            <ul class="space-y-4">
+              <li
+                v-for="(feature, fIndex) in getPlanFeatures(plan)"
+                :key="fIndex"
+                class="flex items-start text-blue-pricingtext"
+              >
+                <span class="mr-3 text-green-500 font-bold text-lg flex-shrink-0 mt-0.5" aria-hidden="true">✅</span>
+                <span class="text-sm leading-relaxed" v-html="feature"></span>
+              </li>
+            </ul>
+          </section>
         </article>
       </section>
 
