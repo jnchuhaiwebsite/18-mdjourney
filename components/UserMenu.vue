@@ -306,7 +306,8 @@ const userDisplay = computed<User | null>(() => {
   return {
     username: user.value.username || user.value.firstName || "User",
     email: user.value.emailAddresses?.[0]?.emailAddress,
-    imageUrl: user.value.imageUrl+ '?width=64&height=64',
+    imageUrl: user.value.imageUrl + '?width=64&height=64'
+  };
 });
 
 // 切换用户菜单
