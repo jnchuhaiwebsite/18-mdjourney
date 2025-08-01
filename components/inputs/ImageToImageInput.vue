@@ -23,7 +23,7 @@
             class="remove-btn"
             title="Remove image"
           >
-            <i class="fa-solid fa-times"></i>
+            ×
           </button>
         </div>
       </div>
@@ -249,11 +249,11 @@ defineExpose({
 }
 
 .upload-area {
-  @apply border-2 border-dashed border-gray-300 rounded-lg p-6 cursor-pointer transition-colors hover:border-blue-500;
+  @apply border-2 border-dashed border-gray-300 rounded-lg p-6 cursor-pointer transition-colors hover:border-blue-500 h-48;
 }
 
 .upload-area.has-image {
-  @apply border-solid border-gray-400;
+  @apply border-solid border-gray-400 p-2 h-48; /* Fixed height to prevent size change */
 }
 
 .upload-placeholder {
@@ -261,19 +261,19 @@ defineExpose({
 }
 
 .image-preview {
-  @apply relative;
+  @apply relative w-full h-full flex items-center justify-center;
 }
 
 .preview-image {
-  @apply w-full h-32 object-cover rounded-lg;
+  @apply max-w-full max-h-full object-contain rounded-lg bg-gray-50;
 }
 
 .remove-btn {
-  @apply absolute top-2 right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600 transition-colors;
+  @apply absolute top-2 right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600 transition-colors text-sm font-bold leading-none;
 }
 
 .prompt-textarea {
-  @apply w-full p-3 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors;
+  @apply w-full p-3 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors  text-blue-inputtext;
 }
 
 .input-hint {

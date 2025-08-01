@@ -108,6 +108,7 @@ export const useUserStore = defineStore('user', () => {
       return pendingFetch
     } catch (err: any) {
       isLoading.value = false
+      console.log('err',err)
       error.value = err.msg || '获取用户信息失败'
       return null
     }

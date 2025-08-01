@@ -23,7 +23,7 @@
             class="remove-btn"
             title="Remove Image"
           >
-            <i class="fa-solid fa-times"></i>
+            ×
           </button>
           
 
@@ -236,11 +236,11 @@ watch(() => props.modelValue, (newValue) => {
 }
 
 .upload-area {
-  @apply border-2 border-dashed border-gray-300 rounded-lg p-6 cursor-pointer transition-colors hover:border-purple-500;
+  @apply border-2 border-dashed border-gray-300 rounded-lg p-6 cursor-pointer transition-colors hover:border-purple-500 h-48;
 }
 
 .upload-area.has-image {
-  @apply border-solid border-gray-400 p-2; /* Adjusted padding for when image is present */
+  @apply border-solid border-gray-400 p-2 h-48; /* Fixed height to prevent size change */
 }
 
 .upload-placeholder {
@@ -248,15 +248,15 @@ watch(() => props.modelValue, (newValue) => {
 }
 
 .image-preview {
-  @apply relative;
+  @apply relative w-full h-full flex items-center justify-center;
 }
 
 .preview-image {
-  @apply w-full max-h-64 object-contain rounded-lg bg-gray-50;
+  @apply max-w-full max-h-full object-contain rounded-lg bg-gray-50;
 }
 
 .remove-btn {
-  @apply absolute top-2 right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600 transition-colors z-20;
+  @apply absolute top-2 right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600 transition-colors z-20 text-sm font-bold leading-none;
 }
 
 .prompt-textarea {

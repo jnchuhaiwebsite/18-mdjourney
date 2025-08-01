@@ -39,7 +39,7 @@ const props = withDefaults(defineProps<Props>(), {
 // Emits
 const emit = defineEmits<{
   'update:modelValue': [value: string]
-  'input-change': [value: string]
+  'input-change': [value: { prompt: string }]
 }>()
 
 // Reactive data
@@ -88,13 +88,15 @@ const handleInput = async () => {
   // 先更新输入内容
   promptError.value = false
   emit('update:modelValue', prompt.value)
-  emit('input-change', prompt.value)
+  // 发出对象格式，保持与其他组件一致
+  emit('input-change', { prompt: prompt.value })
 }
 
 // Handle focus - check login status
 const handleFocus = async () => {
-  // 只验证登录状态，不做任何额外操作
-  await checkLoginStatus()
+  // 验证登录状态，如果未登录则不继续执行
+  const isLoggedIn = await checkLoginStatus()
+  if (!isLoggedIn) return
 }
 
 // Watch for external value changes
@@ -133,7 +135,7 @@ defineExpose({
 }
 
 .prompt-textarea {
-  @apply w-full p-3 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors;
+  @apply w-full p-3 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors text-blue-inputtext;
 }
 
 .input-hint {
