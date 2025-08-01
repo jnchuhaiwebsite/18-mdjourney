@@ -1,5 +1,5 @@
 <template>
-  <footer class="relative bg-blue-pale text-gray-300 py-8 md:py-12 pt-8 border-t border-gray-700/30 mobile-footer">
+  <footer class="relative bg-blue-nav text-gray-300 py-8 md:py-12 pt-8 border-t border-gray-700/30 mobile-footer">
     <div class="max-w-7xl mx-auto px-4 mobile-padding">
       
       <!-- 友情链接区域 -->
