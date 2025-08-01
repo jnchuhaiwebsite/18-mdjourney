@@ -135,10 +135,8 @@ declare const useAsyncData: <T>(key: string, handler: () => Promise<T>) => Promi
 const router = useRouter()
 
 useSeo({
-      title: "Midjourney Video Generator Blog: AI Video Generation & Animation Guide",
-    description: "Discover Midjourney Video Generator's AI technology for creating professional videos and animations. Get tips and updates to enhance your visual content.",
-  image: "/logo.png",
-  url: "/blog"
+    title: "Blog | Midjourney model  Image & Video Generation",
+    description: "Discover Midjourney model's AI technology for creating professional videos and animations. Get tips and updates to enhance your visual content.",
 });
 
 // 使用 useAsyncData 获取数据

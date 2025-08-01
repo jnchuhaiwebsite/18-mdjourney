@@ -4,8 +4,8 @@
       <!-- 页面标题区域 -->
       <header>
         <PageHero 
-          title="Midjourney Video Generator Pricing"
-          subtitle="Unlock the full power of Midjourney Video Generator with a plan that scales with your ambition. No hidden fees, cancel anytime."
+          title="Midjourney Pricing"
+          subtitle="Unlock the full power of Midjourney with a plan that scales with your ambition. No hidden fees, cancel anytime."
         />
       </header>
 
@@ -120,8 +120,8 @@ interface PricingPlan {
 
 // 设置SEO
 useSeo({
-  title: 'Genesis Engine | Midjourney Pricing & Plans',
-  description: 'Explore simple Midjourney pricing on Genesis Engine. Get unlimited AI art & video with V7. No Discord needed. Find the perfect plan and start for free!',
+  title: 'Midjourney Pricing - See Free & Paid Subscription Plans',
+  description: 'Explore simple Midjourney pricing on Midjourney. Get unlimited AI art & video with V7. No Discord needed. Find the perfect plan and start for free!',
 });
 
 // 引入auth认证

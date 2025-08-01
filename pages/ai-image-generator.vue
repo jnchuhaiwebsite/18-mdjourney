@@ -3,7 +3,7 @@
     <main class="w-full mx-auto p-6 bg-blue-pale rounded-lg max-w-7xl min-h-screen">
     <!-- 页面标题 -->
     <PageHero 
-      title="The Midjourney Video Generator"
+      title="The Midjourney Image Generator"
       subtitle="
 Experience the future of digital art. Transform your text and images into stunning, high-quality visuals with our intuitive midjourney image generator, built to harness the full power of Midjourney V7"
     />
@@ -54,8 +54,8 @@ import { useGeneration } from '~/composables/useGeneration';
 // 使用默认的 SEO 配置
   useSeo(
     {
-      title: 'The Midjourney Video Generator: Transform Images to Videos',
-      description: 'Transform your static images into stunning video clips with our premier midjourney video generator. From art to cinematic motion with unparalleled ease.'
+      title: 'Midjourney Image Generator - Text-to-Image & Image-to-Image',
+      description: 'Experience the future of digital art. Transform your text and images into stunning, high-quality visuals with our intuitive midjourney image generator, built to harness the full power of Midjourney V7'
     }
   )
 

@@ -90,18 +90,18 @@ defineOptions({
 
 // SEO data
 useSeo({
-  title: 'Genesis Engine: AI Art & Video Generator for Midjourney V7',
-  description: 'Unlock Midjourney V7\'s full power. Genesis Engine is the ultimate AI art & video generator for creating stunning visuals from text or images. No Discord needed. Try it now!',
+  title: 'Midjourney FAQ - Help & Support Center',
+  description: 'Unlock Midjourney full power. Midjourney is the ultimate AI art & video generator for creating stunning visuals from text or images. No Discord needed. Try it now!',
 })
 
 // FAQ data
 const faqSection = {
   heading: "Your Questions, Answered.",
-  subheading: "Everything you need to know about creating with Genesis Engine and the power of Midjourney V7.",
+  subheading: "Everything you need to know about creating with Genesis Engine and the power of Midjourney V1.",
   questions: [
     {
       question: "What is Genesis Engine, and how is it related to Midjourney?",
-      answer: "Genesis Engine is a premium web platform that serves as a powerful, intuitive interface for the state-of-the-art Midjourney V7 AI model. While Midjourney provides the incredible core technology, we provide the seamless creative experience. Our mission is to eliminate the steep learning curve and clunky workflow of Discord, allowing you to access the full potential of Midjourney V7 through a beautiful, streamlined, and feature-rich application. We are an independent service dedicated to creating the best possible user experience for this powerful technology."
+      answer: "Genesis Engine is a premium web platform that serves as a powerful, intuitive interface for the state-of-the-art Midjourney V1 AI model. While Midjourney provides the incredible core technology, we provide the seamless creative experience. Our mission is to eliminate the steep learning curve and clunky workflow of Discord, allowing you to access the full potential of Midjourney V1 through a beautiful, streamlined, and feature-rich application. We are an independent service dedicated to creating the best possible user experience for this powerful technology."
     },
     {
       question: "How do I use the AI Video Generator feature?",
@@ -116,8 +116,8 @@ const faqSection = {
       answer: "Absolutely. This is a core benefit for our users. Our Creator and Studio plans grant you a full commercial license for every image and video you generate. This means you have the rights to use your creations in marketing campaigns, product designs, client work, and any other for-profit venture. Our licensing aligns with Midjourney's own commercial use terms, giving you complete peace of mind."
     },
     {
-      question: "What kind of prompts work best for Midjourney V7?",
-      answer: "Midjourney V7 has exceptional natural language understanding, but specificity is still key. Think like a photographer or art director. Instead of just \"a dog,\" try:<br><br><em>\"A cinematic, ultra-realistic photo of a golden retriever puppy sitting in a sun-drenched, grassy field, soft morning light, looking at the camera with a playful expression.\"</em><br><br>Include subject, action, environment, lighting, style, and composition. The more detail you provide, the closer the AI can get to the masterpiece in your mind."
+      question: "What kind of prompts work best for Midjourney V1?",
+      answer: "Midjourney V1 has exceptional natural language understanding, but specificity is still key. Think like a photographer or art director. Instead of just \"a dog,\" try:<br><br><em>\"A cinematic, ultra-realistic photo of a golden retriever puppy sitting in a sun-drenched, grassy field, soft morning light, looking at the camera with a playful expression.\"</em><br><br>Include subject, action, environment, lighting, style, and composition. The more detail you provide, the closer the AI can get to the masterpiece in your mind."
     },
     {
       question: "Is it safe to upload my images for the Image-to-Image and AI Video features?",
