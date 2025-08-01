@@ -151,27 +151,6 @@ const handleGenerate = async (params: any) => {
 //     videoTaskStore.clearResults();
 //   }
 // }, { deep: true });
-const toast = reactive({
-  show: false,
-  title: "",
-  message: "",
-  type: "info" as "success" | "error" | "info",
-});
-const showToast = (
-  message: string,
-  type: "success" | "error" | "info" = "info",
-  title?: string
-) => {
-  // First close the previous toast
-  toast.show = false;
-  // Use nextTick to ensure the new toast is shown in the next DOM update cycle
-  nextTick(() => {
-    toast.show = true;
-    toast.message = message;
-    toast.type = type;
-    toast.title = title || "";
-  });
-};
 
 // 下载媒体文件
 const downloadMedia = async (result: any) => {
