@@ -4,7 +4,7 @@
     aria-labelledby="pricing-heading"
   >
     <div class="max-w-7xl mx-auto px-4">
-      <div class="text-gray-300 text-center text-lg mb-2 font-medium">
+      <div class="text-blue-footertext text-center text-lg mb-2 font-medium">
         Choose Your Plan
       </div>
       <h2
@@ -12,7 +12,7 @@
       >
         Simple, Transparent Pricing
       </h2>
-      <p class="text-gray-400 text-center max-w-2xl mx-auto mb-12">
+      <p class="text-blue-footertext text-center max-w-2xl mx-auto mb-12">
         Select the plan that best fits your needs, upgrade or downgrade anytime
       </p>
 

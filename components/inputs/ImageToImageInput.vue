@@ -243,15 +243,15 @@ defineExpose({
 }
 
 .input-label {
-  @apply block text-sm font-semibold text-gray-700;
+  @apply block text-sm font-semibold text-blue-navtext;
 }
 
 .upload-area {
-  @apply border-2 border-dashed border-gray-300 rounded-lg p-6 cursor-pointer transition-colors hover:border-blue-500 h-48;
+  @apply border-2 border-dashed border-blue-pricingborder rounded-lg p-6 cursor-pointer transition-colors hover:border-blue-medium h-48;
 }
 
 .upload-area.has-image {
-  @apply border-solid border-gray-400 p-2 h-48; /* Fixed height to prevent size change */
+  @apply border-solid border-blue-pricingborder p-2 h-48; /* Fixed height to prevent size change */
 }
 
 .upload-placeholder {
@@ -263,7 +263,7 @@ defineExpose({
 }
 
 .preview-image {
-  @apply max-w-full max-h-full object-contain rounded-lg bg-gray-50;
+  @apply max-w-full max-h-full object-contain rounded-lg bg-blue-pale;
 }
 
 .remove-btn {
@@ -271,7 +271,7 @@ defineExpose({
 }
 
 .prompt-textarea {
-  @apply w-full p-3 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors  text-blue-inputtext;
+  @apply w-full p-3 border border-blue-pricingborder rounded-lg resize-none focus:ring-2 focus:ring-blue-medium focus:border-transparent transition-colors  text-blue-inputtext;
 }
 
 .input-hint {

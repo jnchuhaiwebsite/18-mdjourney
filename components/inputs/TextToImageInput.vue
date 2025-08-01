@@ -129,11 +129,11 @@ defineExpose({
 }
 
 .input-label {
-  @apply block text-sm font-semibold text-gray-700;
+  @apply block text-sm font-semibold text-blue-navtext;
 }
 
 .prompt-textarea {
-  @apply w-full p-3 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors text-blue-inputtext;
+  @apply w-full p-3 border border-blue-pricingborder rounded-lg resize-none focus:ring-2 focus:ring-blue-medium focus:border-transparent transition-colors text-blue-inputtext;
 }
 
 .input-hint {

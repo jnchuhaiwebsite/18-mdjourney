@@ -232,15 +232,15 @@ watch(() => props.modelValue, (newValue) => {
 }
 
 .input-label {
-  @apply block text-sm font-semibold text-gray-700;
+  @apply block text-sm font-semibold text-blue-navtext;
 }
 
 .upload-area {
-  @apply border-2 border-dashed border-gray-300 rounded-lg p-6 cursor-pointer transition-colors hover:border-purple-500 h-48;
+  @apply border-2 border-dashed border-blue-pricingborder rounded-lg p-6 cursor-pointer transition-colors hover:border-blue-medium h-48;
 }
 
 .upload-area.has-image {
-  @apply border-solid border-gray-400 p-2 h-48; /* Fixed height to prevent size change */
+  @apply border-solid border-blue-pricingborder p-2 h-48; /* Fixed height to prevent size change */
 }
 
 .upload-placeholder {
@@ -252,7 +252,7 @@ watch(() => props.modelValue, (newValue) => {
 }
 
 .preview-image {
-  @apply max-w-full max-h-full object-contain rounded-lg bg-gray-50;
+  @apply max-w-full max-h-full object-contain rounded-lg bg-blue-pale;
 }
 
 .remove-btn {
@@ -260,12 +260,12 @@ watch(() => props.modelValue, (newValue) => {
 }
 
 .prompt-textarea {
-  @apply w-full p-3 border border-gray-300 rounded-lg resize-none transition-colors text-gray-800 font-medium;
+  @apply w-full p-3 border border-blue-pricingborder rounded-lg resize-none transition-colors text-blue-inputtext font-medium;
 }
 
 .prompt-textarea:focus,
 .prompt-textarea-active {
-  @apply ring-2 ring-purple-500 border-transparent shadow-lg;
+  @apply ring-2 ring-blue-medium border-transparent shadow-lg;
 }
 
 .input-hint {

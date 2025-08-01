@@ -1,5 +1,5 @@
 <template>
-  <footer class="relative bg-blue-nav text-gray-300 py-8 md:py-12 pt-8 border-t border-gray-700/30 mobile-footer">
+  <footer class="relative bg-blue-nav text-blue-footertext py-8 md:py-12 pt-8 border-t border-blue-footerborder/30 mobile-footer">
     <div class="max-w-7xl mx-auto px-4 mobile-padding">
       
       <!-- 友情链接区域 -->
@@ -17,7 +17,7 @@
       </div>
 
       <!-- 分割线 -->
-      <div class="w-full h-px bg-gray-700/30 mb-8" v-if="partnerSites && partnerSites.length > 0"></div>
+      <div class="w-full h-px bg-blue-footerborder/30 mb-8" v-if="partnerSites && partnerSites.length > 0"></div>
 
       <!-- 主要内容区域 -->
       <div class="flex flex-col md:flex-row gap-8 md:gap-16 mobile-footer-links">
