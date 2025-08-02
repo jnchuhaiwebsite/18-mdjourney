@@ -138,9 +138,15 @@ const triggerFileInput = async () => {
 
 // Handle file selection
 const handleFileSelect = async (event: Event) => {
-  // 验证登录状态，如果未登录则不继续执行
+  // 检查登录状态，如果未登录则不处理文件
   const isLoggedIn = await checkLoginStatus()
-  if (!isLoggedIn) return
+  if (!isLoggedIn) {
+    // 清空文件输入，防止文件被选择
+    const target = event.target as HTMLInputElement
+    target.value = ''
+    return
+  }
+  
   const target = event.target as HTMLInputElement
   const file = target.files?.[0]
   if (file && file.type.startsWith('image/')) {
