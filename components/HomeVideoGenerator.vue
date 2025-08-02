@@ -100,20 +100,20 @@ const checkLoginStatus = async () => {
 const withLoginAndCreditCheck = async (callback: () => void | Promise<void>, requiredCredits: number = 1) => {
   // 检查Clerk登录状态
   if (!isSignedIn.value) {
-    $toast.error('请先登录以继续操作');
+    $toast.error('Please log in to continue');
     return;
   }
 
   // 检查用户信息和积分
   await userStore.fetchUserInfo();
   if (!userStore.userInfo) {
-    $toast.error('无法获取用户信息，请重试');
+    $toast.error('Unable to get user information, please try again');
     return;
   }
 
   // 检查积分是否足够
   if (userCredits.value < requiredCredits) {
-    $toast.error(`积分不足。此操作需要 ${requiredCredits} 积分，您当前有 ${userCredits.value} 积分`);
+    $toast.error(`Insufficient credits. This operation requires ${requiredCredits} credits, but you only have ${userCredits.value} credits`);
     router.push('/pricing');
     return;
   }
@@ -124,7 +124,7 @@ const withLoginAndCreditCheck = async (callback: () => void | Promise<void>, req
 // 简化的登录检查方法（不检查积分）
 const withLoginCheck = async (callback: () => void | Promise<void>) => {
   if (!isSignedIn.value) {
-    $toast.error('请先登录以继续操作');
+    $toast.error('Please log in to continue');
     return;
   }
   await callback();
@@ -184,7 +184,7 @@ const uploadImage = async (file: File) => {
 
 // 测试函数
 const testResults = () => {
-  console.log('🧪 测试显示结果');
+  console.log('🧪 Test display results');
   const testUrls = [
     'https://resp.midjourneyai.net/midjourney/202507/31/86f48305-d820-4e7f-91e2-c5f32017bdef.mp4',
     'https://resp.midjourneyai.net/midjourney/202507/31/e12fd1e4-948d-4671-bfbd-42c2427ae8ec.mp4',
@@ -195,7 +195,7 @@ const testResults = () => {
 }
 
 const clearResults = () => {
-  console.log('🧹 清空结果');
+  console.log('🧹 Clear results');
   videoTaskStore.clearResults();
 }
 
@@ -211,7 +211,7 @@ const handleGenerate = async (params: any) => {
       console.log('HomeVideoGenerator generate 调用完成');
     } catch (error) {
       console.error('HomeVideoGenerator generate 调用失败:', error);
-      $toast.error(error instanceof Error ? error.message : '生成失败，请重试');
+      $toast.error(error instanceof Error ? error.message : 'Generation failed, please try again');
     }
   });
 }
