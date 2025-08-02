@@ -61,7 +61,7 @@
 import { ref, watch } from 'vue'
 import { useUserStore } from '~/stores/user'
 import { useNuxtApp } from 'nuxt/app'
-
+import { useUiStore } from '~/stores/ui';
 // Props
 interface Props {
   modelValue?: {
@@ -88,7 +88,7 @@ const prompt = ref(props.modelValue?.prompt || '')
 const promptError = ref(false)
 const userStore = useUserStore()
 const { $toast } = useNuxtApp() as any
-
+const uiStore = useUiStore();
 // 防抖标记
 let isCheckingLogin = false
 
@@ -105,20 +105,8 @@ const checkLoginStatus = async () => {
   
   // 检查用户是否已登录
   if (!userStore.userInfo) {
-    $toast.info('Please log in to continue')
-    isCheckingLogin = true
-    
-    const loginButton = document.getElementById('bindLogin')
-    if (loginButton) {
-      loginButton.click()
-    }
-    
-    // 3秒后重置防抖标记
-    setTimeout(() => {
-      isCheckingLogin = false
-    }, 3000)
-    
-    return false
+    uiStore.showLoginPrompt();
+    return false;
   }
   
   return true

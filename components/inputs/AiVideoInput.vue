@@ -59,7 +59,7 @@ import { ref, watch } from 'vue'
 import { useVideoTaskStore } from '~/stores/videoTask'
 import { useUserStore } from '~/stores/user'
 import { useNuxtApp } from 'nuxt/app'
-
+import { useUiStore } from '~/stores/ui';
 const videoTaskStore = useVideoTaskStore()
 
 // Props
@@ -91,7 +91,7 @@ const duration = ref(props.modelValue?.duration || 6)
 const fps = ref(props.modelValue?.fps || 30)
 const userStore = useUserStore()
 const { $toast } = useNuxtApp() as any
-
+const uiStore = useUiStore();
 // 防抖标记
 let isCheckingLogin = false
 
@@ -108,20 +108,8 @@ const checkLoginStatus = async () => {
   
   // 检查用户是否已登录
   if (!userStore.userInfo) {
-    $toast.info('Please log in to continue')
-    isCheckingLogin = true
-    
-    const loginButton = document.getElementById('bindLogin')
-    if (loginButton) {
-      loginButton.click()
-    }
-    
-    // 3秒后重置防抖标记
-    setTimeout(() => {
-      isCheckingLogin = false
-    }, 3000)
-    
-    return false
+    uiStore.showLoginPrompt();
+    return false;
   }
   
   return true

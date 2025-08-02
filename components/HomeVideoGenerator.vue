@@ -50,6 +50,8 @@ import { storeToRefs } from 'pinia'
 import toast from '~/plugins/toast'
 import { useNuxtApp } from 'nuxt/app'
 import { useRouter } from 'vue-router'
+import { useUiStore } from '~/stores/ui';
+const uiStore = useUiStore();
 
 // Reactive data
 const parameterSettings = ref<any>(null)
@@ -100,8 +102,8 @@ const checkLoginStatus = async () => {
 const withLoginAndCreditCheck = async (callback: () => void | Promise<void>, requiredCredits: number = 1) => {
   // 检查Clerk登录状态
   if (!isSignedIn.value) {
-    $toast.error('Please log in to continue');
-    return;
+    uiStore.showLoginPrompt();
+    return false;
   }
 
   // 检查用户信息和积分
@@ -124,8 +126,8 @@ const withLoginAndCreditCheck = async (callback: () => void | Promise<void>, req
 // 简化的登录检查方法（不检查积分）
 const withLoginCheck = async (callback: () => void | Promise<void>) => {
   if (!isSignedIn.value) {
-    $toast.error('Please log in to continue');
-    return;
+    uiStore.showLoginPrompt();
+    return false;
   }
   await callback();
 }

@@ -2,6 +2,7 @@
 import { useNotificationStore } from '~/stores/notification'
 import { onMounted } from 'vue'
 import NotificationList from '~/components/NotificationList.vue'
+import LoginPromptModal from '~/components/LoginPromptModal.vue'
 
 const notificationStore = useNotificationStore() 
 
@@ -16,6 +17,7 @@ onMounted(() => {
       <NuxtPage />
     </NuxtLayout>
     <NotificationList />
+    <LoginPromptModal />
   </div>
 </template>
 
