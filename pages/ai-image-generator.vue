@@ -193,10 +193,10 @@ const downloadMedia = async (result: any) => {
       await downloadFileWithFetch(result.url, filename)
       
       console.log('Download successful:', filename)
-      $toast.success('下载成功');
+      $toast.success('Download successful');
     } catch (error) {
       console.error('Download failed:', error)
-      $toast.error('下载失败，请重试');
+      $toast.error('Download failed, please try again');
     }
   });
 }
@@ -207,11 +207,11 @@ const validateImageFile = (file: File) => {
   const maxSize = 10 * 1024 * 1024; // 10MB
 
   if (!allowedTypes.includes(file.type)) {
-    throw new Error('请上传有效的图片文件 (JPEG, PNG, GIF, 或 WebP)');
+    throw new Error('Please upload a valid image file (JPEG, PNG, GIF, or WebP)');
   }
 
   if (file.size > maxSize) {
-    throw new Error('文件大小必须小于 10MB');
+    throw new Error('File size must be less than 10MB');
   }
 }
 
@@ -226,13 +226,13 @@ const uploadImage = async (file: File) => {
     return {
       success: true,
       url: URL.createObjectURL(file), // 临时使用本地URL
-      message: '上传成功'
+      message: 'Upload successful'
     };
   } catch (error) {
     return {
       success: false,
       url: '',
-      message: error instanceof Error ? error.message : '上传失败'
+      message: error instanceof Error ? error.message : 'Upload failed'
     };
   }
 }
@@ -260,10 +260,10 @@ const handleImageUpload = async (files: FileList) => {
       uploadedImages.value = uploadedUrls
       
       console.log('Image upload successful:', uploadedUrls)
-      $toast.success('图片上传成功');
+      $toast.success('Image upload successful');
     } catch (error) {
       console.error('Image upload failed:', error)
-      $toast.error(error instanceof Error ? error.message : '图片上传失败')
+      $toast.error(error instanceof Error ? error.message : 'Image upload failed')
     }
   });
 }
