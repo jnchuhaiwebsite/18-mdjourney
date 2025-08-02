@@ -5,6 +5,7 @@
       class="input-group"
     >
       <TextToImageInput 
+        ref="textToImageInputRef"
         @input-change="emit('input-change', $event)" 
       />
     </div>
@@ -13,6 +14,7 @@
       class="input-group"
     >
       <ImageToImageInput 
+        ref="imageToImageInputRef"
         @input-change="emit('input-change', $event)" 
       />
     </div>
@@ -21,6 +23,7 @@
       class="input-group"
     >
       <AiVideoInput 
+        ref="aiVideoInputRef"
         @input-change="emit('input-change', $event)" 
       />
     </div>
@@ -44,6 +47,30 @@ const emit = defineEmits(['input-change'])
 const TextToImageInput = defineAsyncComponent(() => import('./inputs/TextToImageInput.vue'))
 const ImageToImageInput = defineAsyncComponent(() => import('./inputs/ImageToImageInput.vue'))
 const AiVideoInput = defineAsyncComponent(() => import('./inputs/AiVideoInput.vue'))
+
+// Refs for input components
+const textToImageInputRef = ref<any>(null)
+const imageToImageInputRef = ref<any>(null)
+const aiVideoInputRef = ref<any>(null)
+
+// Get current input component based on selected mode
+const getCurrentInputComponent = () => {
+  switch (props.selectedMode) {
+    case 'text-to-image':
+      return textToImageInputRef.value
+    case 'image-to-image':
+      return imageToImageInputRef.value
+    case 'ai-video':
+      return aiVideoInputRef.value
+    default:
+      return null
+  }
+}
+
+// Expose methods
+defineExpose({
+  getCurrentInputComponent
+})
 </script>
 
 <style scoped>

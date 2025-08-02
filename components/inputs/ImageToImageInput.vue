@@ -236,15 +236,29 @@ defineExpose({
     }
   },
   validate: () => {
+    const errors: string[] = []
+    
+    console.log('ImageToImageInput validate - selectedImage:', selectedImage.value)
+    console.log('ImageToImageInput validate - prompt:', prompt.value)
+    
     if (!selectedImage.value) {
-      return false
-    }
-    if (!prompt.value.trim()) {
+      console.log('ImageToImageInput validate - adding image error')
+      errors.push('Please upload a reference image.')
+      
+    }else if (!prompt.value.trim()) {
+      console.log('ImageToImageInput validate - adding prompt error')
       promptError.value = true
-      return false
+      errors.push('Please enter a transformation description.')
+    } else {
+      promptError.value = false
     }
-    promptError.value = false
-    return true
+    
+    const result = {
+      isValid: errors.length === 0,
+      errors: errors
+    }
+    console.log('ImageToImageInput validate - result:', result)
+    return result
   }
 })
 </script>
