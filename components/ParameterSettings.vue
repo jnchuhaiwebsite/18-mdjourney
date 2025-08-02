@@ -284,7 +284,8 @@ const showAspectRatioDropdown = ref(false)
 const prompt = ref('')
 const imageFile = ref<File | null>(null)
 const { isSignedIn } = useClerkAuth();
-
+import { useUiStore } from '~/stores/ui';
+const uiStore = useUiStore();
 const userStore = useUserStore()
 const router = useRouter()
 const { $toast } = useNuxtApp() as any
@@ -426,8 +427,8 @@ const updateWeirdness = () => {
 
 const handleGenerate = async () => {
   if (!isSignedIn.value) {
-    $toast.error('Please log in to continue.');
-    return;
+    uiStore.showLoginPrompt();
+    return false;
   }
 
   if (userCredits.value < currentCreditCost.value) {
