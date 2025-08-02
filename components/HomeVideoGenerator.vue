@@ -44,8 +44,12 @@ import GenerationPreview from './GenerationPreview.vue'
 import { downloadFileWithFetch, generateDownloadFilename, getFileExtension } from '~/utils/downloadHelper'
 import { useGeneration } from '~/composables/useGeneration'
 import { useVideoTaskStore } from '~/stores/videoTask'
+import { useUserStore } from '~/stores/user'
+import { useClerkAuth } from '~/utils/authHelper'
 import { storeToRefs } from 'pinia'
 import toast from '~/plugins/toast'
+import { useNuxtApp } from 'nuxt/app'
+import { useRouter } from 'vue-router'
 
 // Reactive data
 const parameterSettings = ref<any>(null)
@@ -59,10 +63,72 @@ const parameters = ref({
 
 const { generate } = useGeneration();
 const videoTaskStore = useVideoTaskStore();
+const userStore = useUserStore();
+const { isSignedIn } = useClerkAuth();
+const router = useRouter();
+const { $toast } = useNuxtApp() as any;
 const { currentTask, progress, generatedResults } = storeToRefs(videoTaskStore);
 
 const isGenerating = computed(() => !!currentTask.value?.isGenerating);
 const uploadedImages = ref<string[]>([]);
+
+// 用户状态管理
+const userInfo = computed(() => userStore.userInfo);
+const userCredits = computed(() => {
+  const userInfo = userStore.userInfo
+  if (!userInfo) return 0
+  return (userInfo.free_limit || 0) + (userInfo.remaining_limit || 0)
+});
+
+// 登录状态检查 - 与ParameterSettings保持一致
+const checkLoginStatus = async () => {
+  // 每次都重新获取最新的用户信息
+  await userStore.fetchUserInfo()
+  
+  // 检查用户是否已登录
+  if (!userStore.userInfo) {
+    const loginButton = document.getElementById('bindLogin')
+    if (loginButton) {
+      loginButton.click()
+    }
+    return false
+  }
+  return true
+}
+
+// 统一的登录和积分检查方法
+const withLoginAndCreditCheck = async (callback: () => void | Promise<void>, requiredCredits: number = 1) => {
+  // 检查Clerk登录状态
+  if (!isSignedIn.value) {
+    $toast.error('请先登录以继续操作');
+    return;
+  }
+
+  // 检查用户信息和积分
+  await userStore.fetchUserInfo();
+  if (!userStore.userInfo) {
+    $toast.error('无法获取用户信息，请重试');
+    return;
+  }
+
+  // 检查积分是否足够
+  if (userCredits.value < requiredCredits) {
+    $toast.error(`积分不足。此操作需要 ${requiredCredits} 积分，您当前有 ${userCredits.value} 积分`);
+    router.push('/pricing');
+    return;
+  }
+
+  await callback();
+}
+
+// 简化的登录检查方法（不检查积分）
+const withLoginCheck = async (callback: () => void | Promise<void>) => {
+  if (!isSignedIn.value) {
+    $toast.error('请先登录以继续操作');
+    return;
+  }
+  await callback();
+}
 
 // 根据URL检测文件类型
 const detectFileType = (url: string): 'image' | 'video' => {
@@ -136,12 +202,18 @@ const clearResults = () => {
 // Methods
 const handleGenerate = async (params: any) => {
   console.log('HomeVideoGenerator handleGenerate 被调用，参数:', params);
-  try {
-    await generate(params);
-    console.log('HomeVideoGenerator generate 调用完成');
-  } catch (error) {
-    console.error('HomeVideoGenerator generate 调用失败:', error);
-  }
+  
+  // 注意：由于ParameterSettings已经有完整的登录和积分检查，这里作为双重保险
+  // 实际的检查主要在ParameterSettings.vue的handleGenerate中进行
+  await withLoginCheck(async () => {
+    try {
+      await generate(params);
+      console.log('HomeVideoGenerator generate 调用完成');
+    } catch (error) {
+      console.error('HomeVideoGenerator generate 调用失败:', error);
+      $toast.error(error instanceof Error ? error.message : '生成失败，请重试');
+    }
+  });
 }
 
 // 简化的监听逻辑 - 只在任务被清空时清空结果
@@ -165,35 +237,39 @@ const downloadMedia = async (result: any) => {
     console.log('Download successful:', filename)
   } catch (error) {
     console.error('Download failed:', error)
-    showToast("Download failed, please try again", "error");
+    $toast.error("Download failed, please try again");
   }
 }
 
 // 处理图片上传
 const handleImageUpload = async (files: FileList) => {
-  try {
-    const uploadPromises = Array.from(files).map(async (file) => {
-      // 验证文件
-      validateImageFile(file)
+  // 使用登录检查包装上传逻辑
+  await withLoginCheck(async () => {
+    try {
+      const uploadPromises = Array.from(files).map(async (file) => {
+        // 验证文件
+        validateImageFile(file)
+        
+        // 上传文件
+        const uploadResult = await uploadImage(file)
+        
+        if (uploadResult.success) {
+          return uploadResult.url
+        } else {
+          throw new Error(uploadResult.message || 'Upload failed')
+        }
+      })
       
-      // 上传文件
-      const uploadResult = await uploadImage(file)
+      const uploadedUrls = await Promise.all(uploadPromises)
+      uploadedImages.value = uploadedUrls
       
-      if (uploadResult.success) {
-        return uploadResult.url
-      } else {
-        throw new Error(uploadResult.message || 'Upload failed')
-      }
-    })
-    
-    const uploadedUrls = await Promise.all(uploadPromises)
-    uploadedImages.value = uploadedUrls
-    
-    console.log('Image upload successful:', uploadedUrls)
-  } catch (error) {
-    console.error('Image upload failed:', error)
-    alert(error instanceof Error ? error.message : 'Image upload failed')
-  }
+      console.log('Image upload successful:', uploadedUrls)
+      $toast.success('Images uploaded successfully');
+    } catch (error) {
+      console.error('Image upload failed:', error)
+      $toast.error(error instanceof Error ? error.message : 'Image upload failed')
+    }
+  });
 }
 
 // Set default mode on mount
@@ -201,7 +277,24 @@ onMounted(() => {
   if (parameterSettings.value) {
     parameterSettings.value.setParams({ mode: 'ai-video' })
   }
+  
+  // 获取用户信息
+  userStore.fetchUserInfo()
 })
+
+// 包装的提示词输入处理（为子组件提供）
+const handlePromptInput = async () => {
+  await withLoginCheck(() => {
+    // 提示词输入逻辑可以在这里添加
+    // 目前只做登录检查
+    console.log('Prompt input - login check passed');
+  });
+}
+
+// 包装的参数设置处理（为子组件提供）
+const handleParameterChange = async (callback: () => void) => {
+  await withLoginCheck(callback);
+}
 
 // Expose methods to parent component
 defineExpose({
@@ -209,7 +302,14 @@ defineExpose({
   setParams: (params: any) => {
     parameters.value = { ...parameters.value, ...params }
   },
-  handleImageUpload
+  handleImageUpload,
+  handlePromptInput,
+  handleParameterChange,
+  withLoginCheck,
+  withLoginAndCreditCheck,
+  checkLoginStatus,
+  userCredits: userCredits.value,
+  isSignedIn: isSignedIn.value
 })
 </script>
 

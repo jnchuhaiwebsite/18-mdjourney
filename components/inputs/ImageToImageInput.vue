@@ -126,15 +126,24 @@ const checkLoginStatus = async () => {
 
 // Trigger file selection
 const triggerFileInput = async () => {
-  // 只验证登录状态，不做任何额外操作
-  await checkLoginStatus()
-  fileInput.value?.click()
+  // 检查登录状态，如果未登录则不触发文件选择
+  const isLoggedIn = await checkLoginStatus()
+  if (isLoggedIn) {
+    fileInput.value?.click()
+  }
 }
 
 // Handle file selection
 const handleFileSelect = async (event: Event) => {
-  // 只验证登录状态，不做任何额外操作
-  await checkLoginStatus()
+  // 检查登录状态，如果未登录则不处理文件
+  const isLoggedIn = await checkLoginStatus()
+  if (!isLoggedIn) {
+    // 清空文件输入，防止文件被选择
+    const target = event.target as HTMLInputElement
+    target.value = ''
+    return
+  }
+  
   const target = event.target as HTMLInputElement
   const file = target.files?.[0]
   if (file && file.type.startsWith('image/')) {
@@ -143,8 +152,15 @@ const handleFileSelect = async (event: Event) => {
 }
 
 // Handle drag and drop
-const handleDrop = (event: DragEvent) => {
+const handleDrop = async (event: DragEvent) => {
   event.preventDefault()
+  
+  // 检查登录状态，如果未登录则不处理拖拽文件
+  const isLoggedIn = await checkLoginStatus()
+  if (!isLoggedIn) {
+    return
+  }
+  
   const files = event.dataTransfer?.files
   if (files && files.length > 0) {
     const file = files[0]
