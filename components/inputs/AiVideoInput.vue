@@ -226,6 +226,44 @@ watch(() => props.modelValue, (newValue) => {
   }
 }, { deep: true })
 
+// Expose methods
+defineExpose({
+  getValue: () => ({
+    image: selectedImage.value,
+    prompt: prompt.value,
+    duration: duration.value,
+    fps: fps.value
+  }),
+  setValue: (value: any) => {
+    if (value.image) {
+      setImage(value.image)
+    }
+    if (value.prompt !== undefined) {
+      prompt.value = value.prompt
+    }
+    if (value.duration !== undefined) {
+      duration.value = value.duration
+    }
+    if (value.fps !== undefined) {
+      fps.value = value.fps
+    }
+  },
+  validate: () => {
+    const errors: string[] = []
+    
+    if (!selectedImage.value) {
+      errors.push('Please upload an image to continue.')
+    }
+    
+    // 对于AI视频，提示词是可选的，所以不需要验证
+    
+    return {
+      isValid: errors.length === 0,
+      errors: errors
+    }
+  }
+})
+
 </script>
 
 <style scoped>

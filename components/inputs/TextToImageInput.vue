@@ -109,12 +109,19 @@ defineExpose({
     prompt.value = value
   },
   validate: () => {
+    const errors: string[] = []
+    
     if (!prompt.value.trim()) {
       promptError.value = true
-      return false
+      errors.push('Please enter a prompt to continue.')
+    } else {
+      promptError.value = false
     }
-    promptError.value = false
-    return true
+    
+    return {
+      isValid: errors.length === 0,
+      errors: errors
+    }
   }
 })
 </script>
