@@ -50,7 +50,7 @@ export function useSeo(options: SeoOptions = {} as SeoOptions) {
       },
       { property: 'og:type', content: options.ogType || 'website' },
       { property: 'og:url', content: fullUrlWithoutSlash },
-      { property: 'og:image', content: options.ogImage || `${baseUrl}/midjourney-ai.png` },
+      { property: 'og:image', content: options.ogImage || `${baseUrl}/midjourney-ai.webp` },
       { property: 'og:site_name', content: 'hailuo2' },
       ...(options.other || []),
 
@@ -64,7 +64,7 @@ export function useSeo(options: SeoOptions = {} as SeoOptions) {
         name: 'twitter:description',
         content: options.twitterDescription || description,
       },
-      { name: 'twitter:image', content: options.twitterImage || `${baseUrl}/midjourney-ai.png` },
+      { name: 'twitter:image', content: options.twitterImage || `${baseUrl}/midjourney-ai.webp` },
     ],
     link: [{ rel: 'canonical', href: fullUrlWithoutSlash }],
   })
