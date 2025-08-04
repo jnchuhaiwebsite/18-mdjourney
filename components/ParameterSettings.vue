@@ -14,6 +14,7 @@
 
     <!-- Input Panels -->
     <InputPanels 
+      ref="inputPanelsRef"
       :selected-mode="selectedMode" 
       @input-change="handleInputChange" 
     />
@@ -237,6 +238,9 @@ const { progress, currentTask } = storeToRefs(videoTaskStore);
 
 const isGenerating = computed(() => !!videoTaskStore.currentTask?.isGenerating);
 
+// Input panels ref
+const inputPanelsRef = ref<any>(null);
+
 const durationConfig = {
   'text-to-image': {
     relaxed: 10,
@@ -280,7 +284,8 @@ const showAspectRatioDropdown = ref(false)
 const prompt = ref('')
 const imageFile = ref<File | null>(null)
 const { isSignedIn } = useClerkAuth();
-
+import { useUiStore } from '~/stores/ui';
+const uiStore = useUiStore();
 const userStore = useUserStore()
 const router = useRouter()
 const { $toast } = useNuxtApp() as any
@@ -422,8 +427,8 @@ const updateWeirdness = () => {
 
 const handleGenerate = async () => {
   if (!isSignedIn.value) {
-    $toast.error('Please log in to continue.');
-    return;
+    uiStore.showLoginPrompt();
+    return false;
   }
 
   if (userCredits.value < currentCreditCost.value) {
@@ -432,16 +437,31 @@ const handleGenerate = async () => {
     return;
   }
 
-  if (selectedMode.value === 'ai-video') {
-    if (!prompt.value) {
-      $toast.error('Please enter a prompt.');
-      return;
-    }
-    if (!imageFile.value) {
-      $toast.error('Please upload an image.');
-      return;
+  // 验证输入组件
+  if (inputPanelsRef.value) {
+    const currentInputComponent = inputPanelsRef.value.getCurrentInputComponent();
+    console.log('Current input component:', currentInputComponent);
+    console.log('Selected mode:', selectedMode.value);
+    
+    if (currentInputComponent && typeof currentInputComponent.validate === 'function') {
+      const validationResult = currentInputComponent.validate();
+      console.log('Validation result:', validationResult);
+      
+      if (!validationResult.isValid) {
+        // 根据验证结果显示具体的错误信息
+        if (validationResult.errors && Array.isArray(validationResult.errors)) {
+          validationResult.errors.forEach((error: string) => {
+            $toast.error(error);
+          });
+        }
+        return;
+      }
+    } else {
+      console.log('No current input component or validate function not found');
     }
   }
+
+  // 验证通过，继续生成流程
 
   emit('generate', {
     ...currentParams.value,

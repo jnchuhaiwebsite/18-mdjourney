@@ -61,7 +61,7 @@
 import { ref, watch } from 'vue'
 import { useUserStore } from '~/stores/user'
 import { useNuxtApp } from 'nuxt/app'
-
+import { useUiStore } from '~/stores/ui';
 // Props
 interface Props {
   modelValue?: {
@@ -88,7 +88,7 @@ const prompt = ref(props.modelValue?.prompt || '')
 const promptError = ref(false)
 const userStore = useUserStore()
 const { $toast } = useNuxtApp() as any
-
+const uiStore = useUiStore();
 // 防抖标记
 let isCheckingLogin = false
 
@@ -105,20 +105,8 @@ const checkLoginStatus = async () => {
   
   // 检查用户是否已登录
   if (!userStore.userInfo) {
-    $toast.info('Please log in to continue')
-    isCheckingLogin = true
-    
-    const loginButton = document.getElementById('bindLogin')
-    if (loginButton) {
-      loginButton.click()
-    }
-    
-    // 3秒后重置防抖标记
-    setTimeout(() => {
-      isCheckingLogin = false
-    }, 3000)
-    
-    return false
+    uiStore.showLoginPrompt();
+    return false;
   }
   
   return true
@@ -126,15 +114,24 @@ const checkLoginStatus = async () => {
 
 // Trigger file selection
 const triggerFileInput = async () => {
-  // 只验证登录状态，不做任何额外操作
-  await checkLoginStatus()
-  fileInput.value?.click()
+  // 检查登录状态，如果未登录则不触发文件选择
+  const isLoggedIn = await checkLoginStatus()
+  if (isLoggedIn) {
+    fileInput.value?.click()
+  }
 }
 
 // Handle file selection
 const handleFileSelect = async (event: Event) => {
-  // 只验证登录状态，不做任何额外操作
-  await checkLoginStatus()
+  // 检查登录状态，如果未登录则不处理文件
+  const isLoggedIn = await checkLoginStatus()
+  if (!isLoggedIn) {
+    // 清空文件输入，防止文件被选择
+    const target = event.target as HTMLInputElement
+    target.value = ''
+    return
+  }
+  
   const target = event.target as HTMLInputElement
   const file = target.files?.[0]
   if (file && file.type.startsWith('image/')) {
@@ -143,8 +140,15 @@ const handleFileSelect = async (event: Event) => {
 }
 
 // Handle drag and drop
-const handleDrop = (event: DragEvent) => {
+const handleDrop = async (event: DragEvent) => {
   event.preventDefault()
+  
+  // 检查登录状态，如果未登录则不处理拖拽文件
+  const isLoggedIn = await checkLoginStatus()
+  if (!isLoggedIn) {
+    return
+  }
+  
   const files = event.dataTransfer?.files
   if (files && files.length > 0) {
     const file = files[0]
@@ -220,15 +224,29 @@ defineExpose({
     }
   },
   validate: () => {
+    const errors: string[] = []
+    
+    console.log('ImageToImageInput validate - selectedImage:', selectedImage.value)
+    console.log('ImageToImageInput validate - prompt:', prompt.value)
+    
     if (!selectedImage.value) {
-      return false
-    }
-    if (!prompt.value.trim()) {
+      console.log('ImageToImageInput validate - adding image error')
+      errors.push('Please upload a reference image.')
+      
+    }else if (!prompt.value.trim()) {
+      console.log('ImageToImageInput validate - adding prompt error')
       promptError.value = true
-      return false
+      errors.push('Please enter a transformation description.')
+    } else {
+      promptError.value = false
     }
-    promptError.value = false
-    return true
+    
+    const result = {
+      isValid: errors.length === 0,
+      errors: errors
+    }
+    console.log('ImageToImageInput validate - result:', result)
+    return result
   }
 })
 </script>

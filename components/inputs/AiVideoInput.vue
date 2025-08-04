@@ -59,7 +59,7 @@ import { ref, watch } from 'vue'
 import { useVideoTaskStore } from '~/stores/videoTask'
 import { useUserStore } from '~/stores/user'
 import { useNuxtApp } from 'nuxt/app'
-
+import { useUiStore } from '~/stores/ui';
 const videoTaskStore = useVideoTaskStore()
 
 // Props
@@ -91,7 +91,7 @@ const duration = ref(props.modelValue?.duration || 6)
 const fps = ref(props.modelValue?.fps || 30)
 const userStore = useUserStore()
 const { $toast } = useNuxtApp() as any
-
+const uiStore = useUiStore();
 // 防抖标记
 let isCheckingLogin = false
 
@@ -108,20 +108,8 @@ const checkLoginStatus = async () => {
   
   // 检查用户是否已登录
   if (!userStore.userInfo) {
-    $toast.info('Please log in to continue')
-    isCheckingLogin = true
-    
-    const loginButton = document.getElementById('bindLogin')
-    if (loginButton) {
-      loginButton.click()
-    }
-    
-    // 3秒后重置防抖标记
-    setTimeout(() => {
-      isCheckingLogin = false
-    }, 3000)
-    
-    return false
+    uiStore.showLoginPrompt();
+    return false;
   }
   
   return true
@@ -138,9 +126,15 @@ const triggerFileInput = async () => {
 
 // Handle file selection
 const handleFileSelect = async (event: Event) => {
-  // 验证登录状态，如果未登录则不继续执行
+  // 检查登录状态，如果未登录则不处理文件
   const isLoggedIn = await checkLoginStatus()
-  if (!isLoggedIn) return
+  if (!isLoggedIn) {
+    // 清空文件输入，防止文件被选择
+    const target = event.target as HTMLInputElement
+    target.value = ''
+    return
+  }
+  
   const target = event.target as HTMLInputElement
   const file = target.files?.[0]
   if (file && file.type.startsWith('image/')) {
@@ -219,6 +213,44 @@ watch(() => props.modelValue, (newValue) => {
     prompt.value = newValue.prompt
   }
 }, { deep: true })
+
+// Expose methods
+defineExpose({
+  getValue: () => ({
+    image: selectedImage.value,
+    prompt: prompt.value,
+    duration: duration.value,
+    fps: fps.value
+  }),
+  setValue: (value: any) => {
+    if (value.image) {
+      setImage(value.image)
+    }
+    if (value.prompt !== undefined) {
+      prompt.value = value.prompt
+    }
+    if (value.duration !== undefined) {
+      duration.value = value.duration
+    }
+    if (value.fps !== undefined) {
+      fps.value = value.fps
+    }
+  },
+  validate: () => {
+    const errors: string[] = []
+    
+    if (!selectedImage.value) {
+      errors.push('Please upload an image to continue.')
+    }
+    
+    // 对于AI视频，提示词是可选的，所以不需要验证
+    
+    return {
+      isValid: errors.length === 0,
+      errors: errors
+    }
+  }
+})
 
 </script>
 
