@@ -24,7 +24,7 @@
         <!-- Logo 和描述 -->
         <div class="flex-1">
           <div class="flex flex-col items-start text-left">
-            <h1 class="text-blue-logo text-2xl md:text-3xl font-bold mb-4">MidjourneyAI</h1>
+            <p class="text-blue-logo text-2xl md:text-3xl font-bold mb-4">MidjourneyAI</p>
             <p class="text-sm text-blue-footertext max-w-xl mb-4">
               Midjourney is the state-of-the-art AI suite, functioning as a premier MidjourneyAI image generator and a groundbreaking MidjourneyAi video generator to transform your prompts into both breathtaking art and cinematic clips.
             </p>

@@ -2,7 +2,7 @@
   <div class="generation-preview">
     <!-- 预览头部 -->
     <div class="preview-header">
-      <h3 class="preview-title">{{ title }}</h3>
+      <span class="preview-title">{{ title }}</span>
       <div v-if="generatedResults.length > 0" class="preview-stats">
         <span class="stat-item">
           <i class="fa-solid fa-image"></i>
@@ -121,7 +121,7 @@
           <div class="floating-icon">✨</div>
           <div class="floating-icon">🚀</div>
         </div>
-        <h3 class="empty-title">{{ emptyTitle }}</h3>
+        <span class="empty-title">{{ emptyTitle }}</span>
         <p class="empty-subtitle">{{ emptySubtitle }}</p>
       </div>
     </div>
