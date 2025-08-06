@@ -141,12 +141,12 @@
           </p>
           
           <!-- VIP时间显示优化 -->
-          <div v-if="vipLastTime" class="mt-1">
+          <!-- <div v-if="vipLastTime" class="mt-1">
             <p class="text-xs text-gray-600">VIP过期时间:</p>
             <p class="text-xs text-gray-500 font-mono">
               {{ vipLastTime }}
             </p>
-          </div>
+          </div> -->
         </div>
       </div>
 
