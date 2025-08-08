@@ -38,7 +38,7 @@
         </div>
 
         <!-- Rich text content -->
-        <div class="text-blue-navtext space-y-6 [&>h1]:text-2xl [&>h1]:font-bold [&>h1]:text-blue-h1 [&>h2]:text-xl [&>h2]:font-bold [&>h2]:text-blue-h1 [&>h3]:text-lg [&>h3]:font-bold [&>h3]:text-blue-h1 [&>p]:text-blue-navtext [&>p]:leading-relaxed [&>a]:text-blue-dark [&>a]:hover:text-blue-medium [&>strong]:text-blue-h1 [&>code]:text-blue-h1 [&>code]:bg-blue-light [&>code]:px-2 [&>code]:py-1 [&>code]:rounded [&>blockquote]:border-l-4 [&>blockquote]:border-blue-dark [&>blockquote]:pl-4 [&>blockquote]:text-blue-navtext [&>blockquote]:bg-blue-light [&>blockquote]:py-2 [&>hr]:border-blue-pricingborder [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:marker:text-blue-footertext [&>ol]:list-decimal [&>ol]:pl-6 [&>ol]:marker:text-blue-footertext" v-html="processedContent"></div>
+        <div class="text-blue-navtext space-y-6 [&>h1]:text-2xl [&>h1]:font-bold [&>h1]:text-blue-h1 [&>h2]:text-xl [&>h2]:font-bold [&>h2]:text-blue-h1 [&>h3]:text-lg [&>h3]:font-bold [&>h3]:text-blue-h1 [&>p]:text-blue-navtext [&>p]:leading-relaxed [&>a]:text-blue-dark [&>a]:hover:text-blue-medium [&>strong]:text-blue-h1 [&>code]:text-blue-h1 [&>code]:bg-blue-light [&>code]:px-2 [&>code]:py-1 [&>code]:rounded [&>blockquote]:border-l-4 [&>blockquote]:border-blue-dark [&>blockquote]:pl-4 [&>blockquote]:text-blue-navtext [&>blockquote]:bg-blue-light [&>blockquote]:py-2 [&>hr]:border-blue-pricingborder [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:marker:text-blue-footertext [&>ol]:list-decimal [&>ol]:pl-6 [&>ol]:marker:text-blue-footertext [&>img]:max-w-full [&>img]:h-auto [&>img]:rounded-lg [&>img]:shadow-md [&>img]:my-4 [&>img]:mx-auto [&>img]:block [&>img]:border [&>img]:border-gray-200 [&>img]:hover:shadow-lg [&>img]:transition-shadow [&>img]:duration-300" v-html="processedContent"></div>
 
         <!-- Related articles section -->
         <div class="mt-12 pt-8 border-t border-blue-pricingborder" v-if="relatedPosts.length > 0">
@@ -212,6 +212,9 @@ const processedContent = computed(() => {
   // 处理粗体和斜体
   content = content.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
   content = content.replace(/\*(.*?)\*/g, '<em>$1</em>');
+  
+  // 处理图片
+  content = content.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" class="max-w-full h-auto rounded-lg shadow-md my-4 mx-auto" loading="lazy">');
   
   // 处理链接
   content = content.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
