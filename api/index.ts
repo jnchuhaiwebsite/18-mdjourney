@@ -157,7 +157,7 @@ export const createTaskTextVideo = async (data: any) => {
  * @returns 套餐列表
  */
 export const getSubPlans = async () => {
-  return apiRequest(urlList.getSubPlans, 'GET', undefined, false);
+  return apiRequest(urlList.getSubPlans+'?type=1', 'GET', undefined, false);
 }
 /**
  * 获取套餐信息-测试
